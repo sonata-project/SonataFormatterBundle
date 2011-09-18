@@ -10,6 +10,8 @@
     </parameters>
 
     <services>
+        <service id="sonata.formatter.pool" class="Sonata\FormatterBundle\Formatter\Pool" />
+
         <service id="sonata.formatter.text.markdown" class="%sonata.formatter.text.markdown.class%">
             <tag name="sonata.text.formatter" code="markdown"/>
 

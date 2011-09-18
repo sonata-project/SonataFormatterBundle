@@ -40,6 +40,19 @@ class SonataFormatterExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('formatter.xml');
+        $loader->load('twig.xml');
+
+        $pool = $container->getDefinition('sonata.formatter.pool');
+
+        foreach($config['formatters'] as $code => $configuration) {
+            $pool->addMethodCall('add', array($code, new Reference($configuration['service'])));
+
+            $formatter = $container->getDefinition($configuration['service']);
+
+            foreach($configuration['extensions'] as $extension) {
+                $formatter->addMethodCall('addExtention', array(new Reference($extension)));
+            }
+        }
     }
 
     /**
