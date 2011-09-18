@@ -16,7 +16,7 @@ For now, only 3 parsers are available:
 INSTALLATION
 ------------
 
-Add the following entry to ``deps`` the run ``php bin/vendors install``.
+Add the following entry to ``deps`` the run ``php bin/vendors install``::
 
     [KnpMarkdownBundle]
         git=http://github.com/knplabs/KnpMarkdownBundle.git
@@ -26,7 +26,7 @@ Add the following entry to ``deps`` the run ``php bin/vendors install``.
         git=http://github.com/sonata-project/SonataFormatterBundle.git
         target=/bundles/Sonata/FormatterBundle
 
-Register the bundle in ``app/AppKernel.php``
+Register the bundle in ``app/AppKernel.php``::
 
     $bundles = array(
         // ...
@@ -34,7 +34,7 @@ Register the bundle in ``app/AppKernel.php``
         new Sonata\FormatterBundle\SonataFormatterBundle(),
     );
 
-Register namespace in ``app/autoload.php``
+Register namespace in ``app/autoload.php``::
 
     $loader->registerNamespaces(array(
         // ...
@@ -44,6 +44,8 @@ Register namespace in ``app/autoload.php``
 
 USAGE
 -----
+
+.. code-block::
 
     // Use the service
     $html = $this->container->get('sonata.formatter.pool')->transform('markdown', $text);
@@ -63,7 +65,7 @@ The bundle provided a widget to format a text when the form is bound. Just decla
  - source content
  - formatter field
 
-```php
+.. code-block::
 
     $formBuilder
         ->add('rawContent') // source content
@@ -72,7 +74,6 @@ The bundle provided a widget to format a text when the form is bound. Just decla
             'target' => 'content'
         ))
 
-```
 
 When data is populated the ``content`` property will be populated with the text transformed from the selected
 transformer name and the ``rawContent`` property.
@@ -84,23 +85,23 @@ Configuration
 -------------
 
 
-```
-sonata_formatter:
-    formatters:
-        markdown:
-            service: sonata.formatter.text.markdown
-            extensions: []
+.. code-block::
 
-        text:
-            service: sonata.formatter.text.text
-            extensions: []
-```
+    sonata_formatter:
+        formatters:
+            markdown:
+                service: sonata.formatter.text.markdown
+                extensions: []
+
+            text:
+                service: sonata.formatter.text.text
+                extensions: []
 
 
 Twig Usage
 ----------
 
 
-```
+.. code-block::
+
     blog.content | format_text(blog.formatter)
-```
