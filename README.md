@@ -3,6 +3,15 @@ SonataFormatterBundle
 
 The ``SonataFormatterBundle`` provides text helper to format text.
 
+PARSERS
+-------
+
+For now, only 3 parsers are available:
+
+ - markdown
+ - text : return the provided text with the ``nl2br`` function
+ - raw : return the provided text
+
 
 INSTALLATION
 ------------

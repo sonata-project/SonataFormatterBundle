@@ -54,6 +54,12 @@ class Pool
      */
     public function transform($code, $text)
     {
-        return $this->get($code)->transform($text);
+        $text = $this->get($code)->transform($text);
+
+        foreach($this->get($code)->getExtensions() as $extension) {
+            $text = $extension->transform($text);
+        }
+
+        return $text;
     }
 }
