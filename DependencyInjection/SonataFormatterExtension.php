@@ -51,7 +51,7 @@ class SonataFormatterExtension extends Extension
             $formatter = $container->getDefinition($configuration['service']);
 
             foreach($configuration['extensions'] as $extension) {
-                $formatter->addMethodCall('addExtention', array(new Reference($extension)));
+                $formatter->addMethodCall('addExtension', array(new Reference($extension)));
             }
         }
     }
