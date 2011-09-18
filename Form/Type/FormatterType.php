@@ -13,6 +13,10 @@ namespace Sonata\FormatterBundle\Form\Type;
 
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormEvents;
+
+use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 
 use Sonata\FormatterBundle\Formatter\Pool;
 
@@ -33,6 +37,24 @@ class FormatterType extends ChoiceType
     }
 
     /**
+     * @param \Symfony\Component\Form\FormBuilder $builder
+     * @param array $options
+     * @return void
+     */
+    public function buildForm(FormBuilder $builder, array $options)
+    {
+        parent::buildForm($builder, $options);
+
+        $listener = new FormatterListener(
+            $this->pool,
+            $options['source'],
+            $options['target']
+        );
+
+        $builder->addEventListener(FormEvents::POST_BIND, array($listener, 'postBind'));
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getDefaultOptions(array $options)
@@ -40,7 +62,7 @@ class FormatterType extends ChoiceType
         $multiple = isset($options['multiple']) && $options['multiple'];
         $expanded = isset($options['expanded']) && $options['expanded'];
 
-        $options = array(
+        $defaultOptions = array(
             'multiple'          => false,
             'expanded'          => false,
             'choice_list'       => null,
@@ -49,13 +71,27 @@ class FormatterType extends ChoiceType
             'empty_data'        => $multiple || $expanded ? array() : '',
             'empty_value'       => $multiple || $expanded || !isset($options['empty_value']) ? null : '',
             'error_bubbling'    => false,
+
+            // field names
+            'source'            => null,
+            'target'            => null
         );
+
+        $options = array_replace($defaultOptions, $options);
 
         if (!$options['choices']) {
             $options['choices'] = array();
             foreach($this->pool->getFormatters() as $code => $instance) {
-                $options['choices'][] = $this->translator->trans($code, array(), 'SonataFormatterBundle');
+                $options['choices'][$code] = $this->translator->trans($code, array(), 'SonataFormatterBundle');
             }
+        }
+
+        if (!$options['source']) {
+            throw new \RuntimeException('Please provide a source property name');
+        }
+
+        if (!$options['target']) {
+            throw new \RuntimeException('Please provide a target property name');
         }
 
         return $options;

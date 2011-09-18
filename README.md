@@ -52,6 +52,31 @@ USAGE
     {{ my_data | format_text('markdown') }}
 
 
+FORM
+----
+
+The bundle provided a widget to format a text when the form is bound. Just declare 2 fields:
+
+ - source content
+ - formatter field
+
+```php
+
+    $formBuilder
+        ->add('rawContent') // source content
+        ->add('contentFormatter', 'sonata_formatter_type_selector', array(
+            'source' => 'rawContent',
+            'target' => 'content'
+        ))
+
+```
+
+When data is populated the ``content`` property will be populated with the text transformed from the selected
+transformer name and the ``rawContent`` property.
+
+For instance, this can be used to pregenerate the content of a markdown blog post.
+
+
 Configuration
 -------------
 
