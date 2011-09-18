@@ -52,6 +52,9 @@ USAGE
     {{ my_data | format_text('markdown') }}
 
 
+Note : By default the twig filter ``format_text`` is not marked as ``safe``. So if you want to ouput
+the correct result, just add the ``| raw`` filter.
+
 FORM
 ----
 
