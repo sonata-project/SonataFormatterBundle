@@ -14,7 +14,6 @@ use Sonata\FormatterBundle\Formatter\MarkdownFormatter;
 
 class MarkdownFormatterTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testFormatter()
     {
         $parser = $this->getMock('Knp\Bundle\MarkdownBundle\MarkdownParserInterface');
