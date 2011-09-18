@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="sonata.formatter.text.markdown.class">Sonata\FormatterBundle\Formatter\MarkdownFormatter</parameter>
         <parameter key="sonata.formatter.text.text.class">Sonata\FormatterBundle\Formatter\TextFormatter</parameter>
+        <parameter key="sonata.formatter.text.raw.class">Sonata\FormatterBundle\Formatter\RawFormatter</parameter>
     </parameters>
 
     <services>
@@ -19,6 +20,11 @@
         </service>
 
         <service id="sonata.formatter.text.text" class="%sonata.formatter.text.text.class%">
+            <tag name="sonata.text.formatter"/>
+
+        </service>
+
+        <service id="sonata.formatter.text.raw" class="%sonata.formatter.text.raw.class%">
             <tag name="sonata.text.formatter"/>
 
         </service>

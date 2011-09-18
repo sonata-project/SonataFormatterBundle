@@ -62,4 +62,12 @@ class Pool
 
         return $text;
     }
+
+    /**
+     * @return array
+     */
+    public function getFormatters()
+    {
+        return $this->formatters;
+    }
 }
