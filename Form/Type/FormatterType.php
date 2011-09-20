@@ -45,13 +45,19 @@ class FormatterType extends ChoiceType
     {
         parent::buildForm($builder, $options);
 
-        $listener = new FormatterListener(
-            $this->pool,
-            $options['source'],
-            $options['target']
-        );
+        /**
+         * The listener option only work if the source field is after the current field
+         *
+         */
+        if ($options['listener']) {
+            $listener = new FormatterListener(
+                $this->pool,
+                $options['source'],
+                $options['target']
+            );
 
-        $builder->addEventListener(FormEvents::POST_BIND, array($listener, 'postBind'));
+            $builder->addEventListener(FormEvents::BIND_CLIENT_DATA, array($listener, 'postBind'));
+        }
     }
 
     /**
@@ -74,7 +80,8 @@ class FormatterType extends ChoiceType
 
             // field names
             'source'            => null,
-            'target'            => null
+            'target'            => null,
+            'listener'          => false,
         );
 
         $options = array_replace($defaultOptions, $options);
@@ -86,12 +93,14 @@ class FormatterType extends ChoiceType
             }
         }
 
-        if (!$options['source']) {
-            throw new \RuntimeException('Please provide a source property name');
-        }
+        if ($options['listener']) {
+            if (!$options['source']) {
+                throw new \RuntimeException('Please provide a source property name');
+            }
 
-        if (!$options['target']) {
-            throw new \RuntimeException('Please provide a target property name');
+            if (!$options['target']) {
+                throw new \RuntimeException('Please provide a target property name');
+            }
         }
 
         return $options;

@@ -12,7 +12,7 @@
 namespace Sonata\FormatterBundle\Form\EventListener;
 
 use Sonata\FormatterBundle\Formatter\Pool;
-use Symfony\Component\Form\Event\DataEvent;
+use Symfony\Component\Form\Event\FilterDataEvent;
 use Symfony\Component\Form\Util\PropertyPath;
 
 class FormatterListener
@@ -36,20 +36,20 @@ class FormatterListener
     }
 
     /**
-     * @param \Symfony\Component\Form\Event\DataEvent $event
+     * @param \Symfony\Component\Form\Event\FilterDataEvent $event
      * @return void
      */
-    public function postBind(DataEvent $event)
+    public function postBind(FilterDataEvent $event)
     {
-        $sourcePropertyPath = new PropertyPath($this->sourceProperty);
         $targetPropertyPath = new PropertyPath($this->targetProperty);
 
-        $data = $event->getForm()->getParent()->getData();
+        $sourceField = $event->getForm()->getParent()->get($this->sourceProperty);
+        $object = $event->getForm()->getParent()->getData();
 
         // transform the value
         $targetPropertyPath->setValue(
-            $data,
-            $this->pool->transform($event->getData(), $sourcePropertyPath->getValue($data))
+            $object,
+            $this->pool->transform($event->getData(), $sourceField->getData())
         );
     }
 }
