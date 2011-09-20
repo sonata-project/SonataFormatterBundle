@@ -11,41 +11,50 @@
 
 namespace Sonata\FormatterBundle\Extension;
 
-interface ExtensionInterface
+class ControlFlowExtension extends BaseExtension
 {
     /**
      * Returns an array of available filters
      *
-     * @abstract
      * @return array
      */
-    function getAllowedFilters();
+    public function getAllowedFilters()
+    {
+        return array(
+            'escape'
+        );
+    }
 
     /**
      * Returns an array of available tags
      *
-     * @abstract
      * @return array
      */
-    function getAllowedTags();
+    public function getAllowedTags()
+    {
+        return array(
+            'if',
+            'for'
+        );
+    }
 
     /**
      * Returns an array of available functions
      *
-     * @abstract
      * @return array
      */
-    function getAllowedFunctions();
+    public function getAllowedFunctions()
+    {
+        return array();
+    }
 
     /**
-     * @abstract
-     * @return array
+     * Returns the name of the extension.
+     *
+     * @return string The extension name
      */
-    function getAllowedProperties();
-
-    /**
-     * @abstract
-     * @return array
-     */
-    function getAllowedMethods();
+    public function getName()
+    {
+        return 'sonata_formatter_extension_flow';
+    }
 }

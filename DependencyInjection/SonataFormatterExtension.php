@@ -70,7 +70,13 @@ class SonataFormatterExtension extends Extension
 
         $container->setDefinition(sprintf('sonata.formatter.twig.loader.%s', $code), $loader);
 
-        $env = new Definition('Twig_Environment', array($loader, array(
+        $loaderSelector = new Definition('Sonata\FormatterBundle\Twig\Loader\LoaderSelector', array(
+            new Reference(sprintf('sonata.formatter.twig.loader.%s', $code)),
+            new Reference('twig.loader')
+        ));
+        $loaderSelector->setPublic(false);
+
+        $env = new Definition('Twig_Environment', array($loaderSelector, array(
             'debug' => false,
             'strict_variables' => false,
             'charset' => 'UTF-8'

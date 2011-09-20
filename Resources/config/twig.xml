@@ -10,8 +10,13 @@
             <tag name="twig.extension" />
         </service>
 
-        <service id="sonata.formatter.twig.gist" class="Sonata\FormatterBundle\Extension\GistExtension" public="false">
-            <tag name="twig.extension" />
+        <!-- inline service -->
+        <service id="sonata.formatter.twig.gist" class="Sonata\FormatterBundle\Extension\GistExtension" public="true">
+
+        </service>
+
+        <service id="sonata.formatter.twig.control_flow" class="Sonata\FormatterBundle\Extension\ControlFlowExtension" public="true">
+
         </service>
 
     </services>

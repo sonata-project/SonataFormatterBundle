@@ -14,6 +14,14 @@ namespace Sonata\FormatterBundle\Twig;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use \Twig_Sandbox_SecurityError;
 
+/**
+ * @throws \Twig_Sandbox_SecurityError
+ *
+ * Some code are adapted work from the Twig_Sandbox_SecurityPolicy class
+ *
+ * @author fabien.potencier@symfony.com
+ * @author thomas.rabaix@sonata-project.org
+ */
 class SecurityPolicyContenairAware implements \Twig_Sandbox_SecurityPolicyInterface
 {
     protected $allowedTags;
@@ -21,6 +29,10 @@ class SecurityPolicyContenairAware implements \Twig_Sandbox_SecurityPolicyInterf
     protected $allowedFilters;
 
     protected $allowedFunctions;
+
+    protected $allowedProperties;
+
+    protected $allowedMethods;
 
     protected $extensions = array();
 
@@ -74,33 +86,59 @@ class SecurityPolicyContenairAware implements \Twig_Sandbox_SecurityPolicyInterf
         $this->allowedTags = array();
         $this->allowedFilters = array();
         $this->allowedFunctions = array();
+        $this->allowedMethods = array();
+        $this->allowedProperties = array();
 
         foreach($this->extensions as $id) {
             $extension = $this->container->get($id);
 
-            $this->allowedTags = array_merge($this->allowedTags, $extension->getAllowedTags());
-            $this->allowedFilters = array_merge($this->allowedFilters, $extension->getAllowedFilters());
-            $this->allowedFunctions = array_merge($this->allowedFunctions, $extension->getAllowedFunctions());
+            $this->allowedTags          = array_merge($this->allowedTags, $extension->getAllowedTags());
+            $this->allowedFilters       = array_merge($this->allowedFilters, $extension->getAllowedFilters());
+            $this->allowedFunctions     = array_merge($this->allowedFunctions, $extension->getAllowedFunctions());
+            $this->allowedProperties    = array_merge_recursive($this->allowedProperties, $extension->getAllowedProperties());
+            $this->allowedMethods       = array_merge_recursive($this->allowedMethods, $extension->getAllowedMethods());
+
         }
     }
 
-    /**
-     * @param $obj
-     * @param $method
-     * @return bool
-     */
-    function checkMethodAllowed($obj, $method)
+    public function checkMethodAllowed($obj, $method)
     {
-        return false;
+        $this->buildAllowed();
+
+        if ($obj instanceof \Twig_TemplateInterface || $obj instanceof \Twig_Markup) {
+            return true;
+        }
+
+        $allowed = false;
+        $method = strtolower($method);
+        foreach ($this->allowedMethods as $class => $methods) {
+            if ($obj instanceof $class) {
+                $allowed = in_array($method, $methods);
+
+                break;
+            }
+        }
+
+        if (!$allowed) {
+            throw new Twig_Sandbox_SecurityError(sprintf('Calling "%s" method on a "%s" object is not allowed.', $method, get_class($obj)));
+        }
     }
 
-    /**
-     * @param $obj
-     * @param $method
-     * @return bool
-     */
-    function checkPropertyAllowed($obj, $method)
+    public function checkPropertyAllowed($obj, $property)
     {
-        return false;
+        $this->buildAllowed();
+
+        $allowed = false;
+        foreach ($this->allowedProperties as $class => $properties) {
+            if ($obj instanceof $class) {
+                $allowed = in_array($property, is_array($properties) ? $properties : array($properties));
+
+                break;
+            }
+        }
+
+        if (!$allowed) {
+            throw new Twig_Sandbox_SecurityError(sprintf('Calling "%s" property on a "%s" object is not allowed.', $property, get_class($obj)));
+        }
     }
 }

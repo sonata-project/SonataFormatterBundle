@@ -13,6 +13,7 @@ namespace Sonata\FormatterBundle\Formatter;
 
 use \Twig_Environment;
 use \Twig_Error_Syntax;
+use \Twig_Sandbox_SecurityError;
 
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
@@ -69,6 +70,9 @@ class Pool
     {
         list($formatter, $env) = $this->get($code);
 
+        // apply the selected formatter
+        $text = $formatter->transform($text);
+
         try {
             // apply custom extension
             if ($env) {
@@ -76,14 +80,18 @@ class Pool
             }
         } catch (Twig_Error_Syntax $e) {
             if ($this->logger) {
-                $this->logger->crit(sprintf('[FormatterBundle::transform] Error while parsing twig template : %s, %s', $code, $e->getMessage()), array(
+                $this->logger->crit(sprintf('[FormatterBundle::transform] %s - Error while parsing twig template : %s', $code, $e->getMessage()), array(
+                    'text' => $text
+                ));
+            }
+
+        } catch (Twig_Sandbox_SecurityError $e) {
+            if ($this->logger) {
+                $this->logger->crit(sprintf('[FormatterBundle::transform] %s - the user try an non white-listed keyword : %s', $code, $e->getMessage()), array(
                     'text' => $text
                 ));
             }
         }
-
-        // apply the selected formatter
-        $text = $formatter->transform($text);
 
         return $text;
     }

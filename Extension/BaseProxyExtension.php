@@ -13,8 +13,14 @@ namespace Sonata\FormatterBundle\Extension;
 
 use \Twig_Environment;
 
-abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInterface
+abstract class BaseProxyExtension implements \Twig_ExtensionInterface, ExtensionInterface
 {
+    /**
+     * @abstract
+     * @return \Twig_ExtensionInterface
+     */
+    abstract function getTwigExtension();
+
     /**
      * Returns an array of available filters
      *
@@ -70,7 +76,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
      */
     public function initRuntime(Twig_Environment $environment)
     {
-        return array();
+        $this->getTwigExtension()->initRuntime($environment);
     }
 
     /**
@@ -80,7 +86,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
      */
     public function getTokenParsers()
     {
-        return array();
+        return $this->getTwigExtension()->getTokenParsers();
     }
 
     /**
@@ -90,7 +96,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
      */
     public function getNodeVisitors()
     {
-        return array();
+        return $this->getTwigExtension()->getNodeVisitors();
     }
 
     /**
@@ -100,7 +106,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
      */
     public function getFilters()
     {
-        return array();
+        return $this->getTwigExtension()->getFilters();
     }
 
     /**
@@ -110,7 +116,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
      */
     public function getTests()
     {
-        return array();
+        return $this->getTwigExtension()->getTests();
     }
 
     /**
@@ -120,7 +126,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
      */
     public function getFunctions()
     {
-        return array();
+        return $this->getTwigExtension()->getFunctions();
     }
 
     /**
@@ -130,7 +136,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
      */
     public function getOperators()
     {
-        return array();
+        return $this->getTwigExtension()->getOperators();
     }
 
     /**
@@ -140,6 +146,6 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
      */
     public function getGlobals()
     {
-        return array();
+        return $this->getTwigExtension()->getGlobals();
     }
 }

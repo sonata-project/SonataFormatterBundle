@@ -20,6 +20,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $formatter = new RawFormatter();
         $env = $this->getMock('\Twig_Environment');
         $env->expects($this->once())->method('render')->will($this->returnValue('Salut'));
+
         $pool = new Pool;
 
 
@@ -38,6 +39,46 @@ class PoolTest extends \PHPUnit_Framework_TestCase
 
         $pool = new Pool;
         $pool->get('foo');
+    }
+
+    public function testSyntaxError()
+    {
+
+        $formatter = new RawFormatter();
+        $env = $this->getMock('\Twig_Environment');
+        $env->expects($this->once())->method('render')->will($this->throwException(new \Twig_Error_Syntax('Error')));
+
+        $pool = new Pool;
+        $pool->add('foo', $formatter, $env);
+
+        $this->assertEquals('Salut', $pool->transform('foo', 'Salut'));
+    }
+
+    public function testTwig_Sandbox_SecurityError()
+    {
+
+        $formatter = new RawFormatter();
+        $env = $this->getMock('\Twig_Environment');
+        $env->expects($this->once())->method('render')->will($this->throwException(new \Twig_Sandbox_SecurityError('Error')));
+
+        $pool = new Pool;
+        $pool->add('foo', $formatter, $env);
+
+        $this->assertEquals('Salut', $pool->transform('foo', 'Salut'));
+    }
+
+    public function testUnexpectedException()
+    {
+        $this->setExpectedException('Exception');
+
+        $formatter = new RawFormatter();
+        $env = $this->getMock('\Twig_Environment');
+        $env->expects($this->once())->method('render')->will($this->throwException(new \Exception('Error')));
+
+        $pool = new Pool;
+        $pool->add('foo', $formatter, $env);
+
+        $pool->transform('foo', 'Salut');
     }
 }
 
