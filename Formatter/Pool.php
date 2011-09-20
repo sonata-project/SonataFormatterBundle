@@ -11,18 +11,31 @@
 
 namespace Sonata\FormatterBundle\Formatter;
 
+use \Twig_Environment;
+use \Twig_Error_Syntax;
+
+use Symfony\Component\HttpKernel\Log\LoggerInterface;
+
 class Pool
 {
     protected $formatters = array();
 
+    protected $logger;
+
+    public function __construct(LoggerInterface $logger = null)
+    {
+        $this->logger = $logger;
+    }
+
     /**
      * @param $code
-     * @param \Sonata\FormatterBundle\Formatter\FormatterInterface $formatter
+     * @param FormatterInterface $formatter
+     * @param \Twig_Environment $env
      * @return void
      */
-    public function add($code, FormatterInterface $formatter)
+    public function add($code, FormatterInterface $formatter, Twig_Environment $env = null)
     {
-        $this->formatters[$code] = $formatter;
+        $this->formatters[$code] = array($formatter, $env);
     }
 
     /**
@@ -36,7 +49,7 @@ class Pool
 
     /**
      * @param $code
-     * @return null|\Sonata\FormatterBundle\Formatter\FormatterInterface
+     * @return array
      */
     public function get($code)
     {
@@ -54,11 +67,23 @@ class Pool
      */
     public function transform($code, $text)
     {
-        foreach($this->get($code)->getExtensions() as $extension) {
-            $text = $extension->transform($text);
+        list($formatter, $env) = $this->get($code);
+
+        try {
+            // apply custom extension
+            if ($env) {
+                $text = $env->render($text);
+            }
+        } catch (Twig_Error_Syntax $e) {
+            if ($this->logger) {
+                $this->logger->crit(sprintf('[FormatterBundle::transform] Error while parsing twig template : %s, %s', $code, $e->getMessage()), array(
+                    'text' => $text
+                ));
+            }
         }
 
-        $text = $this->get($code)->transform($text);
+        // apply the selected formatter
+        $text = $formatter->transform($text);
 
         return $text;
     }

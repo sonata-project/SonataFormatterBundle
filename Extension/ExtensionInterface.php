@@ -14,9 +14,26 @@ namespace Sonata\FormatterBundle\Extension;
 interface ExtensionInterface
 {
     /**
+     * Returns an array of available filters
+     *
      * @abstract
-     * @param $text
-     * @return void
+     * @return array
      */
-    function transform($text);
+    function getAllowedFilters();
+
+    /**
+     * Returns an array of available tags
+     *
+     * @abstract
+     * @return array
+     */
+    function getAllowedTags();
+
+    /**
+     * Returns an array of available functions
+     *
+     * @abstract
+     * @return array
+     */
+    function getAllowedFunctions();
 }

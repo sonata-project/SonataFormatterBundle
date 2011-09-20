@@ -18,12 +18,14 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     public function testPool()
     {
         $formatter = new RawFormatter();
-
+        $env = $this->getMock('\Twig_Environment');
+        $env->expects($this->once())->method('render')->will($this->returnValue('Salut'));
         $pool = new Pool;
+
 
         $this->assertFalse($pool->has('foo'));
 
-        $pool->add('foo', $formatter);
+        $pool->add('foo', $formatter, $env);
 
         $this->assertTrue($pool->has('foo'));
 
