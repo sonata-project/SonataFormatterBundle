@@ -86,7 +86,7 @@ class SonataFormatterExtension extends Extension
         $container->setDefinition(sprintf('sonata.formatter.twig.env.%s', $code), $env);
 
         $lexer = new Definition('Twig_Lexer', array(new Reference(sprintf('sonata.formatter.twig.env.%s', $code)), array(
-            'tag_comment'  => array('<%#', '%>'),
+            'tag_comment'  => array('<#', '#>'),
             'tag_block'    => array('<%', '%>'),
             'tag_variable' => array('<%=', '%>'),
         )));
