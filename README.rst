@@ -19,7 +19,7 @@ Installation
 Add the following entry to ``deps`` the run ``php bin/vendors install``::
 
     [KnpMarkdownBundle]
-        git=http://github.com/knplabs/KnpMarkdownBundle.git
+        git=http://github.com/KnpLabs/KnpMarkdownBundle.git
         target=/bundles/Knp/Bundle/MarkdownBundle
 
     [SonataFormatterBundle]
