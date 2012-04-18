@@ -63,8 +63,9 @@ class FormatterType extends ChoiceType
     /**
      * {@inheritdoc}
      */
-    public function getDefaultOptions(array $options)
+    public function getDefaultOptions()
     {
+        $options = parent::getDefaultOptions();
         $multiple = isset($options['multiple']) && $options['multiple'];
         $expanded = isset($options['expanded']) && $options['expanded'];
 
