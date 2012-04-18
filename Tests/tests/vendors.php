@@ -11,6 +11,7 @@ if (!is_dir($vendorDir)) {
 $deps = array(
     array('symfony', 'git://github.com/symfony/symfony.git', isset($_SERVER['SYMFONY_VERSION']) ? $_SERVER['SYMFONY_VERSION'] : 'origin/2.0'),
     array('twig', 'git://github.com/fabpot/Twig.git', 'origin/master'),
+    array('Knp/Bundle/MarkdownBundle', 'git://github.com/KnpLabs/KnpMarkdownBundle.git', 'origin/master')
 );
 
 foreach ($deps as $dep) {
