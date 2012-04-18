@@ -19,7 +19,8 @@
     "require": {
         "php": ">=5.3.2",
         "symfony/framework-bundle": "master-dev",
-        "twig/twig": "*"
+        "twig/twig": "*",
+        "knplabs/knp-markdown-bundle": "*"
     },
     "autoload": {
         "psr-0": { "Sonata\\FormatterBundle": "" }
