@@ -69,11 +69,11 @@ class PoolTest extends \PHPUnit_Framework_TestCase
 
     public function testUnexpectedException()
     {
-        $this->setExpectedException('Exception');
+        $this->setExpectedException('RuntimeException');
 
         $formatter = new RawFormatter();
         $env = $this->getMock('\Twig_Environment');
-        $env->expects($this->once())->method('render')->will($this->throwException(new \Exception('Error')));
+        $env->expects($this->once())->method('render')->will($this->throwException(new \RuntimeException('Error')));
 
         $pool = new Pool;
         $pool->add('foo', $formatter, $env);
