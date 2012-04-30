@@ -18,8 +18,16 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "symfony/framework-bundle": "2.0.*",
+        "symfony/http-kernel": "2.0.*",
+        "symfony/dependency-injection": "2.0.*",
+        "symfony/form": "2.0.*",
         "twig/twig": "*"
+    },
+    "require-dev": {
+        "knplabs/knp-markdown-bundle": "*"
+    },
+    "suggests": {
+        "knplabs/knp-markdown-bundle": "*"
     },
     "autoload": {
         "psr-0": { "Sonata\\FormatterBundle": "" }
