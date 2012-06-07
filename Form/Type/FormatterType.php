@@ -13,8 +13,9 @@ namespace Sonata\FormatterBundle\Form\Type;
 
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 
@@ -37,11 +38,11 @@ class FormatterType extends ChoiceType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilder $builder
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      * @return void
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
@@ -56,54 +57,42 @@ class FormatterType extends ChoiceType
                 $options['target']
             );
 
-            $builder->addEventListener(FormEvents::BIND_CLIENT_DATA, array($listener, 'postBind'));
+            $builder->addEventListener(FormEvents::POST_BIND, array($listener, 'postBind'));
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getDefaultOptions()
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $options = parent::getDefaultOptions();
-        $multiple = isset($options['multiple']) && $options['multiple'];
-        $expanded = isset($options['expanded']) && $options['expanded'];
+        parent::setDefaultOptions($resolver);
 
-        $defaultOptions = array(
-            'multiple'          => false,
-            'expanded'          => false,
-            'choice_list'       => null,
-            'choices'           => null,
-            'preferred_choices' => array(),
-            'empty_data'        => $multiple || $expanded ? array() : '',
-            'empty_value'       => $multiple || $expanded || !isset($options['empty_value']) ? null : '',
-            'error_bubbling'    => false,
+        $pool = $this->pool;
+        $translator = $this->translator;
 
-            // field names
-            'source'            => null,
-            'target'            => null,
-            'listener'          => false,
-        );
-
-        $options = array_replace($defaultOptions, $options);
-
-        if (!$options['choices']) {
-            $options['choices'] = array();
-            foreach($this->pool->getFormatters() as $code => $instance) {
-                $options['choices'][$code] = $this->translator->trans($code, array(), 'SonataFormatterBundle');
+        $resolver->setDefaults(array(
+            'choice_list' => null,
+            'source' => function (Options $options, $previousValue) {
+                if ($options['listener'] && !$previousValue) {
+                    throw new \RuntimeException('Please provide a source property name');
+                }
+                return null;
+            },
+            'target' => function (Options $options, $previousValue) {
+                if ($options['listener'] && !$previousValue) {
+                    throw new \RuntimeException('Please provide a target property name');
+                }
+                return null;
+            },
+            'listener' => false,
+            'choices' => function (Options $options) use ($pool, $translator) {
+                $formatters = array();
+                foreach($pool->getFormatters() as $code => $instance) {
+                    $formatters[$code] = $translator->trans($code, array(), 'SonataFormatterBundle');
+                }
+                return $formatters;
             }
-        }
-
-        if ($options['listener']) {
-            if (!$options['source']) {
-                throw new \RuntimeException('Please provide a source property name');
-            }
-
-            if (!$options['target']) {
-                throw new \RuntimeException('Please provide a target property name');
-            }
-        }
-
-        return $options;
+        ));
     }
 }
