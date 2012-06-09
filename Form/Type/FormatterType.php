@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\Options;
 
 use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 
@@ -72,7 +73,6 @@ class FormatterType extends ChoiceType
         $translator = $this->translator;
 
         $resolver->setDefaults(array(
-            'choice_list' => null,
             'source' => function (Options $options, $previousValue) {
                 if ($options['listener'] && !$previousValue) {
                     throw new \RuntimeException('Please provide a source property name');
