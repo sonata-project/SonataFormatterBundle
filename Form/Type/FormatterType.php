@@ -95,4 +95,12 @@ class FormatterType extends ChoiceType
             }
         ));
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sonata_formatter_type_selector';
+    }
 }
