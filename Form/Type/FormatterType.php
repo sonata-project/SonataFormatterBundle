@@ -12,7 +12,7 @@
 namespace Sonata\FormatterBundle\Form\Type;
 
 use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -22,7 +22,7 @@ use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 
 use Sonata\FormatterBundle\Formatter\Pool;
 
-class FormatterType extends ChoiceType
+class FormatterType extends AbstractType
 {
     protected $pool;
 
@@ -45,11 +45,8 @@ class FormatterType extends ChoiceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         /**
          * The listener option only work if the source field is after the current field
-         *
          */
         if ($options['listener']) {
             $listener = new FormatterListener(
@@ -67,8 +64,6 @@ class FormatterType extends ChoiceType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        parent::setDefaultOptions($resolver);
-
         $pool = $this->pool;
         $translator = $this->translator;
 
@@ -94,6 +89,14 @@ class FormatterType extends ChoiceType
                 return $formatters;
             }
         ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return 'choice';
     }
 
     /**
