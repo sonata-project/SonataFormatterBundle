@@ -1,7 +1,7 @@
 Installation
 ============
 
-Add the following entry to ``deps`` the run ``php bin/vendors install``::
+To begin, add the dependent bundles::
 
     php composer.phar require sonata-project/formatter-bundle
 
