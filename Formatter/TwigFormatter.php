@@ -17,10 +17,9 @@ class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterf
     }
 
     /**
-     * @param $text
-     * @return string
+     * {@inheritdoc}
      */
-    function transform($text)
+    public function transform($text)
     {
         // Here we temporary changing twig environment loader to Chain loader with Twig_Loader_Array as first loader, which contains only one our template reference
         $oldLoader = $this->twig->getLoader();
@@ -41,21 +40,18 @@ class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterf
     }
 
     /**
-     * @abstract
-     * @param \Sonata\FormatterBundle\Extension\ExtensionInterface $extensionInterface
-     * @return void
+     * {@inheritdoc}
      */
-    function addExtension(ExtensionInterface $extensionInterface)
+    public function addExtension(ExtensionInterface $extensionInterface)
     {
         throw new \RuntimeException("\\Sonata\\FormatterBundle\\Formatter\\TwigFormatter cannot have extensions");
         
     }
 
     /**
-     * @abstract
-     * @return array
+     * {@inheritdoc}
      */
-    function getExtensions()
+    public function getExtensions()
     {
         return array();
     }
