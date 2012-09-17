@@ -32,3 +32,7 @@ Edit the ``config.yml`` file and add:
             text:
                 service: sonata.formatter.text.text
                 extensions: []
+
+            twig:
+                service: sonata.formatter.text.twig
+                extensions: [] # Twig formatter cannot have extensions
