@@ -8,7 +8,7 @@
         <parameter key="sonata.formatter.text.markdown.class">Sonata\FormatterBundle\Formatter\MarkdownFormatter</parameter>
         <parameter key="sonata.formatter.text.text.class">Sonata\FormatterBundle\Formatter\TextFormatter</parameter>
         <parameter key="sonata.formatter.text.raw.class">Sonata\FormatterBundle\Formatter\RawFormatter</parameter>
-        <parameter key="sonata.formatter.text.twig.class">Sonata\FormatterBundle\Formatter\TwigFormatter</parameter>
+        <parameter key="sonata.formatter.text.twigengine.class">Sonata\FormatterBundle\Formatter\TwigFormatter</parameter>
     </parameters>
 
     <services>
@@ -32,7 +32,7 @@
 
         </service>
 
-        <service id="sonata.formatter.text.twig" class="%sonata.formatter.text.twig.class%">
+        <service id="sonata.formatter.text.twigengine" class="%sonata.formatter.text.twigengine.class%">
             <tag name="sonata.text.formatter"/>
 
             <argument type="service" id="twig"/>
