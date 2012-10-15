@@ -20,7 +20,7 @@
     "require": {
         "symfony/symfony": "2.1.*",
         "twig/twig": "*",
-        "knplabs/knp-markdown-bundle": "dev-master"
+        "knplabs/knp-markdown-bundle": "1.1.*"
     },
     "autoload": {
         "psr-0": { "Sonata\\FormatterBundle": "" }
