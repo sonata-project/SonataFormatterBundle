@@ -17,7 +17,7 @@ class MarkdownFormatterTest extends \PHPUnit_Framework_TestCase
     public function testFormatter()
     {
         $parser = $this->getMock('Knp\Bundle\MarkdownBundle\MarkdownParserInterface');
-        $parser->expects($this->any())->method('transform')->will($this->returnValue('<b>Salut</b>'));
+        $parser->expects($this->any())->method('transformMarkdown')->will($this->returnValue('<b>Salut</b>'));
         $formatter = new MarkdownFormatter($parser);
 
         $this->assertEquals("<b>Salut</b>", $formatter->transform("*Salut*"));

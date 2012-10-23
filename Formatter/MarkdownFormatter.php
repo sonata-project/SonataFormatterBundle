@@ -11,7 +11,6 @@
 
 namespace Sonata\FormatterBundle\Formatter;
 
-use Sonata\FormatterBundle\Extension\ExtensionInterface;
 use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 
 class MarkdownFormatter extends BaseFormatter
@@ -19,7 +18,7 @@ class MarkdownFormatter extends BaseFormatter
     protected $parser;
 
     /**
-     * @param \Knp\Bundle\MarkdownBundle\MarkdownParserInterface $parser
+     * @param MarkdownParserInterface $parser
      */
     public function __construct(MarkdownParserInterface $parser)
     {
@@ -28,10 +27,11 @@ class MarkdownFormatter extends BaseFormatter
 
     /**
      * @param $text
+     *
      * @return string
      */
-    function transform($text)
+    public function transform($text)
     {
-        return $this->parser->transform($text);
+        return $this->parser->transformMarkdown($text);
     }
 }
