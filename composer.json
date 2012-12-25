@@ -18,7 +18,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "symfony/symfony": "2.1.*",
+        "symfony/symfony": ">=2.1,<2.3-dev",
         "twig/twig": "*",
         "knplabs/knp-markdown-bundle": "1.1.*"
     },
