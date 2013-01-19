@@ -85,19 +85,6 @@ class SonataFormatterExtension extends Extension
 
         $container->setDefinition(sprintf('sonata.formatter.twig.env.%s', $code), $env);
 
-        $lexer = new Definition('Twig_Lexer', array(new Reference(sprintf('sonata.formatter.twig.env.%s', $code)), array(
-            'tag_comment'  => array('<#', '#>'),
-            'tag_block'    => array('<%', '%>'),
-            'tag_variable' => array('<%=', '%>'),
-        )));
-        $lexer->setPublic(false);
-
-        $container->setDefinition(new Reference(sprintf('sonata.formatter.twig.lexer.%s', $code)), $lexer);
-
-        $env->addMethodCall('setLexer', array(new Reference(sprintf('sonata.formatter.twig.lexer.%s', $code))));
-
-        $container->setDefinition(sprintf('sonata.formatter.twig.env.%s', $code), $env);
-
         $sandboxPolicy = new Definition('Sonata\FormatterBundle\Twig\SecurityPolicyContenairAware', array(new Reference('service_container'), $extensions));
         $sandboxPolicy->setPublic(false);
         $container->setDefinition(sprintf('sonata.formatter.twig.sandbox.%s.policy', $code), $sandboxPolicy);
@@ -112,6 +99,17 @@ class SonataFormatterExtension extends Extension
         foreach ($extensions as $extension) {
             $env->addMethodCall('addExtension', array(new Reference($extension)));
         }
+
+        $lexer = new Definition('Twig_Lexer', array(new Reference(sprintf('sonata.formatter.twig.env.%s', $code)), array(
+            'tag_comment'  => array('<#', '#>'),
+            'tag_block'    => array('<%', '%>'),
+            'tag_variable' => array('<%=', '%>'),
+        )));
+        $lexer->setPublic(false);
+
+        $container->setDefinition(new Reference(sprintf('sonata.formatter.twig.lexer.%s', $code)), $lexer);
+
+        $env->addMethodCall('setLexer', array(new Reference(sprintf('sonata.formatter.twig.lexer.%s', $code))));
 
         return sprintf('sonata.formatter.twig.env.%s', $code);
     }
