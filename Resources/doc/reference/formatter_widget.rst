@@ -10,10 +10,10 @@ requirements.
 
 By default the widget supports these types:
 
- - markdown with `MarkItUp! <http://markitup.jaysalvat.com/examples/markdown/`_
- - rawhtml with `MarkItUp! <http://markitup.jaysalvat.com/examples/hmtl/`_
+ - markdown with `Markdow MarkItUp! <http://markitup.jaysalvat.com/examples/markdown/>`_
+ - rawhtml with `HTML MarkItUp! <http://markitup.jaysalvat.com/examples/hmtl/>`_
  - text with an standard textarea widget
- - richhtml with `CKEditor http://ckeditor.com/`_
+ - richhtml with `CKEditor <http://ckeditor.com/>`_
 
 Preview
 -------
