@@ -2,7 +2,7 @@
     "name": "sonata-project/formatter-bundle",
     "type": "symfony-bundle",
     "description": "Symfony SonataFormatterBundle",
-    "keywords": ["sonata", "formatter", "markdown"],
+    "keywords": ["sonata", "formatter", "markdown", 'ckeditor', 'markitup'],
     "homepage": "http://sonata-project.org/bundles/formatter",
     "license": "MIT",
     "authors": [
