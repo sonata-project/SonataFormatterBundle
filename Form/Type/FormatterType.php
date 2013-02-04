@@ -11,6 +11,8 @@
 
 namespace Sonata\FormatterBundle\Form\Type;
 
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -39,9 +41,7 @@ class FormatterType extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
-     * @return void
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -57,6 +57,14 @@ class FormatterType extends AbstractType
 
             $builder->addEventListener(FormEvents::POST_BIND, array($listener, 'postBind'));
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->set('source_id', str_replace($view->get('name'), $options['source'], $view->get('id')));
     }
 
     /**

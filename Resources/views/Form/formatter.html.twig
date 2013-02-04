@@ -1,0 +1,66 @@
+{% block sonata_formatter_type_selector_widget %}
+
+    {{ block('choice_widget') }}
+
+    <script>
+        var {{ source_id }}_rich_instance = false;
+
+        jQuery(document).ready(function() {
+
+            // This code requires CKEDITOR and jQuery MarkItUp
+            if (typeof CKEDITOR === 'undefined' || jQuery().markItUp == undefined) {
+                return;
+            }
+
+            jQuery('#{{ id }}').change(function() {
+                var elms = jQuery('#{{ source_id }}');
+                elms.markItUpRemove();
+                if ({{ source_id }}_rich_instance) {
+                    {{ source_id }}_rich_instance.destroy();
+                }
+
+                var val = jQuery(this).val();
+                var appendClass = val;
+                switch(val) {
+                    case 'textile':
+                        elms.markItUp(markitup_sonataTextileSettings);
+                        break;
+                    case 'markdown':
+                        elms.markItUp(markitup_sonataMarkdownSettings);
+                        break;
+                    case 'bbcode':
+                        elms.markItUp(markitup_sonataBBCodeSettings);
+                        break;
+                    case 'rawhtml':
+                        elms.markItUp(markitup_sonataHtmlSettings);
+                        appendClass = 'html';
+                        break;
+                    case 'richhtml':
+                        {{ source_id }}_rich_instance = CKEDITOR.replace('{{ source_id }}', {
+                            toolbar: [
+                                [ 'Bold','Italic','Underline',
+                                  '-', 'Cut','Copy','Paste','PasteText','PasteFromWord',
+                                  '-','Undo','Redo',
+                                  '-', 'Image', 'Link','Unlink','Anchor'
+                                ], [
+                                  'Maximize', 'Source'
+                                ]
+                            ]
+                        });
+                }
+
+                var parent = elms.parents('div.markItUp');
+
+                if (parent) {
+                    for (name in ['textile', 'markdown', 'bbcode', 'rawhtml', 'richhtml', 'rawhtml']) {
+                        parent.removeClass(name)
+                    }
+
+                    parent.addClass(appendClass);
+                }
+            });
+
+            jQuery('#{{ id }}').trigger('change');
+        });
+    </script>
+{% endblock sonata_formatter_type_selector_widget %}
