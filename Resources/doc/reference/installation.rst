@@ -13,6 +13,7 @@ Register the bundle in ``app/AppKernel.php``:
     $bundles = array(
         // ...
         new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
+        new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
         new Sonata\FormatterBundle\SonataFormatterBundle(),
     );
 
@@ -27,11 +28,31 @@ Edit the ``config.yml`` file and add:
         formatters:
             markdown:
                 service: sonata.formatter.text.markdown
-                extensions: []
+                extensions:
+                    - sonata.formatter.twig.control_flow
+                    - sonata.formatter.twig.gist
+                    - sonata.media.formatter.twig
 
             text:
                 service: sonata.formatter.text.text
-                extensions: []
+                extensions:
+                    - sonata.formatter.twig.control_flow
+                    - sonata.formatter.twig.gist
+                    - sonata.media.formatter.twig
+
+            rawhtml:
+                service: sonata.formatter.text.raw
+                extensions:
+                    - sonata.formatter.twig.control_flow
+                    - sonata.formatter.twig.gist
+                    - sonata.media.formatter.twig
+
+            richhtml:
+                service: sonata.formatter.text.raw
+                extensions:
+                    - sonata.formatter.twig.control_flow
+                    - sonata.formatter.twig.gist
+                    - sonata.media.formatter.twig
 
             twig:
                 service: sonata.formatter.text.twigengine
