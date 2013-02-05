@@ -12,6 +12,7 @@ Register the bundle in ``app/AppKernel.php``:
     <?php
     $bundles = array(
         // ...
+        new Sonata\MarkItUpBundle\SonataMarkItUpBundle(),
         new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
         new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
         new Sonata\FormatterBundle\SonataFormatterBundle(),
