@@ -52,10 +52,11 @@ class FormatterType extends AbstractType
             $listener = new FormatterListener(
                 $this->pool,
                 $options['source'],
-                $options['target']
+                $options['target'],
+                $builder->getName()
             );
 
-            $builder->addEventListener(FormEvents::POST_BIND, array($listener, 'postBind'));
+            $builder->getParent()->addEventListener(FormEvents::BIND, array($listener, 'postBind'));
         }
     }
 
