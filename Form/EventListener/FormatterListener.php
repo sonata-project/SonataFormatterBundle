@@ -12,7 +12,7 @@
 namespace Sonata\FormatterBundle\Form\EventListener;
 
 use Sonata\FormatterBundle\Formatter\Pool;
-use Symfony\Component\Form\Event\FilterDataEvent;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\Util\PropertyPath;
 
 class FormatterListener
@@ -23,33 +23,36 @@ class FormatterListener
 
     protected $targetProperty;
 
+    protected $format;
+
     /**
-     * @param \Sonata\FormatterBundle\Formatter\Pool $pool
-     * @param $sourceProperty
-     * @param $targetProperty
+     * @param Pool   $pool
+     * @param string $source
+     * @param string $target
+     * @param string $format
      */
-    public function __construct(Pool $pool, $sourceProperty, $targetProperty)
+    public function __construct(Pool $pool, $source, $target, $format)
     {
         $this->pool = $pool;
-        $this->sourceProperty = $sourceProperty;
-        $this->targetProperty = $targetProperty;
+        $this->source = $source;
+        $this->target = $target;
+        $this->format = $format;
     }
 
     /**
-     * @param \Symfony\Component\Form\Event\FilterDataEvent $event
-     * @return void
+     * @param FormEvent $event
      */
-    public function postBind(FilterDataEvent $event)
+    public function postBind(FormEvent $event)
     {
-        $targetPropertyPath = new PropertyPath($this->targetProperty);
+        $target = new PropertyPath($this->target);
 
-        $sourceField = $event->getForm()->getParent()->get($this->sourceProperty);
-        $object = $event->getForm()->getParent()->getData();
+        $format = $event->getForm()->get($this->format)->getData();
+        $source = $event->getForm()->get($this->source)->getData();
+        $object = $event->getForm()->getData();
 
         // transform the value
-        $targetPropertyPath->setValue(
-            $object,
-            $this->pool->transform($event->getData(), $sourceField->getData())
-        );
+        $target->setValue($object, $this->pool->transform($format, $source));
+
+        $event->setData($object);
     }
 }
