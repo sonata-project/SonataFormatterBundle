@@ -18,8 +18,8 @@ class LoaderSelector implements \Twig_LoaderInterface
     protected $fileLoader;
 
     /**
-     * @param \Twig_LoaderInterface $stringLoader
-     * @param \Twig_LoaderInterface $fileLoader
+     * @param  \Twig_LoaderInterface $stringLoader
+     * @param  \Twig_LoaderInterface $fileLoader
      * @return void
      */
     public function __construct(\Twig_LoaderInterface $stringLoader, \Twig_LoaderInterface $fileLoader)
@@ -31,7 +31,7 @@ class LoaderSelector implements \Twig_LoaderInterface
     /**
      * Gets the source code of a template, given its name.
      *
-     * @param  string $name The name of the template to load
+     * @param string $name The name of the template to load
      *
      * @return string The template source code
      */
@@ -52,7 +52,7 @@ class LoaderSelector implements \Twig_LoaderInterface
     /**
      * Gets the cache key to use for the cache for a given template name.
      *
-     * @param  string $name The name of the template to load
+     * @param string $name The name of the template to load
      *
      * @return string The cache key
      */

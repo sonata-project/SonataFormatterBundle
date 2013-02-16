@@ -31,7 +31,7 @@ class FormatterType extends AbstractType
     protected $translator;
 
     /**
-     * @param \Sonata\FormatterBundle\Formatter\Pool $pool
+     * @param \Sonata\FormatterBundle\Formatter\Pool             $pool
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
      */
     public function __construct(Pool $pool, TranslatorInterface $translator)
@@ -81,20 +81,23 @@ class FormatterType extends AbstractType
                 if ($options['listener'] && !$previousValue) {
                     throw new \RuntimeException('Please provide a source property name');
                 }
+
                 return null;
             },
             'target' => function (Options $options, $previousValue) {
                 if ($options['listener'] && !$previousValue) {
                     throw new \RuntimeException('Please provide a target property name');
                 }
+
                 return null;
             },
             'listener' => false,
             'choices' => function (Options $options) use ($pool, $translator) {
                 $formatters = array();
-                foreach($pool->getFormatters() as $code => $instance) {
+                foreach ($pool->getFormatters() as $code => $instance) {
                     $formatters[$code] = $translator->trans($code, array(), 'SonataFormatterBundle');
                 }
+
                 return $formatters;
             }
         ));

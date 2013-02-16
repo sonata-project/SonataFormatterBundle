@@ -11,15 +11,13 @@
 
 namespace Sonata\FormatterBundle\Formatter;
 
-use Sonata\FormatterBundle\Extension\ExtensionInterface;
-
 class RawFormatter extends BaseFormatter
 {
     /**
      * @param $text
      * @return string
      */
-    function transform($text)
+    public function transform($text)
     {
         return $text;
     }

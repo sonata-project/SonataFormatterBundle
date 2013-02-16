@@ -19,7 +19,7 @@ abstract class BaseProxyExtension implements \Twig_ExtensionInterface, Extension
      * @abstract
      * @return \Twig_ExtensionInterface
      */
-    abstract function getTwigExtension();
+    abstract public function getTwigExtension();
 
     /**
      * Returns an array of available filters
@@ -54,7 +54,7 @@ abstract class BaseProxyExtension implements \Twig_ExtensionInterface, Extension
     /**
      * @return array
      */
-    function getAllowedProperties()
+    public function getAllowedProperties()
     {
         return array();
     }
@@ -62,7 +62,7 @@ abstract class BaseProxyExtension implements \Twig_ExtensionInterface, Extension
     /**
      * @return array
      */
-    function getAllowedMethods()
+    public function getAllowedMethods()
     {
         return array();
     }
