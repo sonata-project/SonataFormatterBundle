@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\FormatterBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -16,7 +15,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
 
@@ -46,7 +44,7 @@ class SonataFormatterExtension extends Extension
 
         $pool = $container->getDefinition('sonata.formatter.pool');
 
-        foreach($config['formatters'] as $code => $configuration) {
+        foreach ($config['formatters'] as $code => $configuration) {
             if (count($configuration['extensions']) == 0) {
                 $env = null;
             } else {
@@ -60,8 +58,8 @@ class SonataFormatterExtension extends Extension
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param $code
-     * @param \Symfony\Component\DependencyInjection\Definition $formatter
-     * @param array $extensions
+     * @param  \Symfony\Component\DependencyInjection\Definition $formatter
+     * @param  array                                             $extensions
      * @return string
      */
     public function createEnvironement(ContainerBuilder $container, $code, Definition $formatter, array $extensions)

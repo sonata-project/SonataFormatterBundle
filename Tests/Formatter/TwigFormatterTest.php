@@ -56,7 +56,7 @@ class TwigFormatterTest extends \PHPUnit_Framework_TestCase
 }
 
 class MyStringLoader implements \Twig_LoaderInterface
-{    
+{
     public function getSource($name)
     {
         return $name;
@@ -66,7 +66,7 @@ class MyStringLoader implements \Twig_LoaderInterface
     {
         return $name;
     }
-    
+
     public function isFresh($name, $time)
     {
         return true;

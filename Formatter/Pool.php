@@ -30,8 +30,8 @@ class Pool
 
     /**
      * @param $code
-     * @param FormatterInterface $formatter
-     * @param \Twig_Environment $env
+     * @param  FormatterInterface $formatter
+     * @param  \Twig_Environment  $env
      * @return void
      */
     public function add($code, FormatterInterface $formatter, Twig_Environment $env = null)

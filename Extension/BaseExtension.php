@@ -48,7 +48,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     /**
      * @return array
      */
-    function getAllowedProperties()
+    public function getAllowedProperties()
     {
         return array();
     }
@@ -56,7 +56,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     /**
      * @return array
      */
-    function getAllowedMethods()
+    public function getAllowedMethods()
     {
         return array();
     }

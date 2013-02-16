@@ -17,10 +17,10 @@ abstract class BaseFormatter implements FormatterInterface
     protected $extensions = array();
 
     /**
-     * @param \Sonata\FormatterBundle\Extension\ExtensionInterface $extensionInterface
+     * @param  \Sonata\FormatterBundle\Extension\ExtensionInterface $extensionInterface
      * @return void
      */
-    function addExtension(ExtensionInterface $extensionInterface)
+    public function addExtension(ExtensionInterface $extensionInterface)
     {
         $this->extensions[] = $extensionInterface;
     }
@@ -28,7 +28,7 @@ abstract class BaseFormatter implements FormatterInterface
     /**
      * @return array
      */
-    function getExtensions()
+    public function getExtensions()
     {
         return $this->extensions;
     }

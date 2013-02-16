@@ -20,18 +20,18 @@ interface FormatterInterface
      * @param $text
      * @return void
      */
-    function transform($text);
+    public function transform($text);
 
     /**
      * @abstract
-     * @param \Sonata\FormatterBundle\Extension\ExtensionInterface $extensionInterface
+     * @param  \Sonata\FormatterBundle\Extension\ExtensionInterface $extensionInterface
      * @return void
      */
-    function addExtension(ExtensionInterface $extensionInterface);
+    public function addExtension(ExtensionInterface $extensionInterface);
 
     /**
      * @abstract
      * @return array
      */
-    function getExtensions();
+    public function getExtensions();
 }

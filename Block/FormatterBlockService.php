@@ -74,7 +74,7 @@ class FormatterBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    function getDefaultSettings()
+    public function getDefaultSettings()
     {
         return array(
             'format'     => 'richhtml',

@@ -11,15 +11,13 @@
 
 namespace Sonata\FormatterBundle\Formatter;
 
-use Sonata\FormatterBundle\Extension\ExtensionInterface;
-
 class TextFormatter extends BaseFormatter
 {
     /**
      * @param $text
      * @return string
      */
-    function transform($text)
+    public function transform($text)
     {
         return nl2br($text);
     }

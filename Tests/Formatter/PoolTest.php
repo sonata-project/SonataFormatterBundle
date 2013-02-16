@@ -23,7 +23,6 @@ class PoolTest extends \PHPUnit_Framework_TestCase
 
         $pool = new Pool;
 
-
         $this->assertFalse($pool->has('foo'));
 
         $pool->add('foo', $formatter, $env);
@@ -81,4 +80,3 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $pool->transform('foo', 'Salut');
     }
 }
-

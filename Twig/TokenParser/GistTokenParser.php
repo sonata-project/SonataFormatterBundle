@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\FormatterBundle\Twig\TokenParser;
 
 use Sonata\FormatterBundle\Twig\Node\GistNode;

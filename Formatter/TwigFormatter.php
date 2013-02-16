@@ -45,7 +45,7 @@ class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterf
     public function addExtension(ExtensionInterface $extensionInterface)
     {
         throw new \RuntimeException("\\Sonata\\FormatterBundle\\Formatter\\TwigFormatter cannot have extensions");
-        
+
     }
 
     /**

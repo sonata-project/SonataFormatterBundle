@@ -40,7 +40,7 @@ class SecurityPolicyContenairAware implements \Twig_Sandbox_SecurityPolicyInterf
 
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-     * @param array $extensions
+     * @param array                                                     $extensions
      */
     public function __construct(ContainerInterface $container, array $extensions = array())
     {
@@ -54,7 +54,7 @@ class SecurityPolicyContenairAware implements \Twig_Sandbox_SecurityPolicyInterf
      * @param $functions
      * @return void
      */
-    function checkSecurity($tags, $filters, $functions)
+    public function checkSecurity($tags, $filters, $functions)
     {
         $this->buildAllowed();
 
@@ -89,7 +89,7 @@ class SecurityPolicyContenairAware implements \Twig_Sandbox_SecurityPolicyInterf
         $this->allowedMethods = array();
         $this->allowedProperties = array();
 
-        foreach($this->extensions as $id) {
+        foreach ($this->extensions as $id) {
             $extension = $this->container->get($id);
 
             $this->allowedTags          = array_merge($this->allowedTags, $extension->getAllowedTags());

@@ -19,7 +19,7 @@ interface ExtensionInterface
      * @abstract
      * @return array
      */
-    function getAllowedFilters();
+    public function getAllowedFilters();
 
     /**
      * Returns an array of available tags
@@ -27,7 +27,7 @@ interface ExtensionInterface
      * @abstract
      * @return array
      */
-    function getAllowedTags();
+    public function getAllowedTags();
 
     /**
      * Returns an array of available functions
@@ -35,17 +35,17 @@ interface ExtensionInterface
      * @abstract
      * @return array
      */
-    function getAllowedFunctions();
+    public function getAllowedFunctions();
 
     /**
      * @abstract
      * @return array
      */
-    function getAllowedProperties();
+    public function getAllowedProperties();
 
     /**
      * @abstract
      * @return array
      */
-    function getAllowedMethods();
+    public function getAllowedMethods();
 }
