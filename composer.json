@@ -27,5 +27,11 @@
     "autoload": {
         "psr-0": { "Sonata\\FormatterBundle": "" }
     },
-    "target-dir": "Sonata/FormatterBundle"
+    "target-dir": "Sonata/FormatterBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-2.0": "2.0.x-dev",
+            "dev-master": "2.1.x-dev"
+        }
+    }
 }
