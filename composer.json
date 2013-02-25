@@ -16,13 +16,12 @@
             "homepage": "https://github.com/sonata-project/SonataFormatterBundle/contributors"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "symfony/symfony": ">=2.1,<2.3-dev",
         "twig/twig": "*",
         "knplabs/knp-markdown-bundle": "1.1.*",
-        "sonata-project/markitup-bundle": "dev-master",
-        "egeloen/ckeditor-bundle": "2.*@stable"
+        "sonata-project/markitup-bundle": "2.1.*",
+        "egeloen/ckeditor-bundle": "2.*"
     },
     "autoload": {
         "psr-0": { "Sonata\\FormatterBundle": "" }
