@@ -65,7 +65,7 @@ class FormatterType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->set('source_id', str_replace($view->get('name'), $options['source'], $view->get('id')));
+        $view->vars['source_id'] = str_replace($view->vars['name'], $options['source'], $view->vars['id']);
     }
 
     /**
