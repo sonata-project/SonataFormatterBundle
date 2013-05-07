@@ -11,6 +11,7 @@
 
 namespace Sonata\FormatterBundle\Block;
 
+use Sonata\BlockBundle\Block\BlockContextInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 use Sonata\AdminBundle\Form\FormMapper;
@@ -18,6 +19,7 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BaseBlockService;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  *
@@ -28,13 +30,11 @@ class FormatterBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function execute(BlockInterface $block, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        $settings = array_merge($this->getDefaultSettings(), $block->getSettings());
-
-        return $this->renderResponse('SonataFormatterBundle:Block:block_formatter.html.twig', array(
-            'block'     => $block,
-            'settings'  => $settings
+        return $this->renderResponse($blockContext->getTemplate(), array(
+            'block'     => $blockContext->getBlock(),
+            'settings'  => $blockContext->getSettings()
         ), $response);
     }
 
@@ -74,12 +74,13 @@ class FormatterBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function getDefaultSettings()
+    public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'format'     => 'richhtml',
             'rawContent' => '<b>Insert your custom content here</b>',
             'content'    => '<b>Insert your custom content here</b>',
-        );
+            'template'   => 'SonataFormatterBundle:Block:block_formatter.html.twig'
+        ));
     }
 }
