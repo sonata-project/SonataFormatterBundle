@@ -21,7 +21,8 @@
         "twig/twig": "*",
         "knplabs/knp-markdown-bundle": "1.1.*",
         "sonata-project/markitup-bundle": "2.1.*",
-        "egeloen/ckeditor-bundle": "2.*"
+        "egeloen/ckeditor-bundle": "2.*",
+        "sonata-project/block-bundle": "2.2.0"
     },
     "autoload": {
         "psr-0": { "Sonata\\FormatterBundle": "" }
