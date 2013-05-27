@@ -48,7 +48,7 @@ class FormatterListener
 
         $format = $event->getForm()->get($this->format)->getData();
         $source = $event->getForm()->get($this->source)->getData();
-        $object = $event->getForm()->getData();
+        $object = $event->getData();
 
         // transform the value
         $target->setValue($object, $this->pool->transform($format, $source));
