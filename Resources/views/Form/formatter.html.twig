@@ -1,6 +1,11 @@
-{% block sonata_formatter_type_selector_widget %}
+{% block sonata_formatter_type_widget %}
 
-    {{ block('choice_widget') }}
+    <div style="margin-bottom: 5px;">
+        {{ form_widget(form.children[format_field]) }}
+        <i>{{ "please_select_format_method"|trans({}, "SonataFormatterBundle") }}</i>
+    </div>
+
+    {{ form_widget(form.children[source_field]) }}
 
     <script>
         var {{ source_id }}_rich_instance = false;
@@ -12,8 +17,8 @@
                 return;
             }
 
-            jQuery('#{{ id }}').change(function() {
-                var elms = jQuery('#{{ source_id }}');
+            jQuery('#{{ form.children[format_field].vars.id }}').change(function() {
+                var elms = jQuery('#{{ form.children[source_field].vars.id }}');
                 elms.markItUpRemove();
                 if ({{ source_id }}_rich_instance) {
                     {{ source_id }}_rich_instance.destroy();
@@ -36,7 +41,7 @@
                         appendClass = 'html';
                         break;
                     case 'richhtml':
-                        {{ source_id }}_rich_instance = CKEDITOR.replace('{{ source_id }}', {
+                        {{ source_id }}_rich_instance = CKEDITOR.replace('{{ form.children[source_field].vars.id }}', {
                             toolbar: [
                                 [ 'Bold','Italic','Underline',
                                   '-', 'Cut','Copy','Paste','PasteText','PasteFromWord',
@@ -61,7 +66,7 @@
                 }
             });
 
-            jQuery('#{{ id }}').trigger('change');
+            jQuery('#{{ form.children[format_field].vars.id }}').trigger('change');
         });
     </script>
-{% endblock sonata_formatter_type_selector_widget %}
+{% endblock sonata_formatter_type_widget %}

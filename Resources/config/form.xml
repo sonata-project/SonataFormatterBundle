@@ -6,7 +6,7 @@
 
     <services>
         <service id="sonata.formatter.form.type.selector" class="Sonata\FormatterBundle\Form\Type\FormatterType">
-            <tag name="form.type" alias="sonata_formatter_type_selector" />
+            <tag name="form.type" alias="sonata_formatter_type" />
 
             <argument type="service" id="sonata.formatter.pool" />
             <argument type="service" id="translator" />

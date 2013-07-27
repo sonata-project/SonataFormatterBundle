@@ -12,6 +12,7 @@
 namespace Sonata\FormatterBundle\Block;
 
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 use Sonata\AdminBundle\Form\FormMapper;
@@ -53,12 +54,14 @@ class FormatterBlockService extends BaseBlockService
     {
         $formMapper->add('settings', 'sonata_type_immutable_array', array(
             'keys' => array(
-                array('format', 'sonata_formatter_type_selector', array(
-                    'source' => 'rawContent',
-                    'target' => '[content]',
-                    'listener' => true,
-                )),
-                array('rawContent', 'textarea', array()),
+                array('content', 'sonata_formatter_type', function(FormBuilderInterface $formBuilder) {
+                    return array(
+                        'event_dispatcher' => $formBuilder->getEventDispatcher(),
+                        'format_field'     => array('format', '[format]'),
+                        'source_field'     => array('rawContent', '[rawContent]'),
+                        'target_field'     => '[content]'
+                    );
+                }),
             )
         ));
     }
