@@ -11,6 +11,7 @@
 
 namespace Sonata\FormatterBundle\Form\Type;
 
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -37,6 +38,7 @@ class FormatterType extends AbstractType
     public function __construct(Pool $pool, TranslatorInterface $translator)
     {
         $this->pool = $pool;
+
         $this->translator = $translator;
     }
 
@@ -45,18 +47,43 @@ class FormatterType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        if (is_array($options['format_field'])) {
+            list($formatField, $formatPropertyPath) = $options['format_field'];
+            $options['format_field_options']['property_path'] = $formatPropertyPath;
+        } else {
+            $formatField = $options['format_field'];
+            $options['format_field_options']['property_path'] = $formatField;
+        }
+
+        if (is_array($options['source_field'])) {
+            list($sourceField, $sourcePropertyPath) = $options['source_field'];
+            $options['source_field_options']['property_path'] = $sourcePropertyPath;
+        } else {
+            $sourceField = $options['source_field'];
+            $options['source_field_options']['property_path'] = $sourceField;
+        }
+
+        $builder
+            ->add($formatField, 'choice', $options['format_field_options'])
+            ->add($sourceField, 'textarea', $options['source_field_options']);
+
         /**
          * The listener option only work if the source field is after the current field
          */
         if ($options['listener']) {
+
+            if (!$options['event_dispatcher'] instanceof EventDispatcherInterface) {
+                throw new \RuntimeException('The event_dispatcher option but be an instance of EventDispatcherInterface');
+            }
+
             $listener = new FormatterListener(
                 $this->pool,
-                $options['source'],
-                $options['target'],
-                $builder->getName()
+                $options['format_field_options']['property_path'],
+                $options['source_field_options']['property_path'],
+                $options['target_field']
             );
 
-            $builder->getParent()->addEventListener(FormEvents::BIND, array($listener, 'postBind'));
+            $options['event_dispatcher']->addListener(FormEvents::POST_SUBMIT, array($listener, 'postSubmit'));
         }
     }
 
@@ -65,7 +92,22 @@ class FormatterType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['source_id'] = str_replace($view->vars['name'], $options['source'], $view->vars['id']);
+
+        if (is_array($options['source_field'])) {
+            list($sourceField, ) = $options['source_field'];
+            $view->vars['source_field'] = $sourceField;
+        } else {
+            $view->vars['source_field'] = $options['source_field'];
+        }
+
+        if (is_array($options['format_field'])) {
+            list($formatField, ) = $options['format_field'];
+            $view->vars['format_field'] = $formatField;
+        } else {
+            $view->vars['format_field'] = $options['format_field'];
+        }
+
+        $view->vars['source_id'] = str_replace($view->vars['name'], $view->vars['source_field'], $view->vars['id']);
     }
 
     /**
@@ -77,38 +119,32 @@ class FormatterType extends AbstractType
         $translator = $this->translator;
 
         $resolver->setDefaults(array(
-            'source' => function (Options $options, $previousValue) {
-                if ($options['listener'] && !$previousValue) {
-                    throw new \RuntimeException('Please provide a source property name');
-                }
+            'inherit_data'      => true,
+            'event_dispatcher'  => null,
+            'format_field'      => null,
+            'format_field_options' => array(
+                'choices'           => function (Options $options) use ($pool, $translator) {
+                    $formatters = array();
+                    foreach ($pool->getFormatters() as $code => $instance) {
+                        $formatters[$code] = $translator->trans($code, array(), 'SonataFormatterBundle');
+                    }
 
-                return null;
-            },
-            'target' => function (Options $options, $previousValue) {
-                if ($options['listener'] && !$previousValue) {
-                    throw new \RuntimeException('Please provide a target property name');
+                    return $formatters;
                 }
-
-                return null;
-            },
-            'listener' => false,
-            'choices' => function (Options $options) use ($pool, $translator) {
-                $formatters = array();
-                foreach ($pool->getFormatters() as $code => $instance) {
-                    $formatters[$code] = $translator->trans($code, array(), 'SonataFormatterBundle');
-                }
-
-                return $formatters;
-            }
+            ),
+            'source_field' => null,
+            'source_field_options'      => array(
+                'attr' => array('class' => 'span10', 'rows' => 20)
+            ),
+            'target_field' => null,
+            'listener'     => true,
         ));
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent()
-    {
-        return 'choice';
+        $resolver->setRequired(array(
+            'format_field',
+            'source_field',
+            'target_field'
+        ));
     }
 
     /**
@@ -116,6 +152,6 @@ class FormatterType extends AbstractType
      */
     public function getName()
     {
-        return 'sonata_formatter_type_selector';
+        return 'sonata_formatter_type';
     }
 }

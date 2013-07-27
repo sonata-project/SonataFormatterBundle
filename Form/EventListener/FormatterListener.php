@@ -13,46 +13,49 @@ namespace Sonata\FormatterBundle\Form\EventListener;
 
 use Sonata\FormatterBundle\Formatter\Pool;
 use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\Util\PropertyPath;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyPath;
 
 class FormatterListener
 {
     protected $pool;
 
-    protected $sourceProperty;
+    protected $formatField;
 
-    protected $targetProperty;
+    protected $sourcefield;
 
-    protected $format;
+    protected $targetField;
 
     /**
      * @param Pool   $pool
+     * @param string $format
      * @param string $source
      * @param string $target
-     * @param string $format
      */
-    public function __construct(Pool $pool, $source, $target, $format)
+    public function __construct(Pool $pool, $formatField, $sourcefield, $targetField)
     {
         $this->pool = $pool;
-        $this->source = $source;
-        $this->target = $target;
-        $this->format = $format;
+
+        $this->formatField = $formatField;
+        $this->sourcefield = $sourcefield;
+        $this->targetField = $targetField;
     }
 
     /**
      * @param FormEvent $event
      */
-    public function postBind(FormEvent $event)
+    public function postSubmit(FormEvent $event)
     {
-        $target = new PropertyPath($this->target);
+        $accessor = PropertyAccess::createPropertyAccessor();
 
-        $format = $event->getForm()->get($this->format)->getData();
-        $source = $event->getForm()->get($this->source)->getData();
-        $object = $event->getForm()->getData();
+        $format = $accessor->getValue($event->getData(), $this->formatField);
+        $source = $accessor->getValue($event->getData(), $this->sourcefield);
 
-        // transform the value
-        $target->setValue($object, $this->pool->transform($format, $source));
+        // make sure the listener works with array
+        $data = $event->getData();
 
-        $event->setData($object);
+        $accessor->setValue($data, $this->targetField, $this->pool->transform($format, $source));
+
+        $event->setData($data);
     }
 }

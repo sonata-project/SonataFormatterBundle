@@ -46,21 +46,28 @@ Now, let's define a form to edit this post:
 .. code-block:: php
 
     <?php
+
     $formBuilder
-        ->add('contentFormatter', 'sonata_formatter_type_selector', array(
-            'source' => 'rawContent',
-            'target' => 'content'
+        ->add('content', 'sonata_formatter_type', array(
+            'event_dispatcher' => $formBuilder->getEventDispatcher(),
+            'format_field'   => 'contentFormatter',
+            'source_field'   => 'rawContent',
+            'source_field_options'      => array(
+                'attr' => array('class' => 'span10', 'rows' => 20)
+            ),
+            'target_field'   => 'content',
+            'listener'       => true,
         ))
-        ->add('rawContent')
 
-The order is quite important here and it mostly due to how the Form Component behave, the
-``sonata_formatter_type_selector`` must appear first.
-
-The form defines a ``contentFormatter`` with a select choice (``sonata_formatter_type_selector``)
+The form type defines a ``contentFormatter`` with a select choice (``sonata_formatter_type_selector``)
 the ``sonata_formatter_type_selector`` takes 2 options:
 
- - ``source``: the user's content to convert
- - ``target``: the field containing the final content
+ - ``event_dispatcher``: the form dispatcher to attach the "submit" event
+ - ``format_field``: the entity's format field
+ - ``format_field_options``: the format field options (optional)
+ - ``source_field``:  the entity's source field
+ - ``source_field_options``: the source field options  (optional)
+ - ``target_field``: the entity's final field with the transformed data
 
 If you stop here, the most interesting part will not be present, let's edit some configuration files.
 
