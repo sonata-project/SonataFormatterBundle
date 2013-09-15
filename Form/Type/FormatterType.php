@@ -106,9 +106,7 @@ class FormatterType extends AbstractType
         } else {
             $view->vars['format_field'] = $options['format_field'];
         }
-		
-		$view->vars['toolbar_icons'] = $options['toolbar_icons'];
-
+		$view->vars['ckeditor_toolbar_icons'] = $options['ckeditor_toolbar_icons'];
         $view->vars['source_id'] = str_replace($view->vars['name'], $view->vars['source_field'], $view->vars['id']);
     }
 
@@ -119,21 +117,20 @@ class FormatterType extends AbstractType
     {
         $pool = $this->pool;
         $translator = $this->translator;
-
+		
         $resolver->setDefaults(array(
-            'inherit_data'      => true,
-            'event_dispatcher'  => null,
-            'format_field'      => null,
-            'toolbar_icons'		=> "[ 'Bold','Italic','Underline',
-                                  '-', 'Cut','Copy','Paste','PasteText','PasteFromWord',
-                                  '-','Undo','Redo',
-                                  '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote',
-                                  '-', 'Image', 'Link','Unlink','Table'
-                                ], [
-                                  'Maximize', 'Source'
-                                ]",
-            'format_field_options' => array(
-                'choices'           => function (Options $options) use ($pool, $translator) {
+            'inherit_data'      		=> true,
+            'event_dispatcher'  		=> null,
+            'format_field'      		=> null,
+            'ckeditor_toolbar_icons'	=> "[ 'Bold','Italic','Underline',
+			                                  '-', 'Cut','Copy','Paste','PasteText','PasteFromWord',
+			                                  '-','Undo','Redo',
+			                                  '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 
+			                                  '-', 'Blockquote',
+			                                  '-', 'Image', 'Link','Unlink','Table'
+			                                ],[ 'Maximize', 'Source' ]",
+            'format_field_options' 		=> array(
+                'choices'           	=> function (Options $options) use ($pool, $translator) {
                     $formatters = array();
                     foreach ($pool->getFormatters() as $code => $instance) {
                         $formatters[$code] = $translator->trans($code, array(), 'SonataFormatterBundle');
