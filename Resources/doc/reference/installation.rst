@@ -32,28 +32,28 @@ Edit the ``config.yml`` file and add:
                 extensions:
                     - sonata.formatter.twig.control_flow
                     - sonata.formatter.twig.gist
-                    - sonata.media.formatter.twig
+
 
             text:
                 service: sonata.formatter.text.text
                 extensions:
                     - sonata.formatter.twig.control_flow
                     - sonata.formatter.twig.gist
-                    - sonata.media.formatter.twig
+
 
             rawhtml:
                 service: sonata.formatter.text.raw
                 extensions:
                     - sonata.formatter.twig.control_flow
                     - sonata.formatter.twig.gist
-                    - sonata.media.formatter.twig
+
 
             richhtml:
                 service: sonata.formatter.text.raw
                 extensions:
                     - sonata.formatter.twig.control_flow
                     - sonata.formatter.twig.gist
-                    - sonata.media.formatter.twig
+
 
             twig:
                 service: sonata.formatter.text.twigengine
