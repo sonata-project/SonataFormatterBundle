@@ -32,6 +32,7 @@ Edit the ``config.yml`` file and add:
                 extensions:
                     - sonata.formatter.twig.control_flow
                     - sonata.formatter.twig.gist
+            #        - sonata.media.formatter.twig #keep this commented unless you are using media bundle.
 
 
             text:
@@ -39,6 +40,7 @@ Edit the ``config.yml`` file and add:
                 extensions:
                     - sonata.formatter.twig.control_flow
                     - sonata.formatter.twig.gist
+            #        - sonata.media.formatter.twig
 
 
             rawhtml:
@@ -46,6 +48,7 @@ Edit the ``config.yml`` file and add:
                 extensions:
                     - sonata.formatter.twig.control_flow
                     - sonata.formatter.twig.gist
+            #        - sonata.media.formatter.twig
 
 
             richhtml:
@@ -53,6 +56,7 @@ Edit the ``config.yml`` file and add:
                 extensions:
                     - sonata.formatter.twig.control_flow
                     - sonata.formatter.twig.gist
+            #        - sonata.media.formatter.twig
 
 
             twig:
