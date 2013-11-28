@@ -106,7 +106,14 @@ class FormatterType extends AbstractType
         } else {
             $view->vars['format_field'] = $options['format_field'];
         }
-
+        
+        $tbicons = '';
+        foreach($options['ckeditor_toolbar_icons'] as $item) {
+            $values = implode("','", $item);
+            $tbicons .= sprintf("['%s'],", $values);
+        }
+        $view->vars['ckeditor_toolbar_icons'] = $tbicons;
+        
         $view->vars['source_id'] = str_replace($view->vars['name'], $view->vars['source_field'], $view->vars['id']);
     }
 
@@ -119,11 +126,19 @@ class FormatterType extends AbstractType
         $translator = $this->translator;
 
         $resolver->setDefaults(array(
-            'inherit_data'      => true,
-            'event_dispatcher'  => null,
-            'format_field'      => null,
-            'format_field_options' => array(
-                'choices'           => function (Options $options) use ($pool, $translator) {
+            'inherit_data'              => true,
+            'event_dispatcher'          => null,
+            'format_field'              => null,
+            'ckeditor_toolbar_icons'    => array( 1 => array('Bold', 'Italic', 'Underline',
+                                                             '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
+                                                             '-', 'Undo', 'Redo',
+                                                             '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
+                                                             '-', 'Blockquote', 
+                                                             '-', 'Image', 'Link', 'Unlink', 'Table'),
+                                                  2 => array('Maximize', 'Source')
+                                                ),
+            'format_field_options'      => array(
+                'choices'               => function (Options $options) use ($pool, $translator) {
                     $formatters = array();
                     foreach ($pool->getFormatters() as $code => $instance) {
                         $formatters[$code] = $translator->trans($code, array(), 'SonataFormatterBundle');

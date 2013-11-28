@@ -43,14 +43,7 @@
                     case 'richhtml':
                         {{ source_id }}_rich_instance = CKEDITOR.replace('{{ form.children[source_field].vars.id }}', {
                             toolbar: [
-                                [ 'Bold','Italic','Underline',
-                                  '-', 'Cut','Copy','Paste','PasteText','PasteFromWord',
-                                  '-','Undo','Redo',
-                                  '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote',
-                                  '-', 'Image', 'Link','Unlink'
-                                ], [
-                                  'Maximize', 'Source'
-                                ]
+                                {{ ckeditor_toolbar_icons|raw }}
                             ]
                         });
                 }
