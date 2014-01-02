@@ -89,7 +89,7 @@ Open the config.yml file and add a following lines (or adjust the current config
 
         form:
             resources:
-                - 'SonataAdminBundle:Form:silex_form_div_layout.html.twig'
+                # ...
                 - 'SonataFormatterBundle:Form:formatter.html.twig'
 
 
