@@ -69,6 +69,10 @@ the ``sonata_formatter_type_selector`` takes 2 options:
  - ``source_field_options``: the source field options  (optional)
  - ``target_field``: the entity's final field with the transformed data
 
+Additionally, the following option can be added to give CKEditor a context in order to customize routes used to browser and upload medias:
+
+- ``ckeditor_context``: the CKEditor configuration context name (optional)
+
 If you stop here, the most interesting part will not be present, let's edit some configuration files.
 
 .. note::

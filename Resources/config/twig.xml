@@ -18,7 +18,6 @@
         <service id="sonata.formatter.twig.control_flow" class="Sonata\FormatterBundle\Extension\ControlFlowExtension" public="true">
 
         </service>
-
     </services>
 
 </container>

@@ -41,11 +41,7 @@
                         appendClass = 'html';
                         break;
                     case 'richhtml':
-                        {{ source_id }}_rich_instance = CKEDITOR.replace('{{ form.children[source_field].vars.id }}', {
-                            toolbar: [
-                                {{ ckeditor_toolbar_icons|raw }}
-                            ]
-                        });
+                        {{ source_id }}_rich_instance = {{ ckeditor_replace(form.children[source_field].vars.id, ckeditor_configuration) }};
                 }
 
                 var parent = elms.parents('div.markItUp');
