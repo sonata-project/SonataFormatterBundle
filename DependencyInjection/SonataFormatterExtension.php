@@ -42,8 +42,13 @@ class SonataFormatterExtension extends Extension
         $loader->load('form.xml');
         
         $bundles = $container->getParameter('kernel.bundles');
+
         if (isset($bundles['SonataBlockBundle'])) {
             $loader->load('block.xml');
+        }
+
+        if (isset($bundles['SonataMediaBundle'])) {
+            $loader->load('ckeditor.xml');
         }
 
         $pool = $container->getDefinition('sonata.formatter.pool');
@@ -57,6 +62,8 @@ class SonataFormatterExtension extends Extension
 
             $pool->addMethodCall('add', array($code, new Reference($configuration['service']), $env));
         }
+
+        $container->setParameter('sonata.formatter.ckeditor.configuration.templates', $config['ckeditor']['templates']);
     }
 
     /**
