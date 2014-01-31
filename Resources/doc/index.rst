@@ -14,3 +14,4 @@ Reference Guide
    reference/usage
    reference/formatter_widget
    reference/formatter_block
+   reference/ckeditor_medias

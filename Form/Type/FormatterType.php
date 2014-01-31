@@ -21,8 +21,9 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\Options;
 
-use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
+use Ivory\CKEditorBundle\Model\ConfigManagerInterface;
 
+use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 use Sonata\FormatterBundle\Formatter\Pool;
 
 class FormatterType extends AbstractType
@@ -32,14 +33,22 @@ class FormatterType extends AbstractType
     protected $translator;
 
     /**
-     * @param \Sonata\FormatterBundle\Formatter\Pool             $pool
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @var ConfigManagerInterface
      */
-    public function __construct(Pool $pool, TranslatorInterface $translator)
+    protected $configManager;
+
+    /**
+     * Constructor
+     *
+     * @param Pool                   $pool          A Formatter Pool service
+     * @param TranslatorInterface    $translator    A Symfony Translator service
+     * @param ConfigManagerInterface $configManager An Ivory CKEditor bundle configuration manager
+     */
+    public function __construct(Pool $pool, TranslatorInterface $translator, ConfigManagerInterface $configManager)
     {
         $this->pool = $pool;
-
         $this->translator = $translator;
+        $this->configManager = $configManager;
     }
 
     /**
@@ -106,14 +115,18 @@ class FormatterType extends AbstractType
         } else {
             $view->vars['format_field'] = $options['format_field'];
         }
-        
-        $tbicons = '';
-        foreach($options['ckeditor_toolbar_icons'] as $item) {
-            $values = implode("','", $item);
-            $tbicons .= sprintf("['%s'],", $values);
+
+        $ckeditorConfiguration = array(
+            'toolbar' => array_values($options['ckeditor_toolbar_icons'])
+        );
+
+        if ($options['ckeditor_context']) {
+            $contextConfig = $this->configManager->getConfig($options['ckeditor_context']);
+            $ckeditorConfiguration = array_merge($ckeditorConfiguration, $contextConfig);
         }
-        $view->vars['ckeditor_toolbar_icons'] = $tbicons;
-        
+
+        $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;
+
         $view->vars['source_id'] = str_replace($view->vars['name'], $view->vars['source_field'], $view->vars['id']);
     }
 
@@ -137,6 +150,7 @@ class FormatterType extends AbstractType
                                                              '-', 'Image', 'Link', 'Unlink', 'Table'),
                                                   2 => array('Maximize', 'Source')
                                                 ),
+            'ckeditor_context'          => null,
             'format_field_options'      => array(
                 'choices'               => function (Options $options) use ($pool, $translator) {
                     $formatters = array();
