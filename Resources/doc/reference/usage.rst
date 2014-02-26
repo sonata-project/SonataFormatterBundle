@@ -13,8 +13,9 @@ Usage
     {{ my_data | format_text('markdown') }}
 
 
-Note : By default the twig filter ``format_text`` is not marked as ``safe``. So if you want to ouput
-the correct result, just add the ``| raw`` filter.
+.. note::
+
+    By default, the twig filter ``format_text`` is not marked as ``safe``. So if you want to ouput the correct result, just add the ``| raw`` filter.
 
 Form
 ----
@@ -37,7 +38,7 @@ And initialize a form type:
         ))
 
 
-When data is populated the ``content`` property will be populated with the text transformed from the selected
+When data is populated, the ``content`` property will be populated with the text transformed from the selected
 transformer name and the ``rawContent`` property.
 
 For instance, this can be used to pregenerate the content of a markdown blog post.
@@ -45,9 +46,9 @@ For instance, this can be used to pregenerate the content of a markdown blog pos
 Twig Formatter
 --------------
 
-Twig formatter uses projects twig enwironment (registered within service container with name "twig").
-All settings that affect the projects twig enwironment (like used template loader, enabled extensions etc.), 
-will also affect the twig formatter.
+Twig formatter uses projects Twig Environment (registered within service container with name ``twig``).
+All settings that affect the projects Twig Environment (like used template loader, enabled extensions etc.)
+will also affect the Twig Formatter.
 
 Also twig formatter cannot have extensions enabled.
 

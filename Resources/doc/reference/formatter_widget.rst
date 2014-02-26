@@ -2,13 +2,13 @@ Formatter Widget
 ================
 
 One recurrent needs is to provide some kind of rich user interface to edit content. However
-depends on the final target the content can have different format : markdown, raw content or html.
+depending on the final target the content can have different format : ``markdown``, ``raw content`` or ``html``.
 
 The ``sonata_formatter_type_selector`` widget has been implemented to allow end users to select
-the correct format for his/her need. And depends of the format the textarea will change to match its
+the correct format for his/her need. And depending on the format the textarea will change to match its
 requirements.
 
-By default the widget supports these types:
+By default, the widget supports these types:
 
  - markdown with `Markdow MarkItUp! <http://markitup.jaysalvat.com/examples/markdown/>`_
  - rawhtml with `HTML MarkItUp! <http://markitup.jaysalvat.com/examples/html/>`_
@@ -20,9 +20,9 @@ Preview
 
 .. figure:: ../images/formatter_with_ckeditor.png
    :align: center
-   :alt: formatter with ckeditor
+   :alt: formatter with CKEditor
 
-   The formatter with ckeditor
+   The formatter with CKEditor
 
 .. figure:: ../images/formatter_with_markitup.png
    :align: center
@@ -34,8 +34,8 @@ Preview
 How to use it ?
 ---------------
 
-In order to make is work, let's take a real life example: "a post from a blog can
-have different input formats". So the post model requires the following fields:
+In order to make it work, let's take a real life example: "a post from a blog can
+have different input formats". So, the post model requires the following fields:
 
  - a ``contentFormatter`` field: store the selected formatter
  - a ``rawContent`` field: store the original content from the user
@@ -59,8 +59,8 @@ Now, let's define a form to edit this post:
             'listener'       => true,
         ))
 
-The form type defines a ``contentFormatter`` with a select choice (``sonata_formatter_type_selector``)
-the ``sonata_formatter_type_selector`` takes 2 options:
+The form type defines a ``contentFormatter`` with a select choice (``sonata_formatter_type_selector``).
+The ``sonata_formatter_type_selector`` takes 2 options:
 
  - ``event_dispatcher``: the form dispatcher to attach the "submit" event
  - ``format_field``: the entity's format field
@@ -69,11 +69,11 @@ the ``sonata_formatter_type_selector`` takes 2 options:
  - ``source_field_options``: the source field options  (optional)
  - ``target_field``: the entity's final field with the transformed data
 
-Additionally, the following option can be added to give CKEditor a context in order to customize routes used to browser and upload medias:
+Additionally, the following option can be added to give CKEditor a context in order to customize routes used to browse and upload medias:
 
 - ``ckeditor_context``: the CKEditor configuration context name (optional)
 
-If you stop here, the most interesting part will not be present, let's edit some configuration files.
+If you stop here, the most interesting part will not be present. Let's edit some configuration files.
 
 .. note::
 
@@ -83,7 +83,7 @@ If you stop here, the most interesting part will not be present, let's edit some
 Dynamic Input
 -------------
 
-Open the config.yml file and add a following lines (or adjust the current configuration):
+Open the ``config.yml`` file and add the following lines (or adjust the current configuration):
 
 .. code-block:: yaml
 
@@ -125,8 +125,8 @@ You also need to include some assets in your template:
 Sonata Admin Integration
 ------------------------
 
-Of course, it is possible to use this feature with the ``SonataAdminBundle``. In order to make it work
-you need to create an extra bit of work
+Of course, it is possible to use this feature with the ``SonataAdminBundle``. In order to make it work,
+you need to create an extra bit of work.
 
 Create a new file named ``layout.html.twig`` inside the ``app/Resources/SonataAdminBundle/views/`` with the
 following content:
@@ -154,7 +154,7 @@ following content:
         <script src="{{ asset('bundles/sonatamarkitup/markitup/markitup/sets/textile/set.js') }}" type="text/javascript"></script>
     {% endblock %}
 
-Then update the ``sonata_admin`` configuration to use this template:
+Then, update the ``sonata_admin`` configuration to use this template:
 
 .. code-block:: yaml
 
