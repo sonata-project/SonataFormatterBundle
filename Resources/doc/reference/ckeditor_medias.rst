@@ -36,8 +36,19 @@ Be sure to have the ``ivory/ivory_ckeditor.yml`` configuration file available. I
 
 You can provide custom routes and a custom context to match your needs.
 
-Second step is optional but you can also define some custom browsing and upload templates with the following configuration.
-To do so, add these few lines in your :
+Second step, don't forget to import this ``ivory/ivory_ckeditor.yml`` file in your ``app/config.yml`` like this:
+
+.. code-block:: yaml
+
+  # app/config.yml
+
+  # ...
+
+  # Ivory CKEditor
+  - { resource: ivory/ivory_ckeditor.yml }
+
+This third step is optional. You can do it if you need to define some custom browsing and uploading templates.
+To do so, add these few lines in your ``sonata_formatter.yml`` file:
 
 .. code-block:: yaml
 
@@ -52,7 +63,7 @@ To do so, add these few lines in your :
               browser: 'SonataFormatterBundle:Ckeditor:browser.html.twig'
               upload: 'SonataFormatterBundle:Ckeditor:upload.html.twig'
 
-Last step takes place in your admin class. You just have to specify the ``ckeditor_context`` parameter.
+Last step takes place in your admin class. You just have to specify the ``ckeditor_context`` parameter to activate ``CKEditor``.
 
 Here is an example to alter shortDescription field of the ProductAdmin:
 
