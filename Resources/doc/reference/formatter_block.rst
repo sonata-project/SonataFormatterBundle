@@ -10,9 +10,9 @@ It can be a quick way to build small websites with rich blocks.
 Installation
 ------------
 
- - Make sure the current is installed
+ - Make sure ``SonataBlockBundle`` is installed
  - Make sure the block bundle is correctly configured
- - Add the ``sonata.formatter.block.formatter`` id to the ``sonata_block`` configuration
+ - Add the ``sonata.formatter.block.formatter`` ID to the ``sonata_block`` configuration
 
  The block service is now available.
 

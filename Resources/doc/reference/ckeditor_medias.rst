@@ -1,17 +1,20 @@
 Use CKEditor to select medias in SonataMediaBundle
 ==================================================
 
-When using richhtml formatting option with ``CKEditor``, you can add a feature to select images directly
-from ``SonataMediaBundle`` or even upload new medias from the editor in ``SonataMediaBundle`` and add it to your content.
+When using ``richhtml`` formatting option with ``CKEditor``, you can add a feature to select images directly
+from ``SonataMediaBundle`` or even upload new medias from the editor in ``SonataMediaBundle`` to add them to your content.
 
 It can be a quick way for editors to manage medias.
 
 Configuration
 -------------
 
-First of all, you have to define your ``IvoryCKEditorBundle`` (already embedded in ``SonataFormatterBundle``) configurations like this:
+First of all, you have to define your ``IvoryCKEditorBundle`` (already embedded in ``SonataFormatterBundle``) configuration.
+Be sure to have the ``ivory/ivory_ckeditor.yml`` configuration file available. It should contain something like this:
 
 .. code-block:: yaml
+
+    # app/config/ivory/ivory_ckeditor.yml
 
     ivory_ck_editor:
         default_config: default
@@ -33,23 +36,32 @@ First of all, you have to define your ``IvoryCKEditorBundle`` (already embedded 
 
 You can provide custom routes and a custom context to match your needs.
 
-Second step is optional but you can also define some custom browsing and upload templates with the following configuration:
+Second step is optional but you can also define some custom browsing and upload templates with the following configuration.
+To do so, add these few lines in your :
 
 .. code-block:: yaml
 
-  # app/config/config.yml
+  # app/config/sonata/sonata_formatter.yml
 
   sonata_formatter:
+
+      # ...
+
       ckeditor:
           templates:
               browser: 'SonataFormatterBundle:Ckeditor:browser.html.twig'
               upload: 'SonataFormatterBundle:Ckeditor:upload.html.twig'
 
-Last step takes place in your admin class, you just have to specify the ``ckeditor_context`` parameter.
+Last step takes place in your admin class. You just have to specify the ``ckeditor_context`` parameter.
 
-Here is an example:
+Here is an example to alter shortDescription field of the ProductAdmin:
 
 .. code-block:: php
+
+    <?php
+    // BaseProductProvider.php
+
+    // ...
 
     $formMapper->add('shortDescription', 'sonata_formatter_type', array(
         'source_field'         => 'rawDescription',
