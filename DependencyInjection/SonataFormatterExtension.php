@@ -27,7 +27,7 @@ class SonataFormatterExtension extends Extension
     /**
      * Loads the url shortener configuration.
      *
-     * @param array            $config    An array of configuration settings
+     * @param array            $configs   An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
     public function load(array $configs, ContainerBuilder $container)
@@ -73,7 +73,7 @@ class SonataFormatterExtension extends Extension
      * @param  array                                             $extensions
      * @return string
      */
-    public function createEnvironement(ContainerBuilder $container, $code, Definition $formatter, array $extensions)
+    public function createEnvironment(ContainerBuilder $container, $code, Definition $formatter, array $extensions)
     {
         $loader = new Definition('Twig_Loader_String');
         $loader->setPublic(false);
@@ -95,7 +95,7 @@ class SonataFormatterExtension extends Extension
 
         $container->setDefinition(sprintf('sonata.formatter.twig.env.%s', $code), $env);
 
-        $sandboxPolicy = new Definition('Sonata\FormatterBundle\Twig\SecurityPolicyContenairAware', array(new Reference('service_container'), $extensions));
+        $sandboxPolicy = new Definition('Sonata\FormatterBundle\Twig\SecurityPolicyContainerAware', array(new Reference('service_container'), $extensions));
         $sandboxPolicy->setPublic(false);
         $container->setDefinition(sprintf('sonata.formatter.twig.sandbox.%s.policy', $code), $sandboxPolicy);
 
