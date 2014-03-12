@@ -39,13 +39,13 @@ class FormatterListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testWithValidFormatter()
     {
-        $formater = $this->getMock('Sonata\FormatterBundle\Formatter\FormatterInterface');
-        $formater->expects($this->once())->method('transform')->will($this->returnCallback(function($text) {
+        $formatter = $this->getMock('Sonata\FormatterBundle\Formatter\FormatterInterface');
+        $formatter->expects($this->once())->method('transform')->will($this->returnCallback(function($text) {
             return strtoupper($text);
         }));
 
         $pool = new Pool();
-        $pool->add('myformat', $formater);
+        $pool->add('myformat', $formatter);
 
         $listener = new FormatterListener($pool, '[format]', '[source]', '[target]');
 

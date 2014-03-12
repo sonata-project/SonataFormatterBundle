@@ -146,7 +146,7 @@ class FormatterType extends AbstractType
                                                              '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
                                                              '-', 'Undo', 'Redo',
                                                              '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
-                                                             '-', 'Blockquote', 
+                                                             '-', 'Blockquote',
                                                              '-', 'Image', 'Link', 'Unlink', 'Table'),
                                                   2 => array('Maximize', 'Source')
                                                 ),
