@@ -22,7 +22,7 @@ use \Twig_Sandbox_SecurityError;
  * @author fabien.potencier@symfony.com
  * @author thomas.rabaix@sonata-project.org
  */
-class SecurityPolicyContenairAware implements \Twig_Sandbox_SecurityPolicyInterface
+class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterface
 {
     protected $allowedTags;
 
