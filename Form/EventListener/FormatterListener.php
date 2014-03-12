@@ -22,22 +22,22 @@ class FormatterListener
 
     protected $formatField;
 
-    protected $sourcefield;
+    protected $sourceField;
 
     protected $targetField;
 
     /**
      * @param Pool   $pool
-     * @param string $format
-     * @param string $source
-     * @param string $target
+     * @param string $formatField
+     * @param string $sourcefield
+     * @param string $targetField
      */
-    public function __construct(Pool $pool, $formatField, $sourcefield, $targetField)
+    public function __construct(Pool $pool, $formatField, $sourceField, $targetField)
     {
         $this->pool = $pool;
 
         $this->formatField = $formatField;
-        $this->sourcefield = $sourcefield;
+        $this->sourceField = $sourceField;
         $this->targetField = $targetField;
     }
 
@@ -49,7 +49,7 @@ class FormatterListener
         $accessor = PropertyAccess::createPropertyAccessor();
 
         $format = $accessor->getValue($event->getData(), $this->formatField);
-        $source = $accessor->getValue($event->getData(), $this->sourcefield);
+        $source = $accessor->getValue($event->getData(), $this->sourceField);
 
         // make sure the listener works with array
         $data = $event->getData();
