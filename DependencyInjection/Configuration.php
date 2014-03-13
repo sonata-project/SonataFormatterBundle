@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('default_formatter')->defaultValue('richhtml')->end()
                 ->arrayNode('formatters')
                     ->useAttributeAsKey('name')
                     ->prototype('array')

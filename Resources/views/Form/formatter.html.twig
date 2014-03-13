@@ -1,8 +1,7 @@
 {% block sonata_formatter_type_widget %}
 
     <div style="margin-bottom: 5px;">
-        {{ form_widget(form.children[format_field]) }}
-        <i>{{ "please_select_format_method"|trans({}, "SonataFormatterBundle") }}</i>
+        {{ form_widget(form.children[format_field], { 'value': default_formatter }) }}
     </div>
 
     {{ form_widget(form.children[source_field]) }}
