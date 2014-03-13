@@ -21,6 +21,8 @@ class Pool
 {
     protected $formatters = array();
 
+    protected $defaultFormatter;
+
     protected $logger;
 
     public function __construct(LoggerInterface $logger = null)
@@ -102,5 +104,21 @@ class Pool
     public function getFormatters()
     {
         return $this->formatters;
+    }
+
+    /**
+     * @param mixed $defaultFormatter
+     */
+    public function setDefaultFormatter($defaultFormatter)
+    {
+        $this->defaultFormatter = $defaultFormatter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDefaultFormatter()
+    {
+        return $this->defaultFormatter;
     }
 }
