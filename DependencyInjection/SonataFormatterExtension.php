@@ -57,7 +57,7 @@ class SonataFormatterExtension extends Extension
             if (count($configuration['extensions']) == 0) {
                 $env = null;
             } else {
-                $env = new Reference($this->createEnvironement($container, $code, $container->getDefinition($configuration['service']), $configuration['extensions']));
+                $env = new Reference($this->createEnvironment($container, $code, $container->getDefinition($configuration['service']), $configuration['extensions']));
             }
 
             $pool->addMethodCall('add', array($code, new Reference($configuration['service']), $env));
