@@ -63,6 +63,7 @@ class FormatterType extends AbstractType
             $formatField = $options['format_field'];
             $options['format_field_options']['property_path'] = $formatField;
         }
+        $options['format_field_options']['data'] = $this->pool->getDefaultFormatter();
 
         if (is_array($options['source_field'])) {
             list($sourceField, $sourcePropertyPath) = $options['source_field'];
@@ -115,8 +116,6 @@ class FormatterType extends AbstractType
         } else {
             $view->vars['format_field'] = $options['format_field'];
         }
-
-        $view->vars['default_formatter'] = $this->pool->getDefaultFormatter();
 
         $ckeditorConfiguration = array(
             'toolbar' => array_values($options['ckeditor_toolbar_icons'])
