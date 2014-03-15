@@ -63,7 +63,7 @@ class SonataFormatterExtension extends Extension
             $pool->addMethodCall('add', array($code, new Reference($configuration['service']), $env));
         }
 
-        if ($config['default_formatter']!=null) {
+        if ($config['default_formatter']==null) {
             if (array_key_exists('richhtml', $config['formatters'])) {
                 $config['default_formatter'] = 'richhtml';
             }
