@@ -63,13 +63,13 @@ class SonataFormatterExtension extends Extension
             $pool->addMethodCall('add', array($code, new Reference($configuration['service']), $env));
         }
 
-        if ($config['default_formatter']==null) {
+        if (array_key_exists('default_formatter', $config)==false) {
             if (array_key_exists('richhtml', $config['formatters'])) {
                 $config['default_formatter'] = 'richhtml';
             }
         }
 
-        $pool->addMethodCall('setDefaultFormatter', array($config['default_formatter']));
+        $pool->addMethodCall('setDefaultFormatter', array_key_exists('default_formatter', $config) ? array($config['default_formatter']) : array(''));
 
         $container->setParameter('sonata.formatter.ckeditor.configuration.templates', $config['ckeditor']['templates']);
     }
