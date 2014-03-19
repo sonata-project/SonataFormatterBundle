@@ -29,7 +29,7 @@ class FormatterListener
     /**
      * @param Pool   $pool
      * @param string $formatField
-     * @param string $sourcefield
+     * @param string $sourceField
      * @param string $targetField
      */
     public function __construct(Pool $pool, $formatField, $sourceField, $targetField)
