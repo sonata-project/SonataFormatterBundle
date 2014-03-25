@@ -55,13 +55,14 @@ Now, let's define a form to edit this post:
             'source_field_options'      => array(
                 'attr' => array('class' => 'span10', 'rows' => 20)
             ),
+            'listener'       => true,
             'target_field'   => 'content'
         ))
 
 The form type defines a ``contentFormatter`` with a select choice (``sonata_formatter_type_selector``).
-The ``sonata_formatter_type_selector`` takes 6 options:
+The ``sonata_formatter_type_selector`` takes various options:
 
- - ``listener`` (optional, default is true)
+ - ``listener`` (optional, default is ``true``)
  - ``event_dispatcher``: the form dispatcher to attach the "submit" event  (optional, depends on the ``listener`` value)
  - ``format_field``: the entity's format field
  - ``format_field_options``: the format field options (optional)
@@ -69,11 +70,10 @@ The ``sonata_formatter_type_selector`` takes 6 options:
  - ``source_field_options``: the source field options  (optional)
  - ``target_field``: the entity's final field with the transformed data
 
-Additionally, the following options allow you to select images directly from SonataMediaBundle
-and to customize the toolbar configuration :
+Additionally, the following options can be added to give CKEditor a context in order to select images directly from SonataMediaBundle, and to define a custom CKEditor toolbar configuration:
 
 - ``ckeditor_context``: give CKEditor a context in order to customize routes used to browse and upload medias (see "Use CKEditor to select medias in SonataMediaBundle" chapter)
-- ``ckeditor_toolbar_icons`` : a custom toolbar configuration (optional, can enhance an existing default configuration)
+- ``ckeditor_toolbar_icons`` : give CKEditor a custom toolbar configuration (optional)
 
 Here is the default CKEditor custom tooolbar configuration you can tweak :
 
