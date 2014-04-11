@@ -32,9 +32,9 @@ And initialize a form type:
     <?php
     $formBuilder
         ->add('rawContent') // source content
-        ->add('contentFormatter', 'sonata_formatter_type_selector', array(
-            'source' => 'rawContent',
-            'target' => 'content'
+        ->add('contentFormatter', 'sonata_formatter_type', array(
+            'source_field' => 'rawContent',
+            'target_field' => 'content'
         ))
 
 
