@@ -24,6 +24,8 @@
                     {{ source_id }}_rich_instance.destroy();
                 }
 
+                CKEDITOR.basePath = "{{ asset(ckeditor_basepath) }}/";
+
                 var val = jQuery(this).val();
                 var appendClass = val;
                 switch(val) {

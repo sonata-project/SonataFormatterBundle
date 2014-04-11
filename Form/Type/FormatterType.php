@@ -117,7 +117,9 @@ class FormatterType extends AbstractType
         }
 
         $ckeditorConfiguration = array(
-            'toolbar' => array_values($options['ckeditor_toolbar_icons'])
+            'toolbar'       => array_values($options['ckeditor_toolbar_icons']),
+            'customConfig'  => false,
+            'contentsCss'   => false,
         );
 
         if ($options['ckeditor_context']) {
@@ -126,6 +128,7 @@ class FormatterType extends AbstractType
         }
 
         $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;
+        $view->vars['ckeditor_basepath'] = $options['ckeditor_basepath'];
 
         $view->vars['source_id'] = str_replace($view->vars['name'], $view->vars['source_field'], $view->vars['id']);
     }
@@ -142,15 +145,17 @@ class FormatterType extends AbstractType
             'inherit_data'              => true,
             'event_dispatcher'          => null,
             'format_field'              => null,
-            'ckeditor_toolbar_icons'    => array( 1 => array('Bold', 'Italic', 'Underline',
-                                                             '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
-                                                             '-', 'Undo', 'Redo',
-                                                             '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
-                                                             '-', 'Blockquote',
-                                                             '-', 'Image', 'Link', 'Unlink', 'Table'),
-                                                  2 => array('Maximize', 'Source')
-                                                ),
+            'ckeditor_toolbar_icons'    => array( array(
+                 'Bold', 'Italic', 'Underline',
+                 '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
+                 '-', 'Undo', 'Redo',
+                 '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
+                 '-', 'Blockquote',
+                 '-', 'Image', 'Link', 'Unlink', 'Table'),
+                 array('Maximize', 'Source')
+            ),
             'ckeditor_context'          => null,
+            'ckeditor_basepath'         => 'bundles/sonataformatter/vendor/ckeditor',
             'format_field_options'      => array(
                 'choices'               => function (Options $options) use ($pool, $translator) {
                     $formatters = array();

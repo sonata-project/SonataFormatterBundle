@@ -41,11 +41,11 @@ var markitup_sonataMarkdownSettings = {
 
 // mIu nameSpace to avoid conflict.
 miu = {
-	markdownTitle: function(markItUp, char) {
+	markdownTitle: function(markItUp, ch) {
 		heading = '';
 		n = $.trim(markItUp.selection||markItUp.placeHolder).length;
 		for(i = 0; i < n; i++) {
-			heading += char;
+			heading += ch;
 		}
 		return '\n'+heading;
 	}
