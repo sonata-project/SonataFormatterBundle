@@ -168,7 +168,7 @@ class FormatterType extends AbstractType
             ),
             'source_field' => null,
             'source_field_options'      => array(
-                'attr' => array('class' => 'span10', 'rows' => 20)
+                'attr' => array('class' => 'span10 col-sm-10 col-md-10', 'rows' => 20)
             ),
             'target_field' => null,
             'listener'     => true,
