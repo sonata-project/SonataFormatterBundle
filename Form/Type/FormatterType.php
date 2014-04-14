@@ -118,8 +118,6 @@ class FormatterType extends AbstractType
 
         $ckeditorConfiguration = array(
             'toolbar'       => array_values($options['ckeditor_toolbar_icons']),
-            'customConfig'  => false,
-            'contentsCss'   => false,
         );
 
         if ($options['ckeditor_context']) {
@@ -155,7 +153,6 @@ class FormatterType extends AbstractType
                  array('Maximize', 'Source')
             ),
             'ckeditor_context'          => null,
-            'ckeditor_basepath'         => 'bundles/sonataformatter/vendor/ckeditor',
             'format_field_options'      => array(
                 'choices'               => function (Options $options) use ($pool, $translator) {
                     $formatters = array();
