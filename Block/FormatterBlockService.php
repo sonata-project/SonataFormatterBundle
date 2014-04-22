@@ -71,7 +71,7 @@ class FormatterBlockService extends BaseBlockService
      */
     public function getName()
     {
-        return 'Formatter';
+        return 'Rich Text Area';
     }
 
     /**
