@@ -152,6 +152,7 @@ class FormatterType extends AbstractType
                  '-', 'Image', 'Link', 'Unlink', 'Table'),
                  array('Maximize', 'Source')
             ),
+            'ckeditor_basepath'         => 'bundles/sonataformatter/vendor/ckeditor',
             'ckeditor_context'          => null,
             'format_field_options'      => array(
                 'choices'               => function (Options $options) use ($pool, $translator) {

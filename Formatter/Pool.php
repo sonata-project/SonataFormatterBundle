@@ -15,7 +15,7 @@ use \Twig_Environment;
 use \Twig_Error_Syntax;
 use \Twig_Sandbox_SecurityError;
 
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 
 class Pool
 {
