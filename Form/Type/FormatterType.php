@@ -92,7 +92,7 @@ class FormatterType extends AbstractType
                 $options['target_field']
             );
 
-            $options['event_dispatcher']->addListener(FormEvents::POST_SUBMIT, array($listener, 'postSubmit'));
+            $options['event_dispatcher']->addListener(FormEvents::SUBMIT, array($listener, 'postSubmit'));
         }
     }
 
