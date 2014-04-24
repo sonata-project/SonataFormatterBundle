@@ -1,4 +1,2 @@
 .DS_Store
 Resources/doc/_build/*
-# for ignore all plugins for now
-Resources/public/vendor/ckeditor/plugins/*
