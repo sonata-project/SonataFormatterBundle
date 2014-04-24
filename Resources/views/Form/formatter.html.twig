@@ -17,7 +17,13 @@
                 return;
             }
 
-            jQuery('#{{ form.children[format_field].vars.id }}').change(function() {
+            jQuery('#{{ form.children[format_field].vars.id }}').parents("form").on('click', function(event) {
+                if ({{ source_id }}_rich_instance) {
+                    {{ source_id }}_rich_instance.updateElement();
+                }
+            });
+
+            jQuery('#{{ form.children[format_field].vars.id }}').change(function(event) {
                 var elms = jQuery('#{{ form.children[source_field].vars.id }}');
                 elms.markItUpRemove();
                 if ({{ source_id }}_rich_instance) {
@@ -42,6 +48,7 @@
                         break;
                     case 'richhtml':
                         {{ source_id }}_rich_instance = {{ ckeditor_replace(form.children[source_field].vars.id, ckeditor_configuration) }};
+
                 }
 
                 var parent = elms.parents('div.markItUp');
