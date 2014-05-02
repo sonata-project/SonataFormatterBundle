@@ -1,4 +1,15 @@
-{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'SonataAdminBundle::empty_layout.html.twig' %}
 
 {% set ckParameters = {'CKEditor': app.request.get('CKEditor'), 'CKEditorFuncNum': app.request.get('CKEditorFuncNum')} %}
 
@@ -16,8 +27,6 @@
     </script>
 {% endblock %}
 
-{% block sonata_nav %}{% endblock %}
-{% block sonata_breadcrumb %}{% endblock %}
 
 {% block preview %}
 
@@ -95,34 +104,26 @@
 
             {% block table_body %}
                 <tbody>
-                {% for object in admin.datagrid.results %}
-                    <tr>
-                        {% for field_description in admin.list.elements %}
-                            {% if field_description.getOption('code') == '_batch' or field_description.name == '_action' %}
-                                {# Disable batch and actions #}
-                            {% elseif field_description.name == 'custom' %}
-                                <td>
-                                    <div>
-                                        <a href="{% path object, 'reference' %}" class="select" style="float: left; margin-right: 6px;">{% thumbnail object, 'admin' with {'width': 75, 'height': 60} %}</a>
+                    {% for object in admin.datagrid.results %}
+                        <tr>
+                            <td colspan="{{ (admin.list.elements|length) - 1}}">
+                                <div>
+                                    <a href="{% path object, 'reference' %}" class="select" style="float: left; margin-right: 6px;">{% thumbnail object, 'admin' with {'width': 75, 'height': 60} %}</a>
 
-                                        <strong><a href="{% path object, 'reference' %}" class="select">{{ object.name }}</a></strong> <br />
-                                        {{ object.providerName|trans({}, 'SonataMediaBundle') }}{% if object.width %}: {{ object.width }}{% if object.height %}x{{ object.height }}{% endif %}px{% endif %}
+                                    <strong><a href="{% path object, 'reference' %}" class="select">{{ object.name }}</a></strong> <br />
+                                    {{ object.providerName|trans({}, 'SonataMediaBundle') }}{% if object.width %}: {{ object.width }}{% if object.height %}x{{ object.height }}{% endif %}px{% endif %}
 
-                                        {% if formats[object.id]|length > 0 %}
-                                            - {{ 'title.formats'|trans({}, 'SonataMediaBundle') }}:
-                                            {% for name, format in formats[object.id] %}
-                                                <a href="{% path object, name %}" class="select">{{ name }}</a> {% if format.width %}({{ format.width }}{% if format.height %}x{{ format.height }}{% endif %}px){% endif %}
-                                            {% endfor %}
-                                        {% endif %}
-                                        <br />
-                                    </div>
-                                </td>
-                            {% else %}
-                                {{ object|render_list_element(field_description) }}
-                            {% endif %}
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
+                                    {% if formats[object.id]|length > 0 %}
+                                        - {{ 'title.formats'|trans({}, 'SonataMediaBundle') }}:
+                                        {% for name, format in formats[object.id] %}
+                                            <a href="{% path object, name %}" class="select">{{ name }}</a> {% if format.width %}({{ format.width }}{% if format.height %}x{{ format.height }}{% endif %}px){% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    <br />
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             {% endblock %}
 
