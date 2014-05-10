@@ -82,7 +82,7 @@ class FormatterType extends AbstractType
         if ($options['listener']) {
 
             if (!$options['event_dispatcher'] instanceof EventDispatcherInterface) {
-                throw new \RuntimeException('The event_dispatcher option but be an instance of EventDispatcherInterface');
+                throw new \RuntimeException('The event_dispatcher option must be an instance of EventDispatcherInterface');
             }
 
             $listener = new FormatterListener(
