@@ -1,20 +1,21 @@
+.. index::
+    double: Block; Usage
+    double: Block; Configuration
+
 Formatter Block
 ===============
 
-The formatter block must be used with the ``SonataBlockBundle`` as it provides
-a native block to handle rich editor.
-
+The formatter block must be used with the ``SonataBlockBundle`` as it provides a native block to handle rich editor.
 It can be a quick way to build small websites with rich blocks.
-
 
 Installation
 ------------
 
- - Make sure ``SonataBlockBundle`` is installed
- - Make sure the block bundle is correctly configured
- - Add the ``sonata.formatter.block.formatter`` ID to the ``sonata_block`` configuration
+* Make sure ``SonataBlockBundle`` is installed;
+* Make sure the block bundle is correctly configured;
+* Add the ``sonata.formatter.block.formatter`` ID to the ``sonata_block`` configuration.
 
- The block service is now available.
+The block service is now available.
 
 .. note::
 
