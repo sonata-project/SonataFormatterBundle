@@ -1,17 +1,27 @@
+.. index::
+    single: Installation; Bundle; Configuration
+
 Installation
 ============
 
-To begin, add the dependent bundles::
+To begin, add the dependent bundles:
 
-    php composer.phar require sonata-project/formatter-bundle
+.. code-block:: bash
+
+    $ php composer.phar require sonata-project/formatter-bundle
 
 Register the bundle in ``app/AppKernel.php``:
 
 .. code-block:: php
 
     <?php
+
+    // app/AppKernel.php
+
     $bundles = array(
+
         // ...
+
         new Sonata\MarkItUpBundle\SonataMarkItUpBundle(),
         new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
         new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
@@ -19,9 +29,9 @@ Register the bundle in ``app/AppKernel.php``:
     );
 
 Configuration
--------------
+=============
 
-Edit the ``config.yml`` file and add:
+Edit the ``config.yml`` file and add these lines:
 
 .. code-block:: yaml
 

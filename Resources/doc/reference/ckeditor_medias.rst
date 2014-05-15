@@ -1,3 +1,7 @@
+.. index::
+    single: Media; MediaBundle
+    double: CKEditor; Configuration
+
 Use CKEditor to select medias in SonataMediaBundle
 ==================================================
 
@@ -65,7 +69,7 @@ To do so, add these few lines in your ``sonata_formatter.yml`` file:
 
 Last step takes place in your admin class. You just have to specify the ``ckeditor_context`` parameter to activate ``CKEditor``.
 
-Here is an example to alter shortDescription field of the ProductAdmin:
+Here is an example to alter `shortDescription` field of the `ProductAdmin`:
 
 .. code-block:: php
 
