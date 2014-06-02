@@ -40,7 +40,8 @@ class SonataFormatterExtension extends Extension
         $loader->load('formatter.xml');
         $loader->load('twig.xml');
         $loader->load('form.xml');
-        
+        $loader->load('validators.xml');
+
         $bundles = $container->getParameter('kernel.bundles');
 
         if (isset($bundles['SonataBlockBundle'])) {
