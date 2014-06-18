@@ -39,10 +39,14 @@ class SonataFormatterExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('formatter.xml');
         $loader->load('twig.xml');
-        $loader->load('form.xml');
+
         $loader->load('validators.xml');
 
         $bundles = $container->getParameter('kernel.bundles');
+
+        if (isset($bundles['IvoryCKEditorBundle'])) {
+            $loader->load('form.xml');
+        }
 
         if (isset($bundles['SonataBlockBundle'])) {
             $loader->load('block.xml');
