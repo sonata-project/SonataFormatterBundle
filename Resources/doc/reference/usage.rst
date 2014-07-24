@@ -52,8 +52,8 @@ For instance, this can be used to pregenerate the content of a markdown blog pos
 Twig Formatter
 --------------
 
-`Twig formatter` uses projects `Twig Environment` (registered within service container with name ``twig``).
-All settings that affect the projects `Twig Environment` (like used template loader, enabled extensions etc.) will also affect the `Twig Formatter`.
+`Twig formatter` uses the project's `Twig Environment` (registered within service container as ``twig``).
+All settings that affect the project's `Twig Environment` (like used template loader, enabled extensions etc.) will also affect the `Twig Formatter`.
 
 Also `Twig formatter` cannot have extensions enabled.
 

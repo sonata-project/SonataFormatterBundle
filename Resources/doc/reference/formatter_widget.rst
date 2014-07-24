@@ -5,15 +5,15 @@
 Formatter Widget
 ================
 
-One recurrent needs is to provide some kind of rich user interface to edit content.
-However, depending on the final target the content can have different format: ``markdown``, ``raw content`` or ``html``.
+One recurrent need is to provide some kind of rich user interface to edit content.
+However, depending on the final target the content can have different formats: ``markdown``, ``raw content`` or ``html``.
 
 The ``sonata_formatter_type_selector`` widget has been implemented to allow end users to select the correct format for his/her need.
 And depending on the format, the textarea will change to match its requirements.
 
 By default, the widget supports these types:
 
-* `text` with an standard textarea widget;
+* `text` with a standard textarea widget;
 * `markdown` with `Markdow MarkItUp! <http://markitup.jaysalvat.com/examples/markdown/>`_;
 * `rawhtml` with `HTML MarkItUp! <http://markitup.jaysalvat.com/examples/html/>`_;
 * `richhtml` with `CKEditor <http://ckeditor.com/>`_.
@@ -98,7 +98,7 @@ If you stop here, the most interesting part will not be present. Let's edit some
 
 .. note::
 
-    If you want to check this code implemented, you can review the ``SonataNewsBundle``.
+    If you want to see an actual implementation of this can, you can have a look at the ``SonataNewsBundle``.
 
 
 Dynamic Input
@@ -144,7 +144,7 @@ You also need to include some assets in your template:
 Sonata Admin Integration
 ------------------------
 
-Of course, it is possible to use this feature with the ``SonataAdminBundle``. In order to make it work, you need to create an extra bit of work.
+Of course, it is possible to use this feature with the ``SonataAdminBundle``. In order to make it work, you need to do an extra bit of work.
 
 Create a new file named ``layout.html.twig`` inside the ``app/Resources/SonataAdminBundle/views/`` with the following content:
 
