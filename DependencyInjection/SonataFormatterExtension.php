@@ -64,8 +64,11 @@ class SonataFormatterExtension extends Extension
             } else {
                 $env = new Reference($this->createEnvironment($container, $code, $container->getDefinition($configuration['service']), $configuration['extensions']));
             }
-
             $pool->addMethodCall('add', array($code, new Reference($configuration['service']), $env));
+
+            if ($configuration['is_default']==true) {
+                $pool->addMethodCall('setDefaultFormatter', array($code));
+            }
         }
 
         $container->setParameter('sonata.formatter.ckeditor.configuration.templates', $config['ckeditor']['templates']);

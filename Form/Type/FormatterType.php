@@ -63,6 +63,7 @@ class FormatterType extends AbstractType
             $formatField = $options['format_field'];
             $options['format_field_options']['property_path'] = $formatField;
         }
+        $options['format_field_options']['data'] = $this->pool->getDefaultFormatter();
 
         if (is_array($options['source_field'])) {
             list($sourceField, $sourcePropertyPath) = $options['source_field'];
@@ -72,9 +73,13 @@ class FormatterType extends AbstractType
             $options['source_field_options']['property_path'] = $sourceField;
         }
 
-        $builder
-            ->add($formatField, 'choice', $options['format_field_options'])
-            ->add($sourceField, 'textarea', $options['source_field_options']);
+        if (count($this->pool->getFormatters()) == 1) {
+            $formatter = $this->pool->getFormatters();
+            $builder->add($formatField, 'hidden', array('data' => key($formatter)));
+        } else {
+            $builder->add($formatField, 'choice', $options['format_field_options']);
+        }
+        $builder->add($sourceField, 'textarea', $options['source_field_options']);
 
         /**
          * The listener option only work if the source field is after the current field
