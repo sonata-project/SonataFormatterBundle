@@ -2,7 +2,9 @@
 
     <div style="margin-bottom: 5px;">
         {{ form_widget(form.children[format_field]) }}
-        <i>{{ "please_select_format_method"|trans({}, "SonataFormatterBundle") }}</i>
+        {% if format_field_options.choices|length > 1 %}
+            <i>{{ "please_select_format_method"|trans({}, "SonataFormatterBundle") }}</i>
+        {% endif %}
     </div>
 
     {{ form_widget(form.children[source_field]) }}
