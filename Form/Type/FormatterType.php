@@ -132,6 +132,7 @@ class FormatterType extends AbstractType
         } else {
             $view->vars['format_field'] = $options['format_field'];
         }
+        $view->vars['format_field_options'] = $options['format_field_options'];
 
         $ckeditorConfiguration = array(
             'toolbar'       => array_values($options['ckeditor_toolbar_icons']),
