@@ -83,8 +83,8 @@ Here is the default `CKEditor` custom tooolbar configuration, you can tweak:
 .. code-block:: php
 
     <?php
-    
-    $ckeditor_toolbar_icons = array( 
+
+    $ckeditor_toolbar_icons = array(
         1 => array('Bold', 'Italic', 'Underline',
             '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
             '-', 'Undo', 'Redo',
@@ -125,16 +125,16 @@ You also need to include some assets in your template:
 
 .. code-block:: html
 
-    <link rel="stylesheet" href="{{ asset('bundles/sonatamarkitup/markitup/markitup/skins/sonata/style.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/sonatamarkitup/markitup/markitup/sets/markdown/style.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/sonatamarkitup/markitup/markitup/sets/html/style.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/sonatamarkitup/markitup/markitup/sets/textile/style.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/skins/sonata/style.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/sets/markdown/style.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/sets/html/style.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/sets/textile/style.css') }}" type="text/css" media="all" />
 
     <script src="{{ asset('bundles/ivoryckeditor/ckeditor.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/sonatamarkitup/markitup/markitup/jquery.markitup.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/sonatamarkitup/markitup/markitup/sets/markdown/set.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/sonatamarkitup/markitup/markitup/sets/html/set.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/sonatamarkitup/markitup/markitup/sets/textile/set.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/sonataformatter/vendor/markitup-markitup/markitup/jquery.markitup.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/sonataformatter/markitup/sets/markdown/set.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/sonataformatter/markitup/sets/html/set.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/sonataformatter/markitup/sets/textile/set.js') }}" type="text/javascript"></script>
 
 .. note::
 
@@ -155,20 +155,20 @@ Create a new file named ``layout.html.twig`` inside the ``app/Resources/SonataAd
     {% block stylesheets %}
         {{ parent() }}
 
-        <link rel="stylesheet" href="{{ asset('bundles/sonatamarkitup/markitup/markitup/skins/sonata/style.css') }}" type="text/css" media="all" />
-        <link rel="stylesheet" href="{{ asset('bundles/sonatamarkitup/markitup/markitup/sets/markdown/style.css') }}" type="text/css" media="all" />
-        <link rel="stylesheet" href="{{ asset('bundles/sonatamarkitup/markitup/markitup/sets/html/style.css') }}" type="text/css" media="all" />
-        <link rel="stylesheet" href="{{ asset('bundles/sonatamarkitup/markitup/markitup/sets/textile/style.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/skins/sonata/style.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/sets/markdown/style.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/sets/html/style.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/sets/textile/style.css') }}" type="text/css" media="all" />
     {% endblock %}
 
     {% block javascripts %}
         {{ parent() }}
 
         <script src="{{ asset('bundles/ivoryckeditor/ckeditor.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/sonatamarkitup/markitup/markitup/jquery.markitup.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/sonatamarkitup/markitup/markitup/sets/markdown/set.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/sonatamarkitup/markitup/markitup/sets/html/set.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/sonatamarkitup/markitup/markitup/sets/textile/set.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/sonataformatter/vendor/markitup-markitup/markitup/jquery.markitup.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/sonataformatter/markitup/sets/markdown/set.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/sonataformatter/markitup/sets/html/set.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/sonataformatter/markitup/sets/textile/set.js') }}" type="text/javascript"></script>
     {% endblock %}
 
 Then, update the ``sonata_admin`` configuration to use this template:

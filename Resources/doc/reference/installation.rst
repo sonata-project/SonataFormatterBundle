@@ -22,7 +22,8 @@ Register the bundle in ``app/AppKernel.php``:
 
         // ...
 
-        new Sonata\MarkItUpBundle\SonataMarkItUpBundle(),
+        // SonataMarkItUpBundle is deprecated. All assets are now available in formatter bundle
+//        new Sonata\MarkItUpBundle\SonataMarkItUpBundle(),
         new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
         new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
         new Sonata\FormatterBundle\SonataFormatterBundle(),
