@@ -1,11 +1,11 @@
 Formatter Widget
 ================
 
-One recurrent needs is to provide some kind of rich user interface to edit content. However
-depends on the final target the content can have different format : markdown, raw content or html.
+One recurrent needs is to provide some kind of rich user interface to edit content. However, this
+depends on the final target whose content can have different formats : markdown, raw content or html.
 
 The ``sonata_formatter_type_selector`` widget has been implemented to allow end users to select
-the correct format for his/her need. And depends of the format the textarea will change to match its
+the correct format for their need. Depending on the format, the textarea will change to match its
 requirements.
 
 By default the widget supports these types:
@@ -37,9 +37,9 @@ How to use it ?
 In order to make is work, let's take a real life example: "a post from a blog can
 have different input formats". So the post model requires the following fields:
 
- - a ``contentFormatter`` field: store the selected formatter
- - a ``rawContent`` field: store the original content from the user
- - a ``content`` field: store the transformed content display to the visitor
+ - a ``contentFormatter`` field: stores the selected formatter
+ - a ``rawContent`` field: stores the original content from the user
+ - a ``content`` field: stores the transformed content display to the visitor
 
 Now, let's define a form to edit this post:
 
@@ -53,7 +53,7 @@ Now, let's define a form to edit this post:
         ))
         ->add('rawContent')
 
-The order is quite important here and it mostly due to how the Form Component behave, the
+The order is quite important here and it is mostly due to how the Form Component behaves. The
 ``sonata_formatter_type_selector`` must appear first.
 
 The form defines a ``contentFormatter`` with a select choice (``sonata_formatter_type_selector``)
@@ -108,8 +108,8 @@ You also need to include some assets in your template:
 .. note::
 
     Files provided in the ``SonataMarkItUpBundle`` are fine for standard usage, feel free to include
-    your own configuration files. For more information about how to edit configuration please refer
-    to their officials documentations.
+    your own configuration files. For more information about how to edit configurations please refer
+    to their official documentations.
 
 Sonata Admin Integration
 ------------------------
