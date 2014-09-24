@@ -18,6 +18,6 @@ Installation
 
 .. note::
 
-    While this block can be used to handle and to manage contents, this is not a good
-    solution to persist content. If you want to build a large website, then review
+    While this block can be used to handle and to manage contents, it is not a good
+    solution to persisting content. If you want to build a large website, then review
     the `Symfony CMF project <http://cmf.symfony.com/>`_.
