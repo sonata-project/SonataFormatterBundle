@@ -35,8 +35,29 @@ class CkeditorAdminController extends BaseMediaAdminController
         }
 
         $datagrid = $this->admin->getDatagrid();
-        $datagrid->setValue('context', null, $this->admin->getPersistentParameter('context'));
+
+        $filters = $this->getRequest()->get('filter');
+
+        // set the default context
+        if (!$filters) {
+            $context = $this->admin->getPersistentParameter('context',  $this->get('sonata.media.pool')->getDefaultContext());
+        } else {
+            $context = $filters['context']['value'];
+        }
+
+        $datagrid->setValue('context', null, $context);
         $datagrid->setValue('providerName', null, $this->admin->getPersistentParameter('provider'));
+
+        // retrieve the main category for the tree view
+        $category = $this->container->get('sonata.classification.manager.category')->getRootCategory($context);
+
+        if (!$filters) {
+            $datagrid->setValue('category', null, $category->getId());
+        }
+
+        if ($this->getRequest()->get('category')) {
+            $datagrid->setValue('category', null, $this->getRequest()->get('category'));
+        }
 
         $formats = array();
 
@@ -46,13 +67,15 @@ class CkeditorAdminController extends BaseMediaAdminController
 
         $formView = $datagrid->getForm()->createView();
 
+        // set the theme for the current Admin Form
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
 
         return $this->render($this->getTemplate('browser'), array(
-            'action' => 'browser',
-            'form' => $formView,
-            'datagrid' => $datagrid,
-            'formats' => $formats
+            'action'        => 'browser',
+            'form'          => $formView,
+            'datagrid'      => $datagrid,
+            'root_category' => $category,
+            'formats'       => $formats
         ));
     }
 
