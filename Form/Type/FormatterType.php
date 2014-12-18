@@ -157,6 +157,11 @@ class FormatterType extends AbstractType
         $pool = $this->pool;
         $translator = $this->translator;
 
+        $formatters = array();
+        foreach ($pool->getFormatters() as $code => $instance) {
+            $formatters[$code] = $translator->trans($code, array(), 'SonataFormatterBundle');
+        }
+
         $resolver->setDefaults(array(
             'inherit_data'              => true,
             'event_dispatcher'          => null,
@@ -173,14 +178,7 @@ class FormatterType extends AbstractType
             'ckeditor_basepath'         => 'bundles/sonataformatter/vendor/ckeditor',
             'ckeditor_context'          => null,
             'format_field_options'      => array(
-                'choices'               => function (Options $options) use ($pool, $translator) {
-                    $formatters = array();
-                    foreach ($pool->getFormatters() as $code => $instance) {
-                        $formatters[$code] = $translator->trans($code, array(), 'SonataFormatterBundle');
-                    }
-
-                    return $formatters;
-                }
+                'choices'               => $formatters
             ),
             'source_field' => null,
             'source_field_options'      => array(
