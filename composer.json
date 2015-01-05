@@ -17,7 +17,8 @@
         }
     ],
     "require": {
-        "symfony/symfony": "~2.3",
+        "symfony/framework-bundle": "~2.3",
+        "symfony/form": "~2.3",
         "twig/twig": "*",
         "knplabs/knp-markdown-bundle": "~1.2.0",
         "egeloen/ckeditor-bundle": "~2.2",
@@ -25,6 +26,7 @@
         "sonata-project/core-bundle": "~2.2"
     },
     "require-dev": {
+        "symfony/validator": "~2.3",
         "sonata-project/markitup-bundle": "~2.1"
     },
     "autoload": {
