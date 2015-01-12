@@ -12,54 +12,68 @@
     <script>
         var {{ source_id }}_rich_instance = false;
 
-        jQuery(document).ready(function() {
+        jQuery(document).ready(function () {
+
+            {{ source_id }}_rich_instance = {{ ckeditor_replace(form.children[source_field].vars.id, ckeditor_configuration) }};
+
+            var juramy = juramy || {};
+            juramy.destroyFix = true;
+            juramy.ckDestroyBugWorkAround = function () {
+                if ({{ source_id }}_rich_instance && juramy.destroyFix) {
+                    {{ source_id }}_rich_instance.destroy();
+                }
+                juramy.destroyFix = false;
+            }
 
             // This code requires CKEDITOR and jQuery MarkItUp
             if (typeof CKEDITOR === 'undefined' || jQuery().markItUp == undefined) {
                 return;
             }
 
-            jQuery('#{{ form.children[format_field].vars.id }}').parents("form").on('click', function(event) {
+            jQuery('#{{ form.children[format_field].vars.id }}').parents("form").on('click', function (event) {
                 if ({{ source_id }}_rich_instance) {
                     {{ source_id }}_rich_instance.updateElement();
                 }
             });
 
-            jQuery('#{{ form.children[format_field].vars.id }}').change(function(event) {
+            jQuery('#{{ form.children[format_field].vars.id }}').change(function (event) {
                 var elms = jQuery('#{{ form.children[source_field].vars.id }}');
                 elms.markItUpRemove();
-                if ({{ source_id }}_rich_instance) {
-                    {{ source_id }}_rich_instance.destroy();
-                }
 
                 var val = jQuery(this).val();
                 var appendClass = val;
-                switch(val) {
-                    case 'textile':
-                        elms.markItUp(markitup_sonataTextileSettings);
+                switch (val) {
+                    case 'text':
+                        juramy.ckDestroyBugWorkAround();
                         break;
                     case 'markdown':
                         elms.markItUp(markitup_sonataMarkdownSettings);
+                        juramy.ckDestroyBugWorkAround();
                         break;
                     case 'bbcode':
                         elms.markItUp(markitup_sonataBBCodeSettings);
+                        juramy.ckDestroyBugWorkAround();
                         break;
                     case 'rawhtml':
                         elms.markItUp(markitup_sonataHtmlSettings);
                         appendClass = 'html';
+                        juramy.ckDestroyBugWorkAround();
                         break;
                     case 'richhtml':
-                        {{ source_id }}_rich_instance = {{ ckeditor_replace(form.children[source_field].vars.id, ckeditor_configuration) }};
-
+                        if (!(juramy.destroyFix)) {
+                            {{ source_id }}_rich_instance = {{ ckeditor_replace(form.children[source_field].vars.id, ckeditor_configuration) }};
+                            if ({{ source_id }}_rich_instance) {
+                                juramy.destroyFix = true;
+                            }
+                        }
                 }
 
                 var parent = elms.parents('div.markItUp');
 
                 if (parent) {
-                    for (name in ['textile', 'markdown', 'bbcode', 'rawhtml', 'richhtml', 'rawhtml']) {
+                    for (name in ['text', 'markdown', 'bbcode', 'rawhtml', 'richhtml']) {
                         parent.removeClass(name)
                     }
-
                     parent.addClass(appendClass);
                 }
             });
