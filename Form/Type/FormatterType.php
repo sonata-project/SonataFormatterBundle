@@ -143,6 +143,9 @@ class FormatterType extends AbstractType
             $ckeditorConfiguration = array_merge($ckeditorConfiguration, $contextConfig);
         }
 
+        $view->vars['ckeditor_plugins']  = $options['ckeditor_plugins'];
+        $ckeditorConfiguration['extraPlugins'] = implode(',', array_keys($options['ckeditor_plugins']));
+
         $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;
         $view->vars['ckeditor_basepath'] = $options['ckeditor_basepath'];
 
@@ -175,6 +178,7 @@ class FormatterType extends AbstractType
                  '-', 'Image', 'Link', 'Unlink', 'Table'),
                  array('Maximize', 'Source')
             ),
+            'ckeditor_plugins'          => array(),
             'ckeditor_basepath'         => 'bundles/sonataformatter/vendor/ckeditor',
             'ckeditor_context'          => null,
             'format_field_options'      => array(

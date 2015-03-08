@@ -49,6 +49,14 @@
                         appendClass = 'html';
                         break;
                     case 'richhtml':
+                        {%- for name, plugin in ckeditor_plugins if ckeditor_plugins is defined -%}
+                            CKEDITOR.plugins.addExternal('{{ name }}', '{{ plugin.path }}',
+                                    {%- if plugin.file is defined -%}
+                                        '{{ plugin.file }}'
+                                    {%- else -%}
+                                        'plugin.js'
+                                    {%- endif -%});
+                        {% endfor %}
                         {{ source_id }}_rich_instance = {{ ckeditor_replace(form.children[source_field].vars.id, ckeditor_configuration) }};
 
                 }
