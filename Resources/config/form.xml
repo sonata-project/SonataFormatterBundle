@@ -12,6 +12,12 @@
             <argument type="service" id="translator" />
             <argument type="service" id="ivory_ck_editor.config_manager" />
         </service>
+
+        <service id="sonata.formatter.form.type.simple" class="Sonata\FormatterBundle\Form\Type\SimpleFormatterType">
+            <tag name="form.type" alias="sonata_simple_formatter_type" />
+
+            <argument type="service" id="ivory_ck_editor.config_manager" />
+        </service>
     </services>
 
 </container>

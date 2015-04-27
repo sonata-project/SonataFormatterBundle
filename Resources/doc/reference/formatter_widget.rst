@@ -2,11 +2,26 @@
     double: Widget; Usage
     double: Widget; Configuration
 
-Formatter Widget
-================
 
 One recurrent need is to provide some kind of rich user interface to edit content.
-However, depending on the final target the content can have different formats: ``markdown``, ``raw content`` or ``html``.
+However, depending on the final target the content can have different formats: ``markdown``, ``textile``, ``bbcode``, ``rawhtml``, ``richhtml``.
+
+Simple Formatter Wiget
+======================
+
+The ``sonata_simple_formatter_type_selector`` widget has been implemented to allow developers to force the input formatter value.
+
+
+.. code-block:: php
+
+    <?php
+
+    $formMapper->add('comment', 'sonata_simple_formatter_type', array(
+        'format' => 'markdown'
+    ));
+
+Advanced Formatter Widget
+=========================
 
 The ``sonata_formatter_type_selector`` widget has been implemented to allow end users to select the correct format for his/her need.
 And depending on the format, the textarea will change to match its requirements.

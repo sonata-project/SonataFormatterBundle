@@ -1,5 +1,6 @@
 {% block sonata_formatter_type_widget %}
 
+    <!-- widget: sonata_formatter_type_widget -->
     <div style="margin-bottom: 5px;">
         {{ form_widget(form.children[format_field]) }}
         {% if format_field_options.choices|length > 1 %}
@@ -68,3 +69,40 @@
         });
     </script>
 {% endblock sonata_formatter_type_widget %}
+
+{% block sonata_simple_formatter_type_widget %}
+
+    <!-- widget: sonata_simple_formatter_type_widget -->
+
+    {{ form_widget(form) }}
+
+    <script>
+        jQuery(document).ready(function() {
+            // This code requires CKEDITOR and jQuery MarkItUp
+            if (typeof CKEDITOR === 'undefined' || jQuery().markItUp == undefined) {
+                return;
+            }
+
+            var elms = jQuery('#{{ form.vars.id }}');
+
+            {% if format == 'textile' %}
+                elms.markItUp(markitup_sonataTextileSettings);
+            {% elseif format == 'markdown' %}
+                elms.markItUp(markitup_sonataMarkdownSettings);
+            {% elseif format == 'bbcode' %}
+                elms.markItUp(markitup_sonataBBCodeSettings);
+            {% elseif format == 'rawhtml' %}
+                elms.markItUp(markitup_sonataHtmlSettings);
+            {% elseif format == 'richhtml' %}
+                {{ ckeditor_replace(form.vars.id, ckeditor_configuration) }};
+            {% endif %}
+
+            var parent = elms.parents('div.markItUp');
+
+            if (parent) {
+                parent.addClass('{{ format }}');
+            }
+
+        });
+    </script>
+{% endblock sonata_simple_formatter_type_widget %}
