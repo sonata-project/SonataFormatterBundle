@@ -93,7 +93,7 @@ Additionally, the following options can be added to give `CKEditor` a context in
 * ``ckeditor_context``: give CKEditor a context in order to customize routes used to browse and upload medias (see "Use CKEditor to select medias in SonataMediaBundle" chapter)
 * ``ckeditor_toolbar_icons`` : give CKEditor a custom toolbar configuration (optional)
 
-Here is the default `CKEditor` custom tooolbar configuration, you can tweak:
+Here is the default `CKEditor` custom toolbar configuration, you can tweak:
 
 .. code-block:: php
 
