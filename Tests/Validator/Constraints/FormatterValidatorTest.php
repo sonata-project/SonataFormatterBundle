@@ -21,6 +21,9 @@ class FormatterValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidator', $validator);
     }
 
+    /**
+     * @group legacy
+     */
     public function testInvalidCase()
     {
         $pool = $this->getMock('Sonata\FormatterBundle\Formatter\Pool');
@@ -68,4 +71,3 @@ class FormatterValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validate('existingFormatter', $constraint);
     }
 }
- 
