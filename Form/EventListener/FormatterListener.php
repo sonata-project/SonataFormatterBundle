@@ -46,7 +46,7 @@ class FormatterListener
      */
     public function postSubmit(FormEvent $event)
     {
-        $accessor = PropertyAccess::getPropertyAccessor();
+        $accessor = PropertyAccess::createPropertyAccessor();
 
         $format = $accessor->getValue($event->getData(), $this->formatField);
         $source = $accessor->getValue($event->getData(), $this->sourceField);

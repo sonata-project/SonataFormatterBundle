@@ -20,9 +20,6 @@ use Symfony\Component\Form\FormEvent;
 
 class FormatterListenerTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @group legacy
-     */
     public function testWithInvalidFormatter()
     {
         $this->setExpectedException('RuntimeException');
@@ -40,9 +37,6 @@ class FormatterListenerTest extends \PHPUnit_Framework_TestCase
         $listener->postSubmit($event);
     }
 
-    /**
-     * @group legacy
-     */
     public function testWithValidFormatter()
     {
         $formatter = $this->getMock('Sonata\FormatterBundle\Formatter\FormatterInterface');
