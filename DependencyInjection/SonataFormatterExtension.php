@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -10,16 +11,15 @@
 
 namespace Sonata\FormatterBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 class SonataFormatterExtension extends Extension
@@ -74,8 +74,9 @@ class SonataFormatterExtension extends Extension
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param $code
-     * @param  \Symfony\Component\DependencyInjection\Definition $formatter
-     * @param  array                                             $extensions
+     * @param \Symfony\Component\DependencyInjection\Definition $formatter
+     * @param array                                             $extensions
+     *
      * @return string
      */
     public function createEnvironment(ContainerBuilder $container, $code, Definition $formatter, array $extensions)
@@ -87,14 +88,14 @@ class SonataFormatterExtension extends Extension
 
         $loaderSelector = new Definition('Sonata\FormatterBundle\Twig\Loader\LoaderSelector', array(
             new Reference(sprintf('sonata.formatter.twig.loader.%s', $code)),
-            new Reference('twig.loader')
+            new Reference('twig.loader'),
         ));
         $loaderSelector->setPublic(false);
 
         $env = new Definition('Twig_Environment', array($loaderSelector, array(
-            'debug' => false,
+            'debug'            => false,
             'strict_variables' => false,
-            'charset' => 'UTF-8'
+            'charset'          => 'UTF-8',
         )));
         $env->setPublic(false);
 
@@ -152,6 +153,6 @@ class SonataFormatterExtension extends Extension
      */
     public function getAlias()
     {
-        return "sonata_formatter";
+        return 'sonata_formatter';
     }
 }

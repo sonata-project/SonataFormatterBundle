@@ -18,9 +18,8 @@ class LoaderSelector implements \Twig_LoaderInterface
     protected $fileLoader;
 
     /**
-     * @param  \Twig_LoaderInterface $stringLoader
-     * @param  \Twig_LoaderInterface $fileLoader
-     * @return void
+     * @param \Twig_LoaderInterface $stringLoader
+     * @param \Twig_LoaderInterface $fileLoader
      */
     public function __construct(\Twig_LoaderInterface $stringLoader, \Twig_LoaderInterface $fileLoader)
     {
@@ -73,9 +72,10 @@ class LoaderSelector implements \Twig_LoaderInterface
     }
 
     /**
-     * Finds out the correct loader
+     * Finds out the correct loader.
      *
      * @param $name
+     *
      * @return \Twig_LoaderInterface
      */
     private function getLoader($name)
@@ -89,6 +89,7 @@ class LoaderSelector implements \Twig_LoaderInterface
 
     /**
      * @param $name
+     *
      * @return bool
      */
     private function isFile($name)

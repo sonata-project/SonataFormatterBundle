@@ -14,9 +14,8 @@ namespace Sonata\FormatterBundle\Tests\Form\Type;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
 
 /**
- * Class FormatterTypeTest
+ * Class FormatterTypeTest.
  *
- * @package Sonata\FormatterBundle\Tests\Form\Type
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -39,15 +38,15 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
         $formBuilder->expects($this->once())->method('remove');
 
         $options = array(
-            'format_field' => 'format',
-            'source_field' => 'source',
+            'format_field'         => 'format',
+            'source_field'         => 'source',
             'format_field_options' => array(
-                'property_path' => ''
+                'property_path' => '',
             ),
             'source_field_options' => array(
-                'property_path' => ''
+                'property_path' => '',
             ),
-            'listener' => false
+            'listener' => false,
         );
 
         $type->buildForm($formBuilder, $options);
@@ -69,18 +68,17 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
         $formBuilder->expects($this->once())->method('get')->will($this->returnValue($choiceFormBuilder));
 
         $options = array(
-            'format_field' => 'format',
-            'source_field' => 'source',
+            'format_field'         => 'format',
+            'source_field'         => 'source',
             'format_field_options' => array(
-                'property_path' => ''
+                'property_path' => '',
             ),
             'source_field_options' => array(
-                'property_path' => ''
+                'property_path' => '',
             ),
-            'listener' => false
+            'listener' => false,
         );
 
         $type->buildForm($formBuilder, $options);
     }
-
 }

@@ -57,6 +57,7 @@ class TextFormatterExtension extends \Twig_Extension
     /**
      * @param $text
      * @param $type
+     *
      * @return string
      */
     public function transform($text, $type)

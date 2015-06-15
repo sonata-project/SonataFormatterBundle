@@ -11,7 +11,6 @@
 
 namespace Sonata\FormatterBundle\Tests\Validator\Constraints;
 
-
 use Sonata\FormatterBundle\Validator\Constraints\Formatter;
 
 class FormatterTest extends \PHPUnit_Framework_TestCase
@@ -24,4 +23,3 @@ class FormatterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('sonata.formatter.validator.formatter', $constraint->validatedBy());
     }
 }
- 

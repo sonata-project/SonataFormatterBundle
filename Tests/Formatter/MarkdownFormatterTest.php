@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -20,6 +21,6 @@ class MarkdownFormatterTest extends \PHPUnit_Framework_TestCase
         $parser->expects($this->any())->method('transformMarkdown')->will($this->returnValue('<b>Salut</b>'));
         $formatter = new MarkdownFormatter($parser);
 
-        $this->assertEquals("<b>Salut</b>", $formatter->transform("*Salut*"));
+        $this->assertEquals('<b>Salut</b>', $formatter->transform('*Salut*'));
     }
 }

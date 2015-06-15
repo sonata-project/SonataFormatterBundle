@@ -11,12 +11,12 @@
 
 namespace Sonata\FormatterBundle\Extension;
 
-use \Twig_Environment;
+use Twig_Environment;
 
 abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInterface
 {
     /**
-     * Returns an array of available filters
+     * Returns an array of available filters.
      *
      * @return array
      */
@@ -26,7 +26,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     }
 
     /**
-     * Returns an array of available tags
+     * Returns an array of available tags.
      *
      * @return array
      */
@@ -36,7 +36,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     }
 
     /**
-     * Returns an array of available functions
+     * Returns an array of available functions.
      *
      * @return array
      */
