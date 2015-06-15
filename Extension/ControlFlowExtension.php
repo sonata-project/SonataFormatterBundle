@@ -14,19 +14,19 @@ namespace Sonata\FormatterBundle\Extension;
 class ControlFlowExtension extends BaseExtension
 {
     /**
-     * Returns an array of available filters
+     * Returns an array of available filters.
      *
      * @return array
      */
     public function getAllowedFilters()
     {
         return array(
-            'escape'
+            'escape',
         );
     }
 
     /**
-     * Returns an array of available tags
+     * Returns an array of available tags.
      *
      * @return array
      */
@@ -34,12 +34,12 @@ class ControlFlowExtension extends BaseExtension
     {
         return array(
             'if',
-            'for'
+            'for',
         );
     }
 
     /**
-     * Returns an array of available functions
+     * Returns an array of available functions.
      *
      * @return array
      */

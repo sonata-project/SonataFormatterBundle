@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -40,5 +41,3 @@ class FormatterValidator extends ConstraintValidator
         }
     }
 }
- 
-

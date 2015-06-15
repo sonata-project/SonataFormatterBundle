@@ -15,6 +15,7 @@ class RawFormatter extends BaseFormatter
 {
     /**
      * @param $text
+     *
      * @return string
      */
     public function transform($text)

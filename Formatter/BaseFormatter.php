@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata project.
  *
@@ -17,8 +18,7 @@ abstract class BaseFormatter implements FormatterInterface
     protected $extensions = array();
 
     /**
-     * @param  \Sonata\FormatterBundle\Extension\ExtensionInterface $extensionInterface
-     * @return void
+     * @param \Sonata\FormatterBundle\Extension\ExtensionInterface $extensionInterface
      */
     public function addExtension(ExtensionInterface $extensionInterface)
     {

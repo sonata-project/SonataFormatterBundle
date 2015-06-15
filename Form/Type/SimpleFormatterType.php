@@ -11,20 +11,11 @@
 
 namespace Sonata\FormatterBundle\Form\Type;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Ivory\CKEditorBundle\Model\ConfigManagerInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\OptionsResolver\Options;
-
-use Ivory\CKEditorBundle\Model\ConfigManagerInterface;
-
-use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
-use Sonata\FormatterBundle\Formatter\Pool;
 
 class SimpleFormatterType extends AbstractType
 {
@@ -34,7 +25,7 @@ class SimpleFormatterType extends AbstractType
     protected $configManager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ConfigManagerInterface $configManager An Ivory CKEditor bundle configuration manager
      */
@@ -69,22 +60,22 @@ class SimpleFormatterType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'ckeditor_toolbar_icons'    => array( array(
+            'ckeditor_toolbar_icons'    => array(array(
                  'Bold', 'Italic', 'Underline',
                  '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
                  '-', 'Undo', 'Redo',
                  '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
                  '-', 'Blockquote',
-                 '-', 'Image', 'Link', 'Unlink', 'Table'),
-                 array('Maximize', 'Source')
+                 '-', 'Image', 'Link', 'Unlink', 'Table', ),
+                 array('Maximize', 'Source'),
             ),
             'ckeditor_basepath'   => 'bundles/sonataformatter/vendor/ckeditor',
             'ckeditor_context'    => null,
             'format_options'      => array(
                 'attr' => array(
                     'class' => 'span10 col-sm-10 col-md-10',
-                    'rows' => 20
-                )
+                    'rows'  => 20,
+                ),
             ),
         ));
 

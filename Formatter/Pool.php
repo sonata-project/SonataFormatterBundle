@@ -11,11 +11,10 @@
 
 namespace Sonata\FormatterBundle\Formatter;
 
-use \Twig_Environment;
-use \Twig_Error_Syntax;
-use \Twig_Sandbox_SecurityError;
-
 use Psr\Log\LoggerInterface;
+use Twig_Environment;
+use Twig_Error_Syntax;
+use Twig_Sandbox_SecurityError;
 
 class Pool
 {
@@ -30,9 +29,8 @@ class Pool
 
     /**
      * @param $code
-     * @param  FormatterInterface $formatter
-     * @param  \Twig_Environment  $env
-     * @return void
+     * @param FormatterInterface $formatter
+     * @param \Twig_Environment  $env
      */
     public function add($code, FormatterInterface $formatter, Twig_Environment $env = null)
     {
@@ -41,6 +39,7 @@ class Pool
 
     /**
      * @param $code
+     *
      * @return bool
      */
     public function has($code)
@@ -50,6 +49,7 @@ class Pool
 
     /**
      * @param $code
+     *
      * @return array
      */
     public function get($code)
@@ -64,6 +64,7 @@ class Pool
     /**
      * @param $code
      * @param $text
+     *
      * @return string
      */
     public function transform($code, $text)
@@ -81,14 +82,13 @@ class Pool
         } catch (Twig_Error_Syntax $e) {
             if ($this->logger) {
                 $this->logger->critical(sprintf('[FormatterBundle::transform] %s - Error while parsing twig template : %s', $code, $e->getMessage()), array(
-                    'text' => $text
+                    'text' => $text,
                 ));
             }
-
         } catch (Twig_Sandbox_SecurityError $e) {
             if ($this->logger) {
                 $this->logger->critical(sprintf('[FormatterBundle::transform] %s - the user try an non white-listed keyword : %s', $code, $e->getMessage()), array(
-                    'text' => $text
+                    'text' => $text,
                 ));
             }
         }

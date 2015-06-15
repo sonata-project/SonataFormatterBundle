@@ -13,9 +13,6 @@ namespace Sonata\FormatterBundle\Tests\Form\EventListener;
 
 use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 use Sonata\FormatterBundle\Formatter\Pool;
-use Sonata\FormatterBundle\Formatter\FormatterInterface;
-use Symfony\Component\Form\Test\FormInterface;
-
 use Symfony\Component\Form\FormEvent;
 
 class FormatterListenerTest extends \PHPUnit_Framework_TestCase
@@ -40,7 +37,7 @@ class FormatterListenerTest extends \PHPUnit_Framework_TestCase
     public function testWithValidFormatter()
     {
         $formatter = $this->getMock('Sonata\FormatterBundle\Formatter\FormatterInterface');
-        $formatter->expects($this->once())->method('transform')->will($this->returnCallback(function($text) {
+        $formatter->expects($this->once())->method('transform')->will($this->returnCallback(function ($text) {
             return strtoupper($text);
         }));
 
@@ -60,10 +57,9 @@ class FormatterListenerTest extends \PHPUnit_Framework_TestCase
         $expected =  array(
             'format' => 'myformat',
             'source' => 'data',
-            'target' => 'DATA'
+            'target' => 'DATA',
         );
 
         $this->assertEquals($expected, $event->getData());
     }
-
 }

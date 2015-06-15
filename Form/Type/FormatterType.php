@@ -11,20 +11,17 @@
 
 namespace Sonata\FormatterBundle\Form\Type;
 
+use Ivory\CKEditorBundle\Model\ConfigManagerInterface;
+use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
+use Sonata\FormatterBundle\Formatter\Pool;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\OptionsResolver\Options;
-
-use Ivory\CKEditorBundle\Model\ConfigManagerInterface;
-
-use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
-use Sonata\FormatterBundle\Formatter\Pool;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class FormatterType extends AbstractType
 {
@@ -38,7 +35,7 @@ class FormatterType extends AbstractType
     protected $configManager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Pool                   $pool          A Formatter Pool service
      * @param TranslatorInterface    $translator    A Symfony Translator service
@@ -93,11 +90,10 @@ class FormatterType extends AbstractType
         $builder
             ->add($sourceField, 'textarea', $options['source_field_options']);
 
-        /**
+        /*
          * The listener option only work if the source field is after the current field
          */
         if ($options['listener']) {
-
             if (!$options['event_dispatcher'] instanceof EventDispatcherInterface) {
                 throw new \RuntimeException('The event_dispatcher option must be an instance of EventDispatcherInterface');
             }
@@ -118,16 +114,15 @@ class FormatterType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-
         if (is_array($options['source_field'])) {
-            list($sourceField, ) = $options['source_field'];
+            list($sourceField) = $options['source_field'];
             $view->vars['source_field'] = $sourceField;
         } else {
             $view->vars['source_field'] = $options['source_field'];
         }
 
         if (is_array($options['format_field'])) {
-            list($formatField, ) = $options['format_field'];
+            list($formatField) = $options['format_field'];
             $view->vars['format_field'] = $formatField;
         } else {
             $view->vars['format_field'] = $options['format_field'];
@@ -166,23 +161,23 @@ class FormatterType extends AbstractType
             'inherit_data'              => true,
             'event_dispatcher'          => null,
             'format_field'              => null,
-            'ckeditor_toolbar_icons'    => array( array(
+            'ckeditor_toolbar_icons'    => array(array(
                  'Bold', 'Italic', 'Underline',
                  '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
                  '-', 'Undo', 'Redo',
                  '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
                  '-', 'Blockquote',
-                 '-', 'Image', 'Link', 'Unlink', 'Table'),
-                 array('Maximize', 'Source')
+                 '-', 'Image', 'Link', 'Unlink', 'Table', ),
+                 array('Maximize', 'Source'),
             ),
             'ckeditor_basepath'         => 'bundles/sonataformatter/vendor/ckeditor',
             'ckeditor_context'          => null,
             'format_field_options'      => array(
-                'choices'               => $formatters
+                'choices'               => $formatters,
             ),
-            'source_field' => null,
+            'source_field'              => null,
             'source_field_options'      => array(
-                'attr' => array('class' => 'span10 col-sm-10 col-md-10', 'rows' => 20)
+                'attr' => array('class' => 'span10 col-sm-10 col-md-10', 'rows' => 20),
             ),
             'target_field' => null,
             'listener'     => true,
@@ -191,7 +186,7 @@ class FormatterType extends AbstractType
         $resolver->setRequired(array(
             'format_field',
             'source_field',
-            'target_field'
+            'target_field',
         ));
     }
 

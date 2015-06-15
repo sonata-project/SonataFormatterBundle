@@ -12,7 +12,7 @@
 namespace Sonata\FormatterBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use \Twig_Sandbox_SecurityError;
+use Twig_Sandbox_SecurityError;
 
 /**
  * @throws \Twig_Sandbox_SecurityError
@@ -52,7 +52,6 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
      * @param $tags
      * @param $filters
      * @param $functions
-     * @return void
      */
     public function checkSecurity($tags, $filters, $functions)
     {
@@ -97,7 +96,6 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
             $this->allowedFunctions     = array_merge($this->allowedFunctions, $extension->getAllowedFunctions());
             $this->allowedProperties    = array_merge_recursive($this->allowedProperties, $extension->getAllowedProperties());
             $this->allowedMethods       = array_merge_recursive($this->allowedMethods, $extension->getAllowedMethods());
-
         }
     }
 

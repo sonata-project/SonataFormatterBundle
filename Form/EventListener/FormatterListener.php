@@ -14,7 +14,6 @@ namespace Sonata\FormatterBundle\Form\EventListener;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyPath;
 
 class FormatterListener
 {
