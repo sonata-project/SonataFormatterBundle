@@ -21,7 +21,7 @@ class Formatter extends Constraint
     public $message = 'The formatter is not valid';
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function validatedBy()
     {
@@ -29,7 +29,7 @@ class Formatter extends Constraint
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTargets()
     {

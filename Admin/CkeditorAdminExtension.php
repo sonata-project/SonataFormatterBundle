@@ -24,7 +24,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 class CkeditorAdminExtension extends AdminExtension
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureRoutes(AdminInterface $admin, RouteCollection $collection)
     {
