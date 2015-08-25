@@ -109,6 +109,21 @@ Here is the default `CKEditor` custom toolbar configuration, you can tweak:
         2 => array('Maximize', 'Source')
     );
 
+You can also implement external plugins:
+
+.. code-block:: php
+
+    <?php
+
+    $formMapper->add('content', 'sonata_formatter_type', [
+        'ckeditor_plugins' => array(
+            'pbckcode' => array(
+                'path' => '/bundles/app/pbckcode/',
+                'file' => 'plugin.js' // Optional if the default filename is plugin.js
+            )
+        )
+    ])
+
 If you stop here, the most interesting part will not be present. Let's edit some configuration files.
 
 .. note::
