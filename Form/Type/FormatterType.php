@@ -129,9 +129,17 @@ class FormatterType extends AbstractType
         }
         $view->vars['format_field_options'] = $options['format_field_options'];
 
-        $ckeditorConfiguration = array(
-            'toolbar'       => array_values($options['ckeditor_toolbar_icons']),
-        );
+        $defaultConfig = $this->configManager->getDefaultConfig();
+
+        if ($this->configManager->hasConfig($defaultConfig)) {
+            $ckeditorConfiguration = $this->configManager->getConfig($defaultConfig);
+        } else {
+            $ckeditorConfiguration = array();
+        }
+
+        $ckeditorConfiguration = array_replace_recursive($ckeditorConfiguration, array(
+            'toolbar' => array_values($options['ckeditor_toolbar_icons']),
+        ));
 
         if ($options['ckeditor_context']) {
             $contextConfig = $this->configManager->getConfig($options['ckeditor_context']);
