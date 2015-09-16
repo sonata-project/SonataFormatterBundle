@@ -24,6 +24,11 @@ Be sure to have the ``ivory/ivory_ckeditor.yml`` configuration file available. I
         default_config: default
         configs:
             default:
+                # default toolbar plus Format button
+                toolbar:
+                - [Bold, Italic, Underline, -, Cut, Copy, Paste, PasteText, PasteFromWord, -, Undo, Redo, -, NumberedList, BulletedList, -, Outdent, Indent, -, Blockquote, -, Image, Link, Unlink, Table]
+                - [Format, Maximize, Source]
+
                 filebrowserBrowseRoute: admin_sonata_media_media_ckeditor_browser
                 filebrowserImageBrowseRoute: admin_sonata_media_media_ckeditor_browser
                 # Display images by default when clicking the image dialog browse button
