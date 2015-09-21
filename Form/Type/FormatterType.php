@@ -137,9 +137,9 @@ class FormatterType extends AbstractType
             $ckeditorConfiguration = array();
         }
 
-        $ckeditorConfiguration = array_replace_recursive($ckeditorConfiguration, array(
-            'toolbar' => array_values($options['ckeditor_toolbar_icons']),
-        ));
+        if (!array_key_exists('toolbar', $ckeditorConfiguration)) {
+            $ckeditorConfiguration['toolbar'] = array_values($options['ckeditor_toolbar_icons']);
+        }
 
         if ($options['ckeditor_context']) {
             $contextConfig = $this->configManager->getConfig($options['ckeditor_context']);

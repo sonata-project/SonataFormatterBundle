@@ -175,6 +175,6 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
             'ckeditor_toolbar_icons' => $ckEditorToolBarIcons,
         ));
 
-        $this->assertEquals($view->vars['ckeditor_configuration'], array('toolbar' => $ckEditorToolBarIcons));
+        $this->assertEquals($view->vars['ckeditor_configuration'], array('toolbar' => $defaultConfigValues['toolbar']));
     }
 }
