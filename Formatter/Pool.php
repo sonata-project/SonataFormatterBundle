@@ -20,11 +20,16 @@ class Pool
 {
     protected $formatters = array();
 
+    protected $defaultFormatter;
+
     protected $logger;
 
-    public function __construct(LoggerInterface $logger = null)
+    public function __construct(LoggerInterface $logger = null, $defaultFormatter = null)
     {
         $this->logger = $logger;
+
+        // TODO: This should become a required first parameter when the major version is changed
+        $this->defaultFormatter = $defaultFormatter;
     }
 
     /**
@@ -102,5 +107,20 @@ class Pool
     public function getFormatters()
     {
         return $this->formatters;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultFormatter()
+    {
+        // TODO: This should be removed when the major version is changed
+        if (is_null($this->defaultFormatter)) {
+            reset($this->formatters);
+
+            $this->defaultFormatter = key($this->formatters);
+        }
+
+        return $this->defaultFormatter;
     }
 }

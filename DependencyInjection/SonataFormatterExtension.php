@@ -56,7 +56,19 @@ class SonataFormatterExtension extends Extension
             $loader->load('ckeditor.xml');
         }
 
+        // TODO: To be removed when major version is changed
+        if (!isset($config['default_formatter'])) {
+            reset($config['formatters']);
+            $config['default_formatter'] = key($config['formatters']);
+        }
+
+        if (!array_key_exists($config['default_formatter'], $config['formatters'])) {
+            throw new \InvalidArgumentException(sprintf('SonataFormatterBundle - Invalid default formatter : %s, available : %s', $config['default_formatter'], json_encode(array_keys($config['formatters']))));
+        }
+
         $pool = $container->getDefinition('sonata.formatter.pool');
+        // TODO: This should become the first (zero-indexed) argument when the major version is changed
+        $pool->addArgument($config['default_formatter']);
 
         foreach ($config['formatters'] as $code => $configuration) {
             if (count($configuration['extensions']) == 0) {
