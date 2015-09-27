@@ -179,7 +179,7 @@ class FormatterType extends AbstractType
                  array('Maximize', 'Source'),
             ),
             'ckeditor_basepath'         => 'bundles/sonataformatter/vendor/ckeditor',
-            'ckeditor_context'          => null,
+            'ckeditor_context'          => 'default',
             'format_field_options'      => array(
                 'choices'               => $formatters,
             ),
