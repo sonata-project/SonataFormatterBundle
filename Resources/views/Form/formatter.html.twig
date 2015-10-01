@@ -54,8 +54,9 @@
                         appendClass = 'html';
                         break;
                     case 'richhtml':
-                        {{ source_id }}_rich_instance = {{ ckeditor_replace(form.children[source_field].vars.id, ckeditor_configuration) }};
-
+                        {{ source_id }}_rich_instance = {{
+                            ckeditor_widget(form.children[source_field].vars.id, ckeditor_configuration)
+                        }};
                 }
 
                 var parent = elms.parents('div.markItUp');
@@ -98,7 +99,7 @@
             {% elseif format == 'rawhtml' %}
                 elms.markItUp(markitup_sonataHtmlSettings);
             {% elseif format == 'richhtml' %}
-                {{ ckeditor_replace(form.vars.id, ckeditor_configuration) }};
+                {{ ckeditor_widget(form.vars.id, ckeditor_configuration) }};
             {% endif %}
 
             var parent = elms.parents('div.markItUp');
