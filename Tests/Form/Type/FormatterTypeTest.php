@@ -24,6 +24,7 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
     public function testBuildFormOneChoice()
     {
         $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->disableOriginalConstructor()->getMock();
+
         $translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->getMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 

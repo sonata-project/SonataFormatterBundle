@@ -61,6 +61,8 @@ class FormatterType extends AbstractType
             $options['format_field_options']['property_path'] = $formatField;
         }
 
+        $options['format_field_options']['data'] = $this->pool->getDefaultFormatter();
+
         if (is_array($options['source_field'])) {
             list($sourceField, $sourcePropertyPath) = $options['source_field'];
             $options['source_field_options']['property_path'] = $sourcePropertyPath;
@@ -75,10 +77,6 @@ class FormatterType extends AbstractType
         $formatChoices = $builder->get($formatField)->getOption('choices');
 
         if (count($formatChoices) === 1) {
-            // Retrieve format value
-            reset($formatChoices); // Ensure we're at the start
-            $options['format_field_options']['data'] = key($formatChoices);
-
             // Remove the choice field
             unset($options['format_field_options']['choices']);
             $builder->remove($formatField);
@@ -127,6 +125,7 @@ class FormatterType extends AbstractType
         } else {
             $view->vars['format_field'] = $options['format_field'];
         }
+
         $view->vars['format_field_options'] = $options['format_field_options'];
 
         $defaultConfig = $this->configManager->getDefaultConfig();

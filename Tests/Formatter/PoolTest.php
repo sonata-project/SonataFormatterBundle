@@ -78,4 +78,24 @@ class PoolTest extends \PHPUnit_Framework_TestCase
 
         $pool->transform('foo', 'Salut');
     }
+
+    public function testDefaultFormatter()
+    {
+        $pool = new Pool(null, 'default');
+
+        $this->assertEquals('default', $pool->getDefaultFormatter());
+    }
+
+    // TODO: This should be removed when the major version is changed
+    public function testBcDefaultFormatter()
+    {
+        $formatter = new RawFormatter();
+        $env = $this->getMock('\Twig_Environment');
+
+        $pool = new Pool();
+
+        $pool->add('foo', $formatter, $env);
+
+        $this->assertEquals('foo', $pool->getDefaultFormatter());
+    }
 }

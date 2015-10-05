@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('default_formatter')->end() // TODO: make it required when the major version is changed
                 ->arrayNode('formatters')
                     ->useAttributeAsKey('name')
                     ->prototype('array')
