@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -10,8 +11,8 @@
 
 namespace Sonata\FormatterBundle\Tests\Formatter;
 
-use Sonata\FormatterBundle\Formatter\RawFormatter;
 use Sonata\FormatterBundle\Formatter\Pool;
+use Sonata\FormatterBundle\Formatter\RawFormatter;
 
 class PoolTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +22,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $env = $this->getMock('\Twig_Environment');
         $env->expects($this->once())->method('render')->will($this->returnValue('Salut'));
 
-        $pool = new Pool;
+        $pool = new Pool();
 
         $this->assertFalse($pool->has('foo'));
 
@@ -29,41 +30,39 @@ class PoolTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($pool->has('foo'));
 
-        $this->assertEquals('Salut', $pool->transform('foo', 'Salut'));
+        $this->assertSame('Salut', $pool->transform('foo', 'Salut'));
     }
 
     public function testNonExistantFormatter()
     {
         $this->setExpectedException('RuntimeException');
 
-        $pool = new Pool;
+        $pool = new Pool();
         $pool->get('foo');
     }
 
     public function testSyntaxError()
     {
-
         $formatter = new RawFormatter();
         $env = $this->getMock('\Twig_Environment');
         $env->expects($this->once())->method('render')->will($this->throwException(new \Twig_Error_Syntax('Error')));
 
-        $pool = new Pool;
+        $pool = new Pool();
         $pool->add('foo', $formatter, $env);
 
-        $this->assertEquals('Salut', $pool->transform('foo', 'Salut'));
+        $this->assertSame('Salut', $pool->transform('foo', 'Salut'));
     }
 
     public function testTwig_Sandbox_SecurityError()
     {
-
         $formatter = new RawFormatter();
         $env = $this->getMock('\Twig_Environment');
         $env->expects($this->once())->method('render')->will($this->throwException(new \Twig_Sandbox_SecurityError('Error')));
 
-        $pool = new Pool;
+        $pool = new Pool();
         $pool->add('foo', $formatter, $env);
 
-        $this->assertEquals('Salut', $pool->transform('foo', 'Salut'));
+        $this->assertSame('Salut', $pool->transform('foo', 'Salut'));
     }
 
     public function testUnexpectedException()
@@ -74,7 +73,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $env = $this->getMock('\Twig_Environment');
         $env->expects($this->once())->method('render')->will($this->throwException(new \RuntimeException('Error')));
 
-        $pool = new Pool;
+        $pool = new Pool();
         $pool->add('foo', $formatter, $env);
 
         $pool->transform('foo', 'Salut');

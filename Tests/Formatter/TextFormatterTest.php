@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -14,12 +15,11 @@ use Sonata\FormatterBundle\Formatter\TextFormatter;
 
 class TextFormatterTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testFormatter()
     {
         $formatter = new TextFormatter();
 
-        $this->assertEquals("Salut", $formatter->transform("Salut"));
-        $this->assertEquals("Salut<br />\nCa va ?", $formatter->transform("Salut\nCa va ?"));
+        $this->assertSame('Salut', $formatter->transform('Salut'));
+        $this->assertSame("Salut<br />\nCa va ?", $formatter->transform("Salut\nCa va ?"));
     }
 }

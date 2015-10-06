@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -16,7 +16,7 @@ use Sonata\FormatterBundle\Twig\TokenParser\GistTokenParser;
 class GistExtension extends BaseExtension
 {
     /**
-     * Returns an array of available filters
+     * Returns an array of available filters.
      *
      * @return array
      */
@@ -26,19 +26,19 @@ class GistExtension extends BaseExtension
     }
 
     /**
-     * Returns an array of available tags
+     * Returns an array of available tags.
      *
      * @return array
      */
     public function getAllowedTags()
     {
         return array(
-            'gist'
+            'gist',
         );
     }
 
     /**
-     * Returns an array of available functions
+     * Returns an array of available functions.
      *
      * @return array
      */
@@ -53,7 +53,7 @@ class GistExtension extends BaseExtension
     public function getTokenParsers()
     {
         return array(
-            new GistTokenParser()
+            new GistTokenParser(),
         );
     }
 
