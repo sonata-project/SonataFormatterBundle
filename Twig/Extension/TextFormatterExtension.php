@@ -18,7 +18,15 @@ use Sonata\FormatterBundle\Formatter\Pool;
  */
 class TextFormatterExtension extends \Twig_Extension
 {
+    /**
+     * @var Pool
+     */
     protected $pool;
+
+    /**
+     * @var \Twig_Environment
+     */
+    protected $environment;
 
     public function __construct(Pool $pool)
     {
@@ -50,7 +58,7 @@ class TextFormatterExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'format_text' => new \Twig_Filter_Method($this, 'transform'),
+            'format_text' => new \Twig_SimpleFilter($this, 'transform'),
         );
     }
 
