@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -21,6 +21,6 @@ class MarkdownFormatterTest extends \PHPUnit_Framework_TestCase
         $parser->expects($this->any())->method('transformMarkdown')->will($this->returnValue('<b>Salut</b>'));
         $formatter = new MarkdownFormatter($parser);
 
-        $this->assertEquals('<b>Salut</b>', $formatter->transform('*Salut*'));
+        $this->assertSame('<b>Salut</b>', $formatter->transform('*Salut*'));
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -30,7 +30,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($pool->has('foo'));
 
-        $this->assertEquals('Salut', $pool->transform('foo', 'Salut'));
+        $this->assertSame('Salut', $pool->transform('foo', 'Salut'));
     }
 
     public function testNonExistantFormatter()
@@ -50,7 +50,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $pool = new Pool();
         $pool->add('foo', $formatter, $env);
 
-        $this->assertEquals('Salut', $pool->transform('foo', 'Salut'));
+        $this->assertSame('Salut', $pool->transform('foo', 'Salut'));
     }
 
     public function testTwig_Sandbox_SecurityError()
@@ -62,7 +62,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $pool = new Pool();
         $pool->add('foo', $formatter, $env);
 
-        $this->assertEquals('Salut', $pool->transform('foo', 'Salut'));
+        $this->assertSame('Salut', $pool->transform('foo', 'Salut'));
     }
 
     public function testUnexpectedException()
@@ -83,7 +83,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     {
         $pool = new Pool(null, 'default');
 
-        $this->assertEquals('default', $pool->getDefaultFormatter());
+        $this->assertSame('default', $pool->getDefaultFormatter());
     }
 
     // TODO: This should be removed when the major version is changed
@@ -96,6 +96,6 @@ class PoolTest extends \PHPUnit_Framework_TestCase
 
         $pool->add('foo', $formatter, $env);
 
-        $this->assertEquals('foo', $pool->getDefaultFormatter());
+        $this->assertSame('foo', $pool->getDefaultFormatter());
     }
 }
