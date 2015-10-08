@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -19,7 +19,7 @@ class RawFormatterTest extends \PHPUnit_Framework_TestCase
     {
         $formatter = new RawFormatter();
 
-        $this->assertEquals('Salut', $formatter->transform('Salut'));
-        $this->assertEquals('<p>Salut<br />Ca va ?</p>', $formatter->transform('<p>Salut<br />Ca va ?</p>'));
+        $this->assertSame('Salut', $formatter->transform('Salut'));
+        $this->assertSame('<p>Salut<br />Ca va ?</p>', $formatter->transform('<p>Salut<br />Ca va ?</p>'));
     }
 }

@@ -83,7 +83,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     {
         $pool = new Pool(null, 'default');
 
-        $this->assertEquals('default', $pool->getDefaultFormatter());
+        $this->assertSame('default', $pool->getDefaultFormatter());
     }
 
     // TODO: This should be removed when the major version is changed
@@ -96,6 +96,6 @@ class PoolTest extends \PHPUnit_Framework_TestCase
 
         $pool->add('foo', $formatter, $env);
 
-        $this->assertEquals('foo', $pool->getDefaultFormatter());
+        $this->assertSame('foo', $pool->getDefaultFormatter());
     }
 }

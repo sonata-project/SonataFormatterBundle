@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -23,7 +23,7 @@ class TwigFormatterTest extends \PHPUnit_Framework_TestCase
         $formatter = new TwigFormatter($twig);
 
         // Checking, that formatter can process twig template, passed as string
-        $this->assertEquals('0,1,2,3,', $formatter->transform('{% for i in range(0, 3) %}{{ i }},{% endfor %}'));
+        $this->assertSame('0,1,2,3,', $formatter->transform('{% for i in range(0, 3) %}{{ i }},{% endfor %}'));
 
         // Checking, that formatter does not changed loader
         $this->assertNotInstanceOf('\\Twig_Loader_String', $twig->getLoader());
@@ -52,7 +52,7 @@ class TwigFormatterTest extends \PHPUnit_Framework_TestCase
 
         $extensions = $formatter->getExtensions();
 
-        $this->assertEquals(0, count($extensions));
+        $this->assertSame(0, count($extensions));
     }
 }
 

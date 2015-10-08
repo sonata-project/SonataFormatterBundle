@@ -1,13 +1,13 @@
 <?php
 
 /*
-* This file is part of the "Outil Auteur" project.
-*
-* (c) 2014 - DED (CanalPlus Group)
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sonata\FormatterBundle\Tests\Form\Type;
 
@@ -111,7 +111,7 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
             'ckeditor_toolbar_icons' => array(),
         ));
 
-        $this->assertEquals($view->vars['ckeditor_configuration'], $defaultConfigValues);
+        $this->assertSame($view->vars['ckeditor_configuration'], $defaultConfigValues);
     }
 
     public function testBuildViewWithoutDefaultConfig()
@@ -143,7 +143,7 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
         ));
 
         $ckeditorConfiguration = array('toolbar' => $ckEditorToolBarIcons);
-        $this->assertEquals($view->vars['ckeditor_configuration'], $ckeditorConfiguration);
+        $this->assertSame($view->vars['ckeditor_configuration'], $ckeditorConfiguration);
     }
 
     public function testBuildViewWithDefaultConfigAndWithToolbarIcons()
@@ -176,6 +176,6 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
             'ckeditor_toolbar_icons' => $ckEditorToolBarIcons,
         ));
 
-        $this->assertEquals($view->vars['ckeditor_configuration'], array('toolbar' => $defaultConfigValues['toolbar']));
+        $this->assertSame($view->vars['ckeditor_configuration'], array('toolbar' => $defaultConfigValues['toolbar']));
     }
 }
