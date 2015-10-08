@@ -1,12 +1,14 @@
 <?php
+
 /*
- * This file is part of sonata-project.
+ * This file is part of the Sonata Project package.
  *
- * (c) 2010 Thomas Rabaix
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Sonata\FormatterBundle\Tests\Validator\Constraints;
 
 use Sonata\FormatterBundle\Validator\Constraints\FormatterValidator;
@@ -68,4 +70,3 @@ class FormatterValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validate('existingFormatter', $constraint);
     }
 }
- 

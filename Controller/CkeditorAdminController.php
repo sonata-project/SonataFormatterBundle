@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,16 +11,15 @@
 
 namespace Sonata\FormatterBundle\Controller;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
 use Sonata\MediaBundle\Controller\MediaAdminController as BaseMediaAdminController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class CkeditorAdminController extends BaseMediaAdminController
 {
     /**
-     * Returns the response object associated with the browser action
+     * Returns the response object associated with the browser action.
      *
      * @return Response
      *
@@ -49,15 +48,15 @@ class CkeditorAdminController extends BaseMediaAdminController
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
 
         return $this->render($this->getTemplate('browser'), array(
-            'action' => 'browser',
-            'form' => $formView,
+            'action'   => 'browser',
+            'form'     => $formView,
             'datagrid' => $datagrid,
-            'formats' => $formats
+            'formats'  => $formats,
         ));
     }
 
     /**
-     * Returns the response object associated with the upload action
+     * Returns the response object associated with the upload action.
      *
      * @return Response
      *
@@ -91,12 +90,12 @@ class CkeditorAdminController extends BaseMediaAdminController
 
         return $this->render($this->getTemplate('upload'), array(
             'action' => 'list',
-            'object' => $media
+            'object' => $media,
         ));
     }
 
     /**
-     * Returns a template
+     * Returns a template.
      *
      * @param string $name
      *
@@ -110,11 +109,11 @@ class CkeditorAdminController extends BaseMediaAdminController
             return $templates[$name];
         }
 
-        return null;
+        return;
     }
 
     /**
-     * Checks if SonataMediaBundle is loaded otherwise throws an exception
+     * Checks if SonataMediaBundle is loaded otherwise throws an exception.
      *
      * @throws \RuntimeException
      */
