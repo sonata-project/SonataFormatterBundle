@@ -22,13 +22,16 @@
         "twig/twig": "*",
         "knplabs/knp-markdown-bundle": "~1.2.0",
         "egeloen/ckeditor-bundle": "~2.2",
-        "sonata-project/block-bundle": "~2.2,>=2.2.1",
-        "sonata-project/core-bundle": "~2.2"
+        "sonata-project/block-bundle": "^2.2.1",
+        "sonata-project/core-bundle": "^2.2.1"
     },
     "require-dev": {
         "symfony/validator": "~2.3",
         "sonata-project/markitup-bundle": "~2.1",
         "fabpot/php-cs-fixer": "~0.5|~1.0"
+    },
+    "conflict": {
+        "symfony/property-access": "<2.3"
     },
     "autoload": {
         "psr-4": { "Sonata\\FormatterBundle\\": "" }
