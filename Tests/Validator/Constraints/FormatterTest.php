@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -19,7 +19,7 @@ class FormatterTest extends \PHPUnit_Framework_TestCase
     {
         $constraint = new Formatter();
 
-        $this->assertEquals('property', $constraint->getTargets());
-        $this->assertEquals('sonata.formatter.validator.formatter', $constraint->validatedBy());
+        $this->assertSame('property', $constraint->getTargets());
+        $this->assertSame('sonata.formatter.validator.formatter', $constraint->validatedBy());
     }
 }
