@@ -58,7 +58,7 @@ class TextFormatterExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'format_text' => new \Twig_SimpleFilter($this, 'transform'),
+            new \Twig_SimpleFilter('format_text', array($this, 'transform')),
         );
     }
 
