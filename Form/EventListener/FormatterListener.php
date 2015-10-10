@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  * (c) Dmitry Vapelnik <dvapelnik@gmail.com>
@@ -29,7 +29,7 @@ class FormatterListener
     protected $targetField;
 
     /**
-     * @param Pool $pool
+     * @param Pool   $pool
      * @param string $formatField
      * @param string $sourceField
      * @param string $targetField
@@ -66,7 +66,7 @@ class FormatterListener
     }
 
     /**
-     * @param $data
+     * @param                  $data
      * @param PropertyAccessor $accessor
      */
     private function transformField(&$data, $accessor)
