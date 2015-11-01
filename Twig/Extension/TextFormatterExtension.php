@@ -28,6 +28,9 @@ class TextFormatterExtension extends \Twig_Extension
      */
     protected $environment;
 
+    /**
+     * @param Pool $pool
+     */
     public function __construct(Pool $pool)
     {
         $this->pool = $pool;
@@ -42,9 +45,7 @@ class TextFormatterExtension extends \Twig_Extension
     }
 
     /**
-     * Returns the token parser instance to add to the existing list.
-     *
-     * @return array An array of Twig_TokenParser instances
+     * {@inheritdoc}
      */
     public function getTokenParsers()
     {
@@ -53,7 +54,7 @@ class TextFormatterExtension extends \Twig_Extension
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getFilters()
     {
@@ -63,8 +64,8 @@ class TextFormatterExtension extends \Twig_Extension
     }
 
     /**
-     * @param $text
-     * @param $type
+     * @param string $text
+     * @param string $type
      *
      * @return string
      */
@@ -74,9 +75,7 @@ class TextFormatterExtension extends \Twig_Extension
     }
 
     /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
+     * {@inheritdoc}
      */
     public function getName()
     {

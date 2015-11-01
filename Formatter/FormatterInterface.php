@@ -16,23 +16,17 @@ use Sonata\FormatterBundle\Extension\ExtensionInterface;
 interface FormatterInterface
 {
     /**
-     * @abstract
-     *
-     * @param $text
+     * @param string $text
      */
     public function transform($text);
 
     /**
-     * @abstract
-     *
-     * @param \Sonata\FormatterBundle\Extension\ExtensionInterface $extensionInterface
+     * @param ExtensionInterface $extensionInterface
      */
     public function addExtension(ExtensionInterface $extensionInterface);
 
     /**
-     * @abstract
-     *
-     * @return array
+     * @return ExtensionInterface[]
      */
     public function getExtensions();
 }

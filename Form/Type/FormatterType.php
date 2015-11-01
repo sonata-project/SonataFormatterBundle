@@ -25,8 +25,14 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class FormatterType extends AbstractType
 {
+    /**
+     * @var Pool
+     */
     protected $pool;
 
+    /**
+     * @var TranslatorInterface
+     */
     protected $translator;
 
     /**

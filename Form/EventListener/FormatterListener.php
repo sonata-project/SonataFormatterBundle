@@ -17,12 +17,24 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class FormatterListener
 {
+    /**
+     * @var Pool
+     */
     protected $pool;
 
+    /**
+     * @var string
+     */
     protected $formatField;
 
+    /**
+     * @var string
+     */
     protected $sourceField;
 
+    /**
+     * @var string
+     */
     protected $targetField;
 
     /**
