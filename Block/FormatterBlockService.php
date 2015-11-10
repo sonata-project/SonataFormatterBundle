@@ -15,6 +15,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -57,14 +58,6 @@ class FormatterBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'Rich Text Area';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
@@ -72,6 +65,16 @@ class FormatterBlockService extends BaseBlockService
             'rawContent' => '<b>Insert your custom content here</b>',
             'content'    => '<b>Insert your custom content here</b>',
             'template'   => 'SonataFormatterBundle:Block:block_formatter.html.twig',
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockMetadata($code = null)
+    {
+        return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'SonataFormatterBundle', array(
+            'class' => 'fa fa-file-text-o',
         ));
     }
 }
