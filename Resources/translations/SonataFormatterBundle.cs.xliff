@@ -6,6 +6,26 @@
                 <source>please_select_format_method</source>
                 <target>vyberte možnost formátování textu</target>
             </trans-unit>
+            <trans-unit id="markdown">
+                <source>markdown</source>
+                <target>markdown</target>
+            </trans-unit>
+            <trans-unit id="text">
+                <source>text</source>
+                <target>text</target>
+            </trans-unit>
+            <trans-unit id="rawhtml">
+                <source>rawhtml</source>
+                <target>rawhtml</target>
+            </trans-unit>
+            <trans-unit id="richhtml">
+                <source>richhtml</source>
+                <target>richhtml</target>
+            </trans-unit>
+            <trans-unit id="twig">
+                <source>twig</source>
+                <target>twig</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

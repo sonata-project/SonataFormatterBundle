@@ -6,6 +6,26 @@
                 <source>please_select_format_method</source>
                 <target>Textformatierungs-Methode auswählen</target>
             </trans-unit>
+            <trans-unit id="markdown">
+                <source>markdown</source>
+                <target>Markdown Editor</target>
+            </trans-unit>
+            <trans-unit id="text">
+                <source>text</source>
+                <target>Text Editor</target>
+            </trans-unit>
+            <trans-unit id="rawhtml">
+                <source>rawhtml</source>
+                <target>HTML Editor</target>
+            </trans-unit>
+            <trans-unit id="richhtml">
+                <source>richhtml</source>
+                <target>Grafischer Editor</target>
+            </trans-unit>
+            <trans-unit id="twig">
+                <source>twig</source>
+                <target>Twig Editor</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
