@@ -6,6 +6,10 @@
                 <source>please_select_format_method</source>
                 <target>selecteer een tekstopmaak optie</target>
             </trans-unit>
+            <trans-unit id="sonata_formatter_block_formatter">
+                <source>sonata.formatter.block.formatter</source>
+                <target>sonata.formatter.block.formatter</target>
+            </trans-unit>
             <trans-unit id="markdown">
                 <source>markdown</source>
                 <target>markdown</target>
