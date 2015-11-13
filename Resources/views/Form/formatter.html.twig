@@ -83,7 +83,8 @@
                 return;
             }
 
-            var elms = jQuery('#{{ form.vars.id }}');
+            var elms = jQuery('#{{ form.vars.id }}'),
+                editor = false;
 
             {% if format == 'textile' %}
                 elms.markItUp(markitup_sonataTextileSettings);
@@ -94,7 +95,7 @@
             {% elseif format == 'rawhtml' %}
                 elms.markItUp(markitup_sonataHtmlSettings);
             {% elseif format == 'richhtml' %}
-                {{ ckeditor_replace(form.vars.id, ckeditor_configuration) }};
+                editor = {{ ckeditor_replace(form.vars.id, ckeditor_configuration) }};
             {% endif %}
 
             var parent = elms.parents('div.markItUp');
@@ -103,6 +104,11 @@
                 parent.addClass('{{ format }}');
             }
 
+            elms.parents("form").on('submit', function (event) {
+                if (editor) {
+                    editor.updateElement();
+                }
+            });
         });
     </script>
 {% endblock sonata_simple_formatter_type_widget %}
