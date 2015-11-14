@@ -30,6 +30,10 @@
                 <source>twig</source>
                 <target>Twig Editor</target>
             </trans-unit>
+            <trans-unit id="form.label_content">
+                <source>form.label_content</source>
+                <target>Inhalt</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
