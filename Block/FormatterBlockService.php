@@ -49,9 +49,11 @@ class FormatterBlockService extends BaseBlockService
                         'format_field'     => array('format', '[format]'),
                         'source_field'     => array('rawContent', '[rawContent]'),
                         'target_field'     => '[content]',
+                        'label'            => 'form.label_content',
                     );
                 }),
             ),
+            'translation_domain' => 'SonataFormatterBundle',
         ));
     }
 

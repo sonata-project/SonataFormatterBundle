@@ -30,6 +30,10 @@
                 <source>twig</source>
                 <target>twig</target>
             </trans-unit>
+            <trans-unit id="form.label_content">
+                <source>form.label_content</source>
+                <target>Contenido</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
