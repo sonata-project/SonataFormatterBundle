@@ -10,7 +10,7 @@
     <services>
         <service id="sonata.formatter.block.formatter" class="%sonata.formatter.block.formatter.class%">
             <tag name="sonata.block" />
-            <argument>sonata.block.empty</argument>
+            <argument>sonata.formatter.block.formatter</argument>
             <argument type="service" id="templating" />
         </service>
     </services>
