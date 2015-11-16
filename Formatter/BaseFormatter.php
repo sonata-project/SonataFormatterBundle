@@ -15,10 +15,13 @@ use Sonata\FormatterBundle\Extension\ExtensionInterface;
 
 abstract class BaseFormatter implements FormatterInterface
 {
+    /**
+     * @var ExtensionInterface[]
+     */
     protected $extensions = array();
 
     /**
-     * @param \Sonata\FormatterBundle\Extension\ExtensionInterface $extensionInterface
+     * @param ExtensionInterface $extensionInterface
      */
     public function addExtension(ExtensionInterface $extensionInterface)
     {
@@ -26,7 +29,7 @@ abstract class BaseFormatter implements FormatterInterface
     }
 
     /**
-     * @return array
+     * @return ExtensionInterface[]
      */
     public function getExtensions()
     {

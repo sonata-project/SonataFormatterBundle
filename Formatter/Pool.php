@@ -18,12 +18,25 @@ use Twig_Sandbox_SecurityError;
 
 class Pool
 {
+    /**
+     * @var array
+     */
     protected $formatters = array();
 
+    /**
+     * @var string
+     */
     protected $defaultFormatter;
 
+    /**
+     * @var LoggerInterface
+     */
     protected $logger;
 
+    /**
+     * @param LoggerInterface|null $logger
+     * @param string|null          $defaultFormatter
+     */
     public function __construct(LoggerInterface $logger = null, $defaultFormatter = null)
     {
         $this->logger = $logger;
@@ -33,7 +46,7 @@ class Pool
     }
 
     /**
-     * @param $code
+     * @param string             $code
      * @param FormatterInterface $formatter
      * @param \Twig_Environment  $env
      */
@@ -43,7 +56,7 @@ class Pool
     }
 
     /**
-     * @param $code
+     * @param string $code
      *
      * @return bool
      */
@@ -53,7 +66,7 @@ class Pool
     }
 
     /**
-     * @param $code
+     * @param string $code
      *
      * @return array
      */
@@ -67,8 +80,8 @@ class Pool
     }
 
     /**
-     * @param $code
-     * @param $text
+     * @param string $code
+     * @param string $text
      *
      * @return string
      */

@@ -16,9 +16,7 @@ use Sonata\FormatterBundle\Twig\TokenParser\GistTokenParser;
 class GistExtension extends BaseExtension
 {
     /**
-     * Returns an array of available filters.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getAllowedFilters()
     {
@@ -26,9 +24,7 @@ class GistExtension extends BaseExtension
     }
 
     /**
-     * Returns an array of available tags.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getAllowedTags()
     {
@@ -38,9 +34,7 @@ class GistExtension extends BaseExtension
     }
 
     /**
-     * Returns an array of available functions.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getAllowedFunctions()
     {
@@ -48,7 +42,7 @@ class GistExtension extends BaseExtension
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getTokenParsers()
     {
@@ -58,9 +52,7 @@ class GistExtension extends BaseExtension
     }
 
     /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
+     * {@inheritdoc}
      */
     public function getName()
     {

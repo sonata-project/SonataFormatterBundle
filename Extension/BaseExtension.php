@@ -16,9 +16,7 @@ use Twig_Environment;
 abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInterface
 {
     /**
-     * Returns an array of available filters.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getAllowedFilters()
     {
@@ -26,9 +24,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     }
 
     /**
-     * Returns an array of available tags.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getAllowedTags()
     {
@@ -36,9 +32,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     }
 
     /**
-     * Returns an array of available functions.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getAllowedFunctions()
     {
@@ -46,7 +40,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getAllowedProperties()
     {
@@ -54,7 +48,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getAllowedMethods()
     {
@@ -62,11 +56,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     }
 
     /**
-     * Initializes the runtime environment.
-     *
-     * This is where you can load some file that contains filter functions for instance.
-     *
-     * @param Twig_Environment $environment The current Twig_Environment instance
+     * {@inheritdoc}
      */
     public function initRuntime(Twig_Environment $environment)
     {
@@ -74,9 +64,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     }
 
     /**
-     * Returns the token parser instances to add to the existing list.
-     *
-     * @return array An array of Twig_TokenParserInterface or Twig_TokenParserBrokerInterface instances
+     * {@inheritdoc}
      */
     public function getTokenParsers()
     {
@@ -84,9 +72,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     }
 
     /**
-     * Returns the node visitor instances to add to the existing list.
-     *
-     * @return array An array of Twig_NodeVisitorInterface instances
+     * {@inheritdoc}
      */
     public function getNodeVisitors()
     {
@@ -94,9 +80,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     }
 
     /**
-     * Returns a list of filters to add to the existing list.
-     *
-     * @return array An array of filters
+     * {@inheritdoc}
      */
     public function getFilters()
     {
@@ -104,9 +88,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     }
 
     /**
-     * Returns a list of tests to add to the existing list.
-     *
-     * @return array An array of tests
+     * {@inheritdoc}
      */
     public function getTests()
     {
@@ -114,9 +96,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     }
 
     /**
-     * Returns a list of functions to add to the existing list.
-     *
-     * @return array An array of functions
+     * {@inheritdoc}
      */
     public function getFunctions()
     {
@@ -124,9 +104,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     }
 
     /**
-     * Returns a list of operators to add to the existing list.
-     *
-     * @return array An array of operators
+     * {@inheritdoc}
      */
     public function getOperators()
     {
@@ -134,9 +112,7 @@ abstract class BaseExtension implements \Twig_ExtensionInterface, ExtensionInter
     }
 
     /**
-     * Returns a list of global functions to add to the existing list.
-     *
-     * @return array An array of global functions
+     * {@inheritdoc}
      */
     public function getGlobals()
     {

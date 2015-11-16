@@ -11,6 +11,7 @@
 
 namespace Sonata\FormatterBundle\Twig;
 
+use Sonata\FormatterBundle\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_Sandbox_SecurityError;
 
@@ -24,23 +25,44 @@ use Twig_Sandbox_SecurityError;
  */
 class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterface
 {
+    /**
+     * @var string[]
+     */
     protected $allowedTags;
 
+    /**
+     * @var string[]
+     */
     protected $allowedFilters;
 
+    /**
+     * @var string[]
+     */
     protected $allowedFunctions;
 
+    /**
+     * @var string[]
+     */
     protected $allowedProperties;
 
+    /**
+     * @var string[]
+     */
     protected $allowedMethods;
 
+    /**
+     * @var ExtensionInterface[]
+     */
     protected $extensions = array();
 
+    /**
+     * @var ContainerInterface
+     */
     protected $container;
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-     * @param array                                                     $extensions
+     * @param ContainerInterface $container
+     * @param array              $extensions
      */
     public function __construct(ContainerInterface $container, array $extensions = array())
     {
@@ -49,9 +71,7 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
     }
 
     /**
-     * @param $tags
-     * @param $filters
-     * @param $functions
+     * {@inheritdoc}
      */
     public function checkSecurity($tags, $filters, $functions)
     {
@@ -99,6 +119,9 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function checkMethodAllowed($obj, $method)
     {
         $this->buildAllowed();
@@ -122,6 +145,9 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function checkPropertyAllowed($obj, $property)
     {
         $this->buildAllowed();

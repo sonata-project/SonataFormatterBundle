@@ -84,10 +84,10 @@ class SonataFormatterExtension extends Extension
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param $code
-     * @param \Symfony\Component\DependencyInjection\Definition $formatter
-     * @param array                                             $extensions
+     * @param ContainerBuilder $container
+     * @param string           $code
+     * @param Definition       $formatter
+     * @param array            $extensions
      *
      * @return string
      */
@@ -143,9 +143,7 @@ class SonataFormatterExtension extends Extension
     }
 
     /**
-     * Returns the base path for the XSD files.
-     *
-     * @return string The XSD base path
+     * {@inheritdoc}
      */
     public function getXsdValidationBasePath()
     {
@@ -153,7 +151,7 @@ class SonataFormatterExtension extends Extension
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getNamespace()
     {
@@ -161,7 +159,7 @@ class SonataFormatterExtension extends Extension
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getAlias()
     {

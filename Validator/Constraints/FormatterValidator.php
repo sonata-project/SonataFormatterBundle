@@ -20,7 +20,9 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class FormatterValidator extends ConstraintValidator
 {
-    /** @var \Sonata\FormatterBundle\Formatter\Pool  */
+    /**
+     * @var Pool
+     */
     protected $pool;
 
     /**

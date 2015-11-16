@@ -15,6 +15,9 @@ use Sonata\FormatterBundle\Extension\ExtensionInterface;
 
 class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterface
 {
+    /**
+     * @var \Twig_Environment
+     */
     protected $twig;
 
     /**

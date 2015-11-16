@@ -15,6 +15,9 @@ use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 
 class MarkdownFormatter extends BaseFormatter
 {
+    /**
+     * @var MarkdownParserInterface
+     */
     protected $parser;
 
     /**
@@ -26,9 +29,7 @@ class MarkdownFormatter extends BaseFormatter
     }
 
     /**
-     * @param $text
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function transform($text)
     {

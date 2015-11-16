@@ -13,15 +13,19 @@ namespace Sonata\FormatterBundle\Twig\Node;
 
 class GistNode extends \Twig_Node
 {
+    /**
+     * @param \Twig_Node_Expression $gist
+     * @param \Twig_Node_Expression $file
+     * @param int                   $lineno
+     * @param null                  $tag
+     */
     public function __construct(\Twig_Node_Expression $gist, \Twig_Node_Expression $file, $lineno, $tag = null)
     {
         parent::__construct(array('gist' => $gist, 'file' => $file), array(), $lineno, $tag);
     }
 
     /**
-     * Compiles the node to PHP.
-     *
-     * @param \Twig_Compiler A Twig_Compiler instance
+     * {@inheritdoc}
      */
     public function compile(\Twig_Compiler $compiler)
     {

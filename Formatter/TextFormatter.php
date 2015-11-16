@@ -14,9 +14,7 @@ namespace Sonata\FormatterBundle\Formatter;
 class TextFormatter extends BaseFormatter
 {
     /**
-     * @param $text
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function transform($text)
     {

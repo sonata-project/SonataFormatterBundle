@@ -18,6 +18,9 @@ use Symfony\Component\Validator\Constraint;
  */
 class Formatter extends Constraint
 {
+    /**
+     * @var string
+     */
     public $message = 'The formatter is not valid';
 
     /**
