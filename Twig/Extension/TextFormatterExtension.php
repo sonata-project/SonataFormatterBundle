@@ -16,7 +16,7 @@ use Sonata\FormatterBundle\Formatter\Pool;
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class TextFormatterExtension extends \Twig_Extension implements \Twig_Extension_InitRuntimeInterface
+class TextFormatterExtension extends \Twig_Extension
 {
     /**
      * @var Pool
@@ -24,24 +24,11 @@ class TextFormatterExtension extends \Twig_Extension implements \Twig_Extension_
     protected $pool;
 
     /**
-     * @var \Twig_Environment
-     */
-    protected $environment;
-
-    /**
      * @param Pool $pool
      */
     public function __construct(Pool $pool)
     {
         $this->pool = $pool;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function initRuntime(\Twig_Environment $environment)
-    {
-        $this->environment = $environment;
     }
 
     /**
