@@ -36,6 +36,16 @@ Edit the ``config.yml`` file and add these lines:
 
 .. code-block:: yaml
 
+    # Twig Configuration
+    twig:
+        debug:            "%kernel.debug%"
+        strict_variables: "%kernel.debug%"
+
+        #sonata
+        form:
+            resources:
+                - 'SonataFormatterBundle:Form:formatter.html.twig'
+
     sonata_formatter:
         formatters:
             markdown:
