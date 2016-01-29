@@ -15,6 +15,16 @@ use Sonata\FormatterBundle\Validator\Constraints\FormatterValidator;
 
 class FormatterValidatorTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    private $context;
+
+    protected function setUp()
+    {
+        $this->context = $this->getMock(interface_exists('Symfony\Component\Validator\Context\ExecutionContextInterface') ? 'Symfony\Component\Validator\Context\ExecutionContextInterface' : 'Symfony\Component\Validator\ExecutionContextInterface');
+    }
+
     public function testValidator()
     {
         $pool = $this->getMock('Sonata\FormatterBundle\Formatter\Pool');
@@ -37,15 +47,14 @@ class FormatterValidatorTest extends \PHPUnit_Framework_TestCase
         $constraint = $this->getMock('Sonata\FormatterBundle\Validator\Constraints\Formatter');
         $constraint->message = $message;
 
-        $context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
-        $context->expects($this->once())
+        $this->context->expects($this->once())
             ->method('addViolation')
             ->with($message);
 
         $validator = new FormatterValidator($pool);
         $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidator', $validator);
 
-        $validator->initialize($context);
+        $validator->initialize($this->context);
 
         $validator->validate('existingFormatter', $constraint);
     }
@@ -61,14 +70,13 @@ class FormatterValidatorTest extends \PHPUnit_Framework_TestCase
         $constraint = $this->getMock('Sonata\FormatterBundle\Validator\Constraints\Formatter');
         $constraint->message = $message;
 
-        $context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
-        $context->expects($this->never())
+        $this->context->expects($this->never())
             ->method('addViolation');
 
         $validator = new FormatterValidator($pool);
         $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidator', $validator);
 
-        $validator->initialize($context);
+        $validator->initialize($this->context);
 
         $validator->validate('existingFormatter', $constraint);
     }
