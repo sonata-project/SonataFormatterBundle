@@ -124,8 +124,8 @@ Open the ``config.yml`` file and add the following lines (or adjust the current 
 .. code-block:: yaml
 
     twig:
-        debug:            %kernel.debug%
-        strict_variables: %kernel.debug%
+        debug:            "%kernel.debug%"
+        strict_variables: "%kernel.debug%"
 
         form:
             resources:
