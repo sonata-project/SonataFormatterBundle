@@ -10,7 +10,7 @@ To begin, add the dependent bundles:
 
     $ php composer.phar require sonata-project/formatter-bundle
 
-Register the bundle in ``app/AppKernel.php``:
+Register the bundles in ``app/AppKernel.php``:
 
 .. code-block:: php
 
