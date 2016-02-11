@@ -23,12 +23,14 @@
         "twig/twig": "~1.12",
         "knplabs/knp-markdown-bundle": "~1.4",
         "egeloen/ckeditor-bundle": "^2.5|^3.0|^4.0",
-        "sonata-project/block-bundle": "~2.2,>=2.2.1",
-        "sonata-project/core-bundle": "~2.3,>=2.3.1"
+        "sonata-project/block-bundle": "^2.2.1",
+        "sonata-project/core-bundle": "^2.3.1"
     },
     "require-dev": {
         "symfony/validator": "~2.3|~3.0",
-        "symfony/phpunit-bridge": "~2.7|~3.0"
+        "symfony/phpunit-bridge": "~2.7|~3.0",
+        "sonata-project/admin-bundle": "~2.3",
+        "sonata-project/media-bundle": "~2.2"
     },
     "autoload": {
         "psr-4": { "Sonata\\FormatterBundle\\": "" }
@@ -37,5 +39,7 @@
         "branch-alias": {
             "dev-master": "2.4.x-dev"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
