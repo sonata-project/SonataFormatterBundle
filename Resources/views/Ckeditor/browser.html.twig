@@ -69,7 +69,9 @@ file that was distributed with this source code.
 
 {% block list_table %}
     <div class="col-xs-6 col-md-3">
-        {{ tree.navigate_child([root_category], admin, true, datagrid.values['category']['value'], 1) }}
+        {% if root_category is not null %}
+            {{ tree.navigate_child([root_category], admin, true, datagrid.values['category']['value'], 1) }}
+        {% endif %}
     </div>
 
     <div class="col-xs-12 col-md-9">
