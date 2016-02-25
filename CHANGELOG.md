@@ -7,6 +7,10 @@ A [BC BREAK] means the update will break the project for many reasons:
 * new dependencies
 * class refactoring
 
+### 2015-10-05
+
+* Update [IvoryCKEditorBundle](https://github.com/egeloen/IvoryCKEditorBundle) to version 3.x.
+
 ### 2014-09-01
 
 * [BC BREAK] Dependency to SonataMarkItUpBundle has been set to require-dev only. You'll need to update your assets path as follows:

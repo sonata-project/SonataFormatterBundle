@@ -18,6 +18,12 @@
         <service id="sonata.formatter.twig.control_flow" class="Sonata\FormatterBundle\Extension\ControlFlowExtension" public="true">
 
         </service>
+
+        <!--Bridge to keep BC between 2.x and 3.x-->
+        <service id="sonata.formatter.twig.ck_editor" class="Sonata\FormatterBundle\Twig\Extension\CKEditorExtension">
+            <argument type="service" id="ivory_ck_editor.templating.helper" />
+            <tag name="twig.extension" />
+        </service>
     </services>
 
 </container>
