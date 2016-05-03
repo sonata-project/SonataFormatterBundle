@@ -25,7 +25,7 @@ matrix:
     - php: 7.0
       env: TARGET=docs
     - php: 5.3
-      env: COMPOSER_FLAGS="--prefer-lowest --prefer-stable"
+      env: COMPOSER_FLAGS="--prefer-lowest --profile -vvv"
     - php: 5.6
       env: SYMFONY_VERSION=2.3.*
     - php: 5.6
@@ -46,7 +46,7 @@ matrix:
 before_script:
   - (phpenv config-rm xdebug.ini || exit 0)
   - mkdir -p ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d && echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-  - composer selfupdate
+  - composer selfupdate --stable
   - composer config -q -g github-oauth.github.com $GITHUB_OAUTH_TOKEN
   - composer global require phpunit/phpunit:@stable fabpot/php-cs-fixer --no-update
   - composer global update --prefer-dist --no-interaction
