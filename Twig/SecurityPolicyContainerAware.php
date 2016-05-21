@@ -66,7 +66,7 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
      */
     public function __construct(ContainerInterface $container, array $extensions = array())
     {
-        $this->container  = $container;
+        $this->container = $container;
         $this->extensions = $extensions;
     }
 
@@ -93,29 +93,6 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
             if (!in_array($function, $this->allowedFunctions)) {
                 throw new Twig_Sandbox_SecurityError(sprintf('Function "%s" is not allowed.', $function));
             }
-        }
-    }
-
-    private function buildAllowed()
-    {
-        if ($this->allowedTags !== null) {
-            return;
-        }
-
-        $this->allowedTags = array();
-        $this->allowedFilters = array();
-        $this->allowedFunctions = array();
-        $this->allowedMethods = array();
-        $this->allowedProperties = array();
-
-        foreach ($this->extensions as $id) {
-            $extension = $this->container->get($id);
-
-            $this->allowedTags          = array_merge($this->allowedTags, $extension->getAllowedTags());
-            $this->allowedFilters       = array_merge($this->allowedFilters, $extension->getAllowedFilters());
-            $this->allowedFunctions     = array_merge($this->allowedFunctions, $extension->getAllowedFunctions());
-            $this->allowedProperties    = array_merge_recursive($this->allowedProperties, $extension->getAllowedProperties());
-            $this->allowedMethods       = array_merge_recursive($this->allowedMethods, $extension->getAllowedMethods());
         }
     }
 
@@ -163,6 +140,29 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
 
         if (!$allowed) {
             throw new Twig_Sandbox_SecurityError(sprintf('Calling "%s" property on a "%s" object is not allowed.', $property, get_class($obj)));
+        }
+    }
+
+    private function buildAllowed()
+    {
+        if ($this->allowedTags !== null) {
+            return;
+        }
+
+        $this->allowedTags = array();
+        $this->allowedFilters = array();
+        $this->allowedFunctions = array();
+        $this->allowedMethods = array();
+        $this->allowedProperties = array();
+
+        foreach ($this->extensions as $id) {
+            $extension = $this->container->get($id);
+
+            $this->allowedTags = array_merge($this->allowedTags, $extension->getAllowedTags());
+            $this->allowedFilters = array_merge($this->allowedFilters, $extension->getAllowedFilters());
+            $this->allowedFunctions = array_merge($this->allowedFunctions, $extension->getAllowedFunctions());
+            $this->allowedProperties = array_merge_recursive($this->allowedProperties, $extension->getAllowedProperties());
+            $this->allowedMethods = array_merge_recursive($this->allowedMethods, $extension->getAllowedMethods());
         }
     }
 }

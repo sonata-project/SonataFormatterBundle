@@ -63,7 +63,7 @@ class SimpleFormatterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'ckeditor_toolbar_icons'    => array(array(
+            'ckeditor_toolbar_icons' => array(array(
                  'Bold', 'Italic', 'Underline',
                  '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
                  '-', 'Undo', 'Redo',
@@ -72,12 +72,12 @@ class SimpleFormatterType extends AbstractType
                  '-', 'Image', 'Link', 'Unlink', 'Table', ),
                  array('Maximize', 'Source'),
             ),
-            'ckeditor_basepath'   => 'bundles/sonataformatter/vendor/ckeditor',
-            'ckeditor_context'    => null,
-            'format_options'      => array(
+            'ckeditor_basepath' => 'bundles/sonataformatter/vendor/ckeditor',
+            'ckeditor_context' => null,
+            'format_options' => array(
                 'attr' => array(
                     'class' => 'span10 col-sm-10 col-md-10',
-                    'rows'  => 20,
+                    'rows' => 20,
                 ),
             ),
         ));
