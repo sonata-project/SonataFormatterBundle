@@ -1,16 +1,12 @@
-<?php /* <body><pre>
+<?php
 
--------------------------------------------------------------------------------------------
-  CKEditor - Posted Data
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-  We are sorry, but your Web server does not support the PHP language used in this script.
-
-  Please note that CKEditor can be used with any other server-side language than just PHP.
-  To save the content created with CKEditor you need to read the POST data on the server
-  side and write it to a file or the database.
-
-  Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
-  For licensing, see LICENSE.md or <a href="http://ckeditor.com/license">http://ckeditor.com/license</a>
--------------------------------------------------------------------------------------------
-
-</pre><div style="display:none"></body> */ include "assets/posteddata.php"; ?>
+include 'assets/posteddata.php';

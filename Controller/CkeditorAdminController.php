@@ -39,7 +39,7 @@ class CkeditorAdminController extends BaseMediaAdminController
 
         // set the default context
         if (!$filters) {
-            $context = $this->admin->getPersistentParameter('context',  $this->get('sonata.media.pool')->getDefaultContext());
+            $context = $this->admin->getPersistentParameter('context', $this->get('sonata.media.pool')->getDefaultContext());
         } else {
             $context = $filters['context']['value'];
         }
@@ -73,11 +73,11 @@ class CkeditorAdminController extends BaseMediaAdminController
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
 
         return $this->render($this->getTemplate('browser'), array(
-            'action'        => 'browser',
-            'form'          => $formView,
-            'datagrid'      => $datagrid,
+            'action' => 'browser',
+            'form' => $formView,
+            'datagrid' => $datagrid,
             'root_category' => $category,
-            'formats'       => $formats,
+            'formats' => $formats,
         ));
     }
 

@@ -31,8 +31,8 @@ class FormatterBlockService extends BaseBlockService
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         return $this->renderResponse($blockContext->getTemplate(), array(
-            'block'     => $blockContext->getBlock(),
-            'settings'  => $blockContext->getSettings(),
+            'block' => $blockContext->getBlock(),
+            'settings' => $blockContext->getSettings(),
         ), $response);
     }
 
@@ -46,10 +46,10 @@ class FormatterBlockService extends BaseBlockService
                 array('content', 'sonata_formatter_type', function (FormBuilderInterface $formBuilder) {
                     return array(
                         'event_dispatcher' => $formBuilder->getEventDispatcher(),
-                        'format_field'     => array('format', '[format]'),
-                        'source_field'     => array('rawContent', '[rawContent]'),
-                        'target_field'     => '[content]',
-                        'label'            => 'form.label_content',
+                        'format_field' => array('format', '[format]'),
+                        'source_field' => array('rawContent', '[rawContent]'),
+                        'target_field' => '[content]',
+                        'label' => 'form.label_content',
                     );
                 }),
             ),
@@ -63,10 +63,10 @@ class FormatterBlockService extends BaseBlockService
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'format'     => 'richhtml',
+            'format' => 'richhtml',
             'rawContent' => '<b>Insert your custom content here</b>',
-            'content'    => '<b>Insert your custom content here</b>',
-            'template'   => 'SonataFormatterBundle:Block:block_formatter.html.twig',
+            'content' => '<b>Insert your custom content here</b>',
+            'template' => 'SonataFormatterBundle:Block:block_formatter.html.twig',
         ));
     }
 
