@@ -54,7 +54,7 @@ class FormatterListenerTest extends \PHPUnit_Framework_TestCase
 
         $listener->postSubmit($event);
 
-        $expected =  array(
+        $expected = array(
             'format' => 'myformat',
             'source' => 'data',
             'target' => 'DATA',
