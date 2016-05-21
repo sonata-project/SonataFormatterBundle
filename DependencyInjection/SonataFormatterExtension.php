@@ -105,9 +105,9 @@ class SonataFormatterExtension extends Extension
         $loaderSelector->setPublic(false);
 
         $env = new Definition('Twig_Environment', array($loaderSelector, array(
-            'debug'            => false,
+            'debug' => false,
             'strict_variables' => false,
-            'charset'          => 'UTF-8',
+            'charset' => 'UTF-8',
         )));
         $env->setPublic(false);
 
@@ -129,8 +129,8 @@ class SonataFormatterExtension extends Extension
         }
 
         $lexer = new Definition('Twig_Lexer', array(new Reference(sprintf('sonata.formatter.twig.env.%s', $code)), array(
-            'tag_comment'  => array('<#', '#>'),
-            'tag_block'    => array('<%', '%>'),
+            'tag_comment' => array('<#', '#>'),
+            'tag_block' => array('<%', '%>'),
             'tag_variable' => array('<%=', '%>'),
         )));
         $lexer->setPublic(false);
