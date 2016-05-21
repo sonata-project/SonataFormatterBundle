@@ -39,8 +39,8 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
         $formBuilder->expects($this->once())->method('remove');
 
         $options = array(
-            'format_field'         => 'format',
-            'source_field'         => 'source',
+            'format_field' => 'format',
+            'source_field' => 'source',
             'format_field_options' => array(
                 'property_path' => '',
             ),
@@ -69,8 +69,8 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
         $formBuilder->expects($this->once())->method('get')->will($this->returnValue($choiceFormBuilder));
 
         $options = array(
-            'format_field'         => 'format',
-            'source_field'         => 'source',
+            'format_field' => 'format',
+            'source_field' => 'source',
             'format_field_options' => array(
                 'property_path' => '',
             ),
@@ -103,11 +103,11 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
         $view->vars['name'] = 'SomeName';
         $form = $this->getMock('Symfony\Component\Form\FormInterface');
         $type->buildView($view, $form, array(
-            'source_field'           => 'SomeField',
-            'format_field'           => 'SomeFormat',
-            'format_field_options'   => 'SomeOptions',
-            'ckeditor_context'       => null,
-            'ckeditor_basepath'      => '',
+            'source_field' => 'SomeField',
+            'format_field' => 'SomeFormat',
+            'format_field_options' => 'SomeOptions',
+            'ckeditor_context' => null,
+            'ckeditor_basepath' => '',
             'ckeditor_toolbar_icons' => array(),
         ));
 
@@ -134,11 +134,11 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
         $view->vars['name'] = 'SomeName';
         $form = $this->getMock('Symfony\Component\Form\FormInterface');
         $type->buildView($view, $form, array(
-            'source_field'           => 'SomeField',
-            'format_field'           => 'SomeFormat',
-            'format_field_options'   => 'SomeOptions',
-            'ckeditor_context'       => null,
-            'ckeditor_basepath'      => '',
+            'source_field' => 'SomeField',
+            'format_field' => 'SomeFormat',
+            'format_field_options' => 'SomeOptions',
+            'ckeditor_context' => null,
+            'ckeditor_basepath' => '',
             'ckeditor_toolbar_icons' => $ckEditorToolBarIcons,
         ));
 
@@ -168,11 +168,11 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
         $view->vars['name'] = 'SomeName';
         $form = $this->getMock('Symfony\Component\Form\FormInterface');
         $type->buildView($view, $form, array(
-            'source_field'           => 'SomeField',
-            'format_field'           => 'SomeFormat',
-            'format_field_options'   => 'SomeOptions',
-            'ckeditor_context'       => null,
-            'ckeditor_basepath'      => '',
+            'source_field' => 'SomeField',
+            'format_field' => 'SomeFormat',
+            'format_field_options' => 'SomeOptions',
+            'ckeditor_context' => null,
+            'ckeditor_basepath' => '',
             'ckeditor_toolbar_icons' => $ckEditorToolBarIcons,
         ));
 

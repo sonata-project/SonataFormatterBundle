@@ -171,10 +171,10 @@ class FormatterType extends AbstractType
         }
 
         $resolver->setDefaults(array(
-            'inherit_data'              => true,
-            'event_dispatcher'          => null,
-            'format_field'              => null,
-            'ckeditor_toolbar_icons'    => array(array(
+            'inherit_data' => true,
+            'event_dispatcher' => null,
+            'format_field' => null,
+            'ckeditor_toolbar_icons' => array(array(
                  'Bold', 'Italic', 'Underline',
                  '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
                  '-', 'Undo', 'Redo',
@@ -183,17 +183,17 @@ class FormatterType extends AbstractType
                  '-', 'Image', 'Link', 'Unlink', 'Table', ),
                  array('Maximize', 'Source'),
             ),
-            'ckeditor_basepath'         => 'bundles/sonataformatter/vendor/ckeditor',
-            'ckeditor_context'          => null,
-            'format_field_options'      => array(
-                'choices'               => $formatters,
+            'ckeditor_basepath' => 'bundles/sonataformatter/vendor/ckeditor',
+            'ckeditor_context' => null,
+            'format_field_options' => array(
+                'choices' => $formatters,
             ),
-            'source_field'              => null,
-            'source_field_options'      => array(
+            'source_field' => null,
+            'source_field_options' => array(
                 'attr' => array('class' => 'span10 col-sm-10 col-md-10', 'rows' => 20),
             ),
             'target_field' => null,
-            'listener'     => true,
+            'listener' => true,
         ));
 
         $resolver->setRequired(array(
