@@ -69,7 +69,7 @@ class LoaderSelector implements \Twig_LoaderInterface
     /**
      * Finds out the correct loader.
      *
-     * @param $name
+     * @param string $name
      *
      * @return \Twig_LoaderInterface
      */
@@ -83,7 +83,7 @@ class LoaderSelector implements \Twig_LoaderInterface
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return bool
      */
