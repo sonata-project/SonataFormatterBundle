@@ -1,7 +1,3 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
-
-## [3.0.0](https://github.com/sonata-project/SonataAdminBundle/compare/2.3.4...3.0.0) - 2016-05-21
-### Changed
-- Update [IvoryCKEditorBundle](https://github.com/egeloen/IvoryCKEditorBundle) to version 3.x.
