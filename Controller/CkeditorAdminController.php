@@ -86,6 +86,7 @@ class CkeditorAdminController extends BaseMediaAdminController
      *
      * @return Response
      *
+     * @throws AccessDeniedException
      * @throws NotFoundHttpException
      */
     public function uploadAction()

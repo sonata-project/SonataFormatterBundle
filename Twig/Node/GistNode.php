@@ -17,7 +17,7 @@ class GistNode extends \Twig_Node
      * @param \Twig_Node_Expression $gist
      * @param \Twig_Node_Expression $file
      * @param int                   $lineno
-     * @param null                  $tag
+     * @param string|null           $tag
      */
     public function __construct(\Twig_Node_Expression $gist, \Twig_Node_Expression $file, $lineno, $tag = null)
     {
