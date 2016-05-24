@@ -28,6 +28,7 @@
         "sonata-project/core-bundle": "^3.0"
     },
     "require-dev": {
+        "sllh/php-cs-fixer-styleci-bridge": "^2.0",
         "symfony/validator": "^2.3 || ^3.0",
         "symfony/phpunit-bridge": "^2.7 || ^3.0"
     },
