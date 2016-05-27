@@ -10,7 +10,9 @@ Symfony SonataFormatterBundle
 [![Monthly Downloads](https://poser.pugx.org/sonata-project/formatter-bundle/d/monthly)](https://packagist.org/packages/sonata-project/formatter-bundle)
 [![Daily Downloads](https://poser.pugx.org/sonata-project/formatter-bundle/d/daily)](https://packagist.org/packages/sonata-project/formatter-bundle)
 
-[![Build Status](https://travis-ci.org/sonata-project/SonataFormatterBundle.svg?branch=master)](https://travis-ci.org/sonata-project/SonataFormatterBundle)
+3.x status: [![Build Status](https://travis-ci.org/sonata-project/SonataFormatterBundle.svg?branch=3.x)](https://travis-ci.org/sonata-project/SonataFormatterBundle)
+
+master status: [![Build Status](https://travis-ci.org/sonata-project/SonataFormatterBundle.svg?branch=master)](https://travis-ci.org/sonata-project/SonataFormatterBundle)
 
 ## Documentation
 
