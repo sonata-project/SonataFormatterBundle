@@ -83,6 +83,93 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
         $type->buildForm($formBuilder, $options);
     }
 
+    public function testBuildFormWithCustomFormatter()
+    {
+        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->getMock();
+        $translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
+        $configManager = $this->getMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+
+        $formatters = array('text' => 'Text', 'html' => 'HTML', 'markdown' => 'Markdown');
+
+        $selectedFormat = 'html';
+
+        $pool->method('getFormatters')->will($this->returnValue($formatters));
+        $type = new FormatterType($pool, $translator, $configManager);
+
+        $choiceFormBuilder = $this->getMock('Symfony\Component\Form\FormBuilderInterface');
+        $choiceFormBuilder->expects($this->once())->method('getOption')->with('choices')->will($this->returnValue($formatters));
+
+        $options = array(
+            'format_field' => 'SomeFormatField',
+            'source_field' => 'SomeSourceField',
+            'format_field_options' => array(
+                'property_path' => '',
+                'data' => $selectedFormat,
+                'choices' => $formatters,
+            ),
+            'source_field_options' => array(
+                'property_path' => '',
+            ),
+            'listener' => false,
+        );
+
+        $formBuilder = $this->getMock('Symfony\Component\Form\FormBuilderInterface');
+        $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', 'choice', array(
+            'property_path' => 'SomeFormatField',
+            'data' => $selectedFormat,
+            'choices' => $formatters,
+        ));
+        $formBuilder->expects($this->at(1))->method('get')->will($this->returnValue($choiceFormBuilder));
+        $formBuilder->expects($this->at(2))->method('add')->with('SomeSourceField', 'textarea', array(
+            'property_path' => 'SomeSourceField',
+        ));
+
+        $type->buildForm($formBuilder, $options);
+    }
+
+    public function testBuildFormWithDefaultFormatter()
+    {
+        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->getMock();
+        $translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
+        $configManager = $this->getMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+
+        $formatters = array('text' => 'Text', 'html' => 'HTML', 'markdown' => 'Markdown');
+        $defaultFormatter = 'text';
+
+        $pool->method('getFormatters')->will($this->returnValue($formatters));
+        $pool->method('getDefaultFormatter')->will($this->returnValue('text'));
+        $type = new FormatterType($pool, $translator, $configManager);
+
+        $choiceFormBuilder = $this->getMock('Symfony\Component\Form\FormBuilderInterface');
+        $choiceFormBuilder->expects($this->once())->method('getOption')->with('choices')->will($this->returnValue($formatters));
+
+        $formBuilder = $this->getMock('Symfony\Component\Form\FormBuilderInterface');
+        $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', 'choice', array(
+            'property_path' => 'SomeFormatField',
+            'data' => $defaultFormatter,
+            'choices' => $formatters,
+        ));
+        $formBuilder->expects($this->at(1))->method('get')->will($this->returnValue($choiceFormBuilder));
+        $formBuilder->expects($this->at(2))->method('add')->with('SomeSourceField', 'textarea', array(
+            'property_path' => 'SomeSourceField',
+        ));
+
+        $options = array(
+            'format_field' => 'SomeFormatField',
+            'source_field' => 'SomeSourceField',
+            'format_field_options' => array(
+                'property_path' => '',
+                'choices' => $formatters,
+            ),
+            'source_field_options' => array(
+                'property_path' => '',
+            ),
+            'listener' => false,
+        );
+
+        $type->buildForm($formBuilder, $options);
+    }
+
     public function testBuildViewWithDefaultConfig()
     {
         $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->disableOriginalConstructor()->getMock();
@@ -177,5 +264,41 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
         ));
 
         $this->assertSame($view->vars['ckeditor_configuration'], array('toolbar' => $defaultConfigValues['toolbar']));
+    }
+
+    public function testBuildViewWithFormatter()
+    {
+        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->disableOriginalConstructor()->getMock();
+        $translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
+        $configManager = $this->getMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+
+        $type = new FormatterType($pool, $translator, $configManager);
+
+        $ckEditorToolBarIcons = array('Icon 1');
+
+        $formatters = array();
+        $formatters['text'] = 'Text';
+        $formatters['html'] = 'HTML';
+
+        $format = 'html';
+
+        /** @var \Symfony\Component\Form\FormView $view */
+        $view = $this->getMock('Symfony\Component\Form\FormView');
+        $view->vars['id'] = 'SomeId';
+        $view->vars['name'] = 'SomeName';
+        $form = $this->getMock('Symfony\Component\Form\FormInterface');
+        $type->buildView($view, $form, array(
+            'source_field' => 'SomeField',
+            'format_field' => 'SomeFormat',
+            'format_field_options' => array(
+                'choices' => $formatters,
+                'data' => $format,
+            ),
+            'ckeditor_context' => null,
+            'ckeditor_basepath' => '',
+            'ckeditor_toolbar_icons' => $ckEditorToolBarIcons,
+        ));
+
+        $this->assertSame($view->vars['format_field_options']['data'], $format);
     }
 }
