@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
-<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" target-language="hu" datatype="plaintext" original="SonataFormatterBundle.en.xliff" >
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="hu" datatype="plaintext" original="SonataFormatterBundle.en.xliff">
         <body>
             <trans-unit id="please_select_format_method">
                 <source>please_select_format_method</source>
