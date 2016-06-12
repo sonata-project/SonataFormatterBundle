@@ -69,6 +69,10 @@ Now, let's define a form to edit this post:
         ->add('content', 'sonata_formatter_type', array(
             'event_dispatcher' => $formBuilder->getEventDispatcher(),
             'format_field'   => 'contentFormatter',
+            'format_field_options' => array(
+                'choices' => array('text', 'markdown'),
+                'data' => 'markdown',
+            ),
             'source_field'   => 'rawContent',
             'source_field_options'      => array(
                 'attr' => array('class' => 'span10', 'rows' => 20)
@@ -78,6 +82,7 @@ Now, let's define a form to edit this post:
         ))
 
 The form type defines a ``contentFormatter`` with a select choice (``sonata_formatter_type_selector``).
+The available formatter choices are ``text`` and ``markdown`` here, with the ``markdown`` formatter preselected.
 The ``sonata_formatter_type_selector`` takes various options:
 
 * ``listener`` (optional, default is ``true``);
