@@ -103,7 +103,9 @@
             {% elseif format == 'rawhtml' %}
                 elms.markItUp(markitup_sonataHtmlSettings);
             {% elseif format == 'richhtml' %}
-                {{ ckeditor_widget(form.vars.id, ckeditor_configuration) }};
+                {{ ckeditor_widget(form.vars.id, ckeditor_configuration, {
+                    input_sync: true,
+                }) }}
             {% endif %}
 
             var parent = elms.parents('div.markItUp');
