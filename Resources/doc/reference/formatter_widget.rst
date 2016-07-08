@@ -17,7 +17,8 @@ The ``sonata_simple_formatter_type_selector`` widget has been implemented to all
     <?php
 
     $formMapper->add('comment', 'sonata_simple_formatter_type', array(
-        'format' => 'markdown'
+        'format' => 'markdown',
+        'ckeditor_context' => 'default', // optional
     ));
 
 Advanced Formatter Widget
