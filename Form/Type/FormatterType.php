@@ -44,6 +44,7 @@ class FormatterType extends AbstractType
     /**
      * @var PluginManagerInterface
      */
+    protected $pluginManager;
 
     /**
      * Constructor.
@@ -161,7 +162,7 @@ class FormatterType extends AbstractType
             $ckeditorConfiguration = array_merge($ckeditorConfiguration, $contextConfig);
         }
 
-        if($this->pluginManager->hasPlugins()) {
+        if ($this->pluginManager->hasPlugins()) {
             $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
         }
 
