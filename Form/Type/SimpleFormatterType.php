@@ -12,6 +12,7 @@
 namespace Sonata\FormatterBundle\Form\Type;
 
 use Ivory\CKEditorBundle\Model\ConfigManagerInterface;
+use Ivory\CKEditorBundle\Model\PluginManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -26,13 +27,20 @@ class SimpleFormatterType extends AbstractType
     protected $configManager;
 
     /**
+     * @var PluginManagerInterface
+     */
+    protected $pluginManager;
+
+    /**
      * Constructor.
      *
      * @param ConfigManagerInterface $configManager An Ivory CKEditor bundle configuration manager
+     * @param PluginManagerInterface $pluginManager An Ivory CKEditor bundle plugin manager
      */
-    public function __construct(ConfigManagerInterface $configManager)
+    public function __construct(ConfigManagerInterface $configManager, PluginManagerInterface $pluginManager)
     {
         $this->configManager = $configManager;
+        $this->pluginManager = $pluginManager;
     }
 
     /**
@@ -49,8 +57,13 @@ class SimpleFormatterType extends AbstractType
             $ckeditorConfiguration = array_merge($ckeditorConfiguration, $contextConfig);
         }
 
+        if($this->pluginManager->hasPlugins()) {
+            $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
+        }
+
         $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;
         $view->vars['ckeditor_basepath'] = $options['ckeditor_basepath'];
+        $view->vars['ckeditor_plugins'] = $options['ckeditor_plugins'];
 
         $view->vars['format'] = $options['format'];
     }
@@ -74,6 +87,7 @@ class SimpleFormatterType extends AbstractType
             ),
             'ckeditor_basepath' => 'bundles/sonataformatter/vendor/ckeditor',
             'ckeditor_context' => null,
+            'ckeditor_plugins' => array(),
             'format_options' => array(
                 'attr' => array(
                     'class' => 'span10 col-sm-10 col-md-10',
