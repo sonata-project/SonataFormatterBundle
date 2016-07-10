@@ -37,7 +37,7 @@ class SimpleFormatterType extends AbstractType
      * @param ConfigManagerInterface $configManager An Ivory CKEditor bundle configuration manager
      * @param PluginManagerInterface $pluginManager An Ivory CKEditor bundle plugin manager
      */
-    public function __construct(ConfigManagerInterface $configManager, PluginManagerInterface $pluginManager)
+    public function __construct(ConfigManagerInterface $configManager, PluginManagerInterface $pluginManager = null)
     {
         $this->configManager = $configManager;
         $this->pluginManager = $pluginManager;
@@ -57,7 +57,7 @@ class SimpleFormatterType extends AbstractType
             $ckeditorConfiguration = array_merge($ckeditorConfiguration, $contextConfig);
         }
 
-        if ($this->pluginManager->hasPlugins()) {
+        if ($this->pluginManager instanceof PluginManagerInterface && $this->pluginManager->hasPlugins()) {
             $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
         }
 

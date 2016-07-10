@@ -54,7 +54,7 @@ class FormatterType extends AbstractType
      * @param ConfigManagerInterface $configManager An Ivory CKEditor bundle configuration manager
      * @param PluginManagerInterface $pluginManager An Ivory CKEditor bundle plugin manager
      */
-    public function __construct(Pool $pool, TranslatorInterface $translator, ConfigManagerInterface $configManager, PluginManagerInterface $pluginManager)
+    public function __construct(Pool $pool, TranslatorInterface $translator, ConfigManagerInterface $configManager, PluginManagerInterface $pluginManager = null)
     {
         $this->pool = $pool;
         $this->translator = $translator;
@@ -162,7 +162,7 @@ class FormatterType extends AbstractType
             $ckeditorConfiguration = array_merge($ckeditorConfiguration, $contextConfig);
         }
 
-        if ($this->pluginManager->hasPlugins()) {
+        if ($this->pluginManager instanceof PluginManagerInterface && $this->pluginManager->hasPlugins()) {
             $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
         }
 
