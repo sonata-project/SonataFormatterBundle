@@ -57,7 +57,7 @@ class SimpleFormatterType extends AbstractType
             $ckeditorConfiguration = array_merge($ckeditorConfiguration, $contextConfig);
         }
 
-        if ($this->pluginManager !== null && $this->pluginManager->hasPlugins()) {
+        if (null !== $this->pluginManager && $this->pluginManager->hasPlugins()) {
             $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
         }
 
