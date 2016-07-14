@@ -13,10 +13,10 @@ namespace Sonata\FormatterBundle\Tests\Block;
 
 use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Model\Block;
-use Sonata\BlockBundle\Tests\Block\AbstractBlockServiceTest;
+use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
 use Sonata\FormatterBundle\Block\FormatterBlockService;
 
-final class FormatterBlockServiceTest extends AbstractBlockServiceTest
+final class FormatterBlockServiceTest extends AbstractBlockServiceTestCase
 {
     public function testExecute()
     {
