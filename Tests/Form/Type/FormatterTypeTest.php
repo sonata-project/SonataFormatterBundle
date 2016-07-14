@@ -12,6 +12,7 @@
 namespace Sonata\FormatterBundle\Tests\Form\Type;
 
 use Sonata\FormatterBundle\Form\Type\FormatterType;
+use Symfony\Component\Form\FormView;
 
 /**
  * Class FormatterTypeTest.
@@ -365,7 +366,7 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
 
         $type = new FormatterType($pool, $translator, $configManager, $pluginManager);
 
-        /** @var \Symfony\Component\Form\FormView $view */
+        /** @var FormView $view */
         $view = $this->getMock('Symfony\Component\Form\FormView');
         $view->vars['id'] = 'SomeId';
         $view->vars['name'] = 'SomeName';
