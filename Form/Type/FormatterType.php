@@ -12,6 +12,7 @@
 namespace Sonata\FormatterBundle\Form\Type;
 
 use Ivory\CKEditorBundle\Model\ConfigManagerInterface;
+use Ivory\CKEditorBundle\Model\PluginManagerInterface;
 use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -41,17 +42,24 @@ class FormatterType extends AbstractType
     protected $configManager;
 
     /**
+     * @var PluginManagerInterface
+     */
+    protected $pluginManager;
+
+    /**
      * Constructor.
      *
      * @param Pool                   $pool          A Formatter Pool service
      * @param TranslatorInterface    $translator    A Symfony Translator service
      * @param ConfigManagerInterface $configManager An Ivory CKEditor bundle configuration manager
+     * @param PluginManagerInterface $pluginManager An Ivory CKEditor bundle plugin manager
      */
-    public function __construct(Pool $pool, TranslatorInterface $translator, ConfigManagerInterface $configManager)
+    public function __construct(Pool $pool, TranslatorInterface $translator, ConfigManagerInterface $configManager, PluginManagerInterface $pluginManager = null)
     {
         $this->pool = $pool;
         $this->translator = $translator;
         $this->configManager = $configManager;
+        $this->pluginManager = $pluginManager;
     }
 
     /**
@@ -154,8 +162,13 @@ class FormatterType extends AbstractType
             $ckeditorConfiguration = array_merge($ckeditorConfiguration, $contextConfig);
         }
 
+        if (null !== $this->pluginManager && $this->pluginManager->hasPlugins()) {
+            $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
+        }
+
         $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;
         $view->vars['ckeditor_basepath'] = $options['ckeditor_basepath'];
+        $view->vars['ckeditor_plugins'] = $options['ckeditor_plugins'];
 
         $view->vars['source_id'] = str_replace($view->vars['name'], $view->vars['source_field'], $view->vars['id']);
     }
@@ -188,6 +201,7 @@ class FormatterType extends AbstractType
             ),
             'ckeditor_basepath' => 'bundles/sonataformatter/vendor/ckeditor',
             'ckeditor_context' => null,
+            'ckeditor_plugins' => array(),
             'format_field_options' => array(
                 'choices' => $formatters,
             ),
