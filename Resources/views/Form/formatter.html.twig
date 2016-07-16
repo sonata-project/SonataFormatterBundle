@@ -54,6 +54,10 @@
                         appendClass = 'html';
                         break;
                     case 'richhtml':
+                        {% for plugin_name, plugin in ckeditor_plugins %}
+                            {{ ckeditor_plugin(plugin_name, plugin) }}
+                        {% endfor %}
+
                         {{ source_id }}_rich_instance = {{
                             ckeditor_widget(form.children[source_field].vars.id, ckeditor_configuration)
                         }};
