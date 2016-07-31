@@ -42,9 +42,8 @@ Edit the ``config.yml`` file and add these lines:
         strict_variables: "%kernel.debug%"
 
         #sonata
-        form:
-            resources:
-                - 'SonataFormatterBundle:Form:formatter.html.twig'
+        form_themes:
+            - 'SonataFormatterBundle:Form:formatter.html.twig'
 
     sonata_formatter:
         formatters:
