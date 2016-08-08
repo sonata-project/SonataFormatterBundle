@@ -215,6 +215,7 @@ class FormatterType extends AbstractType
             'ckeditor_plugins' => array(),
             'format_field_options' => array(
                 'choices' => $formatters,
+                'choice_translation_domain' => false,
             ),
             'source_field' => null,
             'source_field_options' => array(
