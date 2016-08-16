@@ -11,7 +11,7 @@
 
 namespace Sonata\FormatterBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AdminExtension;
+use Sonata\AdminBundle\Admin\AbstractAdminExtension;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
 
@@ -20,7 +20,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
  *
  * @author Kévin Dunglas <kevin@les-tilleuls.coop>
  */
-class CkeditorAdminExtension extends AdminExtension
+class CkeditorAdminExtension extends AbstractAdminExtension
 {
     /**
      * {@inheritdoc}
