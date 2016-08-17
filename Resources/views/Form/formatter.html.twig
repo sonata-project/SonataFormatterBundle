@@ -40,13 +40,7 @@
                         appendClass = 'html';
                         break;
                     case 'richhtml':
-                        {% for plugin_name, plugin in ckeditor_plugins %}
-                            {{ ckeditor_plugin(plugin_name, plugin) }}
-                        {% endfor %}
-
-                        {{ ckeditor_widget(form.children[source_field].vars.id, ckeditor_configuration, {
-                            input_sync: true,
-                        }) }}
+                        {% include 'SonataFormatterBundle:Form:ckeditor.html.twig' with {'ckeditor_field_id': form.children[source_field].vars.id} %}
                 }
 
                 var parent = elms.parents('div.markItUp');
@@ -89,9 +83,7 @@
             {% elseif format == 'rawhtml' %}
                 elms.markItUp(markitup_sonataHtmlSettings);
             {% elseif format == 'richhtml' %}
-                {{ ckeditor_widget(form.vars.id, ckeditor_configuration, {
-                    input_sync: true,
-                }) }}
+                {% include 'SonataFormatterBundle:Form:ckeditor.html.twig' with {'ckeditor_field_id': form.vars.id} %}
             {% endif %}
 
             var parent = elms.parents('div.markItUp');
