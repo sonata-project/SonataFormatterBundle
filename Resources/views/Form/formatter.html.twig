@@ -9,10 +9,7 @@
     </div>
 
     {{ form_widget(form.children[source_field]) }}
-
     <script>
-        var {{ source_id }}_rich_instance = false;
-
         jQuery(document).ready(function() {
 
             // This code requires CKEDITOR and jQuery MarkItUp
@@ -20,22 +17,11 @@
                 return;
             }
 
-            var isInstanceActive = isInstanceActive || function(instance){
-                return instance && instance.status !== "destroyed";
-            };
-
-            jQuery('#{{ form.children[format_field].vars.id }}').parents("form").on('click', function(event) {
-                if (isInstanceActive({{ source_id }}_rich_instance)) {
-                    {{ source_id }}_rich_instance.updateElement();
-                }
-            });
-
             jQuery('#{{ form.children[format_field].vars.id }}').change(function(event) {
                 var elms = jQuery('#{{ form.children[source_field].vars.id }}');
                 elms.markItUpRemove();
-                if (isInstanceActive({{ source_id }}_rich_instance)) {
-                    {{ source_id }}_rich_instance.destroy();
-                }
+
+                {{ ckeditor_destroy(form.children[source_field].vars.id) }}
 
                 var val = jQuery(this).val();
                 var appendClass = val;
@@ -54,13 +40,7 @@
                         appendClass = 'html';
                         break;
                     case 'richhtml':
-                        {% for plugin_name, plugin in ckeditor_plugins %}
-                            {{ ckeditor_plugin(plugin_name, plugin) }}
-                        {% endfor %}
-
-                        {{ source_id }}_rich_instance = {{
-                            ckeditor_widget(form.children[source_field].vars.id, ckeditor_configuration)
-                        }};
+                        {% include 'SonataFormatterBundle:Form:ckeditor.html.twig' with {'ckeditor_field_id': form.children[source_field].vars.id} %}
                 }
 
                 var parent = elms.parents('div.markItUp');
@@ -103,7 +83,7 @@
             {% elseif format == 'rawhtml' %}
                 elms.markItUp(markitup_sonataHtmlSettings);
             {% elseif format == 'richhtml' %}
-                {{ ckeditor_widget(form.vars.id, ckeditor_configuration) }};
+                {% include 'SonataFormatterBundle:Form:ckeditor.html.twig' with {'ckeditor_field_id': form.vars.id} %}
             {% endif %}
 
             var parent = elms.parents('div.markItUp');

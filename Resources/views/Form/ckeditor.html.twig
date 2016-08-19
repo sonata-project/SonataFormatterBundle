@@ -1,0 +1,7 @@
+{% for plugin_name, plugin in ckeditor_plugins %}
+	{{ ckeditor_plugin(plugin_name, plugin) }}
+{% endfor %}
+
+{{ ckeditor_widget(ckeditor_field_id, ckeditor_configuration, {
+	input_sync: true,
+}) }}
