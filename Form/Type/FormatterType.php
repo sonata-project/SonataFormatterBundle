@@ -197,6 +197,15 @@ class FormatterType extends AbstractType
             $formatters[$code] = $translator->trans($code, array(), 'SonataFormatterBundle');
         }
 
+        $formatFieldOptions = array(
+            'choices' => $formatters,
+        );
+
+        // NEXT_MAJOR: Remove the method_exists hack when dropping support for symfony < 2.7
+        if (count($formatters) > 1 && method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
+            $formatFieldOptions['choice_translation_domain'] = false;
+        }
+
         $resolver->setDefaults(array(
             'inherit_data' => true,
             'event_dispatcher' => null,
@@ -213,10 +222,7 @@ class FormatterType extends AbstractType
             'ckeditor_basepath' => 'bundles/sonataformatter/vendor/ckeditor',
             'ckeditor_context' => null,
             'ckeditor_plugins' => array(),
-            'format_field_options' => array(
-                'choices' => $formatters,
-                'choice_translation_domain' => false,
-            ),
+            'format_field_options' => $formatFieldOptions,
             'source_field' => null,
             'source_field_options' => array(
                 'attr' => array('class' => 'span10 col-sm-10 col-md-10', 'rows' => 20),
