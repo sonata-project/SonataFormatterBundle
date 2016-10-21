@@ -21,11 +21,11 @@ class CkeditorAdminController extends BaseMediaAdminController
     /**
      * Returns the response object associated with the browser action.
      *
-     * @return Response
+     * @param Request $request
      *
-     * @throws AccessDeniedException
+     * @return Response
      */
-    public function browserAction()
+    public function browserAction(Request $request)
     {
         $this->checkIfMediaBundleIsLoaded();
 
@@ -84,12 +84,11 @@ class CkeditorAdminController extends BaseMediaAdminController
     /**
      * Returns the response object associated with the upload action.
      *
-     * @return Response
+     * @param Request $request
      *
-     * @throws AccessDeniedException
-     * @throws NotFoundHttpException
+     * @return Response
      */
-    public function uploadAction()
+    public function uploadAction(Request $request)
     {
         $this->checkIfMediaBundleIsLoaded();
 
