@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="it" datatype="plaintext" original="SonataFormatterBundle.en.xliff">
+        <body>
+            <trans-unit id="please_select_format_method">
+                <source>please_select_format_method</source>
+                <target>Opzione di formattazione del contenuto</target>
+            </trans-unit>
+            <trans-unit id="sonata_formatter_block_formatter">
+                <source>sonata.formatter.block.formatter</source>
+                <target>Contenuto avanzato</target>
+            </trans-unit>
+            <trans-unit id="markdown">
+                <source>markdown</source>
+                <target>Markdown</target>
+            </trans-unit>
+            <trans-unit id="text">
+                <source>text</source>
+                <target>Testo</target>
+            </trans-unit>
+            <trans-unit id="rawhtml">
+                <source>rawhtml</source>
+                <target>Markup HTML</target>
+            </trans-unit>
+            <trans-unit id="richhtml">
+                <source>richhtml</source>
+                <target>Rich HTML</target>
+            </trans-unit>
+            <trans-unit id="twig">
+                <source>twig</source>
+                <target>Twig</target>
+            </trans-unit>
+            <trans-unit id="form.label_content">
+                <source>form.label_content</source>
+                <target>Contenuto</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
