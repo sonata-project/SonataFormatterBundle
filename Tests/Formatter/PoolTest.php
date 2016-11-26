@@ -87,43 +87,6 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('default', $pool->getDefaultFormatter());
     }
 
-    /**
-     * NEXT_MAJOR: This should be removed.
-     *
-     * @group legacy
-     */
-    public function testBcDefaultFormatter()
-    {
-        $formatter = new RawFormatter();
-        $env = $this->getMock('\Twig_Environment');
-
-        $pool = new Pool();
-
-        $pool->add('foo', $formatter, $env);
-
-        $this->assertSame('foo', $pool->getDefaultFormatter());
-    }
-
-    /**
-     * NEXT_MAJOR: This should be removed.
-     *
-     * @group legacy
-     */
-    public function testLoggerProvidedThroughConstuctor()
-    {
-        $formatter = new RawFormatter();
-        $pool = new Pool($logger = $this->getMock('Psr\Log\LoggerInterface'));
-        $env = $this->getMock('\Twig_Environment');
-        $env->expects($this->once())->method('render')->will(
-            $this->throwException(new \Twig_Sandbox_SecurityError('Error'))
-        );
-
-        $pool->add('foo', $formatter, $env);
-        $logger->expects($this->once())->method('critical');
-
-        $pool->transform('foo', 'whatever');
-    }
-
     private function getPool()
     {
         $pool = new Pool('whatever');

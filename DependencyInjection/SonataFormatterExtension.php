@@ -56,19 +56,12 @@ class SonataFormatterExtension extends Extension
             $loader->load('ckeditor.xml');
         }
 
-        // NEXT_MAJOR: remove this if block
-        if (!isset($config['default_formatter'])) {
-            @trigger_error(
-                'Not setting the default_formatter configuration node is deprecated since 3.x,'.
-                ' and will no longer be supported in 4.0.',
-                E_USER_DEPRECATED
-            );
-            reset($config['formatters']);
-            $config['default_formatter'] = key($config['formatters']);
-        }
-
         if (!array_key_exists($config['default_formatter'], $config['formatters'])) {
-            throw new \InvalidArgumentException(sprintf('SonataFormatterBundle - Invalid default formatter : %s, available : %s', $config['default_formatter'], json_encode(array_keys($config['formatters']))));
+            throw new \InvalidArgumentException(sprintf(
+                'SonataFormatterBundle - Invalid default formatter : %s, available : %s',
+                $config['default_formatter'],
+                json_encode(array_keys($config['formatters']))
+            ));
         }
 
         $pool = $container->getDefinition('sonata.formatter.pool');
@@ -78,7 +71,12 @@ class SonataFormatterExtension extends Extension
             if (count($configuration['extensions']) == 0) {
                 $env = null;
             } else {
-                $env = new Reference($this->createEnvironment($container, $code, $container->getDefinition($configuration['service']), $configuration['extensions']));
+                $env = new Reference($this->createEnvironment(
+                    $container,
+                    $code,
+                    $container->getDefinition($configuration['service']),
+                    $configuration['extensions']
+                ));
             }
 
             $pool->addMethodCall('add', array($code, new Reference($configuration['service']), $env));

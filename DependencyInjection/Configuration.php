@@ -32,7 +32,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('default_formatter')->end() // NEXT_MAJOR: make this required
+                ->scalarNode('default_formatter')->isRequired()->cannotBeEmpty()->end()
                 ->arrayNode('formatters')
                     ->useAttributeAsKey('name')
                     ->prototype('array')

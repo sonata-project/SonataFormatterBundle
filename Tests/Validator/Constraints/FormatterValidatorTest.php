@@ -27,9 +27,7 @@ class FormatterValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testValidator()
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $pool = $this->getPool();
 
         $validator = new FormatterValidator($pool);
         $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidator', $validator);
@@ -40,7 +38,7 @@ class FormatterValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidCase()
     {
-        $pool = $this->getMock('Sonata\FormatterBundle\Formatter\Pool');
+        $pool = $this->getPool();
         $pool->expects($this->any())
             ->method('has')
             ->will($this->returnValue(false));
@@ -63,9 +61,7 @@ class FormatterValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testValidCase()
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $pool = $this->getPool();
         $pool->expects($this->any())
             ->method('has')
             ->will($this->returnValue(true));
@@ -83,5 +79,12 @@ class FormatterValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->initialize($this->context);
 
         $validator->validate('existingFormatter', $constraint);
+    }
+
+    private function getPool()
+    {
+        return $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 }
