@@ -1,6 +1,15 @@
 UPGRADE 3.x
 ===========
 
+## Deprecated unspecified default_formatter configuration node
+
+The `default_formatter` configuration node will become required.
+
+```yaml
+sonata_formatter:
+    default_formatter: my_formatter
+```
+
 UPGRADE FROM 3.0 to 3.1
 =======================
 
