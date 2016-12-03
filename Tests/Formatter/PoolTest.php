@@ -86,7 +86,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('default', $pool->getDefaultFormatter());
     }
 
-    // TODO: This should be removed when the major version is changed
+    // NEXT_MAJOR: This should be removed
     public function testBcDefaultFormatter()
     {
         $formatter = new RawFormatter();

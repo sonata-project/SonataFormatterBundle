@@ -41,7 +41,7 @@ class Pool
     {
         $this->logger = $logger;
 
-        // TODO: This should become a required first parameter when the major version is changed
+        // NEXT_MAJOR: This should become a required first parameter
         $this->defaultFormatter = $defaultFormatter;
     }
 
@@ -127,7 +127,7 @@ class Pool
      */
     public function getDefaultFormatter()
     {
-        // TODO: This should be removed when the major version is changed
+        // NEXT_MAJOR: This should be removed
         if (is_null($this->defaultFormatter)) {
             reset($this->formatters);
 

@@ -56,7 +56,7 @@ class SonataFormatterExtension extends Extension
             $loader->load('ckeditor.xml');
         }
 
-        // TODO: To be removed when major version is changed
+        // NEXT_MAJOR: remove this if block
         if (!isset($config['default_formatter'])) {
             reset($config['formatters']);
             $config['default_formatter'] = key($config['formatters']);
@@ -67,7 +67,7 @@ class SonataFormatterExtension extends Extension
         }
 
         $pool = $container->getDefinition('sonata.formatter.pool');
-        // TODO: This should become the first (zero-indexed) argument when the major version is changed
+        // NEXT_MAJOR: This should become the first (zero-indexed) argument
         $pool->addArgument($config['default_formatter']);
 
         foreach ($config['formatters'] as $code => $configuration) {
