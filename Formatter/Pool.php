@@ -11,12 +11,14 @@
 
 namespace Sonata\FormatterBundle\Formatter;
 
+use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Twig_Environment;
 use Twig_Error_Syntax;
 use Twig_Sandbox_SecurityError;
 
-class Pool
+class Pool implements LoggerAwareInterface
 {
     /**
      * @var array
@@ -29,20 +31,60 @@ class Pool
     protected $defaultFormatter;
 
     /**
+     * NEXT_MAJOR: use LoggerAwareTrait.
+     *
      * @var LoggerInterface
      */
     protected $logger;
 
     /**
-     * @param LoggerInterface|null $logger
-     * @param string|null          $defaultFormatter
+     * @param string|null $defaultFormatter
      */
-    public function __construct(LoggerInterface $logger = null, $defaultFormatter = null)
+    public function __construct($defaultFormatter = null)
+    {
+        if (func_num_args() == 2) {
+            list($logger, $defaultFormatter) = func_get_args();
+            $this->logger = $logger;
+            $this->defaultFormatter = $defaultFormatter;
+        } elseif (func_num_args() == 1) {
+            if ($defaultFormatter instanceof LoggerInterface) {
+                $this->logger = $defaultFormatter;
+            } else {
+                // NEXT_MAJOR: Only keep this block
+                $this->defaultFormatter = $defaultFormatter;
+            }
+        }
+
+        // NEXT_MAJOR: keep the else block only
+        if ($this->logger) {
+            @trigger_error(sprintf(
+                'Providing a logger to %s through the constructor is deprecated since 3.x'.
+                ' and will no longer be possible in 4.0'.
+                ' This argument should be provided through the setLogger() method.',
+                __CLASS__
+            ), E_USER_DEPRECATED);
+        } else {
+            $this->logger = new NullLogger();
+        }
+
+        // NEXT_MAJOR: make defaultFormatter required
+        if (is_null($this->defaultFormatter)) {
+            @trigger_error(sprintf(
+                'Not providing the defaultFormatter argument to %s is deprecated since 3.x.'.
+                ' This argument will become mandatory in 4.0.',
+                __METHOD__
+            ), E_USER_DEPRECATED);
+        }
+    }
+
+    /**
+     * NEXT_MAJOR: use Psr\Log\LoggerAwareTrait.
+     *
+     * @param LoggerInterface will be used to report errors
+     */
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
-
-        // NEXT_MAJOR: This should become a required first parameter
-        $this->defaultFormatter = $defaultFormatter;
     }
 
     /**
@@ -98,17 +140,13 @@ class Pool
                 $text = $env->render($text);
             }
         } catch (Twig_Error_Syntax $e) {
-            if ($this->logger) {
-                $this->logger->critical(sprintf('[FormatterBundle::transform] %s - Error while parsing twig template : %s', $code, $e->getMessage()), array(
-                    'text' => $text,
-                ));
-            }
+            $this->logger->critical(sprintf('[FormatterBundle::transform] %s - Error while parsing twig template : %s', $code, $e->getMessage()), array(
+                'text' => $text,
+            ));
         } catch (Twig_Sandbox_SecurityError $e) {
-            if ($this->logger) {
-                $this->logger->critical(sprintf('[FormatterBundle::transform] %s - the user try an non white-listed keyword : %s', $code, $e->getMessage()), array(
-                    'text' => $text,
-                ));
-            }
+            $this->logger->critical(sprintf('[FormatterBundle::transform] %s - the user try an non white-listed keyword : %s', $code, $e->getMessage()), array(
+                'text' => $text,
+            ));
         }
 
         return $text;

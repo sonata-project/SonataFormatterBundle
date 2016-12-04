@@ -72,7 +72,6 @@ class SonataFormatterExtension extends Extension
         }
 
         $pool = $container->getDefinition('sonata.formatter.pool');
-        // NEXT_MAJOR: This should become the first (zero-indexed) argument
         $pool->addArgument($config['default_formatter']);
 
         foreach ($config['formatters'] as $code => $configuration) {
