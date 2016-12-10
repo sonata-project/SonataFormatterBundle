@@ -140,11 +140,19 @@ class Pool implements LoggerAwareInterface
                 $text = $env->render($text);
             }
         } catch (Twig_Error_Syntax $e) {
-            $this->logger->critical(sprintf('[FormatterBundle::transform] %s - Error while parsing twig template : %s', $code, $e->getMessage()), array(
+            $this->logger->critical(sprintf(
+                '[FormatterBundle::transform] %s - Error while parsing twig template : %s',
+                $code,
+                $e->getMessage()
+            ), array(
                 'text' => $text,
             ));
         } catch (Twig_Sandbox_SecurityError $e) {
-            $this->logger->critical(sprintf('[FormatterBundle::transform] %s - the user try an non white-listed keyword : %s', $code, $e->getMessage()), array(
+            $this->logger->critical(sprintf(
+                '[FormatterBundle::transform] %s - the user try an non white-listed keyword : %s',
+                $code,
+                $e->getMessage()
+            ), array(
                 'text' => $text,
             ));
         }
