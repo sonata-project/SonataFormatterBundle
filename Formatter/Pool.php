@@ -146,6 +146,7 @@ class Pool implements LoggerAwareInterface
                 $e->getMessage()
             ), array(
                 'text' => $text,
+                'exception' => $e,
             ));
         } catch (Twig_Sandbox_SecurityError $e) {
             $this->logger->critical(sprintf(
@@ -154,6 +155,7 @@ class Pool implements LoggerAwareInterface
                 $e->getMessage()
             ), array(
                 'text' => $text,
+                'exception' => $e,
             ));
         }
 
