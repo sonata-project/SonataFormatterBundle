@@ -41,10 +41,15 @@ Edit the ``config.yml`` file and add these lines:
         debug:            "%kernel.debug%"
         strict_variables: "%kernel.debug%"
 
-        #sonata
-        form:
-            resources:
-                - 'SonataFormatterBundle:Form:formatter.html.twig'
+        #sonata with symfony >= 2.6
+        form_themes:
+            - 'SonataFormatterBundle:Form:formatter.html.twig'
+
+        #sonata with symfony <=2.5
+        #form:
+        #    resources:
+        #        - 'SonataFormatterBundle:Form:formatter.html.twig'
+
 
     sonata_formatter:
         formatters:
