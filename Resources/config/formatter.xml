@@ -8,7 +8,9 @@
     </parameters>
     <services>
         <service id="sonata.formatter.pool" class="Sonata\FormatterBundle\Formatter\Pool">
-            <argument type="service" id="logger"/>
+            <call method="setLogger">
+                <argument type="service" id="logger"/>
+            </call>
         </service>
         <service id="sonata.formatter.text.markdown" class="%sonata.formatter.text.markdown.class%">
             <tag name="sonata.text.formatter" code="markdown"/>
