@@ -22,7 +22,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $env = $this->getMock('\Twig_Environment');
         $env->expects($this->once())->method('render')->will($this->returnValue('Salut'));
 
-        $pool = new Pool();
+        $pool = $this->getPool();
 
         $this->assertFalse($pool->has('foo'));
 
@@ -37,7 +37,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('RuntimeException');
 
-        $pool = new Pool();
+        $pool = $this->getPool();
         $pool->get('foo');
     }
 
@@ -47,7 +47,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $env = $this->getMock('\Twig_Environment');
         $env->expects($this->once())->method('render')->will($this->throwException(new \Twig_Error_Syntax('Error')));
 
-        $pool = new Pool();
+        $pool = $this->getPool();
         $pool->add('foo', $formatter, $env);
 
         $this->assertSame('Salut', $pool->transform('foo', 'Salut'));
@@ -59,7 +59,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $env = $this->getMock('\Twig_Environment');
         $env->expects($this->once())->method('render')->will($this->throwException(new \Twig_Sandbox_SecurityError('Error')));
 
-        $pool = new Pool();
+        $pool = $this->getPool();
         $pool->add('foo', $formatter, $env);
 
         $this->assertSame('Salut', $pool->transform('foo', 'Salut'));
@@ -73,7 +73,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $env = $this->getMock('\Twig_Environment');
         $env->expects($this->once())->method('render')->will($this->throwException(new \RuntimeException('Error')));
 
-        $pool = new Pool();
+        $pool = $this->getPool();
         $pool->add('foo', $formatter, $env);
 
         $pool->transform('foo', 'Salut');
@@ -81,12 +81,17 @@ class PoolTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultFormatter()
     {
-        $pool = new Pool(null, 'default');
+        $pool = new Pool('default');
+        $pool->setLogger($this->getMock('Psr\Log\LoggerInterface'));
 
         $this->assertSame('default', $pool->getDefaultFormatter());
     }
 
-    // TODO: This should be removed when the major version is changed
+    /**
+     * NEXT_MAJOR: This should be removed.
+     *
+     * @group legacy
+     */
     public function testBcDefaultFormatter()
     {
         $formatter = new RawFormatter();
@@ -97,5 +102,33 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $pool->add('foo', $formatter, $env);
 
         $this->assertSame('foo', $pool->getDefaultFormatter());
+    }
+
+    /**
+     * NEXT_MAJOR: This should be removed.
+     *
+     * @group legacy
+     */
+    public function testLoggerProvidedThroughConstuctor()
+    {
+        $formatter = new RawFormatter();
+        $pool = new Pool($logger = $this->getMock('Psr\Log\LoggerInterface'));
+        $env = $this->getMock('\Twig_Environment');
+        $env->expects($this->once())->method('render')->will(
+            $this->throwException(new \Twig_Sandbox_SecurityError('Error'))
+        );
+
+        $pool->add('foo', $formatter, $env);
+        $logger->expects($this->once())->method('critical');
+
+        $pool->transform('foo', 'whatever');
+    }
+
+    private function getPool()
+    {
+        $pool = new Pool('whatever');
+        $pool->setLogger($this->getMock('Psr\Log\LoggerInterface'));
+
+        return $pool;
     }
 }

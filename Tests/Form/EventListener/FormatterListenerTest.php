@@ -21,7 +21,7 @@ class FormatterListenerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('RuntimeException');
 
-        $pool = new Pool();
+        $pool = $this->getPool();
 
         $listener = new FormatterListener($pool, '[format]', '[source]', '[target]');
 
@@ -41,7 +41,7 @@ class FormatterListenerTest extends \PHPUnit_Framework_TestCase
             return strtoupper($text);
         }));
 
-        $pool = new Pool();
+        $pool = $this->getPool();
         $pool->add('myformat', $formatter);
 
         $listener = new FormatterListener($pool, '[format]', '[source]', '[target]');
@@ -61,5 +61,13 @@ class FormatterListenerTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertSame($expected, $event->getData());
+    }
+
+    private function getPool()
+    {
+        $pool = new Pool('whatever');
+        $pool->setLogger($this->getMock('Psr\Log\LoggerInterface'));
+
+        return $pool;
     }
 }
