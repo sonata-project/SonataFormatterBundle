@@ -58,7 +58,7 @@ class SonataFormatterExtension extends Extension
 
         if (!array_key_exists($config['default_formatter'], $config['formatters'])) {
             throw new \InvalidArgumentException(sprintf(
-                'SonataFormatterBundle - Invalid default formatter : %s, available : %s',
+                'SonataFormatterBundle - Invalid default formatter: %s, available: %s',
                 $config['default_formatter'],
                 json_encode(array_keys($config['formatters']))
             ));
