@@ -12,7 +12,7 @@
 namespace Sonata\FormatterBundle\Formatter;
 
 use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
+use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 use Twig_Environment;
 use Twig_Error_Syntax;
@@ -20,6 +20,8 @@ use Twig_Sandbox_SecurityError;
 
 class Pool implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     /**
      * @var array
      */
@@ -31,60 +33,12 @@ class Pool implements LoggerAwareInterface
     protected $defaultFormatter;
 
     /**
-     * NEXT_MAJOR: use LoggerAwareTrait.
-     *
-     * @var LoggerInterface
+     * @param string $defaultFormatter
      */
-    protected $logger;
-
-    /**
-     * @param string|null $defaultFormatter
-     */
-    public function __construct($defaultFormatter = null)
+    public function __construct($defaultFormatter)
     {
-        if (func_num_args() == 2) {
-            list($logger, $defaultFormatter) = func_get_args();
-            $this->logger = $logger;
-            $this->defaultFormatter = $defaultFormatter;
-        } elseif (func_num_args() == 1) {
-            if ($defaultFormatter instanceof LoggerInterface) {
-                $this->logger = $defaultFormatter;
-            } else {
-                // NEXT_MAJOR: Only keep this block
-                $this->defaultFormatter = $defaultFormatter;
-            }
-        }
-
-        // NEXT_MAJOR: keep the else block only
-        if ($this->logger) {
-            @trigger_error(sprintf(
-                'Providing a logger to %s through the constructor is deprecated since 3.x'.
-                ' and will no longer be possible in 4.0'.
-                ' This argument should be provided through the setLogger() method.',
-                __CLASS__
-            ), E_USER_DEPRECATED);
-        } else {
-            $this->logger = new NullLogger();
-        }
-
-        // NEXT_MAJOR: make defaultFormatter required
-        if (is_null($this->defaultFormatter)) {
-            @trigger_error(sprintf(
-                'Not providing the defaultFormatter argument to %s is deprecated since 3.x.'.
-                ' This argument will become mandatory in 4.0.',
-                __METHOD__
-            ), E_USER_DEPRECATED);
-        }
-    }
-
-    /**
-     * NEXT_MAJOR: use Psr\Log\LoggerAwareTrait.
-     *
-     * @param LoggerInterface will be used to report errors
-     */
-    public function setLogger(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
+        $this->defaultFormatter = $defaultFormatter;
+        $this->logger = new NullLogger();
     }
 
     /**
@@ -175,13 +129,6 @@ class Pool implements LoggerAwareInterface
      */
     public function getDefaultFormatter()
     {
-        // NEXT_MAJOR: This should be removed
-        if (is_null($this->defaultFormatter)) {
-            reset($this->formatters);
-
-            $this->defaultFormatter = key($this->formatters);
-        }
-
         return $this->defaultFormatter;
     }
 }

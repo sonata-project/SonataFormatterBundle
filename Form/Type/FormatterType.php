@@ -22,7 +22,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class FormatterType extends AbstractType
@@ -175,16 +174,6 @@ class FormatterType extends AbstractType
     }
 
     /**
-     * NEXT_MAJOR: Remove this method when dropping support for symfony 2.*.
-     *
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $this->configureOptions($resolver);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
@@ -201,8 +190,7 @@ class FormatterType extends AbstractType
             'choices' => $formatters,
         );
 
-        // NEXT_MAJOR: Remove the method_exists hack when dropping support for symfony < 2.7
-        if (count($formatters) > 1 && method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
+        if (count($formatters) > 1) {
             $formatFieldOptions['choice_translation_domain'] = false;
         }
 
