@@ -13,6 +13,7 @@ namespace Sonata\FormatterBundle\Form\Type;
 
 use Ivory\CKEditorBundle\Model\ConfigManagerInterface;
 use Ivory\CKEditorBundle\Model\PluginManagerInterface;
+use Ivory\CKEditorBundle\Model\TemplateManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -32,15 +33,22 @@ class SimpleFormatterType extends AbstractType
     protected $pluginManager;
 
     /**
+     * @var TemplateManagerInterface
+     */
+    protected $templateManager;
+
+    /**
      * Constructor.
      *
-     * @param ConfigManagerInterface $configManager An Ivory CKEditor bundle configuration manager
-     * @param PluginManagerInterface $pluginManager An Ivory CKEditor bundle plugin manager
+     * @param ConfigManagerInterface   $configManager   An Ivory CKEditor bundle configuration manager
+     * @param PluginManagerInterface   $pluginManager   An Ivory CKEditor bundle plugin manager
+     * @param TemplateManagerInterface $templateManager An Ivory CKEditor bundle template manager
      */
-    public function __construct(ConfigManagerInterface $configManager, PluginManagerInterface $pluginManager = null)
+    public function __construct(ConfigManagerInterface $configManager, PluginManagerInterface $pluginManager = null, TemplateManagerInterface $templateManager = null)
     {
         $this->configManager = $configManager;
         $this->pluginManager = $pluginManager;
+        $this->templateManager = $templateManager;
     }
 
     /**
@@ -61,9 +69,14 @@ class SimpleFormatterType extends AbstractType
             $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
         }
 
+        if (null !== $this->templateManager && $this->templateManager->hasTemplates()) {
+            $options['ckeditor_templates'] = $this->templateManager->getTemplates();
+        }
+
         $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;
         $view->vars['ckeditor_basepath'] = $options['ckeditor_basepath'];
         $view->vars['ckeditor_plugins'] = $options['ckeditor_plugins'];
+        $view->vars['ckeditor_templates'] = $options['ckeditor_templates'];
 
         $view->vars['format'] = $options['format'];
     }
@@ -88,6 +101,7 @@ class SimpleFormatterType extends AbstractType
             'ckeditor_basepath' => 'bundles/sonataformatter/vendor/ckeditor',
             'ckeditor_context' => null,
             'ckeditor_plugins' => array(),
+            'ckeditor_templates' => array(),
             'format_options' => array(
                 'attr' => array(
                     'class' => 'span10 col-sm-10 col-md-10',

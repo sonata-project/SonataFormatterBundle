@@ -13,6 +13,7 @@ namespace Sonata\FormatterBundle\Form\Type;
 
 use Ivory\CKEditorBundle\Model\ConfigManagerInterface;
 use Ivory\CKEditorBundle\Model\PluginManagerInterface;
+use Ivory\CKEditorBundle\Model\TemplateManagerInterface;
 use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -48,19 +49,26 @@ class FormatterType extends AbstractType
     protected $pluginManager;
 
     /**
+     * @var TemplateManagerInterface
+     */
+    protected $templateManager;
+
+    /**
      * Constructor.
      *
-     * @param Pool                   $pool          A Formatter Pool service
-     * @param TranslatorInterface    $translator    A Symfony Translator service
-     * @param ConfigManagerInterface $configManager An Ivory CKEditor bundle configuration manager
-     * @param PluginManagerInterface $pluginManager An Ivory CKEditor bundle plugin manager
+     * @param Pool                     $pool            A Formatter Pool service
+     * @param TranslatorInterface      $translator      A Symfony Translator service
+     * @param ConfigManagerInterface   $configManager   An Ivory CKEditor bundle configuration manager
+     * @param PluginManagerInterface   $pluginManager   An Ivory CKEditor bundle plugin manager
+     * @param TemplateManagerInterface $templateManager An Ivory CKEditor bundle template manager
      */
-    public function __construct(Pool $pool, TranslatorInterface $translator, ConfigManagerInterface $configManager, PluginManagerInterface $pluginManager = null)
+    public function __construct(Pool $pool, TranslatorInterface $translator, ConfigManagerInterface $configManager, PluginManagerInterface $pluginManager = null, TemplateManagerInterface $templateManager = null)
     {
         $this->pool = $pool;
         $this->translator = $translator;
         $this->configManager = $configManager;
         $this->pluginManager = $pluginManager;
+        $this->templateManager = $templateManager;
     }
 
     /**
@@ -167,9 +175,14 @@ class FormatterType extends AbstractType
             $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
         }
 
+        if (null !== $this->templateManager && $this->templateManager->hasTemplates()) {
+            $options['ckeditor_templates'] = $this->templateManager->getTemplates();
+        }
+
         $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;
         $view->vars['ckeditor_basepath'] = $options['ckeditor_basepath'];
         $view->vars['ckeditor_plugins'] = $options['ckeditor_plugins'];
+        $view->vars['ckeditor_templates'] = $options['ckeditor_templates'];
 
         $view->vars['source_id'] = str_replace($view->vars['name'], $view->vars['source_field'], $view->vars['id']);
     }
@@ -222,6 +235,7 @@ class FormatterType extends AbstractType
             'ckeditor_basepath' => 'bundles/sonataformatter/vendor/ckeditor',
             'ckeditor_context' => null,
             'ckeditor_plugins' => array(),
+            'ckeditor_templates' => array(),
             'format_field_options' => $formatFieldOptions,
             'source_field' => null,
             'source_field_options' => array(

@@ -2,6 +2,10 @@
 	{{ ckeditor_plugin(plugin_name, plugin) }}
 {% endfor %}
 
+{% for template_name, template in ckeditor_templates %}
+	{{ ckeditor_template(template_name, template) }}
+{% endfor %}
+
 {{ ckeditor_widget(ckeditor_field_id, ckeditor_configuration, {
 	input_sync: true,
 }) }}
