@@ -429,4 +429,54 @@ class FormatterTypeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($view->vars['ckeditor_configuration'], $defaultConfigValues);
     }
+
+    public function testBuildViewWithDefaultConfigAndPluginManagerAndTemplateManagerAndWithTemplates()
+    {
+        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->disableOriginalConstructor()->getMock();
+        $translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
+        $configManager = $this->getMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+        $pluginManager = $this->getMock('Ivory\CKEditorBundle\Model\PluginManagerInterface');
+        $templateManager = $this->getMock('Ivory\CKEditorBundle\Model\TemplateManagerInterface');
+
+        $defaultConfig = 'default';
+        $defaultConfigValues = array('toolbar' => array('Button1'));
+        $configManager->expects($this->once())->method('getDefaultConfig')->will($this->returnValue($defaultConfig));
+        $configManager->expects($this->once())->method('hasConfig')->with($defaultConfig)->will($this->returnValue(true));
+        $configManager->expects($this->once())->method('getConfig')->with($defaultConfig)->will($this->returnValue($defaultConfigValues));
+
+        $templates = array(
+            'imagesPath' => '/bundles/mybundle/templates/images',
+            'templates' => array(
+                array(
+                    'title' => 'My Template',
+                    'image' => 'images.jpg',
+                    'description' => 'My awesome template',
+                    'html' => '<p>Crazy template :)</p>',
+                ),
+            ),
+        );
+
+        $templateManager->expects($this->once())->method('hasTemplates')->will($this->returnValue(true));
+        $templateManager->expects($this->once())->method('getTemplates')->will($this->returnValue($templates));
+
+        $type = new FormatterType($pool, $translator, $configManager, $pluginManager, $templateManager);
+
+        /** @var FormView $view */
+        $view = $this->getMock('Symfony\Component\Form\FormView');
+        $view->vars['id'] = 'SomeId';
+        $view->vars['name'] = 'SomeName';
+        $form = $this->getMock('Symfony\Component\Form\FormInterface');
+        $type->buildView($view, $form, array(
+            'source_field' => 'SomeField',
+            'format_field' => 'SomeFormat',
+            'format_field_options' => 'SomeOptions',
+            'ckeditor_context' => null,
+            'ckeditor_basepath' => '',
+            'ckeditor_plugins' => array(),
+            'ckeditor_templates' => array(),
+            'ckeditor_toolbar_icons' => array(),
+        ));
+
+        $this->assertSame($view->vars['ckeditor_templates'], $templates);
+    }
 }

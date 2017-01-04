@@ -51,7 +51,7 @@ class FormatterType extends AbstractType
     /**
      * @var TemplateManagerInterface
      */
-    protected $templateManager;
+    private $templateManager;
 
     /**
      * Constructor.

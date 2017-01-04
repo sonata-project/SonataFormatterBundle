@@ -35,7 +35,7 @@ class SimpleFormatterType extends AbstractType
     /**
      * @var TemplateManagerInterface
      */
-    protected $templateManager;
+    private $templateManager;
 
     /**
      * Constructor.
