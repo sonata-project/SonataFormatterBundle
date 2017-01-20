@@ -54,8 +54,6 @@ class FormatterType extends AbstractType
     private $templateManager;
 
     /**
-     * Constructor.
-     *
      * @param Pool                     $pool            A Formatter Pool service
      * @param TranslatorInterface      $translator      A Symfony Translator service
      * @param ConfigManagerInterface   $configManager   An Ivory CKEditor bundle configuration manager

@@ -15,9 +15,6 @@ use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Symfony\Component\Form\FormView;
 
 /**
- * Class FormatterTypeTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class FormatterTypeTest extends \PHPUnit_Framework_TestCase

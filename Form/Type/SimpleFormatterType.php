@@ -38,8 +38,6 @@ class SimpleFormatterType extends AbstractType
     private $templateManager;
 
     /**
-     * Constructor.
-     *
      * @param ConfigManagerInterface   $configManager   An Ivory CKEditor bundle configuration manager
      * @param PluginManagerInterface   $pluginManager   An Ivory CKEditor bundle plugin manager
      * @param TemplateManagerInterface $templateManager An Ivory CKEditor bundle template manager
