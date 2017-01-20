@@ -118,7 +118,13 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
         }
 
         if (!$allowed) {
-            throw new Twig_Sandbox_SecurityError(sprintf('Calling "%s" method on a "%s" object is not allowed.', $method, get_class($obj)));
+            throw new Twig_Sandbox_SecurityError(
+                sprintf(
+                    'Calling "%s" method on a "%s" object is not allowed.',
+                    $method,
+                    get_class($obj)
+                )
+            );
         }
     }
 
@@ -139,7 +145,13 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
         }
 
         if (!$allowed) {
-            throw new Twig_Sandbox_SecurityError(sprintf('Calling "%s" property on a "%s" object is not allowed.', $property, get_class($obj)));
+            throw new Twig_Sandbox_SecurityError(
+                sprintf(
+                    'Calling "%s" property on a "%s" object is not allowed.',
+                    $property,
+                    get_class($obj)
+                )
+            );
         }
     }
 
@@ -161,7 +173,12 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
             $this->allowedTags = array_merge($this->allowedTags, $extension->getAllowedTags());
             $this->allowedFilters = array_merge($this->allowedFilters, $extension->getAllowedFilters());
             $this->allowedFunctions = array_merge($this->allowedFunctions, $extension->getAllowedFunctions());
-            $this->allowedProperties = array_merge_recursive($this->allowedProperties, $extension->getAllowedProperties());
+
+            $this->allowedProperties = array_merge_recursive(
+                $this->allowedProperties,
+                $extension->getAllowedProperties()
+            );
+
             $this->allowedMethods = array_merge_recursive($this->allowedMethods, $extension->getAllowedMethods());
         }
     }
