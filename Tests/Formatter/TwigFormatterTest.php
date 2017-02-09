@@ -26,7 +26,9 @@ class TwigFormatterTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('0,1,2,3,', $formatter->transform('{% for i in range(0, 3) %}{{ i }},{% endfor %}'));
 
         // Checking, that formatter does not changed loader
-        $this->assertNotInstanceOf('\\Twig_Loader_String', $twig->getLoader());
+        if (class_exists('\Twig_Loader_String')) {
+            $this->assertNotInstanceOf('\\Twig_Loader_String', $twig->getLoader());
+        }
         $this->assertInstanceOf('Sonata\\FormatterBundle\\Tests\\Formatter\\MyStringLoader', $twig->getLoader());
     }
 
@@ -58,6 +60,11 @@ class TwigFormatterTest extends \PHPUnit_Framework_TestCase
 
 class MyStringLoader implements \Twig_LoaderInterface
 {
+    public function getSourceContext($name)
+    {
+        return $name;
+    }
+
     public function getSource($name)
     {
         return $name;
@@ -69,6 +76,11 @@ class MyStringLoader implements \Twig_LoaderInterface
     }
 
     public function isFresh($name, $time)
+    {
+        return true;
+    }
+
+    public function exists($name)
     {
         return true;
     }
