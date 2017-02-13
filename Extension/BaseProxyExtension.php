@@ -13,7 +13,7 @@ namespace Sonata\FormatterBundle\Extension;
 
 use Twig_Environment;
 
-abstract class BaseProxyExtension implements \Twig_ExtensionInterface, ExtensionInterface
+abstract class BaseProxyExtension extends \Twig_Extension implements ExtensionInterface
 {
     /**
      * @return \Twig_ExtensionInterface

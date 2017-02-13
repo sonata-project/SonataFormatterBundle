@@ -19,7 +19,9 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     public function testPool()
     {
         $formatter = new RawFormatter();
-        $env = $this->getMock('\Twig_Environment');
+        $env = $this->getMockBuilder('\Twig_Environment')
+            ->disableOriginalConstructor()
+            ->getMock();
         $env->expects($this->once())->method('render')->will($this->returnValue('Salut'));
 
         $pool = $this->getPool();
@@ -44,7 +46,9 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     public function testSyntaxError()
     {
         $formatter = new RawFormatter();
-        $env = $this->getMock('\Twig_Environment');
+        $env = $this->getMockBuilder('\Twig_Environment')
+            ->disableOriginalConstructor()
+            ->getMock();
         $env->expects($this->once())->method('render')->will($this->throwException(new \Twig_Error_Syntax('Error')));
 
         $pool = $this->getPool();
@@ -56,7 +60,9 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     public function testTwig_Sandbox_SecurityError()
     {
         $formatter = new RawFormatter();
-        $env = $this->getMock('\Twig_Environment');
+        $env = $this->getMockBuilder('\Twig_Environment')
+            ->disableOriginalConstructor()
+            ->getMock();
         $env->expects($this->once())->method('render')->will($this->throwException(new \Twig_Sandbox_SecurityError('Error')));
 
         $pool = $this->getPool();
@@ -70,7 +76,9 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('RuntimeException');
 
         $formatter = new RawFormatter();
-        $env = $this->getMock('\Twig_Environment');
+        $env = $this->getMockBuilder('\Twig_Environment')
+            ->disableOriginalConstructor()
+            ->getMock();
         $env->expects($this->once())->method('render')->will($this->throwException(new \RuntimeException('Error')));
 
         $pool = $this->getPool();
@@ -95,7 +103,9 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     public function testBcDefaultFormatter()
     {
         $formatter = new RawFormatter();
-        $env = $this->getMock('\Twig_Environment');
+        $env = $this->getMockBuilder('\Twig_Environment')
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $pool = new Pool();
 
@@ -113,7 +123,9 @@ class PoolTest extends \PHPUnit_Framework_TestCase
     {
         $formatter = new RawFormatter();
         $pool = new Pool($logger = $this->getMock('Psr\Log\LoggerInterface'));
-        $env = $this->getMock('\Twig_Environment');
+        $env = $this->getMockBuilder('\Twig_Environment')
+            ->disableOriginalConstructor()
+            ->getMock();
         $env->expects($this->once())->method('render')->will(
             $this->throwException(new \Twig_Sandbox_SecurityError('Error'))
         );
