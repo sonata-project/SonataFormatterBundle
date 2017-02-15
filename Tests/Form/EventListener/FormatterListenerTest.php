@@ -13,9 +13,10 @@ namespace Sonata\FormatterBundle\Tests\Form\EventListener;
 
 use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 use Sonata\FormatterBundle\Formatter\Pool;
+use Sonata\FormatterBundle\Tests\TestCase;
 use Symfony\Component\Form\FormEvent;
 
-class FormatterListenerTest extends \PHPUnit_Framework_TestCase
+class FormatterListenerTest extends TestCase
 {
     public function testWithInvalidFormatter()
     {
@@ -25,7 +26,7 @@ class FormatterListenerTest extends \PHPUnit_Framework_TestCase
 
         $listener = new FormatterListener($pool, '[format]', '[source]', '[target]');
 
-        $event = new FormEvent($this->getMock('Symfony\Component\Form\Test\FormInterface'), array(
+        $event = new FormEvent($this->createMock('Symfony\Component\Form\Test\FormInterface'), array(
             'format' => 'error',
             'source' => 'data',
             'target' => null,
@@ -36,7 +37,7 @@ class FormatterListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testWithValidFormatter()
     {
-        $formatter = $this->getMock('Sonata\FormatterBundle\Formatter\FormatterInterface');
+        $formatter = $this->createMock('Sonata\FormatterBundle\Formatter\FormatterInterface');
         $formatter->expects($this->once())->method('transform')->will($this->returnCallback(function ($text) {
             return strtoupper($text);
         }));
@@ -46,7 +47,7 @@ class FormatterListenerTest extends \PHPUnit_Framework_TestCase
 
         $listener = new FormatterListener($pool, '[format]', '[source]', '[target]');
 
-        $event = new FormEvent($this->getMock('Symfony\Component\Form\Test\FormInterface'), array(
+        $event = new FormEvent($this->createMock('Symfony\Component\Form\Test\FormInterface'), array(
             'format' => 'myformat',
             'source' => 'data',
             'target' => null,
@@ -66,7 +67,7 @@ class FormatterListenerTest extends \PHPUnit_Framework_TestCase
     private function getPool()
     {
         $pool = new Pool('whatever');
-        $pool->setLogger($this->getMock('Psr\Log\LoggerInterface'));
+        $pool->setLogger($this->createMock('Psr\Log\LoggerInterface'));
 
         return $pool;
     }

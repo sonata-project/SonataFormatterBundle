@@ -12,12 +12,13 @@
 namespace Sonata\FormatterBundle\Tests\Formatter;
 
 use Sonata\FormatterBundle\Formatter\MarkdownFormatter;
+use Sonata\FormatterBundle\Tests\TestCase;
 
-class MarkdownFormatterTest extends \PHPUnit_Framework_TestCase
+class MarkdownFormatterTest extends TestCase
 {
     public function testFormatter()
     {
-        $parser = $this->getMock('Knp\Bundle\MarkdownBundle\MarkdownParserInterface');
+        $parser = $this->createMock('Knp\Bundle\MarkdownBundle\MarkdownParserInterface');
         $parser->expects($this->any())->method('transformMarkdown')->will($this->returnValue('<b>Salut</b>'));
         $formatter = new MarkdownFormatter($parser);
 
