@@ -16,7 +16,7 @@ use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
 use Sonata\FormatterBundle\Block\FormatterBlockService;
 
-final class FormatterBlockServiceTest extends AbstractBlockServiceTestCase
+class FormatterBlockServiceTest extends AbstractBlockServiceTestCase
 {
     public function testExecute()
     {
@@ -40,9 +40,7 @@ final class FormatterBlockServiceTest extends AbstractBlockServiceTestCase
 
     public function testDefaultSettings()
     {
-        $blockService = $this->getMockForAbstractClass('Sonata\FormatterBundle\Block\FormatterBlockService', array(
-            'block.service', $this->templating,
-        ));
+        $blockService = new FormatterBlockService('block.service', $this->templating);
         $blockContext = $this->getBlockContext($blockService);
 
         $this->assertSettings(array(

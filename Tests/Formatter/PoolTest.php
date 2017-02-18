@@ -123,7 +123,7 @@ class PoolTest extends TestCase
     public function testLoggerProvidedThroughConstuctor()
     {
         $formatter = new RawFormatter();
-        $pool = new Pool($logger = $this->getMock('Psr\Log\LoggerInterface'));
+        $pool = new Pool($logger = $this->createMock('Psr\Log\LoggerInterface'));
         $env = $this->getMockBuilder('\Twig_Environment')
             ->disableOriginalConstructor()
             ->getMock();
