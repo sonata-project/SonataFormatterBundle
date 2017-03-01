@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.0](https://github.com/sonata-project/SonataFormatterBundle/compare/3.1.0...3.2.0) - 2017-03-01
+### Added
+- Added the possibility to use `templates` defined in your `ivory_ckeditor.yml` in the `sonata_formatter_type` and `sonata_simple_formatter_type`
+- support for Twig 2.0
+
+### Deprecated
+- not specifying the `default_formatter` configuration node is deprecated
+- specifying a logger through the `SonataFormatterBundle\Formatter\Pool` constructor is deprecated in favor of specifying it through `setLogger` method
+- not specifying a default formatter to the `SonataFormatterBundle\Formatter\Pool` constructor
+
+### Fixed
+- Broken markitup header for rawhtml format in sonata_simple_formatter_type_widget
+- Remove wrong implements from `TextFormatterExtension`
+
 ## [3.1.0](https://github.com/sonata-project/SonataFormatterBundle/compare/3.0.1...3.1.0) - 2016-11-30
 ### Added
 - Added `SonataAdminBundle` to suggest

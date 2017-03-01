@@ -58,7 +58,7 @@ class Pool implements LoggerAwareInterface
         // NEXT_MAJOR: keep the else block only
         if ($this->logger) {
             @trigger_error(sprintf(
-                'Providing a logger to %s through the constructor is deprecated since 3.x'.
+                'Providing a logger to %s through the constructor is deprecated since 3.2'.
                 ' and will no longer be possible in 4.0'.
                 ' This argument should be provided through the setLogger() method.',
                 __CLASS__
@@ -70,7 +70,7 @@ class Pool implements LoggerAwareInterface
         // NEXT_MAJOR: make defaultFormatter required
         if (is_null($this->defaultFormatter)) {
             @trigger_error(sprintf(
-                'Not providing the defaultFormatter argument to %s is deprecated since 3.x.'.
+                'Not providing the defaultFormatter argument to %s is deprecated since 3.2.'.
                 ' This argument will become mandatory in 4.0.',
                 __METHOD__
             ), E_USER_DEPRECATED);

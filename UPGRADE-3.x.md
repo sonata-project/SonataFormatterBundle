@@ -1,6 +1,9 @@
 UPGRADE 3.x
 ===========
 
+UPGRADE FROM 3.1 to 3.2
+=======================
+
 ## Deprecated unspecified default_formatter configuration node
 
 The `default_formatter` configuration node will become required.

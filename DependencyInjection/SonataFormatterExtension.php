@@ -59,7 +59,7 @@ class SonataFormatterExtension extends Extension
         // NEXT_MAJOR: remove this if block
         if (!isset($config['default_formatter'])) {
             @trigger_error(
-                'Not setting the default_formatter configuration node is deprecated since 3.x,'.
+                'Not setting the default_formatter configuration node is deprecated since 3.2,'.
                 ' and will no longer be supported in 4.0.',
                 E_USER_DEPRECATED
             );
