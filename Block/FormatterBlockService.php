@@ -13,7 +13,7 @@ namespace Sonata\FormatterBundle\Block;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
-use Sonata\BlockBundle\Block\Service\AbstractBlockService;
+use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class FormatterBlockService extends AbstractBlockService
+class FormatterBlockService extends AbstractAdminBlockService
 {
     /**
      * {@inheritdoc}
