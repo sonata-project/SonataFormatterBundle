@@ -68,7 +68,11 @@ class SonataFormatterExtension extends Extension
         }
 
         if (!array_key_exists($config['default_formatter'], $config['formatters'])) {
-            throw new \InvalidArgumentException(sprintf('SonataFormatterBundle - Invalid default formatter : %s, available : %s', $config['default_formatter'], json_encode(array_keys($config['formatters']))));
+            throw new \InvalidArgumentException(sprintf(
+                'SonataFormatterBundle - Invalid default formatter : %s, available : %s',
+                $config['default_formatter'],
+                json_encode(array_keys($config['formatters']))
+            ));
         }
 
         $pool = $container->getDefinition('sonata.formatter.pool');
@@ -78,13 +82,24 @@ class SonataFormatterExtension extends Extension
             if (count($configuration['extensions']) == 0) {
                 $env = null;
             } else {
-                $env = new Reference($this->createEnvironment($container, $code, $container->getDefinition($configuration['service']), $configuration['extensions']));
+                $env = new Reference($this->createEnvironment(
+                    $container,
+                    $code,
+                    $container->getDefinition($configuration['service']),
+                    $configuration['extensions']
+                ));
             }
 
-            $pool->addMethodCall('add', array($code, new Reference($configuration['service']), $env));
+            $pool->addMethodCall(
+                'add',
+                array($code, new Reference($configuration['service']), $env)
+            );
         }
 
-        $container->setParameter('sonata.formatter.ckeditor.configuration.templates', $config['ckeditor']['templates']);
+        $container->setParameter(
+            'sonata.formatter.ckeditor.configuration.templates',
+            $config['ckeditor']['templates']
+        );
     }
 
     /**
