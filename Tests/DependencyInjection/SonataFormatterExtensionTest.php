@@ -68,6 +68,16 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('sonata.formatter.ckeditor.extension');
     }
 
+    public function testGetLoader()
+    {
+        $this->setParameter('kernel.bundles', array());
+        $this->load();
+        $this->assertInstanceOf(
+            '\Twig_LoaderInterface',
+            $this->container->get('sonata.formatter.twig.loader.text')
+        );
+    }
+
     /**
      * @group legacy
      */
@@ -94,6 +104,20 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
     {
         return array(
             new SonataFormatterExtension(),
+        );
+    }
+
+    protected function getMinimalConfiguration()
+    {
+        return array(
+            'default_formatter' => 'text',
+            'formatters' => array('text' => array(
+                'service' => 'sonata.formatter.text.text',
+                'extensions' => array(
+                    'sonata.formatter.twig.control_flow',
+                    'sonata.formatter.twig.gist',
+                ),
+            )),
         );
     }
 }
