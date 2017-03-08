@@ -17,7 +17,7 @@ use Sonata\FormatterBundle\DependencyInjection\SonataFormatterExtension;
 class SonataFormatterExtensionTest extends AbstractExtensionTestCase
 {
     /**
-     * NEXT_MAJOR: remove this method.
+     * NEXT_MAJOR: remove this method when dropping support for sf < 2.8.
      */
     protected function setUp()
     {
