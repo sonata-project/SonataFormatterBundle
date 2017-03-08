@@ -11,9 +11,10 @@
 
 namespace Sonata\FormatterBundle\Tests\Validator\Constraints;
 
+use Sonata\FormatterBundle\Tests\TestCase;
 use Sonata\FormatterBundle\Validator\Constraints\FormatterValidator;
 
-class FormatterValidatorTest extends \PHPUnit_Framework_TestCase
+class FormatterValidatorTest extends TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
@@ -22,7 +23,7 @@ class FormatterValidatorTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->context = $this->getMock(interface_exists('Symfony\Component\Validator\Context\ExecutionContextInterface') ? 'Symfony\Component\Validator\Context\ExecutionContextInterface' : 'Symfony\Component\Validator\ExecutionContextInterface');
+        $this->context = $this->createMock(interface_exists('Symfony\Component\Validator\Context\ExecutionContextInterface') ? 'Symfony\Component\Validator\Context\ExecutionContextInterface' : 'Symfony\Component\Validator\ExecutionContextInterface');
     }
 
     public function testValidator()
@@ -44,7 +45,7 @@ class FormatterValidatorTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(false));
 
         $message = 'Constraint message';
-        $constraint = $this->getMock('Sonata\FormatterBundle\Validator\Constraints\Formatter');
+        $constraint = $this->createMock('Sonata\FormatterBundle\Validator\Constraints\Formatter');
         $constraint->message = $message;
 
         $this->context->expects($this->once())
@@ -67,7 +68,7 @@ class FormatterValidatorTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(true));
 
         $message = 'Constraint message';
-        $constraint = $this->getMock('Sonata\FormatterBundle\Validator\Constraints\Formatter');
+        $constraint = $this->createMock('Sonata\FormatterBundle\Validator\Constraints\Formatter');
         $constraint->message = $message;
 
         $this->context->expects($this->never())

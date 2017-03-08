@@ -33,7 +33,8 @@ class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterf
      */
     public function transform($text)
     {
-        // Here we temporary changing twig environment loader to Chain loader with Twig_Loader_Array as first loader, which contains only one our template reference
+        // Here we temporary changing twig environment loader to Chain loader with Twig_Loader_Array as first loader,
+        // which contains only one our template reference
         $oldLoader = $this->twig->getLoader();
 
         $hash = sha1($text);
