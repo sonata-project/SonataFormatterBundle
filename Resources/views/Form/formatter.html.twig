@@ -90,6 +90,9 @@
 
             if (parent) {
                 parent.addClass('{{ format }}');
+                {% if format == 'rawhtml' %}
+                    parent.addClass('html');
+                {% endif %}
             }
 
         });
