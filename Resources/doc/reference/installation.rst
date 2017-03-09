@@ -52,6 +52,7 @@ Edit the ``config.yml`` file and add these lines:
 
 
     sonata_formatter:
+        default_formatter: text
         formatters:
             markdown:
                 service: sonata.formatter.text.markdown
