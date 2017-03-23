@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.1](https://github.com/sonata-project/SonataFormatterBundle/compare/3.2.0...3.2.1) - 2017-03-23
+### Added
+- Added compatibility with 4.0 of admin bundle and media bundle
+- Add compatibility with `egeloen/ckeditor-bundle 5.0`
+
+### Fixed
+- Fixed issue with saving `sonata.formatter.block.formatter` when using within SonataAdminBundle (or Sonata sandbox project)
+- Twig 2.0 compatibility
+- Use `request_stack`if it is present on `CkEditorAdminController`
+- Improve the way we set custom `formTheme` for twig
+- Port minor fixes already applied on `SonataMediaBundle` media list
+
 ## [3.2.0](https://github.com/sonata-project/SonataFormatterBundle/compare/3.1.0...3.2.0) - 2017-03-01
 ### Added
 - Added the possibility to use `templates` defined in your `ivory_ckeditor.yml` in the `sonata_formatter_type` and `sonata_simple_formatter_type`
