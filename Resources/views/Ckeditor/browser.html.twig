@@ -60,7 +60,7 @@ file that was distributed with this source code.
                 </div>
 
                 {% if element.children|length %}
-                    {{ _self.navigate_child(element.children, admin, false, current_category, depth + 1) }}
+                    {{ tree.navigate_child(element.children, admin, false, current_category, depth + 1) }}
                 {% endif %}
             </li>
         {% endfor %}
