@@ -53,9 +53,17 @@ class SimpleFormatterType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $ckeditorConfiguration = array(
-            'toolbar' => array_values($options['ckeditor_toolbar_icons']),
-        );
+        $defaultConfig = $this->configManager->getDefaultConfig();
+
+        if ($this->configManager->hasConfig($defaultConfig)) {
+            $ckeditorConfiguration = $this->configManager->getConfig($defaultConfig);
+        } else {
+            $ckeditorConfiguration = array();
+        }
+
+        if (!array_key_exists('toolbar', $ckeditorConfiguration)) {
+            $ckeditorConfiguration['toolbar'] = array_values($options['ckeditor_toolbar_icons']);
+        }
 
         if ($options['ckeditor_context']) {
             $contextConfig = $this->configManager->getConfig($options['ckeditor_context']);
