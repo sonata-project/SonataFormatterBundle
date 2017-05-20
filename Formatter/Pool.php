@@ -137,7 +137,13 @@ class Pool implements LoggerAwareInterface
         try {
             // apply custom extension
             if ($env) {
-                $text = $env->render($text);
+                // NEXT_MAJOR: remove this if block
+                if (class_exists('\Twig_Loader_Array')) {
+                    $template = $env->createTemplate($text);
+                    $text = $template->render(array());
+                } else {
+                    $text = $env->render($text);
+                }
             }
         } catch (Twig_Error_Syntax $e) {
             $this->logger->critical(sprintf(
