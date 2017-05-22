@@ -23,7 +23,18 @@ class PoolTest extends TestCase
         $env = $this->getMockBuilder('\Twig_Environment')
             ->disableOriginalConstructor()
             ->getMock();
-        $env->expects($this->once())->method('render')->will($this->returnValue('Salut'));
+
+        // NEXT_MAJOR: remove this if block
+        if (class_exists('\Twig_Loader_Array')) {
+            $template = $this->getMockBuilder('\Twig_Template')
+                ->disableOriginalConstructor()
+                ->getMock();
+            $template->expects($this->once())->method('render')->will($this->returnValue('Salut'));
+
+            $env->expects($this->once())->method('createTemplate')->will($this->returnValue($template));
+        } else {
+            $env->expects($this->once())->method('render')->will($this->returnValue('Salut'));
+        }
 
         $pool = $this->getPool();
 
@@ -50,7 +61,18 @@ class PoolTest extends TestCase
         $env = $this->getMockBuilder('\Twig_Environment')
             ->disableOriginalConstructor()
             ->getMock();
-        $env->expects($this->once())->method('render')->will($this->throwException(new \Twig_Error_Syntax('Error')));
+
+        // NEXT_MAJOR: remove this if block
+        if (class_exists('\Twig_Loader_Array')) {
+            $template = $this->getMockBuilder('\Twig_Template')
+                ->disableOriginalConstructor()
+                ->getMock();
+            $template->expects($this->once())->method('render')->will($this->throwException(new \Twig_Error_Syntax('Error')));
+
+            $env->expects($this->once())->method('createTemplate')->will($this->returnValue($template));
+        } else {
+            $env->expects($this->once())->method('render')->will($this->throwException(new \Twig_Error_Syntax('Error')));
+        }
 
         $pool = $this->getPool();
         $pool->add('foo', $formatter, $env);
@@ -64,7 +86,18 @@ class PoolTest extends TestCase
         $env = $this->getMockBuilder('\Twig_Environment')
             ->disableOriginalConstructor()
             ->getMock();
-        $env->expects($this->once())->method('render')->will($this->throwException(new \Twig_Sandbox_SecurityError('Error')));
+
+        // NEXT_MAJOR: remove this if block
+        if (class_exists('\Twig_Loader_Array')) {
+            $template = $this->getMockBuilder('\Twig_Template')
+                ->disableOriginalConstructor()
+                ->getMock();
+            $template->expects($this->once())->method('render')->will($this->throwException(new \Twig_Sandbox_SecurityError('Error')));
+
+            $env->expects($this->once())->method('createTemplate')->will($this->returnValue($template));
+        } else {
+            $env->expects($this->once())->method('render')->will($this->throwException(new \Twig_Sandbox_SecurityError('Error')));
+        }
 
         $pool = $this->getPool();
         $pool->add('foo', $formatter, $env);
@@ -80,7 +113,18 @@ class PoolTest extends TestCase
         $env = $this->getMockBuilder('\Twig_Environment')
             ->disableOriginalConstructor()
             ->getMock();
-        $env->expects($this->once())->method('render')->will($this->throwException(new \RuntimeException('Error')));
+
+        // NEXT_MAJOR: remove this if block
+        if (class_exists('\Twig_Loader_Array')) {
+            $template = $this->getMockBuilder('\Twig_Template')
+                ->disableOriginalConstructor()
+                ->getMock();
+            $template->expects($this->once())->method('render')->will($this->throwException(new \RuntimeException('Error')));
+
+            $env->expects($this->once())->method('createTemplate')->will($this->returnValue($template));
+        } else {
+            $env->expects($this->once())->method('render')->will($this->throwException(new \RuntimeException('Error')));
+        }
 
         $pool = $this->getPool();
         $pool->add('foo', $formatter, $env);
@@ -127,9 +171,18 @@ class PoolTest extends TestCase
         $env = $this->getMockBuilder('\Twig_Environment')
             ->disableOriginalConstructor()
             ->getMock();
-        $env->expects($this->once())->method('render')->will(
-            $this->throwException(new \Twig_Sandbox_SecurityError('Error'))
-        );
+
+        // NEXT_MAJOR: remove this if block
+        if (class_exists('\Twig_Loader_Array')) {
+            $template = $this->getMockBuilder('\Twig_Template')
+                ->disableOriginalConstructor()
+                ->getMock();
+            $template->expects($this->once())->method('render')->will($this->throwException(new \Twig_Sandbox_SecurityError('Error')));
+
+            $env->expects($this->once())->method('createTemplate')->will($this->returnValue($template));
+        } else {
+            $env->expects($this->once())->method('render')->will($this->throwException(new \Twig_Sandbox_SecurityError('Error')));
+        }
 
         $pool->add('foo', $formatter, $env);
         $logger->expects($this->once())->method('critical');
