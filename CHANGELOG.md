@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.2](https://github.com/sonata-project/SonataFormatterBundle/compare/3.2.1...3.2.2) - 2017-06-14
+### Fixed
+- Fix the files browser view
+- Fixed twig 2 bug when updating rich text
+
 ## [3.2.1](https://github.com/sonata-project/SonataFormatterBundle/compare/3.2.0...3.2.1) - 2017-03-23
 ### Added
 - Added compatibility with 4.0 of admin bundle and media bundle
