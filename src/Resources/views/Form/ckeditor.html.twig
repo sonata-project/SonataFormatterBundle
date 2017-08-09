@@ -6,6 +6,12 @@
 	{{ ckeditor_template(template_name, template) }}
 {% endfor %}
 
+{% if ckeditor_style_sets is defined %}
+    {% for style_set_name, style_set in ckeditor_style_sets %}
+        {{ ckeditor_styles_set(style_set_name, style_set) }}
+    {% endfor %}
+{% endif %}
+
 {{ ckeditor_widget(ckeditor_field_id, ckeditor_configuration, {
 	input_sync: true,
 }) }}
