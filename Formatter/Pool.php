@@ -139,7 +139,7 @@ class Pool implements LoggerAwareInterface
             if ($env) {
                 // NEXT_MAJOR: remove this if block
                 if (class_exists('\Twig_Loader_Array')) {
-                    $template = $env->createTemplate($text);
+                    $template = $env->createTemplate($text ?: '');
                     $text = $template->render(array());
                 } else {
                     $text = $env->render($text);
