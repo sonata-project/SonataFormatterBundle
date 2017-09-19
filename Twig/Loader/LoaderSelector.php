@@ -53,6 +53,22 @@ class LoaderSelector implements \Twig_LoaderInterface
     /**
      * {@inheritdoc}
      */
+    public function getSourceContext($name)
+    {
+        return $this->getLoader($name)->getSourceContext($name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function exists($name)
+    {
+        return $this->getLoader($name)->exists($name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCacheKey($name)
     {
         return $this->getLoader($name)->getCacheKey($name);
