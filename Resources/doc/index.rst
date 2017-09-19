@@ -3,10 +3,9 @@ Formatter Bundle
 
 The ``SonataFormatterBundle`` provides text helper to format text.
 
-Reference Guide
----------------
-
 .. toctree::
+   :caption: Reference Guide
+   :name: reference guide
    :maxdepth: 1
    :numbered:
 

@@ -79,10 +79,16 @@ class SonataFormatterExtension extends Extension
                 ));
             }
 
-            $pool->addMethodCall('add', array($code, new Reference($configuration['service']), $env));
+            $pool->addMethodCall(
+                'add',
+                array($code, new Reference($configuration['service']), $env)
+            );
         }
 
-        $container->setParameter('sonata.formatter.ckeditor.configuration.templates', $config['ckeditor']['templates']);
+        $container->setParameter(
+            'sonata.formatter.ckeditor.configuration.templates',
+            $config['ckeditor']['templates']
+        );
     }
 
     /**
@@ -95,7 +101,13 @@ class SonataFormatterExtension extends Extension
      */
     public function createEnvironment(ContainerBuilder $container, $code, Definition $formatter, array $extensions)
     {
-        $loader = new Definition('Twig_Loader_String');
+        $loader = new Definition('Twig_Loader_Array');
+
+        // NEXT_MAJOR: remove this if block
+        if (!class_exists('\Twig_Loader_Array')) {
+            $loader = new Definition('Twig_Loader_String');
+        }
+
         $loader->setPublic(false);
 
         $container->setDefinition(sprintf('sonata.formatter.twig.loader.%s', $code), $loader);
