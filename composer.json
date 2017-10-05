@@ -31,7 +31,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^1.1",
         "sllh/php-cs-fixer-styleci-bridge": "^2.0",
         "sonata-project/admin-bundle": "^3.1",
-        "sonata-project/media-bundle": "^3.5",
+        "sonata-project/media-bundle": "^3.6",
         "symfony/phpunit-bridge": "^3.3",
         "symfony/validator": "^2.8 || ^3.2"
     },

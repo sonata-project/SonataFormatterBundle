@@ -46,12 +46,16 @@ class SimpleFormatterTypeTest extends TestCase
         $type->buildView($view, $form, [
             'format' => 'format',
             'ckeditor_context' => 'context',
+            'ckeditor_image_format' => 'format',
             'ckeditor_basepath' => '',
             'ckeditor_plugins' => [],
             'ckeditor_templates' => [],
             'ckeditor_toolbar_icons' => [],
         ]);
 
-        $this->assertSame($view->vars['ckeditor_configuration'], ['toolbar' => ['Button1']]);
+        $this->assertSame(
+            $view->vars['ckeditor_configuration'],
+            ['toolbar' => ['Button1'], 'filebrowserImageUploadRouteParameters' => ['format' => 'format']]
+        );
     }
 }
