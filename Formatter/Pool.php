@@ -23,7 +23,7 @@ class Pool implements LoggerAwareInterface
     /**
      * @var array
      */
-    protected $formatters = array();
+    protected $formatters = [];
 
     /**
      * @var string
@@ -94,7 +94,7 @@ class Pool implements LoggerAwareInterface
      */
     public function add($code, FormatterInterface $formatter, Twig_Environment $env = null)
     {
-        $this->formatters[$code] = array($formatter, $env);
+        $this->formatters[$code] = [$formatter, $env];
     }
 
     /**
@@ -140,7 +140,7 @@ class Pool implements LoggerAwareInterface
                 // NEXT_MAJOR: remove this if block
                 if (class_exists('\Twig_Loader_Array')) {
                     $template = $env->createTemplate($text ?: '');
-                    $text = $template->render(array());
+                    $text = $template->render([]);
                 } else {
                     $text = $env->render($text);
                 }
@@ -150,19 +150,19 @@ class Pool implements LoggerAwareInterface
                 '[FormatterBundle::transform] %s - Error while parsing twig template : %s',
                 $code,
                 $e->getMessage()
-            ), array(
+            ), [
                 'text' => $text,
                 'exception' => $e,
-            ));
+            ]);
         } catch (Twig_Sandbox_SecurityError $e) {
             $this->logger->critical(sprintf(
                 '[FormatterBundle::transform] %s - the user try an non white-listed keyword : %s',
                 $code,
                 $e->getMessage()
-            ), array(
+            ), [
                 'text' => $text,
                 'exception' => $e,
-            ));
+            ]);
         }
 
         return $text;

@@ -21,7 +21,7 @@ class GistNode extends \Twig_Node
      */
     public function __construct(\Twig_Node_Expression $gist, \Twig_Node_Expression $file, $lineno, $tag = null)
     {
-        parent::__construct(array('gist' => $gist, 'file' => $file), array(), $lineno, $tag);
+        parent::__construct(['gist' => $gist, 'file' => $file], [], $lineno, $tag);
     }
 
     /**

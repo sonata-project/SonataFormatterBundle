@@ -20,7 +20,7 @@ abstract class BaseExtension extends \Twig_Extension implements ExtensionInterfa
      */
     public function getAllowedFilters()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -28,7 +28,7 @@ abstract class BaseExtension extends \Twig_Extension implements ExtensionInterfa
      */
     public function getAllowedTags()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -36,7 +36,7 @@ abstract class BaseExtension extends \Twig_Extension implements ExtensionInterfa
      */
     public function getAllowedFunctions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -44,7 +44,7 @@ abstract class BaseExtension extends \Twig_Extension implements ExtensionInterfa
      */
     public function getAllowedProperties()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -52,7 +52,7 @@ abstract class BaseExtension extends \Twig_Extension implements ExtensionInterfa
      */
     public function getAllowedMethods()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -60,7 +60,7 @@ abstract class BaseExtension extends \Twig_Extension implements ExtensionInterfa
      */
     public function initRuntime(Twig_Environment $environment)
     {
-        return array();
+        return [];
     }
 
     /**
@@ -68,7 +68,7 @@ abstract class BaseExtension extends \Twig_Extension implements ExtensionInterfa
      */
     public function getTokenParsers()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -76,7 +76,7 @@ abstract class BaseExtension extends \Twig_Extension implements ExtensionInterfa
      */
     public function getNodeVisitors()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -84,7 +84,7 @@ abstract class BaseExtension extends \Twig_Extension implements ExtensionInterfa
      */
     public function getFilters()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -92,7 +92,7 @@ abstract class BaseExtension extends \Twig_Extension implements ExtensionInterfa
      */
     public function getTests()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -100,7 +100,7 @@ abstract class BaseExtension extends \Twig_Extension implements ExtensionInterfa
      */
     public function getFunctions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -108,7 +108,7 @@ abstract class BaseExtension extends \Twig_Extension implements ExtensionInterfa
      */
     public function getOperators()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -116,6 +116,6 @@ abstract class BaseExtension extends \Twig_Extension implements ExtensionInterfa
      */
     public function getGlobals()
     {
-        return array();
+        return [];
     }
 }
