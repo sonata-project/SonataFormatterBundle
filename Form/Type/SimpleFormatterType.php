@@ -54,9 +54,9 @@ class SimpleFormatterType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $ckeditorConfiguration = array(
+        $ckeditorConfiguration = [
             'toolbar' => array_values($options['ckeditor_toolbar_icons']),
-        );
+        ];
 
         if ($options['ckeditor_context']) {
             $contextConfig = $this->configManager->getConfig($options['ckeditor_context']);
@@ -86,31 +86,31 @@ class SimpleFormatterType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'ckeditor_toolbar_icons' => array(array(
+        $resolver->setDefaults([
+            'ckeditor_toolbar_icons' => [[
                  'Bold', 'Italic', 'Underline',
                  '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
                  '-', 'Undo', 'Redo',
                  '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
                  '-', 'Blockquote',
-                 '-', 'Image', 'Link', 'Unlink', 'Table', ),
-                 array('Maximize', 'Source'),
-            ),
+                 '-', 'Image', 'Link', 'Unlink', 'Table', ],
+                 ['Maximize', 'Source'],
+            ],
             'ckeditor_basepath' => 'bundles/sonataformatter/vendor/ckeditor',
             'ckeditor_context' => null,
-            'ckeditor_plugins' => array(),
-            'ckeditor_templates' => array(),
-            'format_options' => array(
-                'attr' => array(
+            'ckeditor_plugins' => [],
+            'ckeditor_templates' => [],
+            'format_options' => [
+                'attr' => [
                     'class' => 'span10 col-sm-10 col-md-10',
                     'rows' => 20,
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
 
-        $resolver->setRequired(array(
+        $resolver->setRequired([
             'format',
-        ));
+        ]);
     }
 
     /**

@@ -25,7 +25,7 @@ abstract class BaseProxyExtension extends \Twig_Extension implements ExtensionIn
      */
     public function getAllowedFilters()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -33,7 +33,7 @@ abstract class BaseProxyExtension extends \Twig_Extension implements ExtensionIn
      */
     public function getAllowedTags()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -41,7 +41,7 @@ abstract class BaseProxyExtension extends \Twig_Extension implements ExtensionIn
      */
     public function getAllowedFunctions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -49,7 +49,7 @@ abstract class BaseProxyExtension extends \Twig_Extension implements ExtensionIn
      */
     public function getAllowedProperties()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -57,7 +57,7 @@ abstract class BaseProxyExtension extends \Twig_Extension implements ExtensionIn
      */
     public function getAllowedMethods()
     {
-        return array();
+        return [];
     }
 
     /**

@@ -41,8 +41,8 @@ class LoaderSelector implements \Twig_LoaderInterface
         $source = $this->getLoader($name)->getSource($name);
 
         if ($this->isFile($name)) {
-            $from = array('{#', '{{', '{%', '%}', '}}', '#}');
-            $to = array('<#', '<%=', '<%', '%>', '%>', '#>');
+            $from = ['{#', '{{', '{%', '%}', '}}', '#}'];
+            $to = ['<#', '<%=', '<%', '%>', '%>', '#>'];
 
             $source = str_replace($from, $to, $source);
         }

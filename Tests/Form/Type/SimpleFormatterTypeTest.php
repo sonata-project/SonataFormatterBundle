@@ -23,7 +23,7 @@ class SimpleFormatterTypeTest extends TestCase
 
         $type = new SimpleFormatterType($configManager);
 
-        $options = array('format' => 'format');
+        $options = ['format' => 'format'];
 
         $type->buildForm($formBuilder, $options);
     }
@@ -37,21 +37,21 @@ class SimpleFormatterTypeTest extends TestCase
         $configManager->expects($this->once())
             ->method('getConfig')
             ->with('context')
-            ->will($this->returnValue(array('toolbar' => array('Button1'))));
+            ->will($this->returnValue(['toolbar' => ['Button1']]));
         $view->vars['id'] = 'SomeId';
         $view->vars['name'] = 'SomeName';
 
         $type = new SimpleFormatterType($configManager);
 
-        $type->buildView($view, $form, array(
+        $type->buildView($view, $form, [
             'format' => 'format',
             'ckeditor_context' => 'context',
             'ckeditor_basepath' => '',
-            'ckeditor_plugins' => array(),
-            'ckeditor_templates' => array(),
-            'ckeditor_toolbar_icons' => array(),
-        ));
+            'ckeditor_plugins' => [],
+            'ckeditor_templates' => [],
+            'ckeditor_toolbar_icons' => [],
+        ]);
 
-        $this->assertSame($view->vars['ckeditor_configuration'], array('toolbar' => array('Button1')));
+        $this->assertSame($view->vars['ckeditor_configuration'], ['toolbar' => ['Button1']]);
     }
 }

@@ -53,7 +53,7 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
     /**
      * @var ExtensionInterface[]
      */
-    protected $extensions = array();
+    protected $extensions = [];
 
     /**
      * @var ContainerInterface
@@ -64,7 +64,7 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
      * @param ContainerInterface $container
      * @param array              $extensions
      */
-    public function __construct(ContainerInterface $container, array $extensions = array())
+    public function __construct(ContainerInterface $container, array $extensions = [])
     {
         $this->container = $container;
         $this->extensions = $extensions;
@@ -138,7 +138,7 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
         $allowed = false;
         foreach ($this->allowedProperties as $class => $properties) {
             if ($obj instanceof $class) {
-                $allowed = in_array($property, is_array($properties) ? $properties : array($properties));
+                $allowed = in_array($property, is_array($properties) ? $properties : [$properties]);
 
                 break;
             }
@@ -161,11 +161,11 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
             return;
         }
 
-        $this->allowedTags = array();
-        $this->allowedFilters = array();
-        $this->allowedFunctions = array();
-        $this->allowedMethods = array();
-        $this->allowedProperties = array();
+        $this->allowedTags = [];
+        $this->allowedFilters = [];
+        $this->allowedFunctions = [];
+        $this->allowedMethods = [];
+        $this->allowedProperties = [];
 
         foreach ($this->extensions as $id) {
             $extension = $this->container->get($id);
