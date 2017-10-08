@@ -20,7 +20,7 @@ class GistExtension extends BaseExtension
      */
     public function getAllowedFilters()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -28,9 +28,9 @@ class GistExtension extends BaseExtension
      */
     public function getAllowedTags()
     {
-        return array(
+        return [
             'gist',
-        );
+        ];
     }
 
     /**
@@ -38,7 +38,7 @@ class GistExtension extends BaseExtension
      */
     public function getAllowedFunctions()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -46,9 +46,9 @@ class GistExtension extends BaseExtension
      */
     public function getTokenParsers()
     {
-        return array(
+        return [
             new GistTokenParser(),
-        );
+        ];
     }
 
     /**

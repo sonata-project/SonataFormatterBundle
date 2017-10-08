@@ -40,7 +40,7 @@ class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterf
         $hash = sha1($text);
 
         $chainLoader = new \Twig_Loader_Chain();
-        $chainLoader->addLoader(new \Twig_Loader_Array(array($hash => $text)));
+        $chainLoader->addLoader(new \Twig_Loader_Array([$hash => $text]));
         $chainLoader->addLoader($oldLoader);
 
         $this->twig->setLoader($chainLoader);
@@ -65,6 +65,6 @@ class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterf
      */
     public function getExtensions()
     {
-        return array();
+        return [];
     }
 }

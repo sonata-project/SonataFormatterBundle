@@ -36,8 +36,8 @@ class TextFormatterExtension extends \Twig_Extension
      */
     public function getTokenParsers()
     {
-        return array(
-        );
+        return [
+        ];
     }
 
     /**
@@ -45,9 +45,9 @@ class TextFormatterExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('format_text', array($this, 'transform')),
-        );
+        return [
+            new \Twig_SimpleFilter('format_text', [$this, 'transform']),
+        ];
     }
 
     /**

@@ -22,12 +22,12 @@ class FormatterBlockServiceTest extends AbstractBlockServiceTestCase
     {
         $block = new Block();
 
-        $blockContext = new BlockContext($block, array(
+        $blockContext = new BlockContext($block, [
             'format' => 'richhtml',
             'rawContent' => '<b>Insert your custom content here</b>',
             'content' => '<b>Insert your custom content here</b>',
             'template' => 'SonataFormatterBundle:Block:block_formatter.html.twig',
-        ));
+        ]);
 
         $blockService = new FormatterBlockService('block.service', $this->templating);
         $blockService->execute($blockContext);
@@ -43,11 +43,11 @@ class FormatterBlockServiceTest extends AbstractBlockServiceTestCase
         $blockService = new FormatterBlockService('block.service', $this->templating);
         $blockContext = $this->getBlockContext($blockService);
 
-        $this->assertSettings(array(
+        $this->assertSettings([
             'format' => 'richhtml',
             'rawContent' => '<b>Insert your custom content here</b>',
             'content' => '<b>Insert your custom content here</b>',
             'template' => 'SonataFormatterBundle:Block:block_formatter.html.twig',
-        ), $blockContext);
+        ], $blockContext);
     }
 }

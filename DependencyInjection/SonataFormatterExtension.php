@@ -92,7 +92,7 @@ class SonataFormatterExtension extends Extension
 
             $pool->addMethodCall(
                 'add',
-                array($code, new Reference($configuration['service']), $env)
+                [$code, new Reference($configuration['service']), $env]
             );
         }
 
@@ -123,46 +123,46 @@ class SonataFormatterExtension extends Extension
 
         $container->setDefinition(sprintf('sonata.formatter.twig.loader.%s', $code), $loader);
 
-        $loaderSelector = new Definition('Sonata\FormatterBundle\Twig\Loader\LoaderSelector', array(
+        $loaderSelector = new Definition('Sonata\FormatterBundle\Twig\Loader\LoaderSelector', [
             new Reference(sprintf('sonata.formatter.twig.loader.%s', $code)),
             new Reference('twig.loader'),
-        ));
+        ]);
         $loaderSelector->setPublic(false);
 
-        $env = new Definition('Twig_Environment', array($loaderSelector, array(
+        $env = new Definition('Twig_Environment', [$loaderSelector, [
             'debug' => false,
             'strict_variables' => false,
             'charset' => 'UTF-8',
-        )));
+        ]]);
         $env->setPublic(false);
 
         $container->setDefinition(sprintf('sonata.formatter.twig.env.%s', $code), $env);
 
-        $sandboxPolicy = new Definition('Sonata\FormatterBundle\Twig\SecurityPolicyContainerAware', array(new Reference('service_container'), $extensions));
+        $sandboxPolicy = new Definition('Sonata\FormatterBundle\Twig\SecurityPolicyContainerAware', [new Reference('service_container'), $extensions]);
         $sandboxPolicy->setPublic(false);
         $container->setDefinition(sprintf('sonata.formatter.twig.sandbox.%s.policy', $code), $sandboxPolicy);
 
-        $sandbox = new Definition('Twig_Extension_Sandbox', array($sandboxPolicy, true));
+        $sandbox = new Definition('Twig_Extension_Sandbox', [$sandboxPolicy, true]);
         $sandbox->setPublic(false);
 
         $container->setDefinition(sprintf('sonata.formatter.twig.sandbox.%s', $code), $sandbox);
 
-        $env->addMethodCall('addExtension', array(new Reference(sprintf('sonata.formatter.twig.sandbox.%s', $code))));
+        $env->addMethodCall('addExtension', [new Reference(sprintf('sonata.formatter.twig.sandbox.%s', $code))]);
 
         foreach ($extensions as $extension) {
-            $env->addMethodCall('addExtension', array(new Reference($extension)));
+            $env->addMethodCall('addExtension', [new Reference($extension)]);
         }
 
-        $lexer = new Definition('Twig_Lexer', array(new Reference(sprintf('sonata.formatter.twig.env.%s', $code)), array(
-            'tag_comment' => array('<#', '#>'),
-            'tag_block' => array('<%', '%>'),
-            'tag_variable' => array('<%=', '%>'),
-        )));
+        $lexer = new Definition('Twig_Lexer', [new Reference(sprintf('sonata.formatter.twig.env.%s', $code)), [
+            'tag_comment' => ['<#', '#>'],
+            'tag_block' => ['<%', '%>'],
+            'tag_variable' => ['<%=', '%>'],
+        ]]);
         $lexer->setPublic(false);
 
         $container->setDefinition(new Reference(sprintf('sonata.formatter.twig.lexer.%s', $code)), $lexer);
 
-        $env->addMethodCall('setLexer', array(new Reference(sprintf('sonata.formatter.twig.lexer.%s', $code))));
+        $env->addMethodCall('setLexer', [new Reference(sprintf('sonata.formatter.twig.lexer.%s', $code))]);
 
         return sprintf('sonata.formatter.twig.env.%s', $code);
     }

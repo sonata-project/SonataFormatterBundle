@@ -62,10 +62,10 @@ class CkeditorAdminController extends MediaAdminController
             $datagrid->setValue('category', null, $rootCategory->getId());
         }
         if ($this->has('sonata.media.manager.category') && $request->get('category')) {
-            $category = $this->get('sonata.media.manager.category')->findOneBy(array(
+            $category = $this->get('sonata.media.manager.category')->findOneBy([
                 'id' => (int) $request->get('category'),
                 'context' => $context,
-            ));
+            ]);
 
             if (!empty($category)) {
                 $datagrid->setValue('category', null, $category->getId());
@@ -74,7 +74,7 @@ class CkeditorAdminController extends MediaAdminController
             }
         }
 
-        $formats = array();
+        $formats = [];
         foreach ($datagrid->getResults() as $media) {
             $formats[$media->getId()] = $this->get('sonata.media.pool')->getFormatNamesByContext($media->getContext());
         }
@@ -83,13 +83,13 @@ class CkeditorAdminController extends MediaAdminController
 
         $this->setFormTheme($formView, $this->admin->getFilterTheme());
 
-        return $this->render($this->getTemplate('browser'), array(
+        return $this->render($this->getTemplate('browser'), [
             'action' => 'browser',
             'form' => $formView,
             'datagrid' => $datagrid,
             'root_category' => $rootCategory,
             'formats' => $formats,
-        ));
+        ]);
     }
 
     /**
@@ -130,10 +130,10 @@ class CkeditorAdminController extends MediaAdminController
         $mediaManager->save($media, $context, $provider);
         $this->admin->createObjectSecurity($media);
 
-        return $this->render($this->getTemplate('upload'), array(
+        return $this->render($this->getTemplate('upload'), [
             'action' => 'list',
             'object' => $media,
-        ));
+        ]);
     }
 
     /**

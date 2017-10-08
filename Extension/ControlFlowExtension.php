@@ -18,9 +18,9 @@ class ControlFlowExtension extends BaseExtension
      */
     public function getAllowedFilters()
     {
-        return array(
+        return [
             'escape',
-        );
+        ];
     }
 
     /**
@@ -28,10 +28,10 @@ class ControlFlowExtension extends BaseExtension
      */
     public function getAllowedTags()
     {
-        return array(
+        return [
             'if',
             'for',
-        );
+        ];
     }
 
     /**
@@ -39,7 +39,7 @@ class ControlFlowExtension extends BaseExtension
      */
     public function getAllowedFunctions()
     {
-        return array();
+        return [];
     }
 
     /**
