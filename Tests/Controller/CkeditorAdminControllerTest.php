@@ -79,7 +79,8 @@ class CkeditorAdminControllerTest extends TestCase
 
         $response = $this->controller->browserAction();
 
-        $this->assertSame('renderResponse', $response);
+        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
+        $this->assertSame('renderResponse', $response->getContent());
     }
 
     public function testUpload()
@@ -106,7 +107,8 @@ class CkeditorAdminControllerTest extends TestCase
 
         $response = $this->controller->uploadAction();
 
-        $this->assertSame('renderResponse', $response);
+        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
+        $this->assertSame('renderResponse', $response->getContent());
     }
 
     private function configureCRUDController()
@@ -166,6 +168,7 @@ class CkeditorAdminControllerTest extends TestCase
     private function configureRender($template, $data, $rendered)
     {
         $templating = $this->prophesize('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $response = $this->prophesize('Symfony\Component\HttpFoundation\Response');
         $pool = $this->prophesize('Sonata\MediaBundle\Provider\Pool');
 
         $this->admin->getPersistentParameters()->willReturn(array('param' => 'param'));
@@ -174,6 +177,8 @@ class CkeditorAdminControllerTest extends TestCase
         $this->container->get('sonata.media.pool')->willReturn($pool->reveal());
         $this->container->getParameter('sonata.formatter.ckeditor.configuration.templates')
             ->willReturn(array('browser' => $template, 'upload' => $template));
-        $templating->renderResponse($template, $data, null)->willReturn($rendered);
+        $response->getContent()->willReturn($rendered);
+        $templating->renderResponse($template, $data, null)->willReturn($response->reveal());
+        $templating->render($template, $data)->willReturn($rendered);
     }
 }
