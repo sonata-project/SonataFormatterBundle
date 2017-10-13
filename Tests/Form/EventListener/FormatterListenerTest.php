@@ -26,11 +26,11 @@ class FormatterListenerTest extends TestCase
 
         $listener = new FormatterListener($pool, '[format]', '[source]', '[target]');
 
-        $event = new FormEvent($this->createMock('Symfony\Component\Form\Test\FormInterface'), array(
+        $event = new FormEvent($this->createMock('Symfony\Component\Form\Test\FormInterface'), [
             'format' => 'error',
             'source' => 'data',
             'target' => null,
-        ));
+        ]);
 
         $listener->postSubmit($event);
     }
@@ -47,19 +47,19 @@ class FormatterListenerTest extends TestCase
 
         $listener = new FormatterListener($pool, '[format]', '[source]', '[target]');
 
-        $event = new FormEvent($this->createMock('Symfony\Component\Form\Test\FormInterface'), array(
+        $event = new FormEvent($this->createMock('Symfony\Component\Form\Test\FormInterface'), [
             'format' => 'myformat',
             'source' => 'data',
             'target' => null,
-        ));
+        ]);
 
         $listener->postSubmit($event);
 
-        $expected = array(
+        $expected = [
             'format' => 'myformat',
             'source' => 'data',
             'target' => 'DATA',
-        );
+        ];
 
         $this->assertSame($expected, $event->getData());
     }

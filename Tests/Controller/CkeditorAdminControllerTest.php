@@ -55,31 +55,32 @@ class CkeditorAdminControllerTest extends TestCase
         $datagrid->setValue('context', null, 'another_context')->shouldBeCalled();
         $datagrid->setValue('category', null, 1)->shouldBeCalled();
         $datagrid->setValue('providerName', null, 'provider')->shouldBeCalled();
-        $datagrid->getResults()->willReturn(array());
+        $datagrid->getResults()->willReturn([]);
         $datagrid->getForm()->willReturn($form->reveal());
         $pool->getDefaultContext()->willReturn('context');
         $categoryManager->getRootCategory('another_context')->willReturn($category->reveal());
-        $categoryManager->findOneBy(array(
+        $categoryManager->findOneBy([
             'id' => 2,
             'context' => 'another_context',
-        ))->willReturn($category->reveal());
+        ])->willReturn($category->reveal());
         $category->getId()->willReturn(1);
         $form->createView()->willReturn($formView->reveal());
         $this->container->get('sonata.media.pool')->willReturn($pool->reveal());
         $this->container->has('sonata.media.manager.category')->willReturn(true);
         $this->container->get('sonata.media.manager.category')->willReturn($categoryManager->reveal());
-        $this->container->getParameter('kernel.bundles')->willReturn(array('SonataMediaBundle' => true));
+        $this->container->getParameter('kernel.bundles')->willReturn(['SonataMediaBundle' => true]);
         $this->admin->checkAccess('list')->shouldBeCalled();
         $this->admin->getDatagrid()->willReturn($datagrid->reveal());
         $this->admin->getPersistentParameter('context', 'context')->willReturn('another_context');
         $this->admin->getPersistentParameter('provider')->willReturn('provider');
         $this->admin->getFilterTheme()->willReturn('filterTheme');
-        $this->request->get('filter')->willReturn(array());
+        $this->request->get('filter')->willReturn([]);
         $this->request->get('category')->willReturn(2);
 
         $response = $this->controller->browserAction();
 
-        $this->assertSame('renderResponse', $response);
+        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
+        $this->assertSame('renderResponse', $response->getContent());
     }
 
     public function testUpload()
@@ -97,7 +98,7 @@ class CkeditorAdminControllerTest extends TestCase
         $this->admin->checkAccess('create')->shouldBeCalled();
         $this->admin->createObjectSecurity($media->reveal())->shouldBeCalled();
         $this->container->get('sonata.media.manager.media')->willReturn($mediaManager->reveal());
-        $this->container->getParameter('kernel.bundles')->willReturn(array('SonataMediaBundle' => true));
+        $this->container->getParameter('kernel.bundles')->willReturn(['SonataMediaBundle' => true]);
         $this->container->get('sonata.media.pool')->willReturn($pool->reveal());
         $this->request->get('provider')->willReturn('provider');
         $this->request->isMethod('POST')->willReturn(true);
@@ -106,7 +107,8 @@ class CkeditorAdminControllerTest extends TestCase
 
         $response = $this->controller->uploadAction();
 
-        $this->assertSame('renderResponse', $response);
+        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
+        $this->assertSame('renderResponse', $response->getContent());
     }
 
     private function configureCRUDController()
@@ -166,14 +168,17 @@ class CkeditorAdminControllerTest extends TestCase
     private function configureRender($template, $data, $rendered)
     {
         $templating = $this->prophesize('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $response = $this->prophesize('Symfony\Component\HttpFoundation\Response');
         $pool = $this->prophesize('Sonata\MediaBundle\Provider\Pool');
 
-        $this->admin->getPersistentParameters()->willReturn(array('param' => 'param'));
+        $this->admin->getPersistentParameters()->willReturn(['param' => 'param']);
         $this->container->has('templating')->willReturn(true);
         $this->container->get('templating')->willReturn($templating->reveal());
         $this->container->get('sonata.media.pool')->willReturn($pool->reveal());
         $this->container->getParameter('sonata.formatter.ckeditor.configuration.templates')
-            ->willReturn(array('browser' => $template, 'upload' => $template));
-        $templating->renderResponse($template, $data, null)->willReturn($rendered);
+            ->willReturn(['browser' => $template, 'upload' => $template]);
+        $response->getContent()->willReturn($rendered);
+        $templating->renderResponse($template, $data, null)->willReturn($response->reveal());
+        $templating->render($template, $data)->willReturn($rendered);
     }
 }

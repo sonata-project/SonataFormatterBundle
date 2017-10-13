@@ -30,38 +30,38 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
 
     public function testLoadWithMinimalDocumentedConfig()
     {
-        $this->setParameter('kernel.bundles', array());
-        $this->load(array(
+        $this->setParameter('kernel.bundles', []);
+        $this->load([
             'default_formatter' => 'text',
-            'formatters' => array('text' => array(
+            'formatters' => ['text' => [
                 'service' => 'sonata.formatter.text.text',
-                'extensions' => array(
+                'extensions' => [
                     'sonata.formatter.twig.control_flow',
                     'sonata.formatter.twig.gist',
-                ),
-            )),
-        ));
+                ],
+            ]],
+        ]);
         $this->assertContainerBuilderHasService('sonata.formatter.pool');
     }
 
     public function testWithOptionalBundles()
     {
-        $this->setParameter('kernel.bundles', array_flip(array(
+        $this->setParameter('kernel.bundles', array_flip([
             'IvoryCKEditorBundle',
             'SonataBlockBundle',
             'SonataMediaBundle',
-        )));
+        ]));
 
-        $this->load(array(
+        $this->load([
             'default_formatter' => 'text',
-            'formatters' => array('text' => array(
+            'formatters' => ['text' => [
                 'service' => 'sonata.formatter.text.text',
-                'extensions' => array(
+                'extensions' => [
                     'sonata.formatter.twig.control_flow',
                     'sonata.formatter.twig.gist',
-                ),
-            )),
-        ));
+                ],
+            ]],
+        ]);
 
         $this->assertContainerBuilderHasService('sonata.formatter.form.type.selector');
         $this->assertContainerBuilderHasService('sonata.formatter.block.formatter');
@@ -70,7 +70,7 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
 
     public function testGetLoader()
     {
-        $this->setParameter('kernel.bundles', array());
+        $this->setParameter('kernel.bundles', []);
         $this->load();
         $this->assertInstanceOf(
             '\Twig_LoaderInterface',
@@ -83,16 +83,16 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
      */
     public function testLoadWithoutDefaultFormatter()
     {
-        $this->setParameter('kernel.bundles', array());
-        $this->load(array(
-            'formatters' => array('text' => array(
+        $this->setParameter('kernel.bundles', []);
+        $this->load([
+            'formatters' => ['text' => [
                 'service' => 'sonata.formatter.text.text',
-                'extensions' => array(
+                'extensions' => [
                     'sonata.formatter.twig.control_flow',
                     'sonata.formatter.twig.gist',
-                ),
-            )),
-        ));
+                ],
+            ]],
+        ]);
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             'sonata.formatter.pool',
             0,
@@ -102,22 +102,22 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
 
     protected function getContainerExtensions()
     {
-        return array(
+        return [
             new SonataFormatterExtension(),
-        );
+        ];
     }
 
     protected function getMinimalConfiguration()
     {
-        return array(
+        return [
             'default_formatter' => 'text',
-            'formatters' => array('text' => array(
+            'formatters' => ['text' => [
                 'service' => 'sonata.formatter.text.text',
-                'extensions' => array(
+                'extensions' => [
                     'sonata.formatter.twig.control_flow',
                     'sonata.formatter.twig.gist',
-                ),
-            )),
-        );
+                ],
+            ]],
+        ];
     }
 }

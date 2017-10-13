@@ -126,7 +126,7 @@ class FormatterType extends AbstractType
                 $options['target_field']
             );
 
-            $options['event_dispatcher']->addListener(FormEvents::SUBMIT, array($listener, 'postSubmit'));
+            $options['event_dispatcher']->addListener(FormEvents::SUBMIT, [$listener, 'postSubmit']);
         }
     }
 
@@ -156,7 +156,7 @@ class FormatterType extends AbstractType
         if ($this->configManager->hasConfig($defaultConfig)) {
             $ckeditorConfiguration = $this->configManager->getConfig($defaultConfig);
         } else {
-            $ckeditorConfiguration = array();
+            $ckeditorConfiguration = [];
         }
 
         if (!array_key_exists('toolbar', $ckeditorConfiguration)) {
@@ -192,50 +192,50 @@ class FormatterType extends AbstractType
         $pool = $this->pool;
         $translator = $this->translator;
 
-        $formatters = array();
+        $formatters = [];
         foreach ($pool->getFormatters() as $code => $instance) {
-            $formatters[$code] = $translator->trans($code, array(), 'SonataFormatterBundle');
+            $formatters[$code] = $translator->trans($code, [], 'SonataFormatterBundle');
         }
 
-        $formatFieldOptions = array(
+        $formatFieldOptions = [
             'choices' => $formatters,
-        );
+        ];
 
         if (count($formatters) > 1) {
             $formatFieldOptions['choice_translation_domain'] = false;
         }
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'inherit_data' => true,
             'event_dispatcher' => null,
             'format_field' => null,
-            'ckeditor_toolbar_icons' => array(array(
+            'ckeditor_toolbar_icons' => [[
                  'Bold', 'Italic', 'Underline',
                  '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
                  '-', 'Undo', 'Redo',
                  '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
                  '-', 'Blockquote',
-                 '-', 'Image', 'Link', 'Unlink', 'Table', ),
-                 array('Maximize', 'Source'),
-            ),
+                 '-', 'Image', 'Link', 'Unlink', 'Table', ],
+                 ['Maximize', 'Source'],
+            ],
             'ckeditor_basepath' => 'bundles/sonataformatter/vendor/ckeditor',
             'ckeditor_context' => null,
-            'ckeditor_plugins' => array(),
-            'ckeditor_templates' => array(),
+            'ckeditor_plugins' => [],
+            'ckeditor_templates' => [],
             'format_field_options' => $formatFieldOptions,
             'source_field' => null,
-            'source_field_options' => array(
-                'attr' => array('class' => 'span10 col-sm-10 col-md-10', 'rows' => 20),
-            ),
+            'source_field_options' => [
+                'attr' => ['class' => 'span10 col-sm-10 col-md-10', 'rows' => 20],
+            ],
             'target_field' => null,
             'listener' => true,
-        ));
+        ]);
 
-        $resolver->setRequired(array(
+        $resolver->setRequired([
             'format_field',
             'source_field',
             'target_field',
-        ));
+        ]);
     }
 
     /**
