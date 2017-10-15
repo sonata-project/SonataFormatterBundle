@@ -37,9 +37,11 @@ And initialize a form type:
 .. code-block:: php
 
     <?php
+    use Sonata\FormatterBundle\Form\Type\FormatterType;
+
     $formBuilder
         ->add('rawContent') // source content
-        ->add('contentFormatter', 'sonata_formatter_type', array(
+        ->add('contentFormatter', FormatterType::class, array(
             'source_field' => 'rawContent',
             'target_field' => 'content'
         ))

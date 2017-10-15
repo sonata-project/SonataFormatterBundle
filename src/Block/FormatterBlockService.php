@@ -15,7 +15,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\CoreBundle\Form\Type\ImmutableArrayType;
 use Sonata\CoreBundle\Model\Metadata;
+use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -41,9 +43,9 @@ class FormatterBlockService extends AbstractAdminBlockService
      */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
-        $formMapper->add('settings', 'sonata_type_immutable_array', [
+        $formMapper->add('settings', ImmutableArrayType::class, [
             'keys' => [
-                ['content', 'sonata_formatter_type', function (FormBuilderInterface $formBuilder) {
+                ['content', FormatterType::class, function (FormBuilderInterface $formBuilder) {
                     return [
                         'event_dispatcher' => $formBuilder->getEventDispatcher(),
                         'format_field' => ['format', '[format]'],

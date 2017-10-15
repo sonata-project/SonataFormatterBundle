@@ -18,6 +18,9 @@ use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
@@ -95,7 +98,7 @@ class FormatterType extends AbstractType
             $options['source_field_options']['property_path'] = $sourceField;
         }
 
-        $builder->add($formatField, 'choice', $options['format_field_options']);
+        $builder->add($formatField, ChoiceType::class, $options['format_field_options']);
 
         // If there's only one possible format, do not display the choices
         $formatChoices = $builder->get($formatField)->getOption('choices');
@@ -106,11 +109,11 @@ class FormatterType extends AbstractType
             $builder->remove($formatField);
 
             // Replace it with an hidden field
-            $builder->add($formatField, 'hidden', $options['format_field_options']);
+            $builder->add($formatField, HiddenType::class, $options['format_field_options']);
         }
 
         $builder
-            ->add($sourceField, 'textarea', $options['source_field_options']);
+            ->add($sourceField, TextareaType::class, $options['source_field_options']);
 
         /*
          * The listener option only work if the source field is after the current field
@@ -216,8 +219,7 @@ class FormatterType extends AbstractType
             'choices' => $formatters,
         ];
 
-        // NEXT_MAJOR: Remove the method_exists hack when dropping support for symfony < 2.7
-        if (count($formatters) > 1 && method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
+        if (count($formatters) > 1) {
             $formatFieldOptions['choice_translation_domain'] = false;
         }
 
