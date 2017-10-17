@@ -11,8 +11,8 @@
 
 namespace Sonata\FormatterBundle\Tests\Form\Type;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
-use Sonata\FormatterBundle\Tests\TestCase;
 
 class SimpleFormatterTypeTest extends TestCase
 {

@@ -11,9 +11,10 @@
 
 namespace Sonata\FormatterBundle\Tests\Formatter;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Formatter\TwigFormatter;
 
-class TwigFormatterTest extends \PHPUnit_Framework_TestCase
+class TwigFormatterTest extends TestCase
 {
     public function testFormatter()
     {

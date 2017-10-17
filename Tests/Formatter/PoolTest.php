@@ -11,9 +11,9 @@
 
 namespace Sonata\FormatterBundle\Tests\Formatter;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Sonata\FormatterBundle\Formatter\RawFormatter;
-use Sonata\FormatterBundle\Tests\TestCase;
 
 class PoolTest extends TestCase
 {

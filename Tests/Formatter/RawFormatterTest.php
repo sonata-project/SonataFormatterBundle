@@ -11,9 +11,10 @@
 
 namespace Sonata\FormatterBundle\Tests\Formatter;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Formatter\RawFormatter;
 
-class RawFormatterTest extends \PHPUnit_Framework_TestCase
+class RawFormatterTest extends TestCase
 {
     public function testFormatter()
     {

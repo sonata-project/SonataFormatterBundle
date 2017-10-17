@@ -11,9 +11,9 @@
 
 namespace Sonata\FormatterBundle\Tests\Form\EventListener;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 use Sonata\FormatterBundle\Formatter\Pool;
-use Sonata\FormatterBundle\Tests\TestCase;
 use Symfony\Component\Form\FormEvent;
 
 class FormatterListenerTest extends TestCase
