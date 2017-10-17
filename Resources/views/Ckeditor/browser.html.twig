@@ -46,6 +46,7 @@ file that was distributed with this source code.
 
 {% import _self as tree %}
 {% macro navigate_child(collection, admin, root, current_category, depth) %}
+    {% import _self as tree %}
     {% if root and collection|length == 0 %}
         <div>
             <p class="bg-warning">{{ admin.trans('warning_no_category', {}, admin.translationdomain) }}</p>
@@ -60,7 +61,7 @@ file that was distributed with this source code.
                 </div>
 
                 {% if element.children|length %}
-                    {{ _self.navigate_child(element.children, admin, false, current_category, depth + 1) }}
+                    {{ tree.navigate_child(element.children, admin, false, current_category, depth + 1) }}
                 {% endif %}
             </li>
         {% endfor %}
