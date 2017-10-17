@@ -11,8 +11,8 @@
 
 namespace Sonata\FormatterBundle\Tests\Formatter;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Formatter\MarkdownFormatter;
-use Sonata\FormatterBundle\Tests\TestCase;
 
 class MarkdownFormatterTest extends TestCase
 {

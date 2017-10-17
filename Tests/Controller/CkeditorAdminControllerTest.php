@@ -11,9 +11,9 @@
 
 namespace Sonata\FormatterBundle\Tests\Controller;
 
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Sonata\FormatterBundle\Controller\CkeditorAdminController;
-use Sonata\FormatterBundle\Tests\TestCase;
 
 class EntityWithGetId
 {
