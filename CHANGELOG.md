@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.3.0](https://github.com/sonata-project/SonataFormatterBundle/compare/3.2.3...3.3.0) - 2017-10-22
+### Removed
+- Support for old versions of PHP and Symfony.
+
 ## [3.2.3](https://github.com/sonata-project/SonataFormatterBundle/compare/3.2.2...3.2.3) - 2017-09-19
 ### Fixed
 - Fixed passing null to transformer
