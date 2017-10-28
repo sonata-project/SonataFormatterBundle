@@ -11,9 +11,10 @@
 
 namespace Sonata\FormatterBundle\Tests\Twig\Loader;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Twig\Loader\LoaderSelector;
 
-class LoaderSelectorTest extends \PHPUnit_Framework_TestCase
+class LoaderSelectorTest extends TestCase
 {
     public function testCanBeInstanciated()
     {

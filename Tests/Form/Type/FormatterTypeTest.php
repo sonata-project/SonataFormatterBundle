@@ -11,8 +11,8 @@
 
 namespace Sonata\FormatterBundle\Tests\Form\Type;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
-use Sonata\FormatterBundle\Tests\TestCase;
 use Symfony\Component\Form\FormView;
 
 /**
