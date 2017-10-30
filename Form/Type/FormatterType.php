@@ -100,7 +100,7 @@ class FormatterType extends AbstractType
         // If there's only one possible format, do not display the choices
         $formatChoices = $builder->get($formatField)->getOption('choices');
 
-        if (count($formatChoices) === 1) {
+        if (1 === count($formatChoices)) {
             // Remove the choice field
             unset($options['format_field_options']['choices']);
             $builder->remove($formatField);
