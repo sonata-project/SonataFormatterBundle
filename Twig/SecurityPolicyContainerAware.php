@@ -157,7 +157,7 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
 
     private function buildAllowed()
     {
-        if ($this->allowedTags !== null) {
+        if (null !== $this->allowedTags) {
             return;
         }
 
