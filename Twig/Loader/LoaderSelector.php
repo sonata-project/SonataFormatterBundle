@@ -105,7 +105,7 @@ class LoaderSelector implements \Twig_LoaderInterface
      */
     private function isFile($name)
     {
-        if (substr($name, -10) == '.html.twig') {
+        if ('.html.twig' == substr($name, -10)) {
             return true;
         }
 
