@@ -12,6 +12,7 @@
 namespace Sonata\FormatterBundle\Controller;
 
 use Sonata\MediaBundle\Controller\MediaAdminController;
+use Sonata\MediaBundle\Provider\MediaProviderInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -122,7 +123,8 @@ class CkeditorAdminController extends MediaAdminController
             throw $this->createNotFoundException();
         }
 
-        $context = $request->get('context', $this->get('sonata.media.pool')->getDefaultContext());
+        $pool = $this->get('sonata.media.pool');
+        $context = $request->get('context', $pool->getDefaultContext());
 
         $media = $mediaManager->create();
         $media->setBinaryContent($file);
@@ -130,9 +132,15 @@ class CkeditorAdminController extends MediaAdminController
         $mediaManager->save($media, $context, $provider);
         $this->admin->createObjectSecurity($media);
 
+        $format = $pool->getProvider($provider)->getFormatName(
+            $media,
+            $request->get('format', MediaProviderInterface::FORMAT_REFERENCE)
+        );
+
         return $this->render($this->getTemplate('upload'), [
             'action' => 'list',
             'object' => $media,
+            'format' => $format,
         ]);
     }
 

@@ -42,6 +42,7 @@ Be sure to have the ``ivory/ivory_ckeditor.yml`` configuration file available. I
                 filebrowserImageUploadRouteParameters:
                     provider: sonata.media.provider.image
                     context: my-context # Optional, to upload in a custom context
+                    format: my-big # Optional, media format or original size returned to editor
 
 You can provide custom routes and a custom context to match your needs.
 
@@ -93,3 +94,44 @@ Here is an example to alter `shortDescription` field of the `ProductAdmin`:
     ));
 
 And that's it, enjoy browsing and uploading your medias using ``SonataMediaBundle``.
+
+Custom image media format returned to CKEditor
+----------------------------------------------
+
+When you upload an image using CKEditor, the image URL returned by the server leads to the original size.
+You can configure custom image format in ``SonataMediaBundle``:
+
+.. code-block:: yaml
+
+    sonata_media:
+        contexts:
+            default:
+                formats:
+                    big:   { width: 1280, quality: 95 }
+
+Then you can pass this format to CKEditor:
+
+.. code-block:: yaml
+
+    ivory_ck_editor:
+        configs:
+            default:
+                filebrowserImageUploadRoute: admin_sonata_media_media_ckeditor_upload
+                filebrowserImageUploadRouteParameters:
+                    provider: sonata.media.provider.image
+                    context: default
+                    format: big
+
+Alternatively you can specify custom return image format per field:
+
+.. code-block:: php
+
+    <?php
+
+    // ...
+
+    $formMapper->add('details', SimpleFormatterType::class, [
+        'format' => 'richhtml',
+        'ckeditor_context' => 'default',
+        'ckeditor_image_format' => 'big',
+    ]);

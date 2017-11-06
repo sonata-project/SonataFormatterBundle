@@ -169,6 +169,10 @@ class FormatterType extends AbstractType
             $ckeditorConfiguration = array_merge($ckeditorConfiguration, $contextConfig);
         }
 
+        if ($options['ckeditor_image_format']) {
+            $ckeditorConfiguration['filebrowserImageUploadRouteParameters']['format'] = $options['ckeditor_image_format'];
+        }
+
         if (null !== $this->pluginManager && $this->pluginManager->hasPlugins()) {
             $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
         }
@@ -232,6 +236,7 @@ class FormatterType extends AbstractType
             ],
             'ckeditor_basepath' => 'bundles/sonataformatter/vendor/ckeditor',
             'ckeditor_context' => null,
+            'ckeditor_image_format' => null,
             'ckeditor_plugins' => [],
             'ckeditor_templates' => [],
             'format_field_options' => $formatFieldOptions,

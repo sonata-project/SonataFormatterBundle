@@ -89,9 +89,11 @@ class CkeditorAdminControllerTest extends TestCase
         $mediaManager = $this->prophesize('Sonata\MediaBundle\Model\MediaManagerInterface');
         $filesBag = $this->prophesize('Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface');
         $pool = $this->prophesize('Sonata\MediaBundle\Provider\Pool');
+        $provider = $this->prophesize('Sonata\MediaBundle\Provider\MediaProviderInterface');
 
         $this->configureRender('templateList', Argument::type('array'), 'renderResponse');
         $pool->getDefaultContext()->willReturn('context');
+        $pool->getProvider('provider')->willReturn($provider->reveal());
         $filesBag->get('upload')->willReturn(new \stdClass());
         $mediaManager->create()->willReturn($media->reveal());
         $mediaManager->save($media->reveal(), 'context', 'provider')->shouldBeCalled();
@@ -104,6 +106,7 @@ class CkeditorAdminControllerTest extends TestCase
         $this->request->isMethod('POST')->willReturn(true);
         $this->request->files = $filesBag->reveal();
         $this->request->get('context', 'context')->willReturn('context');
+        $this->request->get('format', 'reference')->willReturn('reference');
 
         $response = $this->controller->uploadAction();
 
