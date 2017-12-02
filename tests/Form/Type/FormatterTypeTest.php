@@ -13,6 +13,8 @@ namespace Sonata\FormatterBundle\Tests\Form\Type;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormView;
 
 /**
@@ -113,13 +115,13 @@ class FormatterTypeTest extends TestCase
         ];
 
         $formBuilder = $this->createMock('Symfony\Component\Form\FormBuilderInterface');
-        $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', 'choice', [
+        $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', ChoiceType::class, [
             'property_path' => 'SomeFormatField',
             'data' => $selectedFormat,
             'choices' => $formatters,
         ]);
         $formBuilder->expects($this->at(1))->method('get')->will($this->returnValue($choiceFormBuilder));
-        $formBuilder->expects($this->at(2))->method('add')->with('SomeSourceField', 'textarea', [
+        $formBuilder->expects($this->at(2))->method('add')->with('SomeSourceField', TextareaType::class, [
             'property_path' => 'SomeSourceField',
         ]);
 
@@ -143,13 +145,13 @@ class FormatterTypeTest extends TestCase
         $choiceFormBuilder->expects($this->once())->method('getOption')->with('choices')->will($this->returnValue($formatters));
 
         $formBuilder = $this->createMock('Symfony\Component\Form\FormBuilderInterface');
-        $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', 'choice', [
+        $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', ChoiceType::class, [
             'property_path' => 'SomeFormatField',
             'data' => $defaultFormatter,
             'choices' => $formatters,
         ]);
         $formBuilder->expects($this->at(1))->method('get')->will($this->returnValue($choiceFormBuilder));
-        $formBuilder->expects($this->at(2))->method('add')->with('SomeSourceField', 'textarea', [
+        $formBuilder->expects($this->at(2))->method('add')->with('SomeSourceField', TextareaType::class, [
             'property_path' => 'SomeSourceField',
         ]);
 
@@ -187,13 +189,13 @@ class FormatterTypeTest extends TestCase
         $choiceFormBuilder->expects($this->once())->method('getOption')->with('choices')->will($this->returnValue($formatters));
 
         $formBuilder = $this->createMock('Symfony\Component\Form\FormBuilderInterface');
-        $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', 'choice', [
+        $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', ChoiceType::class, [
             'property_path' => 'SomeFormatField',
             'data' => $defaultFormatter,
             'choices' => $formatters,
         ]);
         $formBuilder->expects($this->at(1))->method('get')->will($this->returnValue($choiceFormBuilder));
-        $formBuilder->expects($this->at(2))->method('add')->with('SomeSourceField', 'textarea', [
+        $formBuilder->expects($this->at(2))->method('add')->with('SomeSourceField', TextareaType::class, [
             'property_path' => 'SomeSourceField',
         ]);
 
