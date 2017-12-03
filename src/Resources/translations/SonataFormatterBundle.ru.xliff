@@ -4,11 +4,11 @@
         <body>
             <trans-unit id="please_select_format_method">
                 <source>please_select_format_method</source>
-                <target>select a text formatting option</target>
+                <target>выберите способ форматирования текста</target>
             </trans-unit>
             <trans-unit id="sonata_formatter_block_formatter">
                 <source>sonata.formatter.block.formatter</source>
-                <target>sonata.formatter.block.formatter</target>
+                <target>Rich Text</target>
             </trans-unit>
             <trans-unit id="markdown">
                 <source>markdown</source>
@@ -32,7 +32,7 @@
             </trans-unit>
             <trans-unit id="form.label_content">
                 <source>form.label_content</source>
-                <target>form.label_content</target>
+                <target>Содержание</target>
             </trans-unit>
         </body>
     </file>

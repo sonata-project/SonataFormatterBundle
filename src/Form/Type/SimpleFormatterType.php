@@ -15,6 +15,7 @@ use Ivory\CKEditorBundle\Model\ConfigManagerInterface;
 use Ivory\CKEditorBundle\Model\PluginManagerInterface;
 use Ivory\CKEditorBundle\Model\TemplateManagerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -122,7 +123,7 @@ class SimpleFormatterType extends AbstractType
      */
     public function getParent()
     {
-        return 'Symfony\Component\Form\Extension\Core\Type\TextareaType';
+        return TextareaType::class;
     }
 
     /**
