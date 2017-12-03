@@ -80,11 +80,11 @@ Here is an example to alter `shortDescription` field of the `ProductAdmin`:
 .. code-block:: php
 
     <?php
-    // BaseProductProvider.php
+    use Sonata\FormatterBundle\Form\Type\FormatterType;
 
     // ...
 
-    $formMapper->add('shortDescription', 'sonata_formatter_type', array(
+    $formMapper->add('shortDescription', FormatterType::class, array(
         'source_field'         => 'rawDescription',
         'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
         'format_field'         => 'descriptionFormatter',
@@ -127,6 +127,7 @@ Alternatively you can specify custom return image format per field:
 .. code-block:: php
 
     <?php
+    use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 
     // ...
 

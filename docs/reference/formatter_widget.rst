@@ -15,8 +15,9 @@ The ``sonata_simple_formatter_type_selector`` widget has been implemented to all
 .. code-block:: php
 
     <?php
+    use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 
-    $formMapper->add('comment', 'sonata_simple_formatter_type', array(
+    $formMapper->add('comment', SimpleFormatterType::class, array(
         'format' => 'markdown',
         'ckeditor_context' => 'default', // optional
     ));
@@ -65,9 +66,10 @@ Now, let's define a form to edit this post:
 .. code-block:: php
 
     <?php
+    use Sonata\FormatterBundle\Form\Type\FormatterType;
 
     $formBuilder
-        ->add('content', 'sonata_formatter_type', array(
+        ->add('content', FormatterType::class, array(
             'event_dispatcher' => $formBuilder->getEventDispatcher(),
             'format_field'   => 'contentFormatter',
             'format_field_options' => array(
