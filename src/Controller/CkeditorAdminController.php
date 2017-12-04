@@ -13,6 +13,11 @@ namespace Sonata\FormatterBundle\Controller;
 
 use Sonata\MediaBundle\Controller\MediaAdminController;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
+use Symfony\Bridge\Twig\AppVariable;
+use Symfony\Bridge\Twig\Command\DebugCommand;
+use Symfony\Bridge\Twig\Extension\FormExtension;
+use Symfony\Bridge\Twig\Form\TwigRenderer;
+use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -187,12 +192,19 @@ class CkeditorAdminController extends MediaAdminController
         $twig = $this->get('twig');
 
         // BC for Symfony < 3.2 where this runtime does not exists
-        if (!method_exists('Symfony\Bridge\Twig\AppVariable', 'getToken')) {
-            $twig->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')
-                ->renderer->setTheme($formView, $theme);
+        if (!method_exists(AppVariable::class, 'getToken')) {
+            $twig->getExtension(FormExtension::class)->renderer->setTheme($formView, $theme);
 
             return;
         }
-        $twig->getRuntime('Symfony\Bridge\Twig\Form\TwigRenderer')->setTheme($formView, $theme);
+
+        // BC for Symfony < 3.4 where runtime should be TwigRenderer
+        if (!method_exists(DebugCommand::class, 'getLoaderPaths')) {
+            $twig->getRuntime(TwigRenderer::class)->setTheme($formView, $theme);
+
+            return;
+        }
+
+        $twig->getRuntime(FormRenderer::class)->setTheme($formView, $theme);
     }
 }
