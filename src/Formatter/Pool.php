@@ -68,7 +68,7 @@ class Pool implements LoggerAwareInterface
         }
 
         // NEXT_MAJOR: make defaultFormatter required
-        if (is_null($this->defaultFormatter)) {
+        if (null === $this->defaultFormatter) {
             @trigger_error(sprintf(
                 'Not providing the defaultFormatter argument to %s is deprecated since 3.2.'.
                 ' This argument will become mandatory in 4.0.',
@@ -182,7 +182,7 @@ class Pool implements LoggerAwareInterface
     public function getDefaultFormatter()
     {
         // NEXT_MAJOR: This should be removed
-        if (is_null($this->defaultFormatter)) {
+        if (null === $this->defaultFormatter) {
             reset($this->formatters);
 
             $this->defaultFormatter = key($this->formatters);
