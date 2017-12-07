@@ -11,7 +11,11 @@
 
 namespace Sonata\FormatterBundle\Twig\Node;
 
-class GistNode extends \Twig_Node
+use Twig\Compiler;
+use Twig\Node\Expression\AbstractExpression;
+use Twig\Node\Node;
+
+class GistNode extends Node
 {
     /**
      * @param \Twig_Node_Expression $gist
@@ -19,7 +23,7 @@ class GistNode extends \Twig_Node
      * @param int                   $lineno
      * @param string|null           $tag
      */
-    public function __construct(\Twig_Node_Expression $gist, \Twig_Node_Expression $file, $lineno, $tag = null)
+    public function __construct(AbstractExpression $gist, AbstractExpression $file, $lineno, $tag = null)
     {
         parent::__construct(['gist' => $gist, 'file' => $file], [], $lineno, $tag);
     }
@@ -27,7 +31,7 @@ class GistNode extends \Twig_Node
     /**
      * {@inheritdoc}
      */
-    public function compile(\Twig_Compiler $compiler)
+    public function compile(Compiler $compiler)
     {
         $compiler
             ->write(sprintf("echo '<div class=\"sonata-gist\"><script src=\"https://gist.github.com/%s.js?file=%s\"></script></div>';\n",
