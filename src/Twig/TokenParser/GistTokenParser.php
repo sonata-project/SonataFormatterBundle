@@ -12,13 +12,15 @@
 namespace Sonata\FormatterBundle\Twig\TokenParser;
 
 use Sonata\FormatterBundle\Twig\Node\GistNode;
+use Twig\Token;
+use Twig\TokenParser\AbstractTokenParser;
 
-class GistTokenParser extends \Twig_TokenParser
+class GistTokenParser extends AbstractTokenParser
 {
     /**
      * {@inheritdoc}
      */
-    public function parse(\Twig_Token $token)
+    public function parse(Token $token)
     {
         $gist = $this->parser->getExpressionParser()->parseExpression();
 
@@ -26,7 +28,7 @@ class GistTokenParser extends \Twig_TokenParser
 
         $file = $this->parser->getExpressionParser()->parseExpression();
 
-        $this->parser->getStream()->expect(\Twig_Token::BLOCK_END_TYPE);
+        $this->parser->getStream()->expect(Token::BLOCK_END_TYPE);
 
         return new GistNode($gist, $file, $token->getLine(), $this->getTag());
     }

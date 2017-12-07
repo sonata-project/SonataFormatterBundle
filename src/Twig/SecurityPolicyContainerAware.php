@@ -13,7 +13,10 @@ namespace Sonata\FormatterBundle\Twig;
 
 use Sonata\FormatterBundle\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Twig_Sandbox_SecurityError;
+use Twig\Markup;
+use Twig\Sandbox\SecurityError;
+use Twig\Sandbox\SecurityPolicyInterface;
+use Twig\TemplateInterface;
 
 /**
  * @throws \Twig_Sandbox_SecurityError
@@ -23,7 +26,7 @@ use Twig_Sandbox_SecurityError;
  * @author fabien.potencier@symfony.com
  * @author thomas.rabaix@sonata-project.org
  */
-class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterface
+class SecurityPolicyContainerAware implements SecurityPolicyInterface
 {
     /**
      * @var string[]
@@ -79,19 +82,19 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
 
         foreach ($tags as $tag) {
             if (!in_array($tag, $this->allowedTags)) {
-                throw new Twig_Sandbox_SecurityError(sprintf('Tag "%s" is not allowed.', $tag));
+                throw new SecurityError(sprintf('Tag "%s" is not allowed.', $tag));
             }
         }
 
         foreach ($filters as $filter) {
             if (!in_array($filter, $this->allowedFilters)) {
-                throw new Twig_Sandbox_SecurityError(sprintf('Filter "%s" is not allowed.', $filter));
+                throw new SecurityError(sprintf('Filter "%s" is not allowed.', $filter));
             }
         }
 
         foreach ($functions as $function) {
             if (!in_array($function, $this->allowedFunctions)) {
-                throw new Twig_Sandbox_SecurityError(sprintf('Function "%s" is not allowed.', $function));
+                throw new SecurityError(sprintf('Function "%s" is not allowed.', $function));
             }
         }
     }
@@ -103,7 +106,7 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
     {
         $this->buildAllowed();
 
-        if ($obj instanceof \Twig_TemplateInterface || $obj instanceof \Twig_Markup) {
+        if ($obj instanceof TemplateInterface || $obj instanceof Markup) {
             return true;
         }
 
@@ -118,7 +121,7 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
         }
 
         if (!$allowed) {
-            throw new Twig_Sandbox_SecurityError(
+            throw new SecurityError(
                 sprintf(
                     'Calling "%s" method on a "%s" object is not allowed.',
                     $method,
@@ -145,7 +148,7 @@ class SecurityPolicyContainerAware implements \Twig_Sandbox_SecurityPolicyInterf
         }
 
         if (!$allowed) {
-            throw new Twig_Sandbox_SecurityError(
+            throw new SecurityError(
                 sprintf(
                     'Calling "%s" property on a "%s" object is not allowed.',
                     $property,
