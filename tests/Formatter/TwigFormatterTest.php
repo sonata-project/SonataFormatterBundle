@@ -33,11 +33,10 @@ class TwigFormatterTest extends TestCase
         $this->assertInstanceOf('Sonata\\FormatterBundle\\Tests\\Formatter\\MyStringLoader', $twig->getLoader());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testAddFormatterExtension()
     {
+        $this->expectException(\RuntimeException::class);
+
         $loader = new MyStringLoader();
         $twig = new \Twig_Environment($loader);
 

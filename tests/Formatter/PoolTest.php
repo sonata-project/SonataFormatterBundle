@@ -49,7 +49,7 @@ class PoolTest extends TestCase
 
     public function testNonExistantFormatter()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->expectException('RuntimeException');
 
         $pool = $this->getPool();
         $pool->get('foo');
@@ -107,7 +107,7 @@ class PoolTest extends TestCase
 
     public function testUnexpectedException()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->expectException('RuntimeException');
 
         $formatter = new RawFormatter();
         $env = $this->getMockBuilder('\Twig_Environment')
