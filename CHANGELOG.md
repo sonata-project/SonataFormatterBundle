@@ -2,6 +2,22 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.4.0](https://github.com/sonata-project/SonataFormatterBundle/compare/3.3.0...3.4.0) - 2017-12-07
+### Added
+- Possibility to configure size of the image returned to ckeditor after upload.
+- Added Russian translations
+
+### Changed
+- Rollback to PHP 5.6 as minimum support.
+- Changed internal folder structure to `src`, `tests` and `docs`
+
+### Fixed
+- It is now allowed to install Symfony 4
+- Fix for getRuntime on Symfony older than 3.4
+
+### Removed
+- Removed BC layer for older symfony versions
+ 
 ## [3.3.0](https://github.com/sonata-project/SonataFormatterBundle/compare/3.2.3...3.3.0) - 2017-10-22
 ### Removed
 - Support for old versions of PHP and Symfony.
