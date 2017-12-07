@@ -28,9 +28,9 @@ class CkeditorAdminController extends MediaAdminController
     /**
      * Returns the response object associated with the browser action.
      *
-     * @return Response
-     *
      * @throws AccessDeniedException
+     *
+     * @return Response
      */
     public function browserAction()
     {
@@ -101,10 +101,10 @@ class CkeditorAdminController extends MediaAdminController
     /**
      * Returns the response object associated with the upload action.
      *
-     * @return Response
-     *
      * @throws AccessDeniedException
      * @throws NotFoundHttpException
+     *
+     * @return Response
      */
     public function uploadAction()
     {
@@ -163,8 +163,6 @@ class CkeditorAdminController extends MediaAdminController
         if (isset($templates[$name])) {
             return $templates[$name];
         }
-
-        return;
     }
 
     /**

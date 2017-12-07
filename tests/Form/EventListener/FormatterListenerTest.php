@@ -20,7 +20,7 @@ class FormatterListenerTest extends TestCase
 {
     public function testWithInvalidFormatter()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->expectException('RuntimeException');
 
         $pool = $this->getPool();
 
