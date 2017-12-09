@@ -11,7 +11,9 @@
 
 namespace Sonata\FormatterBundle\Twig\Loader;
 
-class LoaderSelector implements \Twig_LoaderInterface
+use Twig\Loader\LoaderInterface;
+
+class LoaderSelector implements LoaderInterface
 {
     /**
      * @var \Twig_LoaderInterface
@@ -27,7 +29,7 @@ class LoaderSelector implements \Twig_LoaderInterface
      * @param \Twig_LoaderInterface $stringLoader
      * @param \Twig_LoaderInterface $fileLoader
      */
-    public function __construct(\Twig_LoaderInterface $stringLoader, \Twig_LoaderInterface $fileLoader)
+    public function __construct(LoaderInterface $stringLoader, LoaderInterface $fileLoader)
     {
         $this->stringLoader = $stringLoader;
         $this->fileLoader = $fileLoader;

@@ -12,11 +12,13 @@
 namespace Sonata\FormatterBundle\Twig\Extension;
 
 use Sonata\FormatterBundle\Formatter\Pool;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class TextFormatterExtension extends \Twig_Extension
+class TextFormatterExtension extends AbstractExtension
 {
     /**
      * @var Pool
@@ -46,7 +48,7 @@ class TextFormatterExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('format_text', [$this, 'transform']),
+            new TwigFilter('format_text', [$this, 'transform']),
         ];
     }
 
