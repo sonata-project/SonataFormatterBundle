@@ -88,9 +88,7 @@ class Pool implements LoggerAwareInterface
     }
 
     /**
-     * @param string                 $code
-     * @param FormatterInterface     $formatter
-     * @param \Twig_Environment|null $env
+     * @param string $code
      */
     public function add($code, FormatterInterface $formatter, Twig_Environment $env = null)
     {

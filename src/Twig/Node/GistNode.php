@@ -18,19 +18,16 @@ use Twig\Node\Node;
 class GistNode extends Node
 {
     /**
-     * @param \Twig_Node_Expression $gist
-     * @param \Twig_Node_Expression $file
-     * @param int                   $lineno
-     * @param string|null           $tag
+     * @param AbstractExpression $gist
+     * @param AbstractExpression $file
+     * @param int                $lineno
+     * @param string|null        $tag
      */
     public function __construct(AbstractExpression $gist, AbstractExpression $file, $lineno, $tag = null)
     {
         parent::__construct(['gist' => $gist, 'file' => $file], [], $lineno, $tag);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function compile(Compiler $compiler)
     {
         $compiler

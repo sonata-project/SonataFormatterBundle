@@ -15,17 +15,11 @@ use Sonata\FormatterBundle\Twig\TokenParser\GistTokenParser;
 
 class GistExtension extends BaseExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getAllowedFilters()
     {
         return [];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAllowedTags()
     {
         return [
@@ -33,17 +27,11 @@ class GistExtension extends BaseExtension
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAllowedFunctions()
     {
         return [];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTokenParsers()
     {
         return [
@@ -51,9 +39,6 @@ class GistExtension extends BaseExtension
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'sonata_formatter_extension_gist';

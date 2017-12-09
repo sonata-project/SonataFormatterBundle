@@ -63,19 +63,12 @@ class SecurityPolicyContainerAware implements SecurityPolicyInterface
      */
     protected $container;
 
-    /**
-     * @param ContainerInterface $container
-     * @param array              $extensions
-     */
     public function __construct(ContainerInterface $container, array $extensions = [])
     {
         $this->container = $container;
         $this->extensions = $extensions;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function checkSecurity($tags, $filters, $functions)
     {
         $this->buildAllowed();
@@ -99,9 +92,6 @@ class SecurityPolicyContainerAware implements SecurityPolicyInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function checkMethodAllowed($obj, $method)
     {
         $this->buildAllowed();
@@ -131,9 +121,6 @@ class SecurityPolicyContainerAware implements SecurityPolicyInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function checkPropertyAllowed($obj, $property)
     {
         $this->buildAllowed();

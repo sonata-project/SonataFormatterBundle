@@ -38,7 +38,6 @@ class FormatterListener
     protected $targetField;
 
     /**
-     * @param Pool   $pool
      * @param string $formatField
      * @param string $sourceField
      * @param string $targetField
@@ -52,9 +51,6 @@ class FormatterListener
         $this->targetField = $targetField;
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function postSubmit(FormEvent $event)
     {
         $accessor = PropertyAccess::createPropertyAccessor();

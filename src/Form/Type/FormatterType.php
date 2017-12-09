@@ -57,14 +57,17 @@ class FormatterType extends AbstractType
     private $templateManager;
 
     /**
-     * @param Pool                     $pool            A Formatter Pool service
-     * @param TranslatorInterface      $translator      A Symfony Translator service
-     * @param ConfigManagerInterface   $configManager   An Ivory CKEditor bundle configuration manager
-     * @param PluginManagerInterface   $pluginManager   An Ivory CKEditor bundle plugin manager
-     * @param TemplateManagerInterface $templateManager An Ivory CKEditor bundle template manager
+     * @param ConfigManagerInterface|null   $configManager   An Ivory CKEditor bundle configuration manager
+     * @param PluginManagerInterface|null   $pluginManager   An Ivory CKEditor bundle plugin manager
+     * @param TemplateManagerInterface|null $templateManager An Ivory CKEditor bundle template manager
      */
-    public function __construct(Pool $pool, TranslatorInterface $translator, ConfigManagerInterface $configManager, PluginManagerInterface $pluginManager = null, TemplateManagerInterface $templateManager = null)
-    {
+    public function __construct(
+        Pool $pool,
+        TranslatorInterface $translator,
+        ConfigManagerInterface $configManager,
+        PluginManagerInterface $pluginManager = null,
+        TemplateManagerInterface $templateManager = null
+    ) {
         $this->pool = $pool;
         $this->translator = $translator;
         $this->configManager = $configManager;
@@ -72,9 +75,6 @@ class FormatterType extends AbstractType
         $this->templateManager = $templateManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if (is_array($options['format_field'])) {
@@ -134,9 +134,6 @@ class FormatterType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         if (is_array($options['source_field'])) {
@@ -201,10 +198,6 @@ class FormatterType extends AbstractType
     {
         $this->configureOptions($resolver);
     }
-
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $pool = $this->pool;
@@ -257,17 +250,11 @@ class FormatterType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sonata_formatter_type';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->getBlockPrefix();
