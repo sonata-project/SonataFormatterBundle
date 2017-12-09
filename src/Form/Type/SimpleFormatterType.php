@@ -19,7 +19,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class SimpleFormatterType extends AbstractType
 {
@@ -119,15 +118,6 @@ class SimpleFormatterType extends AbstractType
         ]);
     }
 
-    /**
-     * For Symfony <= 2.8.
-     *
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $this->configureOptions($resolver);
-    }
     public function getParent()
     {
         return TextareaType::class;
