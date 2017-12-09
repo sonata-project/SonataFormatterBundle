@@ -11,9 +11,10 @@
 
 namespace Sonata\FormatterBundle\Extension;
 
-use Twig_Environment;
+use Twig\Environment;
+use Twig\Extension\AbstractExtension;
 
-abstract class BaseExtension extends \Twig_Extension implements ExtensionInterface
+abstract class BaseExtension extends AbstractExtension implements ExtensionInterface
 {
     public function getAllowedFilters()
     {
@@ -40,7 +41,7 @@ abstract class BaseExtension extends \Twig_Extension implements ExtensionInterfa
         return [];
     }
 
-    public function initRuntime(Twig_Environment $environment)
+    public function initRuntime(Environment $environment)
     {
         return [];
     }

@@ -12,15 +12,18 @@
 namespace Sonata\FormatterBundle\Formatter;
 
 use Sonata\FormatterBundle\Extension\ExtensionInterface;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
+use Twig\Loader\ChainLoader;
 
-class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterface
+class TwigFormatter implements FormatterInterface
 {
     /**
-     * @var \Twig_Environment
+     * @var Environment
      */
     protected $twig;
 
-    public function __construct(\Twig_Environment $twig)
+    public function __construct(Environment $twig)
     {
         $this->twig = $twig;
     }
@@ -33,8 +36,8 @@ class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterf
 
         $hash = sha1($text);
 
-        $chainLoader = new \Twig_Loader_Chain();
-        $chainLoader->addLoader(new \Twig_Loader_Array([$hash => $text]));
+        $chainLoader = new ChainLoader();
+        $chainLoader->addLoader(new ArrayLoader([$hash => $text]));
         $chainLoader->addLoader($oldLoader);
 
         $this->twig->setLoader($chainLoader);
