@@ -16,28 +16,21 @@ use Twig\Loader\LoaderInterface;
 class LoaderSelector implements LoaderInterface
 {
     /**
-     * @var \Twig_LoaderInterface
+     * @var LoaderInterface
      */
     protected $stringLoader;
 
     /**
-     * @var \Twig_LoaderInterface
+     * @var LoaderInterface
      */
     protected $fileLoader;
 
-    /**
-     * @param \Twig_LoaderInterface $stringLoader
-     * @param \Twig_LoaderInterface $fileLoader
-     */
     public function __construct(LoaderInterface $stringLoader, LoaderInterface $fileLoader)
     {
         $this->stringLoader = $stringLoader;
         $this->fileLoader = $fileLoader;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSource($name)
     {
         $source = $this->getLoader($name)->getSource($name);
@@ -52,41 +45,27 @@ class LoaderSelector implements LoaderInterface
         return $source;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSourceContext($name)
     {
         return $this->getLoader($name)->getSourceContext($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function exists($name)
     {
         return $this->getLoader($name)->exists($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCacheKey($name)
     {
         return $this->getLoader($name)->getCacheKey($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isFresh($name, $time)
     {
         return false;
     }
 
     /**
-     * Finds out the correct loader.
-     *
      * @param string $name
      *
      * @return \Twig_LoaderInterface

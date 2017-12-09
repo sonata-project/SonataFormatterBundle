@@ -13,9 +13,6 @@ namespace Sonata\FormatterBundle\Extension;
 
 class ControlFlowExtension extends BaseExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getAllowedFilters()
     {
         return [
@@ -23,9 +20,6 @@ class ControlFlowExtension extends BaseExtension
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAllowedTags()
     {
         return [
@@ -34,17 +28,11 @@ class ControlFlowExtension extends BaseExtension
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAllowedFunctions()
     {
         return [];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'sonata_formatter_extension_flow';

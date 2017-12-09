@@ -22,9 +22,6 @@ use Sonata\AdminBundle\Route\RouteCollection;
  */
 class CkeditorAdminExtension extends AbstractAdminExtension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function configureRoutes(AdminInterface $admin, RouteCollection $collection)
     {
         $collection->add('ckeditor_browser', 'ckeditor_browser', [

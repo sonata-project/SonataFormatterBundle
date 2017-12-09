@@ -20,9 +20,6 @@ class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterf
      */
     protected $twig;
 
-    /**
-     * @param \Twig_Environment $twig
-     */
     public function __construct(\Twig_Environment $twig)
     {
         $this->twig = $twig;

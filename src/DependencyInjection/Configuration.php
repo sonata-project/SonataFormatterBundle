@@ -22,9 +22,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
@@ -52,11 +49,6 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * Adds CKEditor configuration section to root node configuration.
-     *
-     * @param ArrayNodeDefinition $node
-     */
     private function addCkeditorSection(ArrayNodeDefinition $node)
     {
         $node
