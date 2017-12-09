@@ -11,9 +11,10 @@
 
 namespace Sonata\FormatterBundle\Extension;
 
-use Twig_Environment;
+use Twig\Environment;
+use Twig\Extension\AbstractExtension;
 
-abstract class BaseProxyExtension extends \Twig_Extension implements ExtensionInterface
+abstract class BaseProxyExtension extends AbstractExtension implements ExtensionInterface
 {
     /**
      * @return \Twig_ExtensionInterface
@@ -45,7 +46,7 @@ abstract class BaseProxyExtension extends \Twig_Extension implements ExtensionIn
         return [];
     }
 
-    public function initRuntime(Twig_Environment $environment)
+    public function initRuntime(Environment $environment)
     {
         $this->getTwigExtension()->initRuntime($environment);
     }
