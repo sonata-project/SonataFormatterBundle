@@ -20,17 +20,11 @@ class MarkdownFormatter extends BaseFormatter
      */
     protected $parser;
 
-    /**
-     * @param MarkdownParserInterface $parser
-     */
     public function __construct(MarkdownParserInterface $parser)
     {
         $this->parser = $parser;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function transform($text)
     {
         return $this->parser->transformMarkdown($text);

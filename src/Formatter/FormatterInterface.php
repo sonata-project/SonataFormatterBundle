@@ -20,9 +20,6 @@ interface FormatterInterface
      */
     public function transform($text);
 
-    /**
-     * @param ExtensionInterface $extensionInterface
-     */
     public function addExtension(ExtensionInterface $extensionInterface);
 
     /**

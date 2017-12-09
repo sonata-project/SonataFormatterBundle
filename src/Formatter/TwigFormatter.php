@@ -25,9 +25,6 @@ class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterf
         $this->twig = $twig;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function transform($text)
     {
         // Here we temporary changing twig environment loader to Chain loader with Twig_Loader_Array as first loader,
@@ -49,17 +46,11 @@ class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterf
         return $result;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addExtension(ExtensionInterface $extensionInterface)
     {
         throw new \RuntimeException('\\Sonata\\FormatterBundle\\Formatter\\TwigFormatter cannot have extensions');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtensions()
     {
         return [];

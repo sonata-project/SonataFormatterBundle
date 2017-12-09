@@ -13,9 +13,6 @@ namespace Sonata\FormatterBundle\Formatter;
 
 class RawFormatter extends BaseFormatter
 {
-    /**
-     * {@inheritdoc}
-     */
     public function transform($text)
     {
         return $text;
