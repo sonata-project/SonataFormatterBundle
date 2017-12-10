@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -21,12 +23,12 @@ class FormatterValidatorTest extends TestCase
      */
     private $context;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->context = $this->createMock(interface_exists('Symfony\Component\Validator\Context\ExecutionContextInterface') ? 'Symfony\Component\Validator\Context\ExecutionContextInterface' : 'Symfony\Component\Validator\ExecutionContextInterface');
     }
 
-    public function testValidator()
+    public function testValidator(): void
     {
         $pool = $this->getPool();
 
@@ -37,7 +39,7 @@ class FormatterValidatorTest extends TestCase
     /**
      * @group legacy
      */
-    public function testInvalidCase()
+    public function testInvalidCase(): void
     {
         $pool = $this->getPool();
         $pool->expects($this->any())
@@ -60,7 +62,7 @@ class FormatterValidatorTest extends TestCase
         $validator->validate('existingFormatter', $constraint);
     }
 
-    public function testValidCase()
+    public function testValidCase(): void
     {
         $pool = $this->getPool();
         $pool->expects($this->any())

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,7 +24,7 @@ use Symfony\Component\Form\FormRenderer;
 
 class EntityWithGetId
 {
-    public function getId()
+    public function getId(): void
     {
     }
 }
@@ -34,7 +36,7 @@ class CkeditorAdminControllerTest extends TestCase
     private $request;
     private $controller;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->container = $this->prophesize('Symfony\Component\DependencyInjection\ContainerInterface');
         $this->admin = $this->prophesize('Sonata\MediaBundle\Admin\BaseMediaAdmin');
@@ -46,7 +48,7 @@ class CkeditorAdminControllerTest extends TestCase
         $this->controller->setContainer($this->container->reveal());
     }
 
-    public function testBrowserAction()
+    public function testBrowserAction(): void
     {
         $datagrid = $this->prophesize('Sonata\AdminBundle\Datagrid\DatagridInterface');
         $pool = $this->prophesize('Sonata\MediaBundle\Provider\Pool');
@@ -88,7 +90,7 @@ class CkeditorAdminControllerTest extends TestCase
         $this->assertSame('renderResponse', $response->getContent());
     }
 
-    public function testUpload()
+    public function testUpload(): void
     {
         $media = $this->prophesize('Sonata\MediaBundle\Model\MediaInterface');
         $mediaManager = $this->prophesize('Sonata\MediaBundle\Model\MediaManagerInterface');
@@ -119,7 +121,7 @@ class CkeditorAdminControllerTest extends TestCase
         $this->assertSame('renderResponse', $response->getContent());
     }
 
-    private function configureCRUDController()
+    private function configureCRUDController(): void
     {
         $pool = $this->prophesize('Sonata\AdminBundle\Admin\Pool');
         $breadcrumbsBuilder = $this->prophesize('Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface');
@@ -137,7 +139,7 @@ class CkeditorAdminControllerTest extends TestCase
         $this->admin->setRequest($this->request->reveal())->shouldBeCalled();
     }
 
-    private function configureGetCurrentRequest($request)
+    private function configureGetCurrentRequest($request): void
     {
         // NEXT_MAJOR: Remove this trick when bumping Symfony requirement to 2.8+.
         if (class_exists('Symfony\Component\HttpFoundation\RequestStack')) {
@@ -152,7 +154,7 @@ class CkeditorAdminControllerTest extends TestCase
         }
     }
 
-    private function configureSetFormTheme($formView, $formTheme)
+    private function configureSetFormTheme($formView, $formTheme): void
     {
         $twig = $this->prophesize(\Twig_Environment::class);
 
@@ -179,7 +181,7 @@ class CkeditorAdminControllerTest extends TestCase
         $twigRenderer->setTheme($formView, $formTheme)->shouldBeCalled();
     }
 
-    private function configureRender($template, $data, $rendered)
+    private function configureRender($template, $data, $rendered): void
     {
         $templating = $this->prophesize('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $response = $this->prophesize('Symfony\Component\HttpFoundation\Response');

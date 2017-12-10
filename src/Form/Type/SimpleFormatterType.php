@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -52,7 +54,7 @@ class SimpleFormatterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $ckeditorConfiguration = [
             'toolbar' => array_values($options['ckeditor_toolbar_icons']),
@@ -88,7 +90,7 @@ class SimpleFormatterType extends AbstractType
      *
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'ckeditor_toolbar_icons' => [[

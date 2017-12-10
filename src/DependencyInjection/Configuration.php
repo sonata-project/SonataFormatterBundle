@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -57,7 +59,7 @@ class Configuration implements ConfigurationInterface
      *
      * @param ArrayNodeDefinition $node
      */
-    private function addCkeditorSection(ArrayNodeDefinition $node)
+    private function addCkeditorSection(ArrayNodeDefinition $node): void
     {
         $node
             ->children()

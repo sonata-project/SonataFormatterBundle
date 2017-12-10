@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -63,7 +65,7 @@ abstract class BaseProxyExtension extends \Twig_Extension implements ExtensionIn
     /**
      * {@inheritdoc}
      */
-    public function initRuntime(Twig_Environment $environment)
+    public function initRuntime(Twig_Environment $environment): void
     {
         $this->getTwigExtension()->initRuntime($environment);
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -170,7 +172,7 @@ class CkeditorAdminController extends MediaAdminController
      *
      * @throws \RuntimeException
      */
-    private function checkIfMediaBundleIsLoaded()
+    private function checkIfMediaBundleIsLoaded(): void
     {
         $bundles = $this->container->getParameter('kernel.bundles');
 
@@ -185,7 +187,7 @@ class CkeditorAdminController extends MediaAdminController
      * @param FormView $formView
      * @param string   $theme
      */
-    private function setFormTheme(FormView $formView, $theme)
+    private function setFormTheme(FormView $formView, $theme): void
     {
         $twig = $this->get('twig');
 
