@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,7 +18,7 @@ use Sonata\FormatterBundle\Formatter\MarkdownFormatter;
 
 class MarkdownFormatterTest extends TestCase
 {
-    public function testFormatter()
+    public function testFormatter(): void
     {
         $parser = $this->createMock('Knp\Bundle\MarkdownBundle\MarkdownParserInterface');
         $parser->expects($this->any())->method('transformMarkdown')->will($this->returnValue('<b>Salut</b>'));

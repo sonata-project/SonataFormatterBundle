@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,7 +18,7 @@ use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 
 class SimpleFormatterTypeTest extends TestCase
 {
-    public function testBuildForm()
+    public function testBuildForm(): void
     {
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
         $formBuilder = $this->createMock('Symfony\Component\Form\FormBuilderInterface');
@@ -28,7 +30,7 @@ class SimpleFormatterTypeTest extends TestCase
         $type->buildForm($formBuilder, $options);
     }
 
-    public function testBuildViewWithDefaultConfig()
+    public function testBuildViewWithDefaultConfig(): void
     {
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
         $view = $this->createMock('Symfony\Component\Form\FormView');

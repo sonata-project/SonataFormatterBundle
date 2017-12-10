@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -46,7 +48,7 @@ class Pool implements LoggerAwareInterface
      * @param FormatterInterface     $formatter
      * @param \Twig_Environment|null $env
      */
-    public function add($code, FormatterInterface $formatter, Twig_Environment $env = null)
+    public function add($code, FormatterInterface $formatter, Twig_Environment $env = null): void
     {
         $this->formatters[$code] = [$formatter, $env];
     }

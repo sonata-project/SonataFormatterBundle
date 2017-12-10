@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,7 +18,7 @@ use Sonata\FormatterBundle\Validator\Constraints\Formatter;
 
 class FormatterTest extends TestCase
 {
-    public function testConstraint()
+    public function testConstraint(): void
     {
         $constraint = new Formatter();
 

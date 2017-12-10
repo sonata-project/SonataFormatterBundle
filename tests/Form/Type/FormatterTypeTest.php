@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,7 +24,7 @@ use Symfony\Component\Form\FormView;
  */
 class FormatterTypeTest extends TestCase
 {
-    public function testBuildFormOneChoice()
+    public function testBuildFormOneChoice(): void
     {
         $pool = $this->getPool();
 
@@ -54,7 +56,7 @@ class FormatterTypeTest extends TestCase
         $type->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormSeveralChoices()
+    public function testBuildFormSeveralChoices(): void
     {
         $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
@@ -84,7 +86,7 @@ class FormatterTypeTest extends TestCase
         $type->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormWithCustomFormatter()
+    public function testBuildFormWithCustomFormatter(): void
     {
         $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
@@ -128,7 +130,7 @@ class FormatterTypeTest extends TestCase
         $type->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormWithDefaultFormatter()
+    public function testBuildFormWithDefaultFormatter(): void
     {
         $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
@@ -171,7 +173,7 @@ class FormatterTypeTest extends TestCase
         $type->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormWithDefaultFormatterAndPluginManager()
+    public function testBuildFormWithDefaultFormatterAndPluginManager(): void
     {
         $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
@@ -215,7 +217,7 @@ class FormatterTypeTest extends TestCase
         $type->buildForm($formBuilder, $options);
     }
 
-    public function testBuildViewWithDefaultConfig()
+    public function testBuildViewWithDefaultConfig(): void
     {
         $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
@@ -249,7 +251,7 @@ class FormatterTypeTest extends TestCase
         $this->assertSame($view->vars['ckeditor_configuration'], $defaultConfigValues);
     }
 
-    public function testBuildViewWithoutDefaultConfig()
+    public function testBuildViewWithoutDefaultConfig(): void
     {
         $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
@@ -284,7 +286,7 @@ class FormatterTypeTest extends TestCase
         $this->assertSame($view->vars['ckeditor_configuration'], $ckeditorConfiguration);
     }
 
-    public function testBuildViewWithDefaultConfigAndWithToolbarIcons()
+    public function testBuildViewWithDefaultConfigAndWithToolbarIcons(): void
     {
         $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
@@ -320,7 +322,7 @@ class FormatterTypeTest extends TestCase
         $this->assertSame($view->vars['ckeditor_configuration'], ['toolbar' => $defaultConfigValues['toolbar']]);
     }
 
-    public function testBuildViewWithFormatter()
+    public function testBuildViewWithFormatter(): void
     {
         $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
@@ -359,7 +361,7 @@ class FormatterTypeTest extends TestCase
         $this->assertSame($view->vars['format_field_options']['data'], $format);
     }
 
-    public function testBuildViewWithDefaultConfigAndPluginManager()
+    public function testBuildViewWithDefaultConfigAndPluginManager(): void
     {
         $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
@@ -394,7 +396,7 @@ class FormatterTypeTest extends TestCase
         $this->assertSame($view->vars['ckeditor_configuration'], $defaultConfigValues);
     }
 
-    public function testBuildViewWithDefaultConfigAndPluginManagerAndTemplateManager()
+    public function testBuildViewWithDefaultConfigAndPluginManagerAndTemplateManager(): void
     {
         $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
@@ -430,7 +432,7 @@ class FormatterTypeTest extends TestCase
         $this->assertSame($view->vars['ckeditor_configuration'], $defaultConfigValues);
     }
 
-    public function testBuildViewWithDefaultConfigAndPluginManagerAndTemplateManagerAndWithTemplates()
+    public function testBuildViewWithDefaultConfigAndPluginManagerAndTemplateManagerAndWithTemplates(): void
     {
         $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');

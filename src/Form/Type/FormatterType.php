@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -74,7 +76,7 @@ class FormatterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if (is_array($options['format_field'])) {
             list($formatField, $formatPropertyPath) = $options['format_field'];
@@ -136,7 +138,7 @@ class FormatterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         if (is_array($options['source_field'])) {
             list($sourceField) = $options['source_field'];
@@ -194,7 +196,7 @@ class FormatterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $pool = $this->pool;
         $translator = $this->translator;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -25,7 +27,7 @@ class CkeditorAdminExtension extends AbstractAdminExtension
     /**
      * {@inheritdoc}
      */
-    public function configureRoutes(AdminInterface $admin, RouteCollection $collection)
+    public function configureRoutes(AdminInterface $admin, RouteCollection $collection): void
     {
         $collection->add('ckeditor_browser', 'ckeditor_browser', [
             '_controller' => 'SonataFormatterBundle:CkeditorAdmin:browser',

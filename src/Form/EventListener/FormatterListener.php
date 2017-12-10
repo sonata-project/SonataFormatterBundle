@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -55,7 +57,7 @@ class FormatterListener
     /**
      * @param FormEvent $event
      */
-    public function postSubmit(FormEvent $event)
+    public function postSubmit(FormEvent $event): void
     {
         $accessor = PropertyAccess::createPropertyAccessor();
 

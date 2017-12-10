@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,7 +18,7 @@ use Sonata\FormatterBundle\Formatter\TwigFormatter;
 
 class TwigFormatterTest extends TestCase
 {
-    public function testFormatter()
+    public function testFormatter(): void
     {
         $loader = new MyStringLoader();
         $twig = new \Twig_Environment($loader);
@@ -33,7 +35,7 @@ class TwigFormatterTest extends TestCase
         $this->assertInstanceOf('Sonata\\FormatterBundle\\Tests\\Formatter\\MyStringLoader', $twig->getLoader());
     }
 
-    public function testAddFormatterExtension()
+    public function testAddFormatterExtension(): void
     {
         $this->expectException(\RuntimeException::class);
 
@@ -45,7 +47,7 @@ class TwigFormatterTest extends TestCase
         $formatter->addExtension(new \Sonata\FormatterBundle\Extension\GistExtension());
     }
 
-    public function testGetFormatterExtension()
+    public function testGetFormatterExtension(): void
     {
         $loader = new MyStringLoader();
         $twig = new \Twig_Environment($loader);

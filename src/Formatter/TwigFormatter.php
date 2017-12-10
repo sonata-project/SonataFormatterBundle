@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -55,7 +57,7 @@ class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterf
     /**
      * {@inheritdoc}
      */
-    public function addExtension(ExtensionInterface $extensionInterface)
+    public function addExtension(ExtensionInterface $extensionInterface): void
     {
         throw new \RuntimeException('\\Sonata\\FormatterBundle\\Formatter\\TwigFormatter cannot have extensions');
     }

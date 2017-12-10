@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,7 +18,7 @@ use Sonata\FormatterBundle\Twig\Loader\LoaderSelector;
 
 class LoaderSelectorTest extends TestCase
 {
-    public function testCanBeInstanciated()
+    public function testCanBeInstanciated(): void
     {
         $loaderSelector = new LoaderSelector(
             $this->prophesize('\Twig_LoaderInterface')->reveal(),

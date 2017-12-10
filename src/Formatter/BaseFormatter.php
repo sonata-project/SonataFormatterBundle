@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -23,7 +25,7 @@ abstract class BaseFormatter implements FormatterInterface
     /**
      * @param ExtensionInterface $extensionInterface
      */
-    public function addExtension(ExtensionInterface $extensionInterface)
+    public function addExtension(ExtensionInterface $extensionInterface): void
     {
         $this->extensions[] = $extensionInterface;
     }

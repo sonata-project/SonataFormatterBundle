@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -31,7 +33,7 @@ class GistNode extends Node
     /**
      * {@inheritdoc}
      */
-    public function compile(Compiler $compiler)
+    public function compile(Compiler $compiler): void
     {
         $compiler
             ->write(sprintf("echo '<div class=\"sonata-gist\"><script src=\"https://gist.github.com/%s.js?file=%s\"></script></div>';\n",
