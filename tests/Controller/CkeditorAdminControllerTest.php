@@ -24,8 +24,11 @@ use Symfony\Component\Form\FormRenderer;
 
 class EntityWithGetId
 {
-    public function getId(): void
+    protected $id;
+
+    public function getId()
     {
+        return $this->id;
     }
 }
 
