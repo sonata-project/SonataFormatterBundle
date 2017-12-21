@@ -24,6 +24,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -195,7 +196,7 @@ class FormatterType extends AbstractType
 
         $formatters = [];
         foreach ($pool->getFormatters() as $code => $instance) {
-            $formatters[$code] = $translator->trans($code, [], 'SonataFormatterBundle');
+            $formatters[$code] = $code;
         }
 
         $formatFieldOptions = [
@@ -203,7 +204,12 @@ class FormatterType extends AbstractType
         ];
 
         if (count($formatters) > 1) {
-            $formatFieldOptions['choice_translation_domain'] = false;
+            $formatFieldOptions['choice_translation_domain'] = 'SonataFormatterBundle';
+
+            // choices_as_values options is not needed in SF 3.0+
+            if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
+                $formatFieldOptions['choices_as_values'] = true;
+            }
         }
 
         $resolver->setDefaults([
