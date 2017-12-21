@@ -15,7 +15,9 @@ use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -485,5 +487,40 @@ class FormatterTypeTest extends TestCase
         ]);
 
         $this->assertSame($view->vars['ckeditor_templates'], $templates);
+    }
+
+    public function testOptions()
+    {
+        $formatters = ['text' => 'Text', 'html' => 'HTML', 'markdown' => 'Markdown'];
+
+        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->disableOriginalConstructor()->getMock();
+        $pool->method('getFormatters')->will($this->returnValue($formatters));
+
+        $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
+
+        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+
+        $optionsResolver = new OptionsResolver();
+
+        $type = new FormatterType($pool, $translator, $configManager);
+        $type->configureOptions($optionsResolver);
+
+        $options = $optionsResolver->resolve();
+
+        $expectedOptions = [
+            'choices' => [
+                'text' => 'text',
+                'html' => 'html',
+                'markdown' => 'markdown',
+            ],
+            'choice_translation_domain' => 'SonataFormatterBundle',
+        ];
+
+        // choices_as_values options is not needed in SF 3.0+
+        if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
+            $expectedOptions['choices_as_values'] = true;
+        }
+
+        $this->assertEquals($expectedOptions, $options['format_field_options']);
     }
 }

@@ -73,7 +73,10 @@ Now, let's define a form to edit this post:
             'event_dispatcher' => $formBuilder->getEventDispatcher(),
             'format_field'   => 'contentFormatter',
             'format_field_options' => array(
-                'choices' => array('text', 'markdown'),
+                'choices' => [
+                    'text' => 'Text',
+                    'markdown' => 'Markdown',
+                ],
                 'data' => 'markdown',
             ),
             'source_field'   => 'rawContent',
