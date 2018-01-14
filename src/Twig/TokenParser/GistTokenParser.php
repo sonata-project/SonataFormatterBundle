@@ -19,9 +19,6 @@ use Twig\TokenParser\AbstractTokenParser;
 
 class GistTokenParser extends AbstractTokenParser
 {
-    /**
-     * {@inheritdoc}
-     */
     public function parse(Token $token)
     {
         $gist = $this->parser->getExpressionParser()->parseExpression();
@@ -35,9 +32,6 @@ class GistTokenParser extends AbstractTokenParser
         return new GistNode($gist, $file, $token->getLine(), $this->getTag());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTag()
     {
         return 'gist';

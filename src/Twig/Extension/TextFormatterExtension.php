@@ -27,26 +27,17 @@ class TextFormatterExtension extends AbstractExtension
      */
     protected $pool;
 
-    /**
-     * @param Pool $pool
-     */
     public function __construct(Pool $pool)
     {
         $this->pool = $pool;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTokenParsers()
     {
         return [
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFilters()
     {
         return [
@@ -65,9 +56,6 @@ class TextFormatterExtension extends AbstractExtension
         return $this->pool->transform($type, $text);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'sonata_text_formatter';

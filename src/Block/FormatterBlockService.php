@@ -29,9 +29,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class FormatterBlockService extends AbstractAdminBlockService
 {
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         return $this->renderResponse($blockContext->getTemplate(), [
@@ -40,9 +37,6 @@ class FormatterBlockService extends AbstractAdminBlockService
         ], $response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
         $formMapper->add('settings', ImmutableArrayType::class, [
@@ -61,9 +55,6 @@ class FormatterBlockService extends AbstractAdminBlockService
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -74,9 +65,6 @@ class FormatterBlockService extends AbstractAdminBlockService
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockMetadata($code = null)
     {
         return new Metadata($this->getName(), (null !== $code ? $code : $this->getName()), false, 'SonataFormatterBundle', [

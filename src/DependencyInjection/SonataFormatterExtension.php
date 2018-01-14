@@ -28,9 +28,6 @@ class SonataFormatterExtension extends Extension
 {
     /**
      * Loads the url shortener configuration.
-     *
-     * @param array            $configs   An array of configuration settings
-     * @param ContainerBuilder $container A ContainerBuilder instance
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -94,10 +91,7 @@ class SonataFormatterExtension extends Extension
     }
 
     /**
-     * @param ContainerBuilder $container
-     * @param string           $code
-     * @param Definition       $formatter
-     * @param array            $extensions
+     * @param string $code
      *
      * @return string
      */
@@ -158,25 +152,16 @@ class SonataFormatterExtension extends Extension
         return sprintf('sonata.formatter.twig.env.%s', $code);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getXsdValidationBasePath()
     {
         return __DIR__.'/../Resources/config/schema';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getNamespace()
     {
         return 'http://www.sonata-project.org/schema/dic/formatter';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAlias()
     {
         return 'sonata_formatter';

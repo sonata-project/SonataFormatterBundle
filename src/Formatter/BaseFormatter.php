@@ -22,9 +22,6 @@ abstract class BaseFormatter implements FormatterInterface
      */
     protected $extensions = [];
 
-    /**
-     * @param ExtensionInterface $extensionInterface
-     */
     public function addExtension(ExtensionInterface $extensionInterface): void
     {
         $this->extensions[] = $extensionInterface;

@@ -14,25 +14,22 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\Formatter;
 
 use Sonata\FormatterBundle\Extension\ExtensionInterface;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
+use Twig\Loader\ChainLoader;
 
-class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterface
+class TwigFormatter implements FormatterInterface
 {
     /**
-     * @var \Twig_Environment
+     * @var Environment
      */
     protected $twig;
 
-    /**
-     * @param \Twig_Environment $twig
-     */
-    public function __construct(\Twig_Environment $twig)
+    public function __construct(Environment $twig)
     {
         $this->twig = $twig;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function transform($text)
     {
         // Here we temporary changing twig environment loader to Chain loader with Twig_Loader_Array as first loader,
@@ -41,8 +38,8 @@ class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterf
 
         $hash = sha1($text);
 
-        $chainLoader = new \Twig_Loader_Chain();
-        $chainLoader->addLoader(new \Twig_Loader_Array([$hash => $text]));
+        $chainLoader = new ChainLoader();
+        $chainLoader->addLoader(new ArrayLoader([$hash => $text]));
         $chainLoader->addLoader($oldLoader);
 
         $this->twig->setLoader($chainLoader);
@@ -54,17 +51,11 @@ class TwigFormatter implements \Sonata\FormatterBundle\Formatter\FormatterInterf
         return $result;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addExtension(ExtensionInterface $extensionInterface): void
     {
         throw new \RuntimeException('\\Sonata\\FormatterBundle\\Formatter\\TwigFormatter cannot have extensions');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExtensions()
     {
         return [];

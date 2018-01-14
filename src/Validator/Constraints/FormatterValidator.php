@@ -27,17 +27,11 @@ class FormatterValidator extends ConstraintValidator
      */
     protected $pool;
 
-    /**
-     * @param Pool $pool
-     */
     public function __construct(Pool $pool)
     {
         $this->pool = $pool;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($value, Constraint $constraint): void
     {
         if (!$this->pool->has($value)) {

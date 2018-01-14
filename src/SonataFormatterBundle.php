@@ -19,25 +19,16 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SonataFormatterBundle extends Bundle
 {
-    /**
-     * {@inheritdoc}
-     */
     public function build(ContainerBuilder $container): void
     {
         $this->registerFormMapping();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function boot(): void
     {
         $this->registerFormMapping();
     }
 
-    /**
-     * Register form mapping information.
-     */
     public function registerFormMapping(): void
     {
         FormHelper::registerFormTypeMapping([

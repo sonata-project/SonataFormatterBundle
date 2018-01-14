@@ -25,17 +25,11 @@ class Formatter extends Constraint
      */
     public $message = 'The formatter is not valid';
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy()
     {
         return 'sonata.formatter.validator.formatter';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets()
     {
         return self::PROPERTY_CONSTRAINT;

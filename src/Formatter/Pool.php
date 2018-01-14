@@ -16,9 +16,9 @@ namespace Sonata\FormatterBundle\Formatter;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
-use Twig_Environment;
-use Twig_Error_Syntax;
-use Twig_Sandbox_SecurityError;
+use Twig\Environment;
+use Twig\Error\SyntaxError;
+use Twig\Sandbox\SecurityError;
 
 class Pool implements LoggerAwareInterface
 {
@@ -44,11 +44,9 @@ class Pool implements LoggerAwareInterface
     }
 
     /**
-     * @param string                 $code
-     * @param FormatterInterface     $formatter
-     * @param \Twig_Environment|null $env
+     * @param string $code
      */
-    public function add($code, FormatterInterface $formatter, Twig_Environment $env = null): void
+    public function add($code, FormatterInterface $formatter, Environment $env = null): void
     {
         $this->formatters[$code] = [$formatter, $env];
     }
@@ -101,7 +99,7 @@ class Pool implements LoggerAwareInterface
                     $text = $env->render($text);
                 }
             }
-        } catch (Twig_Error_Syntax $e) {
+        } catch (SyntaxError $e) {
             $this->logger->critical(sprintf(
                 '[FormatterBundle::transform] %s - Error while parsing twig template : %s',
                 $code,
@@ -110,7 +108,7 @@ class Pool implements LoggerAwareInterface
                 'text' => $text,
                 'exception' => $e,
             ]);
-        } catch (Twig_Sandbox_SecurityError $e) {
+        } catch (SecurityError $e) {
             $this->logger->critical(sprintf(
                 '[FormatterBundle::transform] %s - the user try an non white-listed keyword : %s',
                 $code,

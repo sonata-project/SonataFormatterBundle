@@ -40,20 +40,20 @@ class SimpleFormatterType extends AbstractType
     private $templateManager;
 
     /**
-     * @param ConfigManagerInterface   $configManager   An Ivory CKEditor bundle configuration manager
-     * @param PluginManagerInterface   $pluginManager   An Ivory CKEditor bundle plugin manager
-     * @param TemplateManagerInterface $templateManager An Ivory CKEditor bundle template manager
+     * @param ConfigManagerInterface        $configManager   An Ivory CKEditor bundle configuration manager
+     * @param PluginManagerInterface|null   $pluginManager   An Ivory CKEditor bundle plugin manager
+     * @param TemplateManagerInterface|null $templateManager An Ivory CKEditor bundle template manager
      */
-    public function __construct(ConfigManagerInterface $configManager, PluginManagerInterface $pluginManager = null, TemplateManagerInterface $templateManager = null)
-    {
+    public function __construct(
+        ConfigManagerInterface $configManager,
+        PluginManagerInterface $pluginManager = null,
+        TemplateManagerInterface $templateManager = null
+    ) {
         $this->configManager = $configManager;
         $this->pluginManager = $pluginManager;
         $this->templateManager = $templateManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $ckeditorConfiguration = [
@@ -120,25 +120,16 @@ class SimpleFormatterType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent()
     {
         return TextareaType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sonata_simple_formatter_type';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->getBlockPrefix();

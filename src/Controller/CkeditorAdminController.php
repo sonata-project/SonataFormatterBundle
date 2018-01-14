@@ -28,8 +28,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class CkeditorAdminController extends MediaAdminController
 {
     /**
-     * Returns the response object associated with the browser action.
-     *
      * @throws AccessDeniedException
      *
      * @return Response
@@ -101,8 +99,6 @@ class CkeditorAdminController extends MediaAdminController
     }
 
     /**
-     * Returns the response object associated with the upload action.
-     *
      * @throws AccessDeniedException
      * @throws NotFoundHttpException
      *
@@ -152,10 +148,6 @@ class CkeditorAdminController extends MediaAdminController
     }
 
     /**
-     * Returns a template.
-     *
-     * @param string $name
-     *
      * @return string
      */
     private function getTemplate($name)
@@ -183,9 +175,6 @@ class CkeditorAdminController extends MediaAdminController
 
     /**
      * Sets the admin form theme to form view. Used for compatibility between Symfony versions.
-     *
-     * @param FormView $formView
-     * @param string   $theme
      */
     private function setFormTheme(FormView $formView, $theme): void
     {

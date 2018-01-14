@@ -26,6 +26,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -58,14 +59,17 @@ class FormatterType extends AbstractType
     private $templateManager;
 
     /**
-     * @param Pool                     $pool            A Formatter Pool service
-     * @param TranslatorInterface      $translator      A Symfony Translator service
-     * @param ConfigManagerInterface   $configManager   An Ivory CKEditor bundle configuration manager
-     * @param PluginManagerInterface   $pluginManager   An Ivory CKEditor bundle plugin manager
-     * @param TemplateManagerInterface $templateManager An Ivory CKEditor bundle template manager
+     * @param ConfigManagerInterface|null   $configManager   An Ivory CKEditor bundle configuration manager
+     * @param PluginManagerInterface|null   $pluginManager   An Ivory CKEditor bundle plugin manager
+     * @param TemplateManagerInterface|null $templateManager An Ivory CKEditor bundle template manager
      */
-    public function __construct(Pool $pool, TranslatorInterface $translator, ConfigManagerInterface $configManager, PluginManagerInterface $pluginManager = null, TemplateManagerInterface $templateManager = null)
-    {
+    public function __construct(
+        Pool $pool,
+        TranslatorInterface $translator,
+        ConfigManagerInterface $configManager,
+        PluginManagerInterface $pluginManager = null,
+        TemplateManagerInterface $templateManager = null
+    ) {
         $this->pool = $pool;
         $this->translator = $translator;
         $this->configManager = $configManager;
@@ -73,9 +77,6 @@ class FormatterType extends AbstractType
         $this->templateManager = $templateManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if (is_array($options['format_field'])) {
@@ -135,9 +136,6 @@ class FormatterType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         if (is_array($options['source_field'])) {
@@ -193,9 +191,6 @@ class FormatterType extends AbstractType
         $view->vars['source_id'] = str_replace($view->vars['name'], $view->vars['source_field'], $view->vars['id']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $pool = $this->pool;
@@ -203,7 +198,7 @@ class FormatterType extends AbstractType
 
         $formatters = [];
         foreach ($pool->getFormatters() as $code => $instance) {
-            $formatters[$code] = $translator->trans($code, [], 'SonataFormatterBundle');
+            $formatters[$code] = $code;
         }
 
         $formatFieldOptions = [
@@ -211,7 +206,12 @@ class FormatterType extends AbstractType
         ];
 
         if (count($formatters) > 1) {
-            $formatFieldOptions['choice_translation_domain'] = false;
+            $formatFieldOptions['choice_translation_domain'] = 'SonataFormatterBundle';
+
+            // choices_as_values options is not needed in SF 3.0+
+            if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
+                $formatFieldOptions['choices_as_values'] = true;
+            }
         }
 
         $resolver->setDefaults([
@@ -248,17 +248,11 @@ class FormatterType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sonata_formatter_type';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->getBlockPrefix();
