@@ -11,7 +11,6 @@ Simple Formatter Wiget
 
 The ``sonata_simple_formatter_type_selector`` widget has been implemented to allow developers to force the input formatter value.
 
-
 .. code-block:: php
 
     <?php
@@ -127,81 +126,27 @@ If you stop here, the most interesting part will not be present. Let's edit some
     If you want to see an actual implementation of this can, you can have a look at the ``SonataNewsBundle``.
 
 
-Dynamic Input
--------------
-
-Open the ``config.yml`` file and add the following lines (or adjust the current configuration):
-
-.. code-block:: yaml
-
-    twig:
-        debug:            "%kernel.debug%"
-        strict_variables: "%kernel.debug%"
-
-        form:
-            resources:
-                # ...
-                - 'SonataFormatterBundle:Form:formatter.html.twig'
-
-
-Make sure the ``SonataFormatterBundle:Form:formatter.html.twig`` is set.
-This template contains custom javascript code to load the selected text editor.
-
-You also need to include some assets in your template:
-
-.. code-block:: html
-
-    <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/skins/sonata/style.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/sets/markdown/style.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/sets/html/style.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/sets/textile/style.css') }}" type="text/css" media="all" />
-
-    <script src="{{ asset('bundles/ivoryckeditor/ckeditor.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/sonataformatter/vendor/markitup-markitup/markitup/jquery.markitup.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/sonataformatter/markitup/sets/markdown/set.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/sonataformatter/markitup/sets/html/set.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/sonataformatter/markitup/sets/textile/set.js') }}" type="text/javascript"></script>
-
-.. note::
-
-    Files provided in the ``SonataMarkItUpBundle`` are fine for standard usage, feel free to include your own configuration files.
-    For more information about how to edit configuration please refer to their officials documentations.
-
 Sonata Admin Integration
 ------------------------
 
-Of course, it is possible to use this feature with the ``SonataAdminBundle``. In order to make it work, you need to do an extra bit of work.
-
-Create a new file named ``layout.html.twig`` inside the ``app/Resources/SonataAdminBundle/views/`` with the following content:
-
-.. code-block:: jinja
-
-    {% extends 'SonataAdminBundle::standard_layout.html.twig' %}
-
-    {% block stylesheets %}
-        {{ parent() }}
-
-        <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/skins/sonata/style.css') }}" type="text/css" media="all" />
-        <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/sets/markdown/style.css') }}" type="text/css" media="all" />
-        <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/sets/html/style.css') }}" type="text/css" media="all" />
-        <link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/sets/textile/style.css') }}" type="text/css" media="all" />
-    {% endblock %}
-
-    {% block javascripts %}
-        {{ parent() }}
-
-        <script src="{{ asset('bundles/ivoryckeditor/ckeditor.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/sonataformatter/vendor/markitup-markitup/markitup/jquery.markitup.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/sonataformatter/markitup/sets/markdown/set.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/sonataformatter/markitup/sets/html/set.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/sonataformatter/markitup/sets/textile/set.js') }}" type="text/javascript"></script>
-    {% endblock %}
-
-Then, update the ``sonata_admin`` configuration to use this template:
+Of course, it is possible to use this feature with the ``SonataAdminBundle``.
+Open the ``config.yml`` file and add the following lines (or extend the current configuration):
 
 .. code-block:: yaml
 
     sonata_admin:
-        templates:
-            # default global templates
-            layout:  SonataAdminBundle::layout.html.twig
+        assets:
+            extra_javascripts:
+                # ...
+                - bundles/ivoryckeditor/ckeditor.js
+                - bundles/sonataformatter/vendor/markitup-markitup/markitup/jquery.markitup.js
+                - bundles/sonataformatter/markitup/sets/markdown/set.js
+                - bundles/sonataformatter/markitup/sets/html/set.js
+                - bundles/sonataformatter/markitup/sets/textile/set.js
+
+            extra_stylesheets:
+                # ...
+                - bundles/sonataformatter/markitup/skins/sonata/style.css
+                - bundles/sonataformatter/markitup/sets/markdown/style.css
+                - bundles/sonataformatter/markitup/sets/html/style.css
+                - bundles/sonataformatter/markitup/sets/textile/style.css
