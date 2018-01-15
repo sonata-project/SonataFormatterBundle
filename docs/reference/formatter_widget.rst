@@ -6,8 +6,8 @@
 One recurrent need is to provide some kind of rich user interface to edit content.
 However, depending on the final target the content can have different formats: ``markdown``, ``textile``, ``bbcode``, ``rawhtml``, ``richhtml``.
 
-Simple Formatter Wiget
-======================
+Simple Formatter Widget
+=======================
 
 The ``sonata_simple_formatter_type_selector`` widget has been implemented to allow developers to force the input formatter value.
 
