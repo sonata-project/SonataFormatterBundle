@@ -26,13 +26,13 @@ class FormatterBlockServiceTest extends AbstractBlockServiceTestCase
             'format' => 'richhtml',
             'rawContent' => '<b>Insert your custom content here</b>',
             'content' => '<b>Insert your custom content here</b>',
-            'template' => 'SonataFormatterBundle:Block:block_formatter.html.twig',
+            'template' => '@SonataFormatter/Block/block_formatter.html.twig',
         ]);
 
         $blockService = new FormatterBlockService('block.service', $this->templating);
         $blockService->execute($blockContext);
 
-        $this->assertSame('SonataFormatterBundle:Block:block_formatter.html.twig', $this->templating->view);
+        $this->assertSame('@SonataFormatter/Block/block_formatter.html.twig', $this->templating->view);
 
         $this->assertInternalType('array', $this->templating->parameters['settings']);
         $this->assertInstanceOf('Sonata\BlockBundle\Model\BlockInterface', $this->templating->parameters['block']);
@@ -47,7 +47,7 @@ class FormatterBlockServiceTest extends AbstractBlockServiceTestCase
             'format' => 'richhtml',
             'rawContent' => '<b>Insert your custom content here</b>',
             'content' => '<b>Insert your custom content here</b>',
-            'template' => 'SonataFormatterBundle:Block:block_formatter.html.twig',
+            'template' => '@SonataFormatter/Block/block_formatter.html.twig',
         ], $blockContext);
     }
 }
