@@ -40,7 +40,7 @@
                         appendClass = 'html';
                         break;
                     case 'richhtml':
-                        {% include 'SonataFormatterBundle:Form:ckeditor.html.twig' with {'ckeditor_field_id': form.children[source_field].vars.id} %}
+                        {% include '@SonataFormatter/Form/ckeditor.html.twig' with {'ckeditor_field_id': form.children[source_field].vars.id} %}
                 }
 
                 var parent = elms.parents('div.markItUp');
@@ -83,7 +83,7 @@
             {% elseif format == 'rawhtml' %}
                 elms.markItUp(markitup_sonataHtmlSettings);
             {% elseif format == 'richhtml' %}
-                {% include 'SonataFormatterBundle:Form:ckeditor.html.twig' with {'ckeditor_field_id': form.vars.id} %}
+                {% include '@SonataFormatter/Form/ckeditor.html.twig' with {'ckeditor_field_id': form.vars.id} %}
             {% endif %}
 
             var parent = elms.parents('div.markItUp');

@@ -42,7 +42,7 @@ Edit the ``config.yml`` file and add these lines:
         strict_variables: "%kernel.debug%"
 
         form_themes:
-            - 'SonataFormatterBundle:Form:formatter.html.twig'
+            - '@SonataFormatter/Form/formatter.html.twig'
 
     sonata_formatter:
         default_formatter: text
