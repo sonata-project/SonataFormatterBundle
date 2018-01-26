@@ -61,7 +61,7 @@ class FormatterBlockService extends AbstractAdminBlockService
             'format' => 'richhtml',
             'rawContent' => '<b>Insert your custom content here</b>',
             'content' => '<b>Insert your custom content here</b>',
-            'template' => 'SonataFormatterBundle:Block:block_formatter.html.twig',
+            'template' => '@SonataFormatter/Block/block_formatter.html.twig',
         ]);
     }
 
