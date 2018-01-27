@@ -8,9 +8,27 @@ To begin, add the dependent bundles:
 
 .. code-block:: bash
 
-    $ php composer.phar require sonata-project/formatter-bundle
+    $ composer require sonata-project/formatter-bundle
 
-Register the bundles in ``app/AppKernel.php``:
+Register the bundles in ``bundles.php`` file:
+
+.. code-block:: php
+
+    <?php
+
+    // config/bundles.php
+
+    return [
+        //...
+        Knp\Bundle\MarkdownBundle\KnpMarkdownBundle::class => ['all' => true],
+        Ivory\CKEditorBundle\IvoryCKEditorBundle::class => ['all' => true],
+        Sonata\FormatterBundle\SonataFormatterBundle::class => ['all' => true],
+    ];
+
+.. note::
+    If you are not using Symfony Flex, you should enable bundles in your
+    ``AppKernel.php``.
+
 
 .. code-block:: php
 
@@ -32,17 +50,28 @@ Register the bundles in ``app/AppKernel.php``:
 Configuration
 =============
 
-Edit the ``config.yml`` file and add these lines:
+Add Twig configuration:
 
 .. code-block:: yaml
 
-    # Twig Configuration
+    # config/packages/twig.yaml
+
     twig:
         debug:            "%kernel.debug%"
         strict_variables: "%kernel.debug%"
 
         form_themes:
             - '@SonataFormatter/Form/formatter.html.twig'
+
+.. note::
+    If you are not using Symfony Flex, this configuration should be added
+    to ``app/config/config.yml``.
+
+Now add SonataFormatter configuration:
+
+.. code-block:: yaml
+
+    # config/packages/sonata.yaml
 
     sonata_formatter:
         default_formatter: text
@@ -82,3 +111,7 @@ Edit the ``config.yml`` file and add these lines:
             twig:
                 service: sonata.formatter.text.twigengine
                 extensions: [] # Twig formatter cannot have extensions
+
+.. note::
+    If you are not using Symfony Flex, this configuration should be added
+    to ``app/config/config.yml``.
