@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.4.1](https://github.com/sonata-project/SonataFormatterBundle/compare/3.4.0...3.4.1) - 2018-02-02
+### Changed
+- Switch all templates references to Twig namespaced syntax
+- Switch from templating service to sonata.templating
+
+### Fixed
+- Fixed form initialisation in sf3+
+
 ## [3.4.0](https://github.com/sonata-project/SonataFormatterBundle/compare/3.3.0...3.4.0) - 2017-12-07
 ### Added
 - Possibility to configure size of the image returned to ckeditor after upload.
