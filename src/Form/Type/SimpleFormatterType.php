@@ -13,6 +13,7 @@ namespace Sonata\FormatterBundle\Form\Type;
 
 use Ivory\CKEditorBundle\Model\ConfigManagerInterface;
 use Ivory\CKEditorBundle\Model\PluginManagerInterface;
+use Ivory\CKEditorBundle\Model\StylesSetManagerInterface;
 use Ivory\CKEditorBundle\Model\TemplateManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -33,23 +34,31 @@ class SimpleFormatterType extends AbstractType
     protected $pluginManager;
 
     /**
+     * @var StylesSetManagerInterface
+     */
+    private $stylesSetManager;
+
+    /**
      * @var TemplateManagerInterface
      */
     private $templateManager;
 
     /**
-     * @param ConfigManagerInterface        $configManager   An Ivory CKEditor bundle configuration manager
-     * @param PluginManagerInterface|null   $pluginManager   An Ivory CKEditor bundle plugin manager
-     * @param TemplateManagerInterface|null $templateManager An Ivory CKEditor bundle template manager
+     * @param ConfigManagerInterface         $configManager    An Ivory CKEditor bundle configuration manager
+     * @param PluginManagerInterface|null    $pluginManager    An Ivory CKEditor bundle plugin manager
+     * @param TemplateManagerInterface|null  $templateManager  An Ivory CKEditor bundle template manager
+     * @param StylesSetManagerInterface|null $stylesSetManager An Ivory CKEditor bundle styles set manager
      */
     public function __construct(
         ConfigManagerInterface $configManager,
         PluginManagerInterface $pluginManager = null,
-        TemplateManagerInterface $templateManager = null
+        TemplateManagerInterface $templateManager = null,
+        StylesSetManagerInterface $stylesSetManager = null
     ) {
         $this->configManager = $configManager;
         $this->pluginManager = $pluginManager;
         $this->templateManager = $templateManager;
+        $this->stylesSetManager = $stylesSetManager;
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
@@ -75,10 +84,17 @@ class SimpleFormatterType extends AbstractType
             $options['ckeditor_templates'] = $this->templateManager->getTemplates();
         }
 
+        if (null !== $this->stylesSetManager && $this->stylesSetManager->hasStylesSets()) {
+            $options['ckeditor_style_sets'] = $this->stylesSetManager->getStylesSets();
+        } else {
+            $options['ckeditor_style_sets'] = [];
+        }
+
         $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;
         $view->vars['ckeditor_basepath'] = $options['ckeditor_basepath'];
         $view->vars['ckeditor_plugins'] = $options['ckeditor_plugins'];
         $view->vars['ckeditor_templates'] = $options['ckeditor_templates'];
+        $view->vars['ckeditor_style_sets'] = $options['ckeditor_style_sets'];
 
         $view->vars['format'] = $options['format'];
     }
