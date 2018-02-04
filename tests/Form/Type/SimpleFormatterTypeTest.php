@@ -61,7 +61,7 @@ class SimpleFormatterTypeTest extends TestCase
         );
     }
 
-    public function testBuildViewWithStylesSet()
+    public function testBuildViewWithStylesSet(): void
     {
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
         $stylesSetManager = $this->createMock('Ivory\CKEditorBundle\Model\StylesSetManagerInterface');
