@@ -60,4 +60,50 @@ class SimpleFormatterTypeTest extends TestCase
             ['toolbar' => ['Button1'], 'filebrowserImageUploadRouteParameters' => ['format' => 'format']]
         );
     }
+
+    public function testBuildViewWithStylesSet()
+    {
+        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+        $stylesSetManager = $this->createMock('Ivory\CKEditorBundle\Model\StylesSetManagerInterface');
+        $view = $this->createMock('Symfony\Component\Form\FormView');
+        $form = $this->createMock('Symfony\Component\Form\FormInterface');
+
+        $styleSets = [
+            'my_styleset' => [
+                ['name' => 'Blue Title', 'element' => 'h2', 'styles' => ['color' => 'Blue']],
+                ['name' => 'CSS Style', 'element' => 'span', 'attributes' => ['class' => 'my_style']],
+                ['name' => 'Multiple Element Style', 'element' => ['h2', 'span'], 'attributes' => ['class' => 'my_class']],
+                ['name' => 'Widget Style', 'type' => 'widget', 'widget' => 'my_widget', 'attributes' => ['class' => 'my_widget_style']],
+            ],
+        ];
+
+        $configManager->expects($this->once())
+            ->method('getConfig')
+            ->with('context')
+            ->will($this->returnValue(['toolbar' => ['Button1']]));
+        $stylesSetManager->expects($this->once())
+            ->method('getStylesSets')
+            ->will($this->returnValue($styleSets));
+        $stylesSetManager->expects($this->once())
+            ->method('hasStylesSets')
+            ->will($this->returnValue(true));
+
+        $view->vars['id'] = 'SomeId';
+        $view->vars['name'] = 'SomeName';
+
+        $type = new SimpleFormatterType($configManager, null, null, $stylesSetManager);
+
+        $type->buildView($view, $form, [
+            'format' => 'format',
+            'ckeditor_context' => 'context',
+            'ckeditor_image_format' => 'format',
+            'ckeditor_basepath' => '',
+            'ckeditor_plugins' => [],
+            'ckeditor_templates' => [],
+            'ckeditor_style_sets' => [],
+            'ckeditor_toolbar_icons' => [],
+        ]);
+
+        $this->assertSame($view->vars['ckeditor_style_sets'], $styleSets);
+    }
 }
