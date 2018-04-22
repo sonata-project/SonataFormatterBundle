@@ -15,6 +15,8 @@ namespace Sonata\FormatterBundle\Tests\Controller;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Sonata\AdminBundle\Templating\TemplateRegistry;
+use Sonata\AdminBundle\Templating\TemplateRegistryInterface;
 use Sonata\FormatterBundle\Controller\CkeditorAdminController;
 use Symfony\Bridge\Twig\AppVariable;
 use Symfony\Bridge\Twig\Command\DebugCommand;
@@ -140,6 +142,11 @@ class CkeditorAdminControllerTest extends TestCase
         $this->admin->getTemplate('layout')->willReturn('layout.html.twig');
         $this->admin->isChild()->willReturn(false);
         $this->admin->setRequest($this->request->reveal())->shouldBeCalled();
+
+        if (interface_exists(TemplateRegistryInterface::class)) {
+            $this->container->get('admin_code.template_registry')->willReturn(new TemplateRegistry());
+            $this->admin->getCode()->willReturn('admin_code');
+        }
     }
 
     private function configureGetCurrentRequest($request): void
