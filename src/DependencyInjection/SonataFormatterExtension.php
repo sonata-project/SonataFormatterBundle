@@ -41,7 +41,7 @@ class SonataFormatterExtension extends Extension
 
         $bundles = $container->getParameter('kernel.bundles');
 
-        if (isset($bundles['IvoryCKEditorBundle'])) {
+        if (isset($bundles['FOSCKEditorBundle'])) {
             $loader->load('form.xml');
         }
 

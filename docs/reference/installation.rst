@@ -21,7 +21,7 @@ Register the bundles in ``bundles.php`` file:
     return [
         //...
         Knp\Bundle\MarkdownBundle\KnpMarkdownBundle::class => ['all' => true],
-        Ivory\CKEditorBundle\IvoryCKEditorBundle::class => ['all' => true],
+        FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
         Sonata\FormatterBundle\SonataFormatterBundle::class => ['all' => true],
     ];
 
@@ -43,7 +43,7 @@ Register the bundles in ``bundles.php`` file:
         // SonataMarkItUpBundle is deprecated. All assets are now available in formatter bundle
         // new Sonata\MarkItUpBundle\SonataMarkItUpBundle(),
         new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
-        new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+        new FOS\CKEditorBundle\FOSCKEditorBundle(),
         new Sonata\FormatterBundle\SonataFormatterBundle(),
     );
 

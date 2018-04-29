@@ -13,14 +13,14 @@ It can be a quick way for editors to manage medias.
 Configuration
 -------------
 
-First of all, you have to define your ``IvoryCKEditorBundle`` (already embedded in ``SonataFormatterBundle``) configuration.
-Be sure to have the ``ivory/ivory_ckeditor.yml`` configuration file available. It should contain something like this:
+First of all, you have to define your ``FOSCKEditorBundle`` (already embedded in ``SonataFormatterBundle``) configuration.
+Be sure to have the ``fos/fos_ck_editor.yml`` configuration file available. It should contain something like this:
 
 .. code-block:: yaml
 
-    # app/config/ivory/ivory_ckeditor.yml
+    # app/config/fos/fos_ck_editor.yml
 
-    ivory_ck_editor:
+    fos_ck_editor:
         default_config: default
         configs:
             default:
@@ -46,7 +46,7 @@ Be sure to have the ``ivory/ivory_ckeditor.yml`` configuration file available. I
 
 You can provide custom routes and a custom context to match your needs.
 
-Second step, don't forget to import this ``ivory/ivory_ckeditor.yml`` file in your ``app/config.yml`` like this:
+Second step, don't forget to import this ``fos/fos_ck_editor.yml`` file in your ``app/config.yml`` like this:
 
 .. code-block:: yaml
 
@@ -54,8 +54,8 @@ Second step, don't forget to import this ``ivory/ivory_ckeditor.yml`` file in yo
 
   # ...
 
-  # Ivory CKEditor
-  - { resource: ivory/ivory_ckeditor.yml }
+  # FOSCKEditor
+  - { resource: fos/fos_ck_editor.yml }
 
 This third step is optional. You can do it if you need to define some custom browsing and uploading templates.
 To do so, add these few lines in your ``sonata_formatter.yml`` file:
@@ -113,7 +113,7 @@ Then you can pass this format to CKEditor:
 
 .. code-block:: yaml
 
-    ivory_ck_editor:
+    fos_ck_editor:
         configs:
             default:
                 filebrowserImageUploadRoute: admin_sonata_media_media_ckeditor_upload

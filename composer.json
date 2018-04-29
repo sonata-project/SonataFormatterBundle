@@ -24,7 +24,7 @@
     ],
     "require": {
         "php": "^5.6 || ^7.0",
-        "egeloen/ckeditor-bundle": "^4.0 || ^5.0 || ^6.0",
+        "friendsofsymfony/ckeditor-bundle": "dev-master",
         "knplabs/knp-markdown-bundle": "^1.7",
         "sonata-project/block-bundle": "^3.11",
         "sonata-project/core-bundle": "^3.9",

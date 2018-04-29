@@ -11,10 +11,10 @@
 
 namespace Sonata\FormatterBundle\Form\Type;
 
-use Ivory\CKEditorBundle\Model\ConfigManagerInterface;
-use Ivory\CKEditorBundle\Model\PluginManagerInterface;
-use Ivory\CKEditorBundle\Model\StylesSetManagerInterface;
-use Ivory\CKEditorBundle\Model\TemplateManagerInterface;
+use FOS\CKEditorBundle\Model\ConfigManagerInterface;
+use FOS\CKEditorBundle\Model\PluginManagerInterface;
+use FOS\CKEditorBundle\Model\StylesSetManagerInterface;
+use FOS\CKEditorBundle\Model\TemplateManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormInterface;
@@ -44,10 +44,10 @@ class SimpleFormatterType extends AbstractType
     private $templateManager;
 
     /**
-     * @param ConfigManagerInterface         $configManager    An Ivory CKEditor bundle configuration manager
-     * @param PluginManagerInterface|null    $pluginManager    An Ivory CKEditor bundle plugin manager
-     * @param TemplateManagerInterface|null  $templateManager  An Ivory CKEditor bundle template manager
-     * @param StylesSetManagerInterface|null $stylesSetManager An Ivory CKEditor bundle styles set manager
+     * @param ConfigManagerInterface         $configManager    An FOS CKEditor bundle configuration manager
+     * @param PluginManagerInterface|null    $pluginManager    An FOS CKEditor bundle plugin manager
+     * @param TemplateManagerInterface|null  $templateManager  An FOS CKEditor bundle template manager
+     * @param StylesSetManagerInterface|null $stylesSetManager An FOS CKEditor bundle styles set manager
      */
     public function __construct(
         ConfigManagerInterface $configManager,
