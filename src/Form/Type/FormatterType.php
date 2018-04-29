@@ -57,9 +57,9 @@ class FormatterType extends AbstractType
     private $templateManager;
 
     /**
-     * @param ConfigManagerInterface|null   $configManager   An FOS CKEditor bundle configuration manager
-     * @param PluginManagerInterface|null   $pluginManager   An FOS CKEditor bundle plugin manager
-     * @param TemplateManagerInterface|null $templateManager An FOS CKEditor bundle template manager
+     * @param ConfigManagerInterface|null   $configManager   A FOS CKEditor bundle configuration manager
+     * @param PluginManagerInterface|null   $pluginManager   A FOS CKEditor bundle plugin manager
+     * @param TemplateManagerInterface|null $templateManager A FOS CKEditor bundle template manager
      */
     public function __construct(
         Pool $pool,
