@@ -44,10 +44,10 @@ class SimpleFormatterType extends AbstractType
     private $templateManager;
 
     /**
-     * @param ConfigManagerInterface         $configManager    An FOS CKEditor bundle configuration manager
-     * @param PluginManagerInterface|null    $pluginManager    An FOS CKEditor bundle plugin manager
-     * @param TemplateManagerInterface|null  $templateManager  An FOS CKEditor bundle template manager
-     * @param StylesSetManagerInterface|null $stylesSetManager An FOS CKEditor bundle styles set manager
+     * @param ConfigManagerInterface         $configManager    A FOS CKEditor bundle configuration manager
+     * @param PluginManagerInterface|null    $pluginManager    A FOS CKEditor bundle plugin manager
+     * @param TemplateManagerInterface|null  $templateManager  A FOS CKEditor bundle template manager
+     * @param StylesSetManagerInterface|null $stylesSetManager A FOS CKEditor bundle styles set manager
      */
     public function __construct(
         ConfigManagerInterface $configManager,
