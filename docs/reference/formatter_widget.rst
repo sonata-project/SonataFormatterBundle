@@ -138,7 +138,7 @@ Open the ``config.yml`` file and add the following lines (or extend the current 
         assets:
             extra_javascripts:
                 # ...
-                - bundles/ivoryckeditor/ckeditor.js
+                - bundles/fosckeditor/ckeditor.js
                 - bundles/sonataformatter/vendor/markitup-markitup/markitup/jquery.markitup.js
                 - bundles/sonataformatter/markitup/sets/markdown/set.js
                 - bundles/sonataformatter/markitup/sets/html/set.js

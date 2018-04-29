@@ -11,9 +11,9 @@
 
 namespace Sonata\FormatterBundle\Form\Type;
 
-use Ivory\CKEditorBundle\Model\ConfigManagerInterface;
-use Ivory\CKEditorBundle\Model\PluginManagerInterface;
-use Ivory\CKEditorBundle\Model\TemplateManagerInterface;
+use FOS\CKEditorBundle\Model\ConfigManagerInterface;
+use FOS\CKEditorBundle\Model\PluginManagerInterface;
+use FOS\CKEditorBundle\Model\TemplateManagerInterface;
 use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -57,9 +57,9 @@ class FormatterType extends AbstractType
     private $templateManager;
 
     /**
-     * @param ConfigManagerInterface|null   $configManager   An Ivory CKEditor bundle configuration manager
-     * @param PluginManagerInterface|null   $pluginManager   An Ivory CKEditor bundle plugin manager
-     * @param TemplateManagerInterface|null $templateManager An Ivory CKEditor bundle template manager
+     * @param ConfigManagerInterface|null   $configManager   An FOS CKEditor bundle configuration manager
+     * @param PluginManagerInterface|null   $pluginManager   An FOS CKEditor bundle plugin manager
+     * @param TemplateManagerInterface|null $templateManager An FOS CKEditor bundle template manager
      */
     public function __construct(
         Pool $pool,
