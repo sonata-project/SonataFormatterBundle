@@ -87,7 +87,7 @@ class CkeditorAdminController extends MediaAdminController
 
         $this->setFormTheme($formView, $this->admin->getFilterTheme());
 
-        return $this->render($this->getTemplate('browser'), [
+        return $this->renderWithExtraParams($this->getTemplate('browser'), [
             'action' => 'browser',
             'form' => $formView,
             'datagrid' => $datagrid,
@@ -138,7 +138,7 @@ class CkeditorAdminController extends MediaAdminController
             $request->get('format', MediaProviderInterface::FORMAT_REFERENCE)
         );
 
-        return $this->render($this->getTemplate('upload'), [
+        return $this->renderWithExtraParams($this->getTemplate('upload'), [
             'action' => 'list',
             'object' => $media,
             'format' => $format,
