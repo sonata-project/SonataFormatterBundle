@@ -11,10 +11,14 @@
 
 namespace Sonata\FormatterBundle\Form\Type;
 
-use FOS\CKEditorBundle\Model\ConfigManagerInterface;
-use FOS\CKEditorBundle\Model\PluginManagerInterface;
-use FOS\CKEditorBundle\Model\StylesSetManagerInterface;
-use FOS\CKEditorBundle\Model\TemplateManagerInterface;
+use FOS\CKEditorBundle\Model\ConfigManagerInterface as FOSConfigManagerInterface;
+use FOS\CKEditorBundle\Model\PluginManagerInterface as FOSPluginManagerInterface;
+use FOS\CKEditorBundle\Model\TemplateManagerInterface as FOSTemplateManagerInterface;
+use FOS\CKEditorBundle\Model\StylesSetManagerInterface as FOSStylesSetManagerInterface;
+use Ivory\CKEditorBundle\Model\ConfigManagerInterface as IvoryConfigManagerInterface;
+use Ivory\CKEditorBundle\Model\PluginManagerInterface as IvoryPluginManagerInterface;
+use Ivory\CKEditorBundle\Model\TemplateManagerInterface as IvoryTemplateManagerInterface;
+use Ivory\CKEditorBundle\Model\StylesSetManagerInterface as IvoryStylesSetManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormInterface;
@@ -24,37 +28,93 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class SimpleFormatterType extends AbstractType
 {
     /**
-     * @var ConfigManagerInterface
+     * @var FOSConfigManagerInterface|IvoryConfigManagerInterface
      */
     protected $configManager;
 
     /**
-     * @var PluginManagerInterface
+     * @var FOSPluginManagerInterface|IvoryPluginManagerInterface
      */
     protected $pluginManager;
 
     /**
-     * @var StylesSetManagerInterface
+     * @var FOSStylesSetManagerInterface|IvoryStylesSetManagerInterface
      */
     private $stylesSetManager;
 
     /**
-     * @var TemplateManagerInterface
+     * @var FOSTemplateManagerInterface|IvoryTemplateManagerInterface
      */
     private $templateManager;
 
     /**
-     * @param ConfigManagerInterface         $configManager    A FOS CKEditor bundle configuration manager
-     * @param PluginManagerInterface|null    $pluginManager    A FOS CKEditor bundle plugin manager
-     * @param TemplateManagerInterface|null  $templateManager  A FOS CKEditor bundle template manager
-     * @param StylesSetManagerInterface|null $stylesSetManager A FOS CKEditor bundle styles set manager
+     * @param FOSConfigManagerInterface|IvoryConfigManagerInterface
+     * $configManager   A CKEditor bundle configuration manager
+     * @param FOSPluginManagerInterface|IvoryPluginManagerInterface|null
+     * $pluginManager   A CKEditor bundle plugin manager
+     * @param FOSTemplateManagerInterface|IvoryTemplateManagerInterface|null
+     * $templateManager A CKEditor bundle template manager
+     * @param FOSStylesSetManagerInterface|IvoryStylesSetManagerInterface|null
+     * $stylesSetManager A CKEditor bundle styles set manager
      */
     public function __construct(
-        ConfigManagerInterface $configManager,
-        PluginManagerInterface $pluginManager = null,
-        TemplateManagerInterface $templateManager = null,
-        StylesSetManagerInterface $stylesSetManager = null
+        $configManager,
+        $pluginManager = null,
+        $templateManager = null,
+        $stylesSetManager = null
     ) {
+        if ($configManager instanceof IvoryConfigManagerInterface) {
+            @trigger_error(
+                'IvoryCKEditorBundle is abandoned and should be replaced with FOSCKEditorBundle.',
+                E_USER_DEPRECATED
+            );
+        } elseif (!$configManager instanceof FOSConfigManagerInterface) {
+            throw new \InvalidArgumentException(sprintf(
+                '$configManager should be of type "%s" or "%s".',
+                FOSConfigManagerInterface::class,
+                IvoryConfigManagerInterface::class
+            ));
+        }
+
+        if ($pluginManager instanceof IvoryPluginManagerInterface) {
+            @trigger_error(
+                'IvoryCKEditorBundle is abandoned and should be replaced with FOSCKEditorBundle.',
+                E_USER_DEPRECATED
+            );
+        } elseif ($pluginManager && !$pluginManager instanceof FOSPluginManagerInterface) {
+            throw new \InvalidArgumentException(sprintf(
+                '$pluginManager should be of type "%s" or "%s".',
+                FOSPluginManagerInterface::class,
+                IvoryPluginManagerInterface::class
+            ));
+        }
+
+        if ($templateManager instanceof IvoryTemplateManagerInterface) {
+            @trigger_error(
+                'IvoryCKEditorBundle is abandoned and should be replaced with FOSCKEditorBundle.',
+                E_USER_DEPRECATED
+            );
+        } elseif ($templateManager && !$templateManager instanceof FOSTemplateManagerInterface) {
+            throw new \InvalidArgumentException(sprintf(
+                '$templateManager should be of type "%s" or "%s".',
+                FOSTemplateManagerInterface::class,
+                IvoryTemplateManagerInterface::class
+            ));
+        }
+
+        if ($stylesSetManager instanceof IvoryStylesSetManagerInterface) {
+            @trigger_error(
+                'IvoryCKEditorBundle is abandoned and should be replaced with FOSCKEditorBundle.',
+                E_USER_DEPRECATED
+            );
+        } elseif ($stylesSetManager && !$stylesSetManager instanceof FOSStylesSetManagerInterface) {
+            throw new \InvalidArgumentException(sprintf(
+                '$stylesSetManager should be of type "%s" or "%s".',
+                FOSStylesSetManagerInterface::class,
+                IvoryStylesSetManagerInterface::class
+            ));
+        }
+
         $this->configManager = $configManager;
         $this->pluginManager = $pluginManager;
         $this->templateManager = $templateManager;
