@@ -106,7 +106,6 @@ class FormatterType extends AbstractType
             ));
         }
 
-
         $this->pool = $pool;
         $this->translator = $translator;
         $this->configManager = $configManager;
