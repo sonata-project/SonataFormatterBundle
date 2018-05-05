@@ -47,6 +47,18 @@ Register the bundles in ``bundles.php`` file:
         new Sonata\FormatterBundle\SonataFormatterBundle(),
     );
 
+You have to install Ckeditor:
+
+.. code-block:: bash
+
+    $  bin/console ckeditor:install
+
+and install Symfony assets:
+
+.. code-block:: bash
+
+    $  bin/console assets:install
+
 Configuration
 =============
 
