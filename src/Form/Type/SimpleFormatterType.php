@@ -63,12 +63,9 @@ class SimpleFormatterType extends AbstractType
         $templateManager = null,
         $stylesSetManager = null
     ) {
-        if ($configManager instanceof IvoryConfigManagerInterface) {
-            @trigger_error(
-                'IvoryCKEditorBundle is abandoned and should be replaced with FOSCKEditorBundle.',
-                E_USER_DEPRECATED
-            );
-        } elseif (!$configManager instanceof FOSConfigManagerInterface) {
+        if (!$configManager instanceof IvoryConfigManagerInterface
+            && !$configManager instanceof FOSConfigManagerInterface
+        ) {
             throw new \InvalidArgumentException(sprintf(
                 '$configManager should be of type "%s" or "%s".',
                 FOSConfigManagerInterface::class,
@@ -76,12 +73,10 @@ class SimpleFormatterType extends AbstractType
             ));
         }
 
-        if ($pluginManager instanceof IvoryPluginManagerInterface) {
-            @trigger_error(
-                'IvoryCKEditorBundle is abandoned and should be replaced with FOSCKEditorBundle.',
-                E_USER_DEPRECATED
-            );
-        } elseif ($pluginManager && !$pluginManager instanceof FOSPluginManagerInterface) {
+        if ($pluginManager
+            && !$pluginManager instanceof IvoryPluginManagerInterface
+            && !$pluginManager instanceof FOSPluginManagerInterface
+        ) {
             throw new \InvalidArgumentException(sprintf(
                 '$pluginManager should be of type "%s" or "%s".',
                 FOSPluginManagerInterface::class,
@@ -89,12 +84,10 @@ class SimpleFormatterType extends AbstractType
             ));
         }
 
-        if ($templateManager instanceof IvoryTemplateManagerInterface) {
-            @trigger_error(
-                'IvoryCKEditorBundle is abandoned and should be replaced with FOSCKEditorBundle.',
-                E_USER_DEPRECATED
-            );
-        } elseif ($templateManager && !$templateManager instanceof FOSTemplateManagerInterface) {
+        if ($templateManager
+            && !$templateManager instanceof IvoryTemplateManagerInterface
+            && !$templateManager instanceof FOSTemplateManagerInterface
+        ) {
             throw new \InvalidArgumentException(sprintf(
                 '$templateManager should be of type "%s" or "%s".',
                 FOSTemplateManagerInterface::class,
@@ -102,12 +95,10 @@ class SimpleFormatterType extends AbstractType
             ));
         }
 
-        if ($stylesSetManager instanceof IvoryStylesSetManagerInterface) {
-            @trigger_error(
-                'IvoryCKEditorBundle is abandoned and should be replaced with FOSCKEditorBundle.',
-                E_USER_DEPRECATED
-            );
-        } elseif ($stylesSetManager && !$stylesSetManager instanceof FOSStylesSetManagerInterface) {
+        if ($stylesSetManager
+            && !$stylesSetManager instanceof IvoryStylesSetManagerInterface
+            && !$stylesSetManager instanceof FOSStylesSetManagerInterface
+        ) {
             throw new \InvalidArgumentException(sprintf(
                 '$stylesSetManager should be of type "%s" or "%s".',
                 FOSStylesSetManagerInterface::class,

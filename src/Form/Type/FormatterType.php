@@ -74,12 +74,9 @@ class FormatterType extends AbstractType
         $pluginManager = null,
         $templateManager = null
     ) {
-        if ($configManager instanceof IvoryConfigManagerInterface) {
-            @trigger_error(
-                'IvoryCKEditorBundle is abandoned and should be replaced with FOSCKEditorBundle.',
-                E_USER_DEPRECATED
-            );
-        } elseif (!$configManager instanceof FOSConfigManagerInterface) {
+        if (!$configManager instanceof IvoryConfigManagerInterface
+            && !$configManager instanceof FOSConfigManagerInterface
+        ) {
             throw new \InvalidArgumentException(sprintf(
                 '$configManager should be of type "%s" or "%s".',
                 FOSConfigManagerInterface::class,
@@ -87,12 +84,10 @@ class FormatterType extends AbstractType
             ));
         }
 
-        if ($pluginManager instanceof IvoryPluginManagerInterface) {
-            @trigger_error(
-                'IvoryCKEditorBundle is abandoned and should be replaced with FOSCKEditorBundle.',
-                E_USER_DEPRECATED
-            );
-        } elseif ($pluginManager && !$pluginManager instanceof FOSPluginManagerInterface) {
+        if ($pluginManager
+            && !$pluginManager instanceof IvoryPluginManagerInterface
+            && !$pluginManager instanceof FOSPluginManagerInterface
+        ) {
             throw new \InvalidArgumentException(sprintf(
                 '$pluginManager should be of type "%s" or "%s".',
                 FOSPluginManagerInterface::class,
@@ -100,18 +95,17 @@ class FormatterType extends AbstractType
             ));
         }
 
-        if ($templateManager instanceof IvoryTemplateManagerInterface) {
-            @trigger_error(
-                'IvoryCKEditorBundle is abandoned and should be replaced with FOSCKEditorBundle.',
-                E_USER_DEPRECATED
-            );
-        } elseif ($templateManager && !$templateManager instanceof FOSTemplateManagerInterface) {
+        if ($templateManager
+            && !$templateManager instanceof IvoryTemplateManagerInterface
+            && !$templateManager instanceof FOSTemplateManagerInterface
+        ) {
             throw new \InvalidArgumentException(sprintf(
                 '$templateManager should be of type "%s" or "%s".',
                 FOSTemplateManagerInterface::class,
                 IvoryTemplateManagerInterface::class
             ));
         }
+
 
         $this->pool = $pool;
         $this->translator = $translator;
