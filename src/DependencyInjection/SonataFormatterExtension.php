@@ -44,6 +44,10 @@ class SonataFormatterExtension extends Extension
         if (isset($bundles['FOSCKEditorBundle'])) {
             $loader->load('form_fos.xml');
         } elseif (isset($bundles['IvoryCKEditorBundle'])) {
+            @trigger_error(
+                'IvoryCKEditorBundle is abandoned and should be replaced with FOSCKEditorBundle.',
+                E_USER_DEPRECATED
+            );
             $loader->load('form_ivory.xml');
         }
 
