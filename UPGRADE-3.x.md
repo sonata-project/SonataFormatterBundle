@@ -1,6 +1,8 @@
 UPGRADE 3.x
 ===========
 
+IvoryCKEditorBundle has been deprecated, you should install [FOSCKEditorBundle](https://github.com/FriendsOfSymfony/FOSCKEditorBundle).
+
 UPGRADE FROM 3.1 to 3.2
 =======================
 
