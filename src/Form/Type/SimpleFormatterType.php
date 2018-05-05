@@ -13,12 +13,12 @@ namespace Sonata\FormatterBundle\Form\Type;
 
 use FOS\CKEditorBundle\Model\ConfigManagerInterface as FOSConfigManagerInterface;
 use FOS\CKEditorBundle\Model\PluginManagerInterface as FOSPluginManagerInterface;
-use FOS\CKEditorBundle\Model\TemplateManagerInterface as FOSTemplateManagerInterface;
 use FOS\CKEditorBundle\Model\StylesSetManagerInterface as FOSStylesSetManagerInterface;
+use FOS\CKEditorBundle\Model\TemplateManagerInterface as FOSTemplateManagerInterface;
 use Ivory\CKEditorBundle\Model\ConfigManagerInterface as IvoryConfigManagerInterface;
 use Ivory\CKEditorBundle\Model\PluginManagerInterface as IvoryPluginManagerInterface;
-use Ivory\CKEditorBundle\Model\TemplateManagerInterface as IvoryTemplateManagerInterface;
 use Ivory\CKEditorBundle\Model\StylesSetManagerInterface as IvoryStylesSetManagerInterface;
+use Ivory\CKEditorBundle\Model\TemplateManagerInterface as IvoryTemplateManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormInterface;

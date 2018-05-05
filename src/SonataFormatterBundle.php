@@ -11,11 +11,11 @@
 
 namespace Sonata\FormatterBundle;
 
+use FOS\CKEditorBundle\Form\Type\CKEditorType as FOSCKEditorType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType as IvoryCKEditorType;
 use Sonata\CoreBundle\Form\FormHelper;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use FOS\CKEditorBundle\Form\Type\CKEditorType as FOSCKEditorType;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType as IvoryCKEditorType;
 
 class SonataFormatterBundle extends Bundle
 {
