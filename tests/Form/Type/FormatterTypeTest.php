@@ -15,7 +15,6 @@ namespace Sonata\FormatterBundle\Tests\Form\Type;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
-use Sonata\FormatterBundle\Formatter\MarkdownFormatter;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Sonata\FormatterBundle\Formatter\RawFormatter;
 use Sonata\FormatterBundle\Formatter\TextFormatter;
@@ -41,6 +40,7 @@ class FormatterTypeTest extends TestCase
 
         $this->pool = new Pool('');
     }
+
     public function testBuildFormOneChoice(): void
     {
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
