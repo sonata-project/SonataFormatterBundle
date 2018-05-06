@@ -73,7 +73,6 @@ class SonataFormatterExtension extends Extension
                 $env = new Reference($this->createEnvironment(
                     $container,
                     $code,
-                    $container->getDefinition($configuration['service']),
                     $configuration['extensions']
                 ));
             }
@@ -90,7 +89,7 @@ class SonataFormatterExtension extends Extension
         );
     }
 
-    public function createEnvironment(ContainerBuilder $container, $code, Definition $formatter, array $extensions): string
+    public function createEnvironment(ContainerBuilder $container, string $code, array $extensions): string
     {
         $loader = new Definition('Twig_Loader_Array');
 
