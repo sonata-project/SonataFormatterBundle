@@ -33,37 +33,37 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
     /**
      * @var string[]
      */
-    protected $allowedTags;
+    private $allowedTags;
 
     /**
      * @var string[]
      */
-    protected $allowedFilters;
+    private $allowedFilters;
 
     /**
      * @var string[]
      */
-    protected $allowedFunctions;
+    private $allowedFunctions;
 
     /**
      * @var string[]
      */
-    protected $allowedProperties;
+    private $allowedProperties;
 
     /**
      * @var string[]
      */
-    protected $allowedMethods;
+    private $allowedMethods;
 
     /**
      * @var ExtensionInterface[]
      */
-    protected $extensions = [];
+    private $extensions = [];
 
     /**
      * @var ContainerInterface
      */
-    protected $container;
+    private $container;
 
     public function __construct(ContainerInterface $container, array $extensions = [])
     {

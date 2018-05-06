@@ -23,7 +23,7 @@ final class TwigFormatter implements FormatterInterface
     /**
      * @var Environment
      */
-    protected $twig;
+    private $twig;
 
     public function __construct(Environment $twig)
     {
