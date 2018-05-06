@@ -18,7 +18,7 @@ use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 use Twig\Loader\ChainLoader;
 
-class TwigFormatter implements FormatterInterface
+final class TwigFormatter implements FormatterInterface
 {
     /**
      * @var Environment

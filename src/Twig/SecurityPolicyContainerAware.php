@@ -28,7 +28,7 @@ use Twig\TemplateInterface;
  * @author fabien.potencier@symfony.com
  * @author thomas.rabaix@sonata-project.org
  */
-class SecurityPolicyContainerAware implements SecurityPolicyInterface
+final class SecurityPolicyContainerAware implements SecurityPolicyInterface
 {
     /**
      * @var string[]

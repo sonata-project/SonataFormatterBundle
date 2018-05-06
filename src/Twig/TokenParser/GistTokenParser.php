@@ -17,7 +17,7 @@ use Sonata\FormatterBundle\Twig\Node\GistNode;
 use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;
 
-class GistTokenParser extends AbstractTokenParser
+final class GistTokenParser extends AbstractTokenParser
 {
     public function parse(Token $token): GistNode
     {

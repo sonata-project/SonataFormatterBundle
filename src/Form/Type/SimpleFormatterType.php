@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SimpleFormatterType extends AbstractType
+final class SimpleFormatterType extends AbstractType
 {
     /**
      * @var ConfigManagerInterface

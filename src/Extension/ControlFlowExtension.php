@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Extension;
 
-class ControlFlowExtension extends BaseExtension
+final class ControlFlowExtension extends BaseExtension
 {
     public function getAllowedFilters(): array
     {

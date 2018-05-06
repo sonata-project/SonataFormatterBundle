@@ -17,7 +17,7 @@ use Twig\Compiler;
 use Twig\Node\Expression\AbstractExpression;
 use Twig\Node\Node;
 
-class GistNode extends Node
+final class GistNode extends Node
 {
     public function __construct(
         AbstractExpression $gist,

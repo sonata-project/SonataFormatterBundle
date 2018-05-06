@@ -31,7 +31,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class FormatterType extends AbstractType
+final class FormatterType extends AbstractType
 {
     /**
      * @var Pool

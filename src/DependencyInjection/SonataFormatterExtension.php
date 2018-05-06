@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class SonataFormatterExtension extends Extension
+final class SonataFormatterExtension extends Extension
 {
     /**
      * Loads the url shortener configuration.

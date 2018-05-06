@@ -22,7 +22,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
  *
  * @author Kévin Dunglas <kevin@les-tilleuls.coop>
  */
-class CkeditorAdminExtension extends AbstractAdminExtension
+final class CkeditorAdminExtension extends AbstractAdminExtension
 {
     public function configureRoutes(AdminInterface $admin, RouteCollection $collection): void
     {

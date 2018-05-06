@@ -17,7 +17,7 @@ use Sonata\CoreBundle\Form\FormHelper;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SonataFormatterBundle extends Bundle
+final class SonataFormatterBundle extends Bundle
 {
     public function build(ContainerBuilder $container): void
     {
