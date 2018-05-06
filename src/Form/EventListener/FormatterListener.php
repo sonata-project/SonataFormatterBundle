@@ -17,7 +17,7 @@ use Sonata\FormatterBundle\Formatter\Pool;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-class FormatterListener
+final class FormatterListener
 {
     /**
      * @var Pool

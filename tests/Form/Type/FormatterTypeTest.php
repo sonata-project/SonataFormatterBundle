@@ -15,6 +15,10 @@ namespace Sonata\FormatterBundle\Tests\Form\Type;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
+use Sonata\FormatterBundle\Formatter\MarkdownFormatter;
+use Sonata\FormatterBundle\Formatter\Pool;
+use Sonata\FormatterBundle\Formatter\RawFormatter;
+use Sonata\FormatterBundle\Formatter\TextFormatter;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormTypeInterface;
@@ -26,14 +30,23 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class FormatterTypeTest extends TestCase
 {
+    /**
+     * @var Pool
+     */
+    private $pool;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->pool = new Pool('');
+    }
     public function testBuildFormOneChoice(): void
     {
-        $pool = $this->getPool();
-
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 
-        $type = new FormatterType($pool, $translator, $configManager);
+        $type = new FormatterType($this->pool, $translator, $configManager);
 
         $choiceFormBuilder = $this->createMock('Symfony\Component\Form\FormBuilderInterface');
         $choiceFormBuilder->expects($this->once())->method('getOption')->with('choices')->will($this->returnValue(['foo' => 'bar']));
@@ -60,11 +73,10 @@ class FormatterTypeTest extends TestCase
 
     public function testBuildFormSeveralChoices(): void
     {
-        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 
-        $type = new FormatterType($pool, $translator, $configManager);
+        $type = new FormatterType($this->pool, $translator, $configManager);
 
         $choiceFormBuilder = $this->createMock('Symfony\Component\Form\FormBuilderInterface');
         $choiceFormBuilder->expects($this->once())->method('getOption')->with('choices')->will($this->returnValue(['foo' => 'bar', 'foo2' => 'bar2']));
@@ -90,26 +102,28 @@ class FormatterTypeTest extends TestCase
 
     public function testBuildFormWithCustomFormatter(): void
     {
-        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 
-        $formatters = ['text' => 'Text', 'html' => 'HTML', 'markdown' => 'Markdown'];
+        $this->pool->add('text', new TextFormatter());
+        $this->pool->add('raw', new RawFormatter());
 
-        $selectedFormat = 'html';
+        $formatters = ['text' => 'Text', 'raw' => 'Raw'];
 
-        $pool->method('getFormatters')->will($this->returnValue($formatters));
-        $type = new FormatterType($pool, $translator, $configManager);
+        $type = new FormatterType($this->pool, $translator, $configManager);
 
         $choiceFormBuilder = $this->createMock('Symfony\Component\Form\FormBuilderInterface');
-        $choiceFormBuilder->expects($this->once())->method('getOption')->with('choices')->will($this->returnValue($formatters));
+        $choiceFormBuilder->expects($this->once())
+            ->method('getOption')
+            ->with('choices')
+            ->will($this->returnValue($formatters));
 
         $options = [
             'format_field' => 'SomeFormatField',
             'source_field' => 'SomeSourceField',
             'format_field_options' => [
                 'property_path' => '',
-                'data' => $selectedFormat,
+                'data' => $selectedFormat = 'text',
                 'choices' => $formatters,
             ],
             'source_field_options' => [
@@ -134,24 +148,26 @@ class FormatterTypeTest extends TestCase
 
     public function testBuildFormWithDefaultFormatter(): void
     {
-        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 
-        $formatters = ['text' => 'Text', 'html' => 'HTML', 'markdown' => 'Markdown'];
-        $defaultFormatter = 'text';
+        $this->pool->add('text', new TextFormatter());
+        $this->pool->add('raw', new RawFormatter());
 
-        $pool->method('getFormatters')->will($this->returnValue($formatters));
-        $pool->method('getDefaultFormatter')->will($this->returnValue('text'));
-        $type = new FormatterType($pool, $translator, $configManager);
+        $formatters = ['text' => 'Text', 'raw' => 'Raw'];
+
+        $type = new FormatterType($this->pool, $translator, $configManager);
 
         $choiceFormBuilder = $this->createMock('Symfony\Component\Form\FormBuilderInterface');
-        $choiceFormBuilder->expects($this->once())->method('getOption')->with('choices')->will($this->returnValue($formatters));
+        $choiceFormBuilder->expects($this->once())
+            ->method('getOption')
+            ->with('choices')
+            ->will($this->returnValue($formatters));
 
         $formBuilder = $this->createMock('Symfony\Component\Form\FormBuilderInterface');
         $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', ChoiceType::class, [
             'property_path' => 'SomeFormatField',
-            'data' => $defaultFormatter,
+            'data' => $defaultFormatter = 'text',
             'choices' => $formatters,
         ]);
         $formBuilder->expects($this->at(1))->method('get')->will($this->returnValue($choiceFormBuilder));
@@ -164,6 +180,7 @@ class FormatterTypeTest extends TestCase
             'source_field' => 'SomeSourceField',
             'format_field_options' => [
                 'property_path' => '',
+                'data' => 'text',
                 'choices' => $formatters,
             ],
             'source_field_options' => [
@@ -177,17 +194,16 @@ class FormatterTypeTest extends TestCase
 
     public function testBuildFormWithDefaultFormatterAndPluginManager(): void
     {
-        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
         $pluginManager = $this->createMock('Ivory\CKEditorBundle\Model\PluginManagerInterface');
 
-        $formatters = ['text' => 'Text', 'html' => 'HTML', 'markdown' => 'Markdown'];
-        $defaultFormatter = 'text';
+        $this->pool->add('text', new TextFormatter());
+        $this->pool->add('raw', new RawFormatter());
 
-        $pool->method('getFormatters')->will($this->returnValue($formatters));
-        $pool->method('getDefaultFormatter')->will($this->returnValue('text'));
-        $type = new FormatterType($pool, $translator, $configManager, $pluginManager);
+        $formatters = ['text' => 'Text', 'raw' => 'Raw'];
+
+        $type = new FormatterType($this->pool, $translator, $configManager, $pluginManager);
 
         $choiceFormBuilder = $this->createMock('Symfony\Component\Form\FormBuilderInterface');
         $choiceFormBuilder->expects($this->once())->method('getOption')->with('choices')->will($this->returnValue($formatters));
@@ -195,7 +211,7 @@ class FormatterTypeTest extends TestCase
         $formBuilder = $this->createMock('Symfony\Component\Form\FormBuilderInterface');
         $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', ChoiceType::class, [
             'property_path' => 'SomeFormatField',
-            'data' => $defaultFormatter,
+            'data' => $defaultFormatter = 'text',
             'choices' => $formatters,
         ]);
         $formBuilder->expects($this->at(1))->method('get')->will($this->returnValue($choiceFormBuilder));
@@ -208,6 +224,7 @@ class FormatterTypeTest extends TestCase
             'source_field' => 'SomeSourceField',
             'format_field_options' => [
                 'property_path' => '',
+                'data' => 'text',
                 'choices' => $formatters,
             ],
             'source_field_options' => [
@@ -221,7 +238,6 @@ class FormatterTypeTest extends TestCase
 
     public function testBuildViewWithDefaultConfig(): void
     {
-        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 
@@ -231,7 +247,7 @@ class FormatterTypeTest extends TestCase
         $configManager->expects($this->once())->method('hasConfig')->with($defaultConfig)->will($this->returnValue(true));
         $configManager->expects($this->once())->method('getConfig')->with($defaultConfig)->will($this->returnValue($defaultConfigValues));
 
-        $type = new FormatterType($pool, $translator, $configManager);
+        $type = new FormatterType($this->pool, $translator, $configManager);
 
         /** @var \Symfony\Component\Form\FormView $view */
         $view = $this->createMock('Symfony\Component\Form\FormView');
@@ -255,7 +271,6 @@ class FormatterTypeTest extends TestCase
 
     public function testBuildViewWithoutDefaultConfig(): void
     {
-        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 
@@ -263,7 +278,7 @@ class FormatterTypeTest extends TestCase
         $configManager->expects($this->once())->method('getDefaultConfig')->will($this->returnValue($defaultConfig));
         $configManager->expects($this->once())->method('hasConfig')->with($defaultConfig)->will($this->returnValue(false));
 
-        $type = new FormatterType($pool, $translator, $configManager);
+        $type = new FormatterType($this->pool, $translator, $configManager);
 
         $ckEditorToolBarIcons = ['Icon 1'];
 
@@ -290,7 +305,6 @@ class FormatterTypeTest extends TestCase
 
     public function testBuildViewWithDefaultConfigAndWithToolbarIcons(): void
     {
-        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 
@@ -300,7 +314,7 @@ class FormatterTypeTest extends TestCase
         $configManager->expects($this->once())->method('hasConfig')->with($defaultConfig)->will($this->returnValue(true));
         $configManager->expects($this->once())->method('getConfig')->with($defaultConfig)->will($this->returnValue($defaultConfigValues));
 
-        $type = new FormatterType($pool, $translator, $configManager);
+        $type = new FormatterType($this->pool, $translator, $configManager);
 
         $ckEditorToolBarIcons = ['Icon 1'];
 
@@ -326,11 +340,10 @@ class FormatterTypeTest extends TestCase
 
     public function testBuildViewWithFormatter(): void
     {
-        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 
-        $type = new FormatterType($pool, $translator, $configManager);
+        $type = new FormatterType($this->pool, $translator, $configManager);
 
         $ckEditorToolBarIcons = ['Icon 1'];
 
@@ -365,7 +378,6 @@ class FormatterTypeTest extends TestCase
 
     public function testBuildViewWithDefaultConfigAndPluginManager(): void
     {
-        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
         $pluginManager = $this->createMock('Ivory\CKEditorBundle\Model\PluginManagerInterface');
@@ -376,7 +388,7 @@ class FormatterTypeTest extends TestCase
         $configManager->expects($this->once())->method('hasConfig')->with($defaultConfig)->will($this->returnValue(true));
         $configManager->expects($this->once())->method('getConfig')->with($defaultConfig)->will($this->returnValue($defaultConfigValues));
 
-        $type = new FormatterType($pool, $translator, $configManager, $pluginManager);
+        $type = new FormatterType($this->pool, $translator, $configManager, $pluginManager);
 
         /** @var FormView $view */
         $view = $this->createMock('Symfony\Component\Form\FormView');
@@ -400,7 +412,6 @@ class FormatterTypeTest extends TestCase
 
     public function testBuildViewWithDefaultConfigAndPluginManagerAndTemplateManager(): void
     {
-        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
         $pluginManager = $this->createMock('Ivory\CKEditorBundle\Model\PluginManagerInterface');
@@ -412,7 +423,7 @@ class FormatterTypeTest extends TestCase
         $configManager->expects($this->once())->method('hasConfig')->with($defaultConfig)->will($this->returnValue(true));
         $configManager->expects($this->once())->method('getConfig')->with($defaultConfig)->will($this->returnValue($defaultConfigValues));
 
-        $type = new FormatterType($pool, $translator, $configManager, $pluginManager, $templateManager);
+        $type = new FormatterType($this->pool, $translator, $configManager, $pluginManager, $templateManager);
 
         /** @var FormView $view */
         $view = $this->createMock('Symfony\Component\Form\FormView');
@@ -436,7 +447,6 @@ class FormatterTypeTest extends TestCase
 
     public function testBuildViewWithDefaultConfigAndPluginManagerAndTemplateManagerAndWithTemplates(): void
     {
-        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
         $pluginManager = $this->createMock('Ivory\CKEditorBundle\Model\PluginManagerInterface');
@@ -463,7 +473,7 @@ class FormatterTypeTest extends TestCase
         $templateManager->expects($this->once())->method('hasTemplates')->will($this->returnValue(true));
         $templateManager->expects($this->once())->method('getTemplates')->will($this->returnValue($templates));
 
-        $type = new FormatterType($pool, $translator, $configManager, $pluginManager, $templateManager);
+        $type = new FormatterType($this->pool, $translator, $configManager, $pluginManager, $templateManager);
 
         /** @var FormView $view */
         $view = $this->createMock('Symfony\Component\Form\FormView');
@@ -487,10 +497,8 @@ class FormatterTypeTest extends TestCase
 
     public function testOptions(): void
     {
-        $formatters = ['text' => 'Text', 'html' => 'HTML', 'markdown' => 'Markdown'];
-
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->disableOriginalConstructor()->getMock();
-        $pool->method('getFormatters')->will($this->returnValue($formatters));
+        $this->pool->add('text', new TextFormatter());
+        $this->pool->add('raw', new RawFormatter());
 
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
 
@@ -498,7 +506,7 @@ class FormatterTypeTest extends TestCase
 
         $optionsResolver = new OptionsResolver();
 
-        $type = new FormatterType($pool, $translator, $configManager);
+        $type = new FormatterType($this->pool, $translator, $configManager);
         $type->configureOptions($optionsResolver);
 
         $options = $optionsResolver->resolve();
@@ -506,8 +514,7 @@ class FormatterTypeTest extends TestCase
         $expectedOptions = [
             'choices' => [
                 'text' => 'text',
-                'html' => 'html',
-                'markdown' => 'markdown',
+                'raw' => 'raw',
             ],
             'choice_translation_domain' => 'SonataFormatterBundle',
         ];
@@ -518,12 +525,5 @@ class FormatterTypeTest extends TestCase
         }
 
         $this->assertEquals($expectedOptions, $options['format_field_options']);
-    }
-
-    private function getPool()
-    {
-        return $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')
-            ->disableOriginalConstructor()
-            ->getMock();
     }
 }

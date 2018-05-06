@@ -20,7 +20,7 @@ use Twig\Environment;
 use Twig\Error\SyntaxError;
 use Twig\Sandbox\SecurityError;
 
-class Pool implements LoggerAwareInterface
+final class Pool implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 

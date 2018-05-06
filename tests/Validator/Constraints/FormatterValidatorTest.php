@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\Tests\Validator\Constraints;
 
 use PHPUnit\Framework\TestCase;
+use Sonata\FormatterBundle\Formatter\FormatterInterface;
+use Sonata\FormatterBundle\Formatter\Pool;
+use Sonata\FormatterBundle\Validator\Constraints\Formatter;
 use Sonata\FormatterBundle\Validator\Constraints\FormatterValidator;
 
 class FormatterValidatorTest extends TestCase
@@ -23,16 +26,26 @@ class FormatterValidatorTest extends TestCase
      */
     private $context;
 
+    /**
+     * @var Pool
+     */
+    private $pool;
+
+    /**
+     * @var Formatter
+     */
+    private $constraint;
+
     protected function setUp(): void
     {
         $this->context = $this->createMock(interface_exists('Symfony\Component\Validator\Context\ExecutionContextInterface') ? 'Symfony\Component\Validator\Context\ExecutionContextInterface' : 'Symfony\Component\Validator\ExecutionContextInterface');
+        $this->pool = new Pool('');
+        $this->constraint = new Formatter();
     }
 
     public function testValidator(): void
     {
-        $pool = $this->getPool();
-
-        $validator = new FormatterValidator($pool);
+        $validator = new FormatterValidator($this->pool);
         $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidator', $validator);
     }
 
@@ -41,53 +54,34 @@ class FormatterValidatorTest extends TestCase
      */
     public function testInvalidCase(): void
     {
-        $pool = $this->getPool();
-        $pool->expects($this->any())
-            ->method('has')
-            ->will($this->returnValue(false));
-
-        $message = 'Constraint message';
-        $constraint = $this->createMock('Sonata\FormatterBundle\Validator\Constraints\Formatter');
-        $constraint->message = $message;
+        $this->constraint->message = $message = 'Constraint message';
 
         $this->context->expects($this->once())
             ->method('addViolation')
             ->with($message);
 
-        $validator = new FormatterValidator($pool);
+        $validator = new FormatterValidator($this->pool);
         $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidator', $validator);
 
         $validator->initialize($this->context);
 
-        $validator->validate('existingFormatter', $constraint);
+        $validator->validate('existingFormatter', $this->constraint);
     }
 
     public function testValidCase(): void
     {
-        $pool = $this->getPool();
-        $pool->expects($this->any())
-            ->method('has')
-            ->will($this->returnValue(true));
+        $this->pool->add('existingFormatter', $this->createMock(FormatterInterface::class));
 
-        $message = 'Constraint message';
-        $constraint = $this->createMock('Sonata\FormatterBundle\Validator\Constraints\Formatter');
-        $constraint->message = $message;
+        $this->constraint->message = $message = 'Constraint message';
 
         $this->context->expects($this->never())
             ->method('addViolation');
 
-        $validator = new FormatterValidator($pool);
+        $validator = new FormatterValidator($this->pool);
         $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidator', $validator);
 
         $validator->initialize($this->context);
 
-        $validator->validate('existingFormatter', $constraint);
-    }
-
-    private function getPool()
-    {
-        return $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $validator->validate('existingFormatter', $this->constraint);
     }
 }

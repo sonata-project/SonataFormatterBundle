@@ -15,7 +15,7 @@ namespace Sonata\FormatterBundle\Formatter;
 
 use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 
-class MarkdownFormatter extends BaseFormatter
+final class MarkdownFormatter extends BaseFormatter
 {
     /**
      * @var MarkdownParserInterface

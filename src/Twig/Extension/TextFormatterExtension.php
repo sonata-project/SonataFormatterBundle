@@ -20,7 +20,7 @@ use Twig\TwigFilter;
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class TextFormatterExtension extends AbstractExtension
+final class TextFormatterExtension extends AbstractExtension
 {
     /**
      * @var Pool

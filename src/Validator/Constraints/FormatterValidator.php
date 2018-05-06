@@ -20,7 +20,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 /**
  * @author Romain Mouillard <romain.mouillard@gmail.com>
  */
-class FormatterValidator extends ConstraintValidator
+final class FormatterValidator extends ConstraintValidator
 {
     /**
      * @var Pool

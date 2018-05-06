@@ -15,7 +15,7 @@ namespace Sonata\FormatterBundle\Extension;
 
 use Sonata\FormatterBundle\Twig\TokenParser\GistTokenParser;
 
-class GistExtension extends BaseExtension
+final class GistExtension extends BaseExtension
 {
     public function getAllowedFilters(): array
     {

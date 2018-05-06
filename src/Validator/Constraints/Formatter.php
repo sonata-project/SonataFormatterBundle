@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class Formatter extends Constraint
+final class Formatter extends Constraint
 {
     /**
      * @var string

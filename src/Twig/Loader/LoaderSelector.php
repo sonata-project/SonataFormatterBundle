@@ -16,7 +16,7 @@ namespace Sonata\FormatterBundle\Twig\Loader;
 use Twig\Loader\LoaderInterface;
 use Twig\Source;
 
-class LoaderSelector implements LoaderInterface
+final class LoaderSelector implements LoaderInterface
 {
     /**
      * @var LoaderInterface
