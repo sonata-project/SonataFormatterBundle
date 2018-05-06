@@ -59,7 +59,7 @@ class FormatterType extends AbstractType
     private $templateManager;
 
     /**
-     * @param ConfigManagerInterface|null   $configManager   An Ivory CKEditor bundle configuration manager
+     * @param ConfigManagerInterface        $configManager   An Ivory CKEditor bundle configuration manager
      * @param PluginManagerInterface|null   $pluginManager   An Ivory CKEditor bundle plugin manager
      * @param TemplateManagerInterface|null $templateManager An Ivory CKEditor bundle template manager
      */
