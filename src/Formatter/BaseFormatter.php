@@ -30,7 +30,7 @@ abstract class BaseFormatter implements FormatterInterface
     /**
      * @return ExtensionInterface[]
      */
-    public function getExtensions()
+    public function getExtensions(): array
     {
         return $this->extensions;
     }
