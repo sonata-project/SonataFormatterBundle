@@ -22,22 +22,22 @@ final class FormatterListener
     /**
      * @var Pool
      */
-    protected $pool;
+    private $pool;
 
     /**
      * @var string
      */
-    protected $formatField;
+    private $formatField;
 
     /**
      * @var string
      */
-    protected $sourceField;
+    private $sourceField;
 
     /**
      * @var string
      */
-    protected $targetField;
+    private $targetField;
 
     public function __construct(Pool $pool, string $formatField, string $sourceField, string $targetField)
     {

@@ -21,12 +21,12 @@ final class LoaderSelector implements LoaderInterface
     /**
      * @var LoaderInterface
      */
-    protected $stringLoader;
+    private $stringLoader;
 
     /**
      * @var LoaderInterface
      */
-    protected $fileLoader;
+    private $fileLoader;
 
     public function __construct(LoaderInterface $stringLoader, LoaderInterface $fileLoader)
     {
