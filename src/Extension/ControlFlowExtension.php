@@ -15,14 +15,14 @@ namespace Sonata\FormatterBundle\Extension;
 
 class ControlFlowExtension extends BaseExtension
 {
-    public function getAllowedFilters()
+    public function getAllowedFilters(): array
     {
         return [
             'escape',
         ];
     }
 
-    public function getAllowedTags()
+    public function getAllowedTags(): array
     {
         return [
             'if',
@@ -30,12 +30,12 @@ class ControlFlowExtension extends BaseExtension
         ];
     }
 
-    public function getAllowedFunctions()
+    public function getAllowedFunctions(): array
     {
         return [];
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'sonata_formatter_extension_flow';
     }

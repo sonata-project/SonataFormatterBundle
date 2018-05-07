@@ -59,7 +59,7 @@ class FormatterType extends AbstractType
     private $templateManager;
 
     /**
-     * @param ConfigManagerInterface|null   $configManager   An Ivory CKEditor bundle configuration manager
+     * @param ConfigManagerInterface        $configManager   An Ivory CKEditor bundle configuration manager
      * @param PluginManagerInterface|null   $pluginManager   An Ivory CKEditor bundle plugin manager
      * @param TemplateManagerInterface|null $templateManager An Ivory CKEditor bundle template manager
      */
@@ -67,8 +67,8 @@ class FormatterType extends AbstractType
         Pool $pool,
         TranslatorInterface $translator,
         ConfigManagerInterface $configManager,
-        PluginManagerInterface $pluginManager = null,
-        TemplateManagerInterface $templateManager = null
+        ?PluginManagerInterface $pluginManager = null,
+        ?TemplateManagerInterface $templateManager = null
     ) {
         $this->pool = $pool;
         $this->translator = $translator;
@@ -248,12 +248,12 @@ class FormatterType extends AbstractType
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sonata_formatter_type';
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->getBlockPrefix();
     }

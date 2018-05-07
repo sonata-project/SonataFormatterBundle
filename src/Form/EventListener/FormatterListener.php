@@ -39,12 +39,7 @@ class FormatterListener
      */
     protected $targetField;
 
-    /**
-     * @param string $formatField
-     * @param string $sourceField
-     * @param string $targetField
-     */
-    public function __construct(Pool $pool, $formatField, $sourceField, $targetField)
+    public function __construct(Pool $pool, string $formatField, string $sourceField, string $targetField)
     {
         $this->pool = $pool;
 

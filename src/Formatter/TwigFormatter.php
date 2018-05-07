@@ -30,7 +30,7 @@ class TwigFormatter implements FormatterInterface
         $this->twig = $twig;
     }
 
-    public function transform($text)
+    public function transform(string $text): string
     {
         // Here we temporary changing twig environment loader to Chain loader with Twig_Loader_Array as first loader,
         // which contains only one our template reference
@@ -56,7 +56,7 @@ class TwigFormatter implements FormatterInterface
         throw new \RuntimeException('\\Sonata\\FormatterBundle\\Formatter\\TwigFormatter cannot have extensions');
     }
 
-    public function getExtensions()
+    public function getExtensions(): array
     {
         return [];
     }

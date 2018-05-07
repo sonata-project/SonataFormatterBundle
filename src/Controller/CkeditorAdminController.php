@@ -29,10 +29,8 @@ class CkeditorAdminController extends MediaAdminController
 {
     /**
      * @throws AccessDeniedException
-     *
-     * @return Response
      */
-    public function browserAction()
+    public function browserAction(): Response
     {
         $this->checkIfMediaBundleIsLoaded();
 
@@ -101,10 +99,8 @@ class CkeditorAdminController extends MediaAdminController
     /**
      * @throws AccessDeniedException
      * @throws NotFoundHttpException
-     *
-     * @return Response
      */
-    public function uploadAction()
+    public function uploadAction(): Response
     {
         $this->checkIfMediaBundleIsLoaded();
 
@@ -147,10 +143,7 @@ class CkeditorAdminController extends MediaAdminController
         ]);
     }
 
-    /**
-     * @return string
-     */
-    private function getTemplate($name)
+    private function getTemplate(string $name): string
     {
         $templates = $this->container->getParameter('sonata.formatter.ckeditor.configuration.templates');
 
@@ -176,7 +169,7 @@ class CkeditorAdminController extends MediaAdminController
     /**
      * Sets the admin form theme to form view. Used for compatibility between Symfony versions.
      */
-    private function setFormTheme(FormView $formView, $theme): void
+    private function setFormTheme(FormView $formView, string $theme): void
     {
         $twig = $this->get('twig');
 

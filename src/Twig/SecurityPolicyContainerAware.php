@@ -71,7 +71,7 @@ class SecurityPolicyContainerAware implements SecurityPolicyInterface
         $this->extensions = $extensions;
     }
 
-    public function checkSecurity($tags, $filters, $functions): void
+    public function checkSecurity(array $tags, array $filters, array $functions): void
     {
         $this->buildAllowed();
 
@@ -94,7 +94,7 @@ class SecurityPolicyContainerAware implements SecurityPolicyInterface
         }
     }
 
-    public function checkMethodAllowed($obj, $method)
+    public function checkMethodAllowed($obj, string $method): bool
     {
         $this->buildAllowed();
 
