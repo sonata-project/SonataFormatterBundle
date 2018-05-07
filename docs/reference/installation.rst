@@ -9,7 +9,7 @@ you can skip to "Install SonataFormatterBundle".
 
 First you will need to add a line to your `composer.json`:
 
-.. code-block:: json
+.. code-block:: javascript
 
     "replace": {
         "egeloen/ckeditor-bundle": "*"
