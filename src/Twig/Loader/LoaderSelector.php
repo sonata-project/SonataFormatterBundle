@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -12,6 +14,7 @@
 namespace Sonata\FormatterBundle\Twig\Loader;
 
 use Twig\Loader\LoaderInterface;
+use Twig\Source;
 
 class LoaderSelector implements LoaderInterface
 {
@@ -31,7 +34,7 @@ class LoaderSelector implements LoaderInterface
         $this->fileLoader = $fileLoader;
     }
 
-    public function getSource($name)
+    public function getSource(string $name): string
     {
         $source = $this->getLoader($name)->getSource($name);
 
@@ -45,32 +48,27 @@ class LoaderSelector implements LoaderInterface
         return $source;
     }
 
-    public function getSourceContext($name)
+    public function getSourceContext($name): Source
     {
         return $this->getLoader($name)->getSourceContext($name);
     }
 
-    public function exists($name)
+    public function exists($name): bool
     {
         return $this->getLoader($name)->exists($name);
     }
 
-    public function getCacheKey($name)
+    public function getCacheKey($name): string
     {
         return $this->getLoader($name)->getCacheKey($name);
     }
 
-    public function isFresh($name, $time)
+    public function isFresh($name, $time): bool
     {
         return false;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Twig_LoaderInterface
-     */
-    private function getLoader($name)
+    private function getLoader(string $name): LoaderInterface
     {
         if ($this->isFile($name)) {
             return $this->fileLoader;
@@ -79,12 +77,7 @@ class LoaderSelector implements LoaderInterface
         return $this->stringLoader;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
-    private function isFile($name)
+    private function isFile(string $name): bool
     {
         if ('.html.twig' == substr($name, -10)) {
             return true;

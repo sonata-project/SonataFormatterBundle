@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -57,7 +59,7 @@ class FormatterType extends AbstractType
     private $templateManager;
 
     /**
-     * @param ConfigManagerInterface|null   $configManager   An Ivory CKEditor bundle configuration manager
+     * @param ConfigManagerInterface        $configManager   An Ivory CKEditor bundle configuration manager
      * @param PluginManagerInterface|null   $pluginManager   An Ivory CKEditor bundle plugin manager
      * @param TemplateManagerInterface|null $templateManager An Ivory CKEditor bundle template manager
      */
@@ -65,8 +67,8 @@ class FormatterType extends AbstractType
         Pool $pool,
         TranslatorInterface $translator,
         ConfigManagerInterface $configManager,
-        PluginManagerInterface $pluginManager = null,
-        TemplateManagerInterface $templateManager = null
+        ?PluginManagerInterface $pluginManager = null,
+        ?TemplateManagerInterface $templateManager = null
     ) {
         $this->pool = $pool;
         $this->translator = $translator;
@@ -75,7 +77,7 @@ class FormatterType extends AbstractType
         $this->templateManager = $templateManager;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if (is_array($options['format_field'])) {
             list($formatField, $formatPropertyPath) = $options['format_field'];
@@ -134,7 +136,7 @@ class FormatterType extends AbstractType
         }
     }
 
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         if (is_array($options['source_field'])) {
             list($sourceField) = $options['source_field'];
@@ -189,7 +191,7 @@ class FormatterType extends AbstractType
         $view->vars['source_id'] = str_replace($view->vars['name'], $view->vars['source_field'], $view->vars['id']);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $pool = $this->pool;
         $translator = $this->translator;
@@ -246,12 +248,12 @@ class FormatterType extends AbstractType
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sonata_formatter_type';
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->getBlockPrefix();
     }

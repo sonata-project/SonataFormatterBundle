@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -15,31 +17,31 @@ use Sonata\FormatterBundle\Twig\TokenParser\GistTokenParser;
 
 class GistExtension extends BaseExtension
 {
-    public function getAllowedFilters()
+    public function getAllowedFilters(): array
     {
         return [];
     }
 
-    public function getAllowedTags()
+    public function getAllowedTags(): array
     {
         return [
             'gist',
         ];
     }
 
-    public function getAllowedFunctions()
+    public function getAllowedFunctions(): array
     {
         return [];
     }
 
-    public function getTokenParsers()
+    public function getTokenParsers(): array
     {
         return [
             new GistTokenParser(),
         ];
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'sonata_formatter_extension_gist';
     }

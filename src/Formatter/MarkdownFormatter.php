@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -25,7 +27,7 @@ class MarkdownFormatter extends BaseFormatter
         $this->parser = $parser;
     }
 
-    public function transform($text)
+    public function transform(string $text): string
     {
         return $this->parser->transformMarkdown($text);
     }

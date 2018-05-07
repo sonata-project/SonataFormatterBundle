@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -17,7 +19,7 @@ use Sonata\FormatterBundle\Formatter\RawFormatter;
 
 class PoolTest extends TestCase
 {
-    public function testPool()
+    public function testPool(): void
     {
         $formatter = new RawFormatter();
         $env = $this->getMockBuilder('\Twig_Environment')
@@ -47,7 +49,7 @@ class PoolTest extends TestCase
         $this->assertSame('Salut', $pool->transform('foo', 'Salut'));
     }
 
-    public function testNonExistantFormatter()
+    public function testNonExistantFormatter(): void
     {
         $this->expectException('RuntimeException');
 
@@ -55,7 +57,7 @@ class PoolTest extends TestCase
         $pool->get('foo');
     }
 
-    public function testSyntaxError()
+    public function testSyntaxError(): void
     {
         $formatter = new RawFormatter();
         $env = $this->getMockBuilder('\Twig_Environment')
@@ -80,7 +82,7 @@ class PoolTest extends TestCase
         $this->assertSame('Salut', $pool->transform('foo', 'Salut'));
     }
 
-    public function testTwig_Sandbox_SecurityError()
+    public function testTwig_Sandbox_SecurityError(): void
     {
         $formatter = new RawFormatter();
         $env = $this->getMockBuilder('\Twig_Environment')
@@ -105,7 +107,7 @@ class PoolTest extends TestCase
         $this->assertSame('Salut', $pool->transform('foo', 'Salut'));
     }
 
-    public function testUnexpectedException()
+    public function testUnexpectedException(): void
     {
         $this->expectException('RuntimeException');
 
@@ -132,62 +134,12 @@ class PoolTest extends TestCase
         $pool->transform('foo', 'Salut');
     }
 
-    public function testDefaultFormatter()
+    public function testDefaultFormatter(): void
     {
         $pool = new Pool('default');
         $pool->setLogger($this->createMock('Psr\Log\LoggerInterface'));
 
         $this->assertSame('default', $pool->getDefaultFormatter());
-    }
-
-    /**
-     * NEXT_MAJOR: This should be removed.
-     *
-     * @group legacy
-     */
-    public function testBcDefaultFormatter()
-    {
-        $formatter = new RawFormatter();
-        $env = $this->getMockBuilder('\Twig_Environment')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $pool = new Pool();
-
-        $pool->add('foo', $formatter, $env);
-
-        $this->assertSame('foo', $pool->getDefaultFormatter());
-    }
-
-    /**
-     * NEXT_MAJOR: This should be removed.
-     *
-     * @group legacy
-     */
-    public function testLoggerProvidedThroughConstuctor()
-    {
-        $formatter = new RawFormatter();
-        $pool = new Pool($logger = $this->createMock('Psr\Log\LoggerInterface'));
-        $env = $this->getMockBuilder('\Twig_Environment')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        // NEXT_MAJOR: remove this if block
-        if (class_exists('\Twig_Loader_Array')) {
-            $template = $this->getMockBuilder('\Twig_Template')
-                ->disableOriginalConstructor()
-                ->getMock();
-            $template->expects($this->once())->method('render')->will($this->throwException(new \Twig_Sandbox_SecurityError('Error')));
-
-            $env->expects($this->once())->method('createTemplate')->will($this->returnValue($template));
-        } else {
-            $env->expects($this->once())->method('render')->will($this->throwException(new \Twig_Sandbox_SecurityError('Error')));
-        }
-
-        $pool->add('foo', $formatter, $env);
-        $logger->expects($this->once())->method('critical');
-
-        $pool->transform('foo', 'whatever');
     }
 
     private function getPool()

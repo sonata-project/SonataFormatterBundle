@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -37,12 +39,7 @@ class FormatterListener
      */
     protected $targetField;
 
-    /**
-     * @param string $formatField
-     * @param string $sourceField
-     * @param string $targetField
-     */
-    public function __construct(Pool $pool, $formatField, $sourceField, $targetField)
+    public function __construct(Pool $pool, string $formatField, string $sourceField, string $targetField)
     {
         $this->pool = $pool;
 
@@ -51,7 +48,7 @@ class FormatterListener
         $this->targetField = $targetField;
     }
 
-    public function postSubmit(FormEvent $event)
+    public function postSubmit(FormEvent $event): void
     {
         $accessor = PropertyAccess::createPropertyAccessor();
 

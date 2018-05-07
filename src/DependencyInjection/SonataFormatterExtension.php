@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -27,7 +29,7 @@ class SonataFormatterExtension extends Extension
     /**
      * Loads the url shortener configuration.
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
         $configuration = new Configuration();
@@ -53,20 +55,9 @@ class SonataFormatterExtension extends Extension
             $loader->load('ckeditor.xml');
         }
 
-        // NEXT_MAJOR: remove this if block
-        if (!isset($config['default_formatter'])) {
-            @trigger_error(
-                'Not setting the default_formatter configuration node is deprecated since 3.2,'.
-                ' and will no longer be supported in 4.0.',
-                E_USER_DEPRECATED
-            );
-            reset($config['formatters']);
-            $config['default_formatter'] = key($config['formatters']);
-        }
-
         if (!array_key_exists($config['default_formatter'], $config['formatters'])) {
             throw new \InvalidArgumentException(sprintf(
-                'SonataFormatterBundle - Invalid default formatter : %s, available : %s',
+                'SonataFormatterBundle - Invalid default formatter: %s, available: %s',
                 $config['default_formatter'],
                 json_encode(array_keys($config['formatters']))
             ));
@@ -82,7 +73,6 @@ class SonataFormatterExtension extends Extension
                 $env = new Reference($this->createEnvironment(
                     $container,
                     $code,
-                    $container->getDefinition($configuration['service']),
                     $configuration['extensions']
                 ));
             }
@@ -99,12 +89,7 @@ class SonataFormatterExtension extends Extension
         );
     }
 
-    /**
-     * @param string $code
-     *
-     * @return string
-     */
-    public function createEnvironment(ContainerBuilder $container, $code, Definition $formatter, array $extensions)
+    public function createEnvironment(ContainerBuilder $container, string $code, array $extensions): string
     {
         $loader = new Definition('Twig_Loader_Array');
 
@@ -161,17 +146,17 @@ class SonataFormatterExtension extends Extension
         return sprintf('sonata.formatter.twig.env.%s', $code);
     }
 
-    public function getXsdValidationBasePath()
+    public function getXsdValidationBasePath(): string
     {
         return __DIR__.'/../Resources/config/schema';
     }
 
-    public function getNamespace()
+    public function getNamespace(): string
     {
         return 'http://www.sonata-project.org/schema/dic/formatter';
     }
 
-    public function getAlias()
+    public function getAlias(): string
     {
         return 'sonata_formatter';
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -69,7 +71,7 @@ class SecurityPolicyContainerAware implements SecurityPolicyInterface
         $this->extensions = $extensions;
     }
 
-    public function checkSecurity($tags, $filters, $functions)
+    public function checkSecurity(array $tags, array $filters, array $functions): void
     {
         $this->buildAllowed();
 
@@ -92,7 +94,7 @@ class SecurityPolicyContainerAware implements SecurityPolicyInterface
         }
     }
 
-    public function checkMethodAllowed($obj, $method)
+    public function checkMethodAllowed($obj, string $method): bool
     {
         $this->buildAllowed();
 
@@ -121,7 +123,7 @@ class SecurityPolicyContainerAware implements SecurityPolicyInterface
         }
     }
 
-    public function checkPropertyAllowed($obj, $property)
+    public function checkPropertyAllowed($obj, $property): void
     {
         $this->buildAllowed();
 
@@ -145,7 +147,7 @@ class SecurityPolicyContainerAware implements SecurityPolicyInterface
         }
     }
 
-    private function buildAllowed()
+    private function buildAllowed(): void
     {
         if (null !== $this->allowedTags) {
             return;

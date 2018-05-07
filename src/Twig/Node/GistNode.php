@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -17,18 +19,16 @@ use Twig\Node\Node;
 
 class GistNode extends Node
 {
-    /**
-     * @param AbstractExpression $gist
-     * @param AbstractExpression $file
-     * @param int                $lineno
-     * @param string|null        $tag
-     */
-    public function __construct(AbstractExpression $gist, AbstractExpression $file, $lineno, $tag = null)
-    {
+    public function __construct(
+        AbstractExpression $gist,
+        AbstractExpression $file,
+        int $lineno,
+        ?string $tag = null
+    ) {
         parent::__construct(['gist' => $gist, 'file' => $file], [], $lineno, $tag);
     }
 
-    public function compile(Compiler $compiler)
+    public function compile(Compiler $compiler): void
     {
         $compiler
             ->write(sprintf(

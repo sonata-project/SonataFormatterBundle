@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -11,77 +13,74 @@
 
 namespace Sonata\FormatterBundle\Extension;
 
-use Twig\Environment;
 use Twig\Extension\AbstractExtension;
+use Twig\ExtensionInterface;
 
 abstract class BaseProxyExtension extends AbstractExtension implements ExtensionInterface
 {
-    /**
-     * @return \Twig_ExtensionInterface
-     */
-    abstract public function getTwigExtension();
+    abstract public function getTwigExtension(): ExtensionInterface;
 
-    public function getAllowedFilters()
+    public function getAllowedFilters(): array
     {
         return [];
     }
 
-    public function getAllowedTags()
+    public function getAllowedTags(): array
     {
         return [];
     }
 
-    public function getAllowedFunctions()
+    public function getAllowedFunctions(): array
     {
         return [];
     }
 
-    public function getAllowedProperties()
+    public function getAllowedProperties(): array
     {
         return [];
     }
 
-    public function getAllowedMethods()
+    public function getAllowedMethods(): array
     {
         return [];
     }
 
-    public function initRuntime(Environment $environment)
+    public function initRuntime(Twig_Environment $environment): void
     {
         $this->getTwigExtension()->initRuntime($environment);
     }
 
-    public function getTokenParsers()
+    public function getTokenParsers(): array
     {
         return $this->getTwigExtension()->getTokenParsers();
     }
 
-    public function getNodeVisitors()
+    public function getNodeVisitors(): array
     {
         return $this->getTwigExtension()->getNodeVisitors();
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return $this->getTwigExtension()->getFilters();
     }
 
-    public function getTests()
+    public function getTests(): array
     {
         return $this->getTwigExtension()->getTests();
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return $this->getTwigExtension()->getFunctions();
     }
 
-    public function getOperators()
+    public function getOperators(): array
     {
         return $this->getTwigExtension()->getOperators();
     }
 
-    public function getGlobals()
+    public function getGlobals(): array
     {
         return $this->getTwigExtension()->getGlobals();
     }

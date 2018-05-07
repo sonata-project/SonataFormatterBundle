@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,14 +24,14 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sonata_formatter');
 
         $rootNode
             ->children()
-                ->scalarNode('default_formatter')->end() // NEXT_MAJOR: make this required
+                ->scalarNode('default_formatter')->isRequired()->cannotBeEmpty()->end()
                 ->arrayNode('formatters')
                     ->useAttributeAsKey('name')
                     ->prototype('array')
@@ -49,7 +51,7 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    private function addCkeditorSection(ArrayNodeDefinition $node)
+    private function addCkeditorSection(ArrayNodeDefinition $node): void
     {
         $node
             ->children()

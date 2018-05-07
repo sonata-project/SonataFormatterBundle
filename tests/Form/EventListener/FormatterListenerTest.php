@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -18,7 +20,7 @@ use Symfony\Component\Form\FormEvent;
 
 class FormatterListenerTest extends TestCase
 {
-    public function testWithInvalidFormatter()
+    public function testWithInvalidFormatter(): void
     {
         $this->expectException('RuntimeException');
 
@@ -35,7 +37,7 @@ class FormatterListenerTest extends TestCase
         $listener->postSubmit($event);
     }
 
-    public function testWithValidFormatter()
+    public function testWithValidFormatter(): void
     {
         $formatter = $this->createMock('Sonata\FormatterBundle\Formatter\FormatterInterface');
         $formatter->expects($this->once())->method('transform')->will($this->returnCallback(function ($text) {

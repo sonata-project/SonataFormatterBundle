@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,9 +26,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class FormatterTypeTest extends TestCase
 {
-    public function testBuildFormOneChoice()
+    public function testBuildFormOneChoice(): void
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->getPool();
 
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
@@ -56,9 +58,9 @@ class FormatterTypeTest extends TestCase
         $type->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormSeveralChoices()
+    public function testBuildFormSeveralChoices(): void
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 
@@ -86,11 +88,9 @@ class FormatterTypeTest extends TestCase
         $type->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormWithCustomFormatter()
+    public function testBuildFormWithCustomFormatter(): void
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 
@@ -132,11 +132,9 @@ class FormatterTypeTest extends TestCase
         $type->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormWithDefaultFormatter()
+    public function testBuildFormWithDefaultFormatter(): void
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 
@@ -177,11 +175,9 @@ class FormatterTypeTest extends TestCase
         $type->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormWithDefaultFormatterAndPluginManager()
+    public function testBuildFormWithDefaultFormatterAndPluginManager(): void
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
         $pluginManager = $this->createMock('Ivory\CKEditorBundle\Model\PluginManagerInterface');
@@ -223,9 +219,9 @@ class FormatterTypeTest extends TestCase
         $type->buildForm($formBuilder, $options);
     }
 
-    public function testBuildViewWithDefaultConfig()
+    public function testBuildViewWithDefaultConfig(): void
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 
@@ -257,9 +253,9 @@ class FormatterTypeTest extends TestCase
         $this->assertSame($view->vars['ckeditor_configuration'], $defaultConfigValues);
     }
 
-    public function testBuildViewWithoutDefaultConfig()
+    public function testBuildViewWithoutDefaultConfig(): void
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 
@@ -292,9 +288,9 @@ class FormatterTypeTest extends TestCase
         $this->assertSame($view->vars['ckeditor_configuration'], $ckeditorConfiguration);
     }
 
-    public function testBuildViewWithDefaultConfigAndWithToolbarIcons()
+    public function testBuildViewWithDefaultConfigAndWithToolbarIcons(): void
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 
@@ -328,9 +324,9 @@ class FormatterTypeTest extends TestCase
         $this->assertSame($view->vars['ckeditor_configuration'], ['toolbar' => $defaultConfigValues['toolbar']]);
     }
 
-    public function testBuildViewWithFormatter()
+    public function testBuildViewWithFormatter(): void
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
 
@@ -367,9 +363,9 @@ class FormatterTypeTest extends TestCase
         $this->assertSame($view->vars['format_field_options']['data'], $format);
     }
 
-    public function testBuildViewWithDefaultConfigAndPluginManager()
+    public function testBuildViewWithDefaultConfigAndPluginManager(): void
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
         $pluginManager = $this->createMock('Ivory\CKEditorBundle\Model\PluginManagerInterface');
@@ -402,9 +398,9 @@ class FormatterTypeTest extends TestCase
         $this->assertSame($view->vars['ckeditor_configuration'], $defaultConfigValues);
     }
 
-    public function testBuildViewWithDefaultConfigAndPluginManagerAndTemplateManager()
+    public function testBuildViewWithDefaultConfigAndPluginManagerAndTemplateManager(): void
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
         $pluginManager = $this->createMock('Ivory\CKEditorBundle\Model\PluginManagerInterface');
@@ -438,9 +434,9 @@ class FormatterTypeTest extends TestCase
         $this->assertSame($view->vars['ckeditor_configuration'], $defaultConfigValues);
     }
 
-    public function testBuildViewWithDefaultConfigAndPluginManagerAndTemplateManagerAndWithTemplates()
+    public function testBuildViewWithDefaultConfigAndPluginManagerAndTemplateManagerAndWithTemplates(): void
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->getPool();
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
         $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
         $pluginManager = $this->createMock('Ivory\CKEditorBundle\Model\PluginManagerInterface');
@@ -489,7 +485,7 @@ class FormatterTypeTest extends TestCase
         $this->assertSame($view->vars['ckeditor_templates'], $templates);
     }
 
-    public function testOptions()
+    public function testOptions(): void
     {
         $formatters = ['text' => 'Text', 'html' => 'HTML', 'markdown' => 'Markdown'];
 
@@ -522,5 +518,12 @@ class FormatterTypeTest extends TestCase
         }
 
         $this->assertEquals($expectedOptions, $options['format_field_options']);
+    }
+
+    private function getPool()
+    {
+        return $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 }

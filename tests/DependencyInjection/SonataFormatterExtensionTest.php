@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -19,7 +21,7 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
     /**
      * NEXT_MAJOR: remove this method when dropping support for sf < 2.8.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!method_exists($this, 'setParameter')) {
             $this->markTestSkipped('Skipping this test for sf 2.3, too cumbersome to write');
@@ -28,7 +30,7 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
         parent::setUp();
     }
 
-    public function testLoadWithMinimalDocumentedConfig()
+    public function testLoadWithMinimalDocumentedConfig(): void
     {
         $this->setParameter('kernel.bundles', []);
         $this->load([
@@ -44,7 +46,7 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('sonata.formatter.pool');
     }
 
-    public function testWithOptionalBundles()
+    public function testWithOptionalBundles(): void
     {
         $this->setParameter('kernel.bundles', array_flip([
             'IvoryCKEditorBundle',
@@ -68,7 +70,7 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('sonata.formatter.ckeditor.extension');
     }
 
-    public function testGetLoader()
+    public function testGetLoader(): void
     {
         $this->setParameter('kernel.bundles', []);
         $this->load();
@@ -81,7 +83,7 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
     /**
      * @group legacy
      */
-    public function testLoadWithoutDefaultFormatter()
+    public function testLoadWithoutDefaultFormatter(): void
     {
         $this->setParameter('kernel.bundles', []);
         $this->load([

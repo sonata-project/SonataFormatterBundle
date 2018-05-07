@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -23,12 +25,12 @@ class Formatter extends Constraint
      */
     public $message = 'The formatter is not valid';
 
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return 'sonata.formatter.validator.formatter';
     }
 
-    public function getTargets()
+    public function getTargets(): string
     {
         return self::PROPERTY_CONSTRAINT;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,67 +18,67 @@ use Twig\Extension\AbstractExtension;
 
 abstract class BaseExtension extends AbstractExtension implements ExtensionInterface
 {
-    public function getAllowedFilters()
+    public function getAllowedFilters(): array
     {
         return [];
     }
 
-    public function getAllowedTags()
+    public function getAllowedTags(): array
     {
         return [];
     }
 
-    public function getAllowedFunctions()
+    public function getAllowedFunctions(): array
     {
         return [];
     }
 
-    public function getAllowedProperties()
+    public function getAllowedProperties(): array
     {
         return [];
     }
 
-    public function getAllowedMethods()
+    public function getAllowedMethods(): array
     {
         return [];
     }
 
-    public function initRuntime(Environment $environment)
+    public function initRuntime(Environment $environment): array
     {
         return [];
     }
 
-    public function getTokenParsers()
+    public function getTokenParsers(): array
     {
         return [];
     }
 
-    public function getNodeVisitors()
+    public function getNodeVisitors(): array
     {
         return [];
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return [];
     }
 
-    public function getTests()
+    public function getTests(): array
     {
         return [];
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [];
     }
 
-    public function getOperators()
+    public function getOperators(): array
     {
         return [];
     }
 
-    public function getGlobals()
+    public function getGlobals(): array
     {
         return [];
     }

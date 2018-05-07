@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -30,7 +32,7 @@ class FormatterValidator extends ConstraintValidator
         $this->pool = $pool;
     }
 
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$this->pool->has($value)) {
             $this->context->addViolation($constraint->message);

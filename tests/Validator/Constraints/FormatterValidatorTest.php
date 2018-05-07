@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -21,16 +23,14 @@ class FormatterValidatorTest extends TestCase
      */
     private $context;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->context = $this->createMock(interface_exists('Symfony\Component\Validator\Context\ExecutionContextInterface') ? 'Symfony\Component\Validator\Context\ExecutionContextInterface' : 'Symfony\Component\Validator\ExecutionContextInterface');
     }
 
-    public function testValidator()
+    public function testValidator(): void
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $pool = $this->getPool();
 
         $validator = new FormatterValidator($pool);
         $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidator', $validator);
@@ -39,9 +39,9 @@ class FormatterValidatorTest extends TestCase
     /**
      * @group legacy
      */
-    public function testInvalidCase()
+    public function testInvalidCase(): void
     {
-        $pool = $this->createMock('Sonata\FormatterBundle\Formatter\Pool');
+        $pool = $this->getPool();
         $pool->expects($this->any())
             ->method('has')
             ->will($this->returnValue(false));
@@ -62,11 +62,9 @@ class FormatterValidatorTest extends TestCase
         $validator->validate('existingFormatter', $constraint);
     }
 
-    public function testValidCase()
+    public function testValidCase(): void
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $pool = $this->getPool();
         $pool->expects($this->any())
             ->method('has')
             ->will($this->returnValue(true));
@@ -84,5 +82,12 @@ class FormatterValidatorTest extends TestCase
         $validator->initialize($this->context);
 
         $validator->validate('existingFormatter', $constraint);
+    }
+
+    private function getPool()
+    {
+        return $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 }

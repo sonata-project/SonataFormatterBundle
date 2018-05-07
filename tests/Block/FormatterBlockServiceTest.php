@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -18,7 +20,7 @@ use Sonata\FormatterBundle\Block\FormatterBlockService;
 
 class FormatterBlockServiceTest extends AbstractBlockServiceTestCase
 {
-    public function testExecute()
+    public function testExecute(): void
     {
         $block = new Block();
 
@@ -38,7 +40,7 @@ class FormatterBlockServiceTest extends AbstractBlockServiceTestCase
         $this->assertInstanceOf('Sonata\BlockBundle\Model\BlockInterface', $this->templating->parameters['block']);
     }
 
-    public function testDefaultSettings()
+    public function testDefaultSettings(): void
     {
         $blockService = new FormatterBlockService('block.service', $this->templating);
         $blockContext = $this->getBlockContext($blockService);
