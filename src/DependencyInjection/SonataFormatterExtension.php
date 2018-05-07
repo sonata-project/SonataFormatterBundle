@@ -88,8 +88,23 @@ final class SonataFormatterExtension extends Extension
             $config['ckeditor']['templates']
         );
     }
+    
+    public function getXsdValidationBasePath(): string
+    {
+        return __DIR__.'/../Resources/config/schema';
+    }
 
-    public function createEnvironment(ContainerBuilder $container, string $code, array $extensions): string
+    public function getNamespace(): string
+    {
+        return 'http://www.sonata-project.org/schema/dic/formatter';
+    }
+
+    public function getAlias(): string
+    {
+        return 'sonata_formatter';
+    }
+
+    private function createEnvironment(ContainerBuilder $container, string $code, array $extensions): string
     {
         $loader = new Definition('Twig_Loader_Array');
 
@@ -144,20 +159,5 @@ final class SonataFormatterExtension extends Extension
         $env->addMethodCall('setLexer', [new Reference(sprintf('sonata.formatter.twig.lexer.%s', $code))]);
 
         return sprintf('sonata.formatter.twig.env.%s', $code);
-    }
-
-    public function getXsdValidationBasePath(): string
-    {
-        return __DIR__.'/../Resources/config/schema';
-    }
-
-    public function getNamespace(): string
-    {
-        return 'http://www.sonata-project.org/schema/dic/formatter';
-    }
-
-    public function getAlias(): string
-    {
-        return 'sonata_formatter';
     }
 }

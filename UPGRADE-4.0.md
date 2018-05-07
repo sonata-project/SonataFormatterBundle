@@ -1,6 +1,10 @@
 UPGRADE FROM 3.x to 4.0
 =======================
 
+# Final
+
+All classes are now final.
+
 # Assets
 Ckeditor has been removed from formatter code, you will have to run:
 
@@ -20,3 +24,4 @@ to regenerate assets.
 
 PHP 7.1 type hints have been added wherever possible, you have to add them in
 types extending or implementing ours.
+
