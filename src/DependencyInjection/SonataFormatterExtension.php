@@ -88,7 +88,7 @@ final class SonataFormatterExtension extends Extension
             $config['ckeditor']['templates']
         );
     }
-    
+
     public function getXsdValidationBasePath(): string
     {
         return __DIR__.'/../Resources/config/schema';
