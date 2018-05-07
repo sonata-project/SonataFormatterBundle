@@ -53,9 +53,9 @@ class SimpleFormatterType extends AbstractType
      */
     public function __construct(
         ConfigManagerInterface $configManager,
-        PluginManagerInterface $pluginManager = null,
-        TemplateManagerInterface $templateManager = null,
-        StylesSetManagerInterface $stylesSetManager = null
+        ?PluginManagerInterface $pluginManager = null,
+        ?TemplateManagerInterface $templateManager = null,
+        ?StylesSetManagerInterface $stylesSetManager = null
     ) {
         $this->configManager = $configManager;
         $this->pluginManager = $pluginManager;
@@ -136,7 +136,7 @@ class SimpleFormatterType extends AbstractType
         ]);
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return TextareaType::class;
     }

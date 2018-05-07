@@ -73,7 +73,6 @@ class SonataFormatterExtension extends Extension
                 $env = new Reference($this->createEnvironment(
                     $container,
                     $code,
-                    $container->getDefinition($configuration['service']),
                     $configuration['extensions']
                 ));
             }
@@ -90,12 +89,7 @@ class SonataFormatterExtension extends Extension
         );
     }
 
-    /**
-     * @param string $code
-     *
-     * @return string
-     */
-    public function createEnvironment(ContainerBuilder $container, $code, Definition $formatter, array $extensions)
+    public function createEnvironment(ContainerBuilder $container, string $code, array $extensions): string
     {
         $loader = new Definition('Twig_Loader_Array');
 
@@ -152,17 +146,17 @@ class SonataFormatterExtension extends Extension
         return sprintf('sonata.formatter.twig.env.%s', $code);
     }
 
-    public function getXsdValidationBasePath()
+    public function getXsdValidationBasePath(): string
     {
         return __DIR__.'/../Resources/config/schema';
     }
 
-    public function getNamespace()
+    public function getNamespace(): string
     {
         return 'http://www.sonata-project.org/schema/dic/formatter';
     }
 
-    public function getAlias()
+    public function getAlias(): string
     {
         return 'sonata_formatter';
     }

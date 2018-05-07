@@ -15,7 +15,7 @@ namespace Sonata\FormatterBundle\Formatter;
 
 class RawFormatter extends BaseFormatter
 {
-    public function transform($text)
+    public function transform(string $text): string
     {
         return $text;
     }

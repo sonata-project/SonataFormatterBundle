@@ -32,31 +32,25 @@ class TextFormatterExtension extends AbstractExtension
         $this->pool = $pool;
     }
 
-    public function getTokenParsers()
+    public function getTokenParsers(): array
     {
         return [
         ];
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('format_text', [$this, 'transform']),
         ];
     }
 
-    /**
-     * @param string $text
-     * @param string $type
-     *
-     * @return string
-     */
-    public function transform($text, $type)
+    public function transform(string $text, string $type): string
     {
         return $this->pool->transform($type, $text);
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'sonata_text_formatter';
     }

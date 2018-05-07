@@ -15,7 +15,7 @@ namespace Sonata\FormatterBundle\Formatter;
 
 class TextFormatter extends BaseFormatter
 {
-    public function transform($text)
+    public function transform(string $text): string
     {
         return nl2br($text);
     }

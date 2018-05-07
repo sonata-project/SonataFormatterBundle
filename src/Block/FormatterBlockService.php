@@ -29,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class FormatterBlockService extends AbstractAdminBlockService
 {
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, Response $response = null): Response
     {
         return $this->renderResponse($blockContext->getTemplate(), [
             'block' => $blockContext->getBlock(),
@@ -65,10 +65,14 @@ class FormatterBlockService extends AbstractAdminBlockService
         ]);
     }
 
-    public function getBlockMetadata($code = null)
+    public function getBlockMetadata($code = null): Metadata
     {
-        return new Metadata($this->getName(), (null !== $code ? $code : $this->getName()), false, 'SonataFormatterBundle', [
-            'class' => 'fa fa-file-text-o',
-        ]);
+        return new Metadata(
+            $this->getName(),
+            null !== $code ? $code : $this->getName(),
+            false,
+            'SonataFormatterBundle',
+            ['class' => 'fa fa-file-text-o']
+        );
     }
 }

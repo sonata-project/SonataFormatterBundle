@@ -39,7 +39,7 @@
         "symfony/property-access": "^2.8 || ^3.2 || ^4.0",
         "symfony/translation": "^2.8 || ^3.2 || ^4.0",
         "symfony/twig-bridge": "^2.8 || ^3.2 || ^4.0",
-        "twig/twig": "^1.34 || ^2.0"
+        "twig/twig": "^2.4"
     },
     "conflict": {
         "sonata-project/admin-bundle": "<3.27",

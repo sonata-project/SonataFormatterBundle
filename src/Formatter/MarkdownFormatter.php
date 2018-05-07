@@ -27,7 +27,7 @@ class MarkdownFormatter extends BaseFormatter
         $this->parser = $parser;
     }
 
-    public function transform($text)
+    public function transform(string $text): string
     {
         return $this->parser->transformMarkdown($text);
     }
