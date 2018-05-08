@@ -13,12 +13,9 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Form\Type;
 
-use FOS\CKEditorBundle\Model\ConfigManagerInterface as FOSConfigManagerInterface;
-use FOS\CKEditorBundle\Model\PluginManagerInterface as FOSPluginManagerInterface;
-use FOS\CKEditorBundle\Model\TemplateManagerInterface as FOSTemplateManagerInterface;
-use Ivory\CKEditorBundle\Model\ConfigManagerInterface as IvoryConfigManagerInterface;
-use Ivory\CKEditorBundle\Model\PluginManagerInterface as IvoryPluginManagerInterface;
-use Ivory\CKEditorBundle\Model\TemplateManagerInterface as IvoryTemplateManagerInterface;
+use FOS\CKEditorBundle\Model\ConfigManagerInterface;
+use FOS\CKEditorBundle\Model\PluginManagerInterface;
+use FOS\CKEditorBundle\Model\TemplateManagerInterface;
 use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -47,67 +44,27 @@ final class FormatterType extends AbstractType
     protected $translator;
 
     /**
-     * @var FOSConfigManagerInterface|IvoryConfigManagerInterface
+     * @var ConfigManagerInterface
      */
     protected $configManager;
 
     /**
-     * @var FOSPluginManagerInterface|IvoryPluginManagerInterface
+     * @var PluginManagerInterface
      */
     protected $pluginManager;
 
     /**
-     * @var FOSTemplateManagerInterface|IvoryTemplateManagerInterface
+     * @var TemplateManagerInterface
      */
     private $templateManager;
 
-    /**
-     * @param FOSConfigManagerInterface|IvoryConfigManagerInterface
-     * $configManager   A CKEditor bundle configuration manager
-     * @param FOSPluginManagerInterface|IvoryPluginManagerInterface|null
-     * $pluginManager   A CKEditor bundle plugin manager
-     * @param FOSTemplateManagerInterface|IvoryTemplateManagerInterface|null
-     * $templateManager A CKEditor bundle template manager
-     */
     public function __construct(
         Pool $pool,
         TranslatorInterface $translator,
-        $configManager,
-        $pluginManager = null,
-        $templateManager = null
+        ConfigManagerInterface $configManager,
+        ?PluginManagerInterface $pluginManager = null,
+        ?TemplateManagerInterface $templateManager = null
     ) {
-        if (!$configManager instanceof IvoryConfigManagerInterface
-            && !$configManager instanceof FOSConfigManagerInterface
-        ) {
-            throw new \InvalidArgumentException(sprintf(
-                '$configManager should be of type "%s" or "%s".',
-                FOSConfigManagerInterface::class,
-                IvoryConfigManagerInterface::class
-            ));
-        }
-
-        if ($pluginManager
-            && !$pluginManager instanceof IvoryPluginManagerInterface
-            && !$pluginManager instanceof FOSPluginManagerInterface
-        ) {
-            throw new \InvalidArgumentException(sprintf(
-                '$pluginManager should be of type "%s" or "%s".',
-                FOSPluginManagerInterface::class,
-                IvoryPluginManagerInterface::class
-            ));
-        }
-
-        if ($templateManager
-            && !$templateManager instanceof IvoryTemplateManagerInterface
-            && !$templateManager instanceof FOSTemplateManagerInterface
-        ) {
-            throw new \InvalidArgumentException(sprintf(
-                '$templateManager should be of type "%s" or "%s".',
-                FOSTemplateManagerInterface::class,
-                IvoryTemplateManagerInterface::class
-            ));
-        }
-
         $this->pool = $pool;
         $this->translator = $translator;
         $this->configManager = $configManager;

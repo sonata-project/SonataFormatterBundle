@@ -18,11 +18,8 @@ use Prophecy\Argument;
 use Sonata\AdminBundle\Templating\TemplateRegistry;
 use Sonata\AdminBundle\Templating\TemplateRegistryInterface;
 use Sonata\FormatterBundle\Controller\CkeditorAdminController;
-use Symfony\Bridge\Twig\AppVariable;
-use Symfony\Bridge\Twig\Command\DebugCommand;
-use Symfony\Bridge\Twig\Extension\FormExtension;
-use Symfony\Bridge\Twig\Form\TwigRenderer;
 use Symfony\Component\Form\FormRenderer;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class EntityWithGetId
 {
@@ -89,7 +86,7 @@ class CkeditorAdminControllerTest extends TestCase
         $this->request->get('filter')->willReturn([]);
         $this->request->get('category')->willReturn(2);
 
-        $response = $this->controller->browserAction();
+        $response = $this->controller->browserAction($this->request->reveal());
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
         $this->assertSame('renderResponse', $response->getContent());
@@ -120,7 +117,7 @@ class CkeditorAdminControllerTest extends TestCase
         $this->request->get('context', 'context')->willReturn('context');
         $this->request->get('format', 'reference')->willReturn('reference');
 
-        $response = $this->controller->uploadAction();
+        $response = $this->controller->uploadAction($this->request->reveal());
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
         $this->assertSame('renderResponse', $response->getContent());
@@ -151,43 +148,23 @@ class CkeditorAdminControllerTest extends TestCase
 
     private function configureGetCurrentRequest($request): void
     {
-        // NEXT_MAJOR: Remove this trick when bumping Symfony requirement to 2.8+.
-        if (class_exists('Symfony\Component\HttpFoundation\RequestStack')) {
-            $requestStack = $this->prophesize('Symfony\Component\HttpFoundation\RequestStack');
+        $requestStack = $this->prophesize(RequestStack::class);
 
-            $this->container->has('request_stack')->willReturn(true);
-            $this->container->get('request_stack')->willReturn($requestStack->reveal());
-            $requestStack->getCurrentRequest()->willReturn($request);
-        } else {
-            $this->container->has('request_stack')->willReturn(false);
-            $this->container->get('request')->willReturn($request);
-        }
+        $this->container->has('request_stack')->willReturn(true);
+        $this->container->get('request_stack')->willReturn($requestStack->reveal());
+        $requestStack->getCurrentRequest()->willReturn($request);
     }
 
     private function configureSetFormTheme($formView, $formTheme): void
     {
         $twig = $this->prophesize(\Twig_Environment::class);
 
-        // Remove this trick when bumping Symfony requirement to 3.4+
-        if (method_exists(DebugCommand::class, 'getLoaderPaths')) {
-            $rendererClass = FormRenderer::class;
-        } else {
-            $rendererClass = TwigRenderer::class;
-        }
-
-        $twigRenderer = $this->prophesize($rendererClass);
+        $twigRenderer = $this->prophesize(FormRenderer::class);
 
         $this->container->get('twig')->willReturn($twig->reveal());
 
-        // Remove this trick when bumping Symfony requirement to 3.2+.
-        if (method_exists(AppVariable::class, 'getToken')) {
-            $twig->getRuntime($rendererClass)->willReturn($twigRenderer->reveal());
-        } else {
-            $formExtension = $this->prophesize(FormExtension::class);
-            $formExtension->renderer = $twigRenderer->reveal();
+        $twig->getRuntime(FormRenderer::class)->willReturn($twigRenderer->reveal());
 
-            $twig->getExtension(FormExtension::class)->willReturn($formExtension->reveal());
-        }
         $twigRenderer->setTheme($formView, $formTheme)->shouldBeCalled();
     }
 

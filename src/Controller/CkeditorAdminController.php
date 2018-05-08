@@ -15,12 +15,9 @@ namespace Sonata\FormatterBundle\Controller;
 
 use Sonata\MediaBundle\Controller\MediaAdminController;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
-use Symfony\Bridge\Twig\AppVariable;
-use Symfony\Bridge\Twig\Command\DebugCommand;
-use Symfony\Bridge\Twig\Extension\FormExtension;
-use Symfony\Bridge\Twig\Form\TwigRenderer;
 use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -30,16 +27,9 @@ final class CkeditorAdminController extends MediaAdminController
     /**
      * @throws AccessDeniedException
      */
-    public function browserAction(): Response
+    public function browserAction(Request $request): Response
     {
         $this->checkIfMediaBundleIsLoaded();
-
-        // NEXT_MAJOR: Remove this when dropping support for SF < 2.8 (change method signature)
-        if ($this->has('request_stack')) {
-            $request = $this->get('request_stack')->getCurrentRequest();
-        } else {
-            $request = $this->get('request');
-        }
 
         $this->admin->checkAccess('list');
 
@@ -100,16 +90,9 @@ final class CkeditorAdminController extends MediaAdminController
      * @throws AccessDeniedException
      * @throws NotFoundHttpException
      */
-    public function uploadAction(): Response
+    public function uploadAction(Request $request): Response
     {
         $this->checkIfMediaBundleIsLoaded();
-
-        // NEXT_MAJOR: Remove this when dropping support for SF < 2.8 (change method signature)
-        if ($this->has('request_stack')) {
-            $request = $this->get('request_stack')->getCurrentRequest();
-        } else {
-            $request = $this->get('request');
-        }
 
         $this->admin->checkAccess('create');
 
@@ -171,22 +154,6 @@ final class CkeditorAdminController extends MediaAdminController
      */
     private function setFormTheme(FormView $formView, string $theme): void
     {
-        $twig = $this->get('twig');
-
-        // BC for Symfony < 3.2 where this runtime does not exists
-        if (!method_exists(AppVariable::class, 'getToken')) {
-            $twig->getExtension(FormExtension::class)->renderer->setTheme($formView, $theme);
-
-            return;
-        }
-
-        // BC for Symfony < 3.4 where runtime should be TwigRenderer
-        if (!method_exists(DebugCommand::class, 'getLoaderPaths')) {
-            $twig->getRuntime(TwigRenderer::class)->setTheme($formView, $theme);
-
-            return;
-        }
-
-        $twig->getRuntime(FormRenderer::class)->setTheme($formView, $theme);
+        $this->get('twig')->getRuntime(FormRenderer::class)->setTheme($formView, $theme);
     }
 }

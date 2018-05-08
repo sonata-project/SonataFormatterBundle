@@ -44,13 +44,7 @@ final class SonataFormatterExtension extends Extension
         $bundles = $container->getParameter('kernel.bundles');
 
         if (isset($bundles['FOSCKEditorBundle'])) {
-            $loader->load('form_fos.xml');
-        } elseif (isset($bundles['IvoryCKEditorBundle'])) {
-            @trigger_error(
-                'IvoryCKEditorBundle is abandoned and should be replaced with FOSCKEditorBundle.',
-                E_USER_DEPRECATED
-            );
-            $loader->load('form_ivory.xml');
+            $loader->load('form.xml');
         }
 
         if (isset($bundles['SonataBlockBundle'])) {
@@ -113,11 +107,6 @@ final class SonataFormatterExtension extends Extension
     private function createEnvironment(ContainerBuilder $container, string $code, array $extensions): string
     {
         $loader = new Definition('Twig_Loader_Array');
-
-        // NEXT_MAJOR: remove this if block
-        if (!class_exists('\Twig_Loader_Array')) {
-            $loader = new Definition('Twig_Loader_String');
-        }
 
         $loader->setPublic(false);
 

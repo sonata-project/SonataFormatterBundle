@@ -18,18 +18,6 @@ use Sonata\FormatterBundle\DependencyInjection\SonataFormatterExtension;
 
 class SonataFormatterExtensionTest extends AbstractExtensionTestCase
 {
-    /**
-     * NEXT_MAJOR: remove this method when dropping support for sf < 2.8.
-     */
-    protected function setUp(): void
-    {
-        if (!method_exists($this, 'setParameter')) {
-            $this->markTestSkipped('Skipping this test for sf 2.3, too cumbersome to write');
-        }
-
-        parent::setUp();
-    }
-
     public function testLoadWithMinimalDocumentedConfig(): void
     {
         $this->setParameter('kernel.bundles', []);

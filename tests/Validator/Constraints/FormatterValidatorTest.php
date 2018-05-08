@@ -18,6 +18,7 @@ use Sonata\FormatterBundle\Formatter\FormatterInterface;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Sonata\FormatterBundle\Validator\Constraints\Formatter;
 use Sonata\FormatterBundle\Validator\Constraints\FormatterValidator;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class FormatterValidatorTest extends TestCase
 {
@@ -38,7 +39,7 @@ class FormatterValidatorTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->context = $this->createMock(interface_exists('Symfony\Component\Validator\Context\ExecutionContextInterface') ? 'Symfony\Component\Validator\Context\ExecutionContextInterface' : 'Symfony\Component\Validator\ExecutionContextInterface');
+        $this->context = $this->createMock(ExecutionContextInterface::class);
         $this->pool = new Pool('');
         $this->constraint = new Formatter();
     }
