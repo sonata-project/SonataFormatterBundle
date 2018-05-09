@@ -44,7 +44,7 @@ class FormatterTypeTest extends TestCase
     public function testBuildFormOneChoice(): void
     {
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
 
         $type = new FormatterType($this->pool, $translator, $configManager);
 
@@ -74,7 +74,7 @@ class FormatterTypeTest extends TestCase
     public function testBuildFormSeveralChoices(): void
     {
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
 
         $type = new FormatterType($this->pool, $translator, $configManager);
 
@@ -103,7 +103,7 @@ class FormatterTypeTest extends TestCase
     public function testBuildFormWithCustomFormatter(): void
     {
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
 
         $this->pool->add('text', new TextFormatter());
         $this->pool->add('raw', new RawFormatter());
@@ -149,7 +149,7 @@ class FormatterTypeTest extends TestCase
     public function testBuildFormWithDefaultFormatter(): void
     {
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
 
         $this->pool->add('text', new TextFormatter());
         $this->pool->add('raw', new RawFormatter());
@@ -195,8 +195,8 @@ class FormatterTypeTest extends TestCase
     public function testBuildFormWithDefaultFormatterAndPluginManager(): void
     {
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
-        $pluginManager = $this->createMock('Ivory\CKEditorBundle\Model\PluginManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
+        $pluginManager = $this->createMock('FOS\CKEditorBundle\Model\PluginManagerInterface');
 
         $this->pool->add('text', new TextFormatter());
         $this->pool->add('raw', new RawFormatter());
@@ -239,7 +239,7 @@ class FormatterTypeTest extends TestCase
     public function testBuildViewWithDefaultConfig(): void
     {
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
 
         $defaultConfig = 'default';
         $defaultConfigValues = ['toolbar' => ['Button1']];
@@ -272,7 +272,7 @@ class FormatterTypeTest extends TestCase
     public function testBuildViewWithoutDefaultConfig(): void
     {
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
 
         $defaultConfig = 'default';
         $configManager->expects($this->once())->method('getDefaultConfig')->will($this->returnValue($defaultConfig));
@@ -306,7 +306,7 @@ class FormatterTypeTest extends TestCase
     public function testBuildViewWithDefaultConfigAndWithToolbarIcons(): void
     {
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
 
         $defaultConfig = 'default';
         $defaultConfigValues = ['toolbar' => ['Button 1']];
@@ -341,7 +341,7 @@ class FormatterTypeTest extends TestCase
     public function testBuildViewWithFormatter(): void
     {
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
 
         $type = new FormatterType($this->pool, $translator, $configManager);
 
@@ -379,8 +379,8 @@ class FormatterTypeTest extends TestCase
     public function testBuildViewWithDefaultConfigAndPluginManager(): void
     {
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
-        $pluginManager = $this->createMock('Ivory\CKEditorBundle\Model\PluginManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
+        $pluginManager = $this->createMock('FOS\CKEditorBundle\Model\PluginManagerInterface');
 
         $defaultConfig = 'default';
         $defaultConfigValues = ['toolbar' => ['Button1']];
@@ -413,9 +413,9 @@ class FormatterTypeTest extends TestCase
     public function testBuildViewWithDefaultConfigAndPluginManagerAndTemplateManager(): void
     {
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
-        $pluginManager = $this->createMock('Ivory\CKEditorBundle\Model\PluginManagerInterface');
-        $templateManager = $this->createMock('Ivory\CKEditorBundle\Model\TemplateManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
+        $pluginManager = $this->createMock('FOS\CKEditorBundle\Model\PluginManagerInterface');
+        $templateManager = $this->createMock('FOS\CKEditorBundle\Model\TemplateManagerInterface');
 
         $defaultConfig = 'default';
         $defaultConfigValues = ['toolbar' => ['Button1']];
@@ -448,9 +448,9 @@ class FormatterTypeTest extends TestCase
     public function testBuildViewWithDefaultConfigAndPluginManagerAndTemplateManagerAndWithTemplates(): void
     {
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
-        $pluginManager = $this->createMock('Ivory\CKEditorBundle\Model\PluginManagerInterface');
-        $templateManager = $this->createMock('Ivory\CKEditorBundle\Model\TemplateManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
+        $pluginManager = $this->createMock('FOS\CKEditorBundle\Model\PluginManagerInterface');
+        $templateManager = $this->createMock('FOS\CKEditorBundle\Model\TemplateManagerInterface');
 
         $defaultConfig = 'default';
         $defaultConfigValues = ['toolbar' => ['Button1']];
@@ -502,7 +502,7 @@ class FormatterTypeTest extends TestCase
 
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
 
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
 
         $optionsResolver = new OptionsResolver();
 

@@ -49,7 +49,7 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
     public function testWithOptionalBundles(): void
     {
         $this->setParameter('kernel.bundles', array_flip([
-            'IvoryCKEditorBundle',
+            'FOSCKEditorBundle',
             'SonataBlockBundle',
             'SonataMediaBundle',
         ]));

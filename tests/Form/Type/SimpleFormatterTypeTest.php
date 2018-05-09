@@ -20,7 +20,7 @@ class SimpleFormatterTypeTest extends TestCase
 {
     public function testBuildForm(): void
     {
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
         $formBuilder = $this->createMock('Symfony\Component\Form\FormBuilderInterface');
 
         $type = new SimpleFormatterType($configManager);
@@ -32,7 +32,7 @@ class SimpleFormatterTypeTest extends TestCase
 
     public function testBuildViewWithDefaultConfig(): void
     {
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
         $view = $this->createMock('Symfony\Component\Form\FormView');
         $form = $this->createMock('Symfony\Component\Form\FormInterface');
 
@@ -63,8 +63,8 @@ class SimpleFormatterTypeTest extends TestCase
 
     public function testBuildViewWithStylesSet(): void
     {
-        $configManager = $this->createMock('Ivory\CKEditorBundle\Model\ConfigManagerInterface');
-        $stylesSetManager = $this->createMock('Ivory\CKEditorBundle\Model\StylesSetManagerInterface');
+        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
+        $stylesSetManager = $this->createMock('FOS\CKEditorBundle\Model\StylesSetManagerInterface');
         $view = $this->createMock('Symfony\Component\Form\FormView');
         $form = $this->createMock('Symfony\Component\Form\FormInterface');
 

@@ -4,7 +4,20 @@
 Installation
 ============
 
-To begin, add the dependent bundles:
+If you are using Symfony4 you will need to make some adjustments, if not
+you can skip to "Install SonataFormatterBundle".
+
+First you will need to add a line to your `composer.json`:
+
+.. code-block:: javascript
+
+    "replace": {
+        "egeloen/ckeditor-bundle": "*"
+    }
+
+And after that you need to install `FOSCKEditorBundle`_.
+
+Install SonataFormatterBundle:
 
 .. code-block:: bash
 
@@ -21,7 +34,7 @@ Register the bundles in ``bundles.php`` file:
     return [
         //...
         Knp\Bundle\MarkdownBundle\KnpMarkdownBundle::class => ['all' => true],
-        Ivory\CKEditorBundle\IvoryCKEditorBundle::class => ['all' => true],
+        FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
         Sonata\FormatterBundle\SonataFormatterBundle::class => ['all' => true],
     ];
 
@@ -43,7 +56,7 @@ Register the bundles in ``bundles.php`` file:
         // SonataMarkItUpBundle is deprecated. All assets are now available in formatter bundle
         // new Sonata\MarkItUpBundle\SonataMarkItUpBundle(),
         new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
-        new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+        new FOS\CKEditorBundle\FOSCKEditorBundle(),
         new Sonata\FormatterBundle\SonataFormatterBundle(),
     );
 
@@ -127,3 +140,5 @@ Now add SonataFormatter configuration:
 .. note::
     If you are not using Symfony Flex, this configuration should be added
     to ``app/config/config.yml``.
+
+.. _`FOSCKEditorBundle`: https://github.com/FriendsOfSymfony/FOSCKEditorBundle
