@@ -12,7 +12,9 @@
 namespace Sonata\FormatterBundle\Tests\Validator\Constraints;
 
 use PHPUnit\Framework\TestCase;
+use Sonata\FormatterBundle\Formatter\Pool;
 use Sonata\FormatterBundle\Validator\Constraints\FormatterValidator;
+use Symfony\Component\Validator\ConstraintValidator;
 
 class FormatterValidatorTest extends TestCase
 {
@@ -28,12 +30,10 @@ class FormatterValidatorTest extends TestCase
 
     public function testValidator()
     {
-        $pool = $this->getMockBuilder('Sonata\FormatterBundle\Formatter\Pool')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $pool = $this->createMock(Pool::class);
 
         $validator = new FormatterValidator($pool);
-        $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidator', $validator);
+        $this->assertInstanceOf(ConstraintValidator::class, $validator);
     }
 
     /**
@@ -55,7 +55,7 @@ class FormatterValidatorTest extends TestCase
             ->with($message);
 
         $validator = new FormatterValidator($pool);
-        $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidator', $validator);
+        $this->assertInstanceOf(ConstraintValidator::class, $validator);
 
         $validator->initialize($this->context);
 
@@ -79,7 +79,7 @@ class FormatterValidatorTest extends TestCase
             ->method('addViolation');
 
         $validator = new FormatterValidator($pool);
-        $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidator', $validator);
+        $this->assertInstanceOf(ConstraintValidator::class, $validator);
 
         $validator->initialize($this->context);
 

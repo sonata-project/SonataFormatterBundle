@@ -11,15 +11,20 @@
 
 namespace Sonata\FormatterBundle\Tests\Form\Type;
 
+use FOS\CKEditorBundle\Model\ConfigManagerInterface;
+use FOS\CKEditorBundle\Model\StylesSetManagerInterface;
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 
 class SimpleFormatterTypeTest extends TestCase
 {
     public function testBuildForm()
     {
-        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
-        $formBuilder = $this->createMock('Symfony\Component\Form\FormBuilderInterface');
+        $configManager = $this->createMock(ConfigManagerInterface::class);
+        $formBuilder = $this->createMock(FormBuilderInterface::class);
 
         $type = new SimpleFormatterType($configManager);
 
@@ -30,9 +35,9 @@ class SimpleFormatterTypeTest extends TestCase
 
     public function testBuildViewWithDefaultConfig()
     {
-        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
-        $view = $this->createMock('Symfony\Component\Form\FormView');
-        $form = $this->createMock('Symfony\Component\Form\FormInterface');
+        $configManager = $this->createMock(ConfigManagerInterface::class);
+        $view = $this->createMock(FormView::class);
+        $form = $this->createMock(FormInterface::class);
 
         $configManager->expects($this->once())
             ->method('getConfig')
@@ -61,17 +66,26 @@ class SimpleFormatterTypeTest extends TestCase
 
     public function testBuildViewWithStylesSet()
     {
-        $configManager = $this->createMock('FOS\CKEditorBundle\Model\ConfigManagerInterface');
-        $stylesSetManager = $this->createMock('FOS\CKEditorBundle\Model\StylesSetManagerInterface');
-        $view = $this->createMock('Symfony\Component\Form\FormView');
-        $form = $this->createMock('Symfony\Component\Form\FormInterface');
+        $configManager = $this->createMock(ConfigManagerInterface::class);
+        $stylesSetManager = $this->createMock(StylesSetManagerInterface::class);
+        $view = $this->createMock(FormView::class);
+        $form = $this->createMock(FormInterface::class);
 
         $styleSets = [
             'my_styleset' => [
                 ['name' => 'Blue Title', 'element' => 'h2', 'styles' => ['color' => 'Blue']],
                 ['name' => 'CSS Style', 'element' => 'span', 'attributes' => ['class' => 'my_style']],
-                ['name' => 'Multiple Element Style', 'element' => ['h2', 'span'], 'attributes' => ['class' => 'my_class']],
-                ['name' => 'Widget Style', 'type' => 'widget', 'widget' => 'my_widget', 'attributes' => ['class' => 'my_widget_style']],
+                [
+                    'name' => 'Multiple Element Style',
+                    'element' => ['h2', 'span'],
+                    'attributes' => ['class' => 'my_class'],
+                ],
+                [
+                    'name' => 'Widget Style',
+                    'type' => 'widget',
+                    'widget' => 'my_widget',
+                    'attributes' => ['class' => 'my_widget_style'],
+                ],
             ],
         ];
 

@@ -12,9 +12,12 @@
 namespace Sonata\FormatterBundle\Tests\Form\EventListener;
 
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
+use Sonata\FormatterBundle\Formatter\FormatterInterface;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormInterface;
 
 class FormatterListenerTest extends TestCase
 {
@@ -26,7 +29,7 @@ class FormatterListenerTest extends TestCase
 
         $listener = new FormatterListener($pool, '[format]', '[source]', '[target]');
 
-        $event = new FormEvent($this->createMock('Symfony\Component\Form\Test\FormInterface'), [
+        $event = new FormEvent($this->createMock(FormInterface::class), [
             'format' => 'error',
             'source' => 'data',
             'target' => null,
@@ -37,7 +40,7 @@ class FormatterListenerTest extends TestCase
 
     public function testWithValidFormatter()
     {
-        $formatter = $this->createMock('Sonata\FormatterBundle\Formatter\FormatterInterface');
+        $formatter = $this->createMock(FormatterInterface::class);
         $formatter->expects($this->once())->method('transform')->will($this->returnCallback(function ($text) {
             return strtoupper($text);
         }));
@@ -47,7 +50,7 @@ class FormatterListenerTest extends TestCase
 
         $listener = new FormatterListener($pool, '[format]', '[source]', '[target]');
 
-        $event = new FormEvent($this->createMock('Symfony\Component\Form\Test\FormInterface'), [
+        $event = new FormEvent($this->createMock(FormInterface::class), [
             'format' => 'myformat',
             'source' => 'data',
             'target' => null,
@@ -67,7 +70,7 @@ class FormatterListenerTest extends TestCase
     private function getPool()
     {
         $pool = new Pool('whatever');
-        $pool->setLogger($this->createMock('Psr\Log\LoggerInterface'));
+        $pool->setLogger($this->createMock(LoggerInterface::class));
 
         return $pool;
     }
