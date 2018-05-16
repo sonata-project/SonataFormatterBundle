@@ -14,6 +14,7 @@ namespace Sonata\FormatterBundle\Tests\Form\Type;
 use FOS\CKEditorBundle\Model\ConfigManagerInterface;
 use FOS\CKEditorBundle\Model\PluginManagerInterface;
 use FOS\CKEditorBundle\Model\TemplateManagerInterface;
+use FOS\CKEditorBundle\Model\ToolbarManagerInterface;
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Sonata\FormatterBundle\Formatter\Pool;
@@ -437,6 +438,53 @@ class FormatterTypeTest extends TestCase
         ]);
 
         $this->assertSame($view->vars['ckeditor_configuration'], $defaultConfigValues);
+    }
+
+    public function testBuildViewWithDefaultConfigAndToolbarManager()
+    {
+        $pool = $this->createMock(Pool::class);
+        $translator = $this->createMock(TranslatorInterface::class);
+        $configManager = $this->createMock(ConfigManagerInterface::class);
+        $toolbarManager = $this->createMock(ToolbarManagerInterface::class);
+
+        $defaultConfig = 'default';
+        $toolbar_config = 'custom_toolbar';
+        $defaultConfigValues = ['toolbar' => $toolbar_config];
+        $custom_toolbar = ['Button 1'];
+        $configManager->expects($this->once())->method('getDefaultConfig')->will($this->returnValue($defaultConfig));
+        $configManager->expects($this->once())
+            ->method('hasConfig')
+            ->with($defaultConfig)
+            ->will($this->returnValue(true));
+        $configManager->expects($this->once())
+            ->method('getConfig')
+            ->with($defaultConfig)
+            ->will($this->returnValue($defaultConfigValues));
+        $toolbarManager->expects($this->once())
+            ->method('resolveToolbar')
+            ->with($toolbar_config)
+            ->will($this->returnValue($custom_toolbar));
+
+        $type = new FormatterType($pool, $translator, $configManager, null, null, $toolbarManager);
+
+        /** @var FormView $view */
+        $view = $this->createMock(FormView::class);
+        $view->vars['id'] = 'SomeId';
+        $view->vars['name'] = 'SomeName';
+        $form = $this->createMock(FormInterface::class);
+        $type->buildView($view, $form, [
+            'source_field' => 'SomeField',
+            'format_field' => 'SomeFormat',
+            'format_field_options' => 'SomeOptions',
+            'ckeditor_context' => null,
+            'ckeditor_image_format' => null,
+            'ckeditor_basepath' => '',
+            'ckeditor_plugins' => [],
+            'ckeditor_templates' => [],
+            'ckeditor_toolbar_icons' => [],
+        ]);
+
+        $this->assertSame($view->vars['ckeditor_configuration'], ['toolbar' => $custom_toolbar]);
     }
 
     public function testBuildViewWithDefaultConfigAndPluginManagerAndTemplateManager()
