@@ -15,10 +15,12 @@ use FOS\CKEditorBundle\Model\ConfigManagerInterface as FOSConfigManagerInterface
 use FOS\CKEditorBundle\Model\PluginManagerInterface as FOSPluginManagerInterface;
 use FOS\CKEditorBundle\Model\StylesSetManagerInterface as FOSStylesSetManagerInterface;
 use FOS\CKEditorBundle\Model\TemplateManagerInterface as FOSTemplateManagerInterface;
+use FOS\CKEditorBundle\Model\ToolbarManagerInterface as FOSToolbarManagerInterface;
 use Ivory\CKEditorBundle\Model\ConfigManagerInterface as IvoryConfigManagerInterface;
 use Ivory\CKEditorBundle\Model\PluginManagerInterface as IvoryPluginManagerInterface;
 use Ivory\CKEditorBundle\Model\StylesSetManagerInterface as IvoryStylesSetManagerInterface;
 use Ivory\CKEditorBundle\Model\TemplateManagerInterface as IvoryTemplateManagerInterface;
+use Ivory\CKEditorBundle\Model\ToolbarManagerInterface as IvoryToolbarManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormInterface;
@@ -48,6 +50,11 @@ class SimpleFormatterType extends AbstractType
     private $templateManager;
 
     /**
+     * @var FOSToolbarManagerInterface|IvoryToolbarManagerInterface
+     */
+    private $toolbarManager;
+
+    /**
      * @param FOSConfigManagerInterface|IvoryConfigManagerInterface
      * $configManager   A CKEditor bundle configuration manager
      * @param FOSPluginManagerInterface|IvoryPluginManagerInterface|null
@@ -56,12 +63,15 @@ class SimpleFormatterType extends AbstractType
      * $templateManager A CKEditor bundle template manager
      * @param FOSStylesSetManagerInterface|IvoryStylesSetManagerInterface|null
      * $stylesSetManager A CKEditor bundle styles set manager
+     * @param FOSToolbarManagerInterface|IvoryToolbarManagerInterface|null
+     * $toolbarManager A CKEditor bundle toolbar manager
      */
     public function __construct(
         $configManager,
         $pluginManager = null,
         $templateManager = null,
-        $stylesSetManager = null
+        $stylesSetManager = null,
+        $toolbarManager = null
     ) {
         if (!$configManager instanceof IvoryConfigManagerInterface
             && !$configManager instanceof FOSConfigManagerInterface
@@ -106,10 +116,22 @@ class SimpleFormatterType extends AbstractType
             ));
         }
 
+        if ($toolbarManager
+            && !$toolbarManager instanceof IvoryToolbarManagerInterface
+            && !$toolbarManager instanceof FOSToolbarManagerInterface
+        ) {
+            throw new \InvalidArgumentException(sprintf(
+                '$toolbarManager should be of type "%s" or "%s".',
+                FOSToolbarManagerInterface::class,
+                IvoryToolbarManagerInterface::class
+            ));
+        }
+
         $this->configManager = $configManager;
         $this->pluginManager = $pluginManager;
         $this->templateManager = $templateManager;
         $this->stylesSetManager = $stylesSetManager;
+        $this->toolbarManager = $toolbarManager;
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
@@ -139,6 +161,10 @@ class SimpleFormatterType extends AbstractType
             $options['ckeditor_style_sets'] = $this->stylesSetManager->getStylesSets();
         } else {
             $options['ckeditor_style_sets'] = [];
+        }
+
+        if (null !== $this->toolbarManager && is_string($ckeditorConfiguration['toolbar'])) {
+            $ckeditorConfiguration['toolbar'] = $this->toolbarManager->resolveToolbar($ckeditorConfiguration['toolbar']);
         }
 
         $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;

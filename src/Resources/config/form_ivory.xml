@@ -8,6 +8,7 @@
             <argument type="service" id="ivory_ck_editor.config_manager"/>
             <argument type="service" id="ivory_ck_editor.plugin_manager"/>
             <argument type="service" id="ivory_ck_editor.template_manager"/>
+            <argument type="service" id="ivory_ck_editor.toolbar_manager" on-invalid="null"/>
         </service>
         <service id="sonata.formatter.form.type.simple" class="Sonata\FormatterBundle\Form\Type\SimpleFormatterType">
             <tag name="form.type" alias="sonata_simple_formatter_type"/>
@@ -15,6 +16,7 @@
             <argument type="service" id="ivory_ck_editor.plugin_manager"/>
             <argument type="service" id="ivory_ck_editor.template_manager"/>
             <argument type="service" id="ivory_ck_editor.styles_set_manager"/>
+            <argument type="service" id="ivory_ck_editor.toolbar_manager" on-invalid="null"/>
         </service>
     </services>
 </container>
