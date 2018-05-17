@@ -12,6 +12,7 @@
 namespace Sonata\FormatterBundle\Tests\Formatter;
 
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Sonata\FormatterBundle\Formatter\RawFormatter;
 
@@ -135,7 +136,7 @@ class PoolTest extends TestCase
     public function testDefaultFormatter()
     {
         $pool = new Pool('default');
-        $pool->setLogger($this->createMock('Psr\Log\LoggerInterface'));
+        $pool->setLogger($this->createMock(LoggerInterface::class));
 
         $this->assertSame('default', $pool->getDefaultFormatter());
     }
@@ -193,7 +194,7 @@ class PoolTest extends TestCase
     private function getPool()
     {
         $pool = new Pool('whatever');
-        $pool->setLogger($this->createMock('Psr\Log\LoggerInterface'));
+        $pool->setLogger($this->createMock(LoggerInterface::class));
 
         return $pool;
     }

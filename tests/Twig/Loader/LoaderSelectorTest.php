@@ -13,17 +13,18 @@ namespace Sonata\FormatterBundle\Tests\Twig\Loader;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Twig\Loader\LoaderSelector;
+use Twig\Loader\LoaderInterface;
 
 class LoaderSelectorTest extends TestCase
 {
     public function testCanBeInstanciated()
     {
         $loaderSelector = new LoaderSelector(
-            $this->prophesize('\Twig_LoaderInterface')->reveal(),
-            $this->prophesize('\Twig_LoaderInterface')->reveal()
+            $this->prophesize(LoaderInterface::class)->reveal(),
+            $this->prophesize(LoaderInterface::class)->reveal()
         );
         $this->assertInstanceOf(
-            'Sonata\FormatterBundle\Twig\Loader\LoaderSelector',
+            LoaderSelector::class,
             $loaderSelector
         );
     }

@@ -11,6 +11,7 @@
 
 namespace Sonata\FormatterBundle\Tests\Formatter;
 
+use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Formatter\MarkdownFormatter;
 
@@ -18,7 +19,7 @@ class MarkdownFormatterTest extends TestCase
 {
     public function testFormatter()
     {
-        $parser = $this->createMock('Knp\Bundle\MarkdownBundle\MarkdownParserInterface');
+        $parser = $this->createMock(MarkdownParserInterface::class);
         $parser->expects($this->any())->method('transformMarkdown')->will($this->returnValue('<b>Salut</b>'));
         $formatter = new MarkdownFormatter($parser);
 
