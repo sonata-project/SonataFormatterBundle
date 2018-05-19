@@ -59,7 +59,7 @@ Preview
 How to use it ?
 ---------------
 
-In order to make it work, let's take a real life example: "a post from a
+In order to make it work, let us take a real life example: "a post from a
 blog can have different input formats".
 So, the post model requires the following fields:
 
@@ -67,7 +67,7 @@ So, the post model requires the following fields:
 * a ``rawContent`` field: store the original content from the user;
 * a ``content`` field: store the transformed content display to the visitor.
 
-Now, let's define a form to edit this post:
+Now, let us define a form to edit this post:
 
 .. code-block:: php
 

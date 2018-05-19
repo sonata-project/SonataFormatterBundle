@@ -53,7 +53,7 @@ contain something like this:
 
 You can provide custom routes and a custom context to match your needs.
 
-Second step, don't forget to import this ``fos/fos_ck_editor.yml`` file
+Second step, do not forget to import this ``fos/fos_ck_editor.yml`` file
 in your ``app/config.yml`` like this:
 
 .. code-block:: yaml
@@ -103,7 +103,8 @@ Here is an example to alter ``shortDescription`` field of the
         'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher()
     ));
 
-And that's it, enjoy browsing and uploading your medias using ``SonataMediaBundle``.
+And that is it, enjoy browsing and uploading your medias using
+``SonataMediaBundle``.
 
 Custom image media format returned to CKEditor
 ----------------------------------------------
