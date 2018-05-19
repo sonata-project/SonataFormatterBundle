@@ -22,7 +22,9 @@ Usage
 
 .. note::
 
-    By default, the `Twig` filter ``format_text`` is not marked as ``safe``. So, if you want to ouput the correct result, just add the ``| raw`` filter.
+    By default, the `Twig` filter ``format_text`` is not marked as
+    ``safe``. So, if you want to ouput the correct result, just add the
+    ``| raw`` filter.
 
 Form
 ----
@@ -48,9 +50,12 @@ And initialize a form type:
         ))
 
 
-When data is populated, the ``content`` property will be populated with the text transformed from the selected transformer name and the ``rawContent`` property.
+When data is populated, the ``content`` property will be populated with
+the text transformed from the selected transformer name and the
+``rawContent`` property.
 
-For instance, this can be used to pregenerate the content of a markdown blog post.
+This can be used to pregenerate the content of a markdown blog post, for
+instance.
 
 Twig Formatter
 --------------

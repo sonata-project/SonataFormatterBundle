@@ -3,13 +3,17 @@
     double: Widget; Configuration
 
 
-One recurrent need is to provide some kind of rich user interface to edit content.
-However, depending on the final target the content can have different formats: ``markdown``, ``textile``, ``bbcode``, ``rawhtml``, ``richhtml``.
+One recurrent need is to provide some kind of rich user interface to
+edit content.
+However, depending on the final target the content can have different
+formats: ``markdown``, ``textile``, ``bbcode``, ``rawhtml``,
+``richhtml``.
 
 Simple Formatter Widget
 =======================
 
-The ``sonata_simple_formatter_type_selector`` widget has been implemented to allow developers to force the input formatter value.
+The ``sonata_simple_formatter_type_selector`` widget has been
+implemented to allow developers to force the input formatter value.
 
 .. code-block:: php
 
@@ -24,8 +28,10 @@ The ``sonata_simple_formatter_type_selector`` widget has been implemented to all
 Advanced Formatter Widget
 =========================
 
-The ``sonata_formatter_type_selector`` widget has been implemented to allow end users to select the correct format for his/her need.
-And depending on the format, the textarea will change to match its requirements.
+The ``sonata_formatter_type_selector`` widget has been implemented to
+allow end users to select the correct format for his/her need.  And
+depending on the format, the textarea will change to match its
+requirements.
 
 By default, the widget supports these types:
 
@@ -53,7 +59,8 @@ Preview
 How to use it ?
 ---------------
 
-In order to make it work, let's take a real life example: "a post from a blog can have different input formats".
+In order to make it work, let's take a real life example: "a post from a
+blog can have different input formats".
 So, the post model requires the following fields:
 
 * a ``contentFormatter`` field: store the selected formatter;
@@ -86,22 +93,30 @@ Now, let's define a form to edit this post:
             'target_field'   => 'content'
         ))
 
-The form type defines a ``contentFormatter`` with a select choice (``sonata_formatter_type_selector``).
-The available formatter choices are ``text`` and ``markdown`` here, with the ``markdown`` formatter preselected.
+The form type defines a ``contentFormatter`` with a select choice
+(``sonata_formatter_type_selector``).
+The available formatter choices are ``text`` and ``markdown`` here, with
+the ``markdown`` formatter preselected.
 The ``sonata_formatter_type_selector`` takes various options:
 
 * ``listener`` (optional, default is ``true``);
-* ``event_dispatcher``: the form dispatcher to attach the "submit" event  (optional, depends on the ``listener`` value);
+* ``event_dispatcher``: the form dispatcher to attach the "submit" event
+  (optional, depends on the ``listener`` value);
 * ``format_field``: the entity's format field;
 * ``format_field_options``: the format field options (optional);
 * ``source_field``: the entity's source field;
 * ``source_field_options``: the source field options (optional);
 * ``target_field``: the entity's final field with the transformed data.
 
-Additionally, the following options can be added to give `CKEditor` a context in order to select images directly from ``SonataMediaBundle``, and to define a custom `CKEditor` toolbar configuration:
+Additionally, the following options can be added to give `CKEditor` a
+context in order to select images directly from ``SonataMediaBundle``,
+and to define a custom `CKEditor` toolbar configuration:
 
-* ``ckeditor_context``: give CKEditor a context in order to customize routes used to browse and upload medias (see "Use CKEditor to select medias in SonataMediaBundle" chapter)
-* ``ckeditor_toolbar_icons`` : give CKEditor a custom toolbar configuration (optional)
+* ``ckeditor_context``: give CKEditor a context in order to customize
+  routes used to browse and upload medias (see "Use CKEditor to select
+  medias in SonataMediaBundle" chapter)
+* ``ckeditor_toolbar_icons`` : give CKEditor a custom toolbar
+  configuration (optional)
 
 Here is the default `CKEditor` custom toolbar configuration, you can tweak:
 
@@ -119,18 +134,22 @@ Here is the default `CKEditor` custom toolbar configuration, you can tweak:
         2 => array('Maximize', 'Source')
     );
 
-If you stop here, the most interesting part will not be present. Let's edit some configuration files.
+If you stop here, the most interesting part will not be present. Let's
+edit some configuration files.
 
 .. note::
 
-    If you want to see an actual implementation of this can, you can have a look at the ``SonataNewsBundle``.
+    If you want to see an actual implementation of this can, you can
+    have a look at the ``SonataNewsBundle``.
 
 
 Sonata Admin Integration
 ------------------------
 
-Of course, it is possible to use this feature with the ``SonataAdminBundle``.
-Open the ``config.yml`` file and add the following lines (or extend the current configuration):
+Of course, it is possible to use this feature with the
+``SonataAdminBundle``.
+Open the ``config.yml`` file and add the following lines (or extend the
+current configuration):
 
 .. code-block:: yaml
 
