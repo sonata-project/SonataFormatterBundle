@@ -22,7 +22,7 @@ Usage
 
 .. note::
 
-    By default, the `Twig` filter ``format_text`` is not marked as
+    By default, the ``Twig`` filter ``format_text`` is not marked as
     ``safe``. So, if you want to ouput the correct result, just add the
     ``| raw`` filter.
 
@@ -32,8 +32,8 @@ Form
 The bundle provides a widget to format a text when the form is bound.
 You have to declare 2 fields:
 
-* `source content` field;
-* `formatter` field.
+* ``source content`` field;
+* ``formatter`` field.
 
 And initialize a form type:
 
@@ -60,13 +60,23 @@ instance.
 Twig Formatter
 --------------
 
-`Twig formatter` uses the project's `Twig Environment` (registered within service container as ``twig``).
-All settings that affect the project's `Twig Environment` (like used template loader, enabled extensions etc.) will also affect the `Twig Formatter`.
+``TwigFormatter`` uses the ``Twig\Environment`` of the project
+(registered within service container as ``twig``).
+All settings that affect the ``Twig\Environment`` of the project (like
+the template loader in use, enabled extensions etc.) will also affect
+the ``TwigFormatter``.
 
-Also `Twig formatter` cannot have extensions enabled.
+Also, ``TwigFormatter`` cannot have extensions enabled.
 
 Security warning
 ................
 
-Since in most cases `Twig Formatter` will be used as the formatter in the administrative interface (like the one shown above with the form), be careful of allowing users to edit the templates, as this could potentially affect the safety of the system. You have to take care of the safety of your templates.
-In exceptional cases, you can create a separate instance of `Twig Environment`, register it within service container and override `Twig Formatter` definition passing own secure Twig Environment as a parameter instead of project one.
+Since in most cases ``TwigFormatter`` will be used as the formatter in
+the administration interface (like the one shown above with the form),
+be careful of allowing users to edit the templates, as this could
+potentially affect the safety of the system. You have to take care of
+the safety of your templates.
+In exceptional cases, you can create a separate instance of
+``Twig\Environment``, register it within the service container and
+override ``TwigFormatter`` definition passing own secure Twig
+Environment as a parameter instead of the project one.

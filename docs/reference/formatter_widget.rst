@@ -108,9 +108,9 @@ The ``sonata_formatter_type_selector`` takes various options:
 * ``source_field_options``: the source field options (optional);
 * ``target_field``: the entity's final field with the transformed data.
 
-Additionally, the following options can be added to give `CKEditor` a
+Additionally, the following options can be added to give ``CKEditor`` a
 context in order to select images directly from ``SonataMediaBundle``,
-and to define a custom `CKEditor` toolbar configuration:
+and to define a custom ``CKEditor`` toolbar configuration:
 
 * ``ckeditor_context``: give CKEditor a context in order to customize
   routes used to browse and upload medias (see "Use CKEditor to select
@@ -118,7 +118,7 @@ and to define a custom `CKEditor` toolbar configuration:
 * ``ckeditor_toolbar_icons`` : give CKEditor a custom toolbar
   configuration (optional)
 
-Here is the default `CKEditor` custom toolbar configuration, you can tweak:
+Here is the default ``CKEditor`` custom toolbar configuration, you can tweak:
 
 .. code-block:: php
 
