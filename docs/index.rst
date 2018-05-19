@@ -1,7 +1,7 @@
 Formatter Bundle
 ================
 
-The ``SonataFormatterBundle`` provides text helper to format text.
+The ``SonataFormatterBundle`` provides text helpers to format text.
 
 .. toctree::
    :caption: Reference Guide
