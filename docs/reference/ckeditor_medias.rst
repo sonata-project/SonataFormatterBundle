@@ -5,10 +5,10 @@
 Use CKEditor to select medias in SonataMediaBundle
 ==================================================
 
-When using ``richhtml`` formatting option with ``CKEditor``, you can add
-a feature to select images directly from ``SonataMediaBundle`` or even
-upload new medias from the editor in ``SonataMediaBundle`` to add them
-to your content.
+When using the ``richhtml`` formatting option with ``CKEditor``, you can
+add a feature to select images directly from ``SonataMediaBundle`` or
+even upload new medias from the editor in ``SonataMediaBundle`` to add
+them to your content.
 
 It can be a quick way for editors to manage medias.
 

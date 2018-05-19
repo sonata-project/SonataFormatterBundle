@@ -6,7 +6,7 @@
 One recurrent need is to provide some kind of rich user interface to
 edit content.
 However, depending on the final target the content can have different
-formats: ``markdown``, ``textile``, ``bbcode``, ``rawhtml``,
+formats: ``markdown``, ``textile``, ``bbcode``, ``rawhtml``, or
 ``richhtml``.
 
 Simple Formatter Widget
