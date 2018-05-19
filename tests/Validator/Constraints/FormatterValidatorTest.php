@@ -18,6 +18,7 @@ use Sonata\FormatterBundle\Formatter\FormatterInterface;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Sonata\FormatterBundle\Validator\Constraints\Formatter;
 use Sonata\FormatterBundle\Validator\Constraints\FormatterValidator;
+use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class FormatterValidatorTest extends TestCase
@@ -47,7 +48,7 @@ class FormatterValidatorTest extends TestCase
     public function testValidator(): void
     {
         $validator = new FormatterValidator($this->pool);
-        $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidator', $validator);
+        $this->assertInstanceOf(ConstraintValidator::class, $validator);
     }
 
     /**
@@ -62,7 +63,7 @@ class FormatterValidatorTest extends TestCase
             ->with($message);
 
         $validator = new FormatterValidator($this->pool);
-        $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidator', $validator);
+        $this->assertInstanceOf(ConstraintValidator::class, $validator);
 
         $validator->initialize($this->context);
 
@@ -79,7 +80,7 @@ class FormatterValidatorTest extends TestCase
             ->method('addViolation');
 
         $validator = new FormatterValidator($this->pool);
-        $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidator', $validator);
+        $this->assertInstanceOf(ConstraintValidator::class, $validator);
 
         $validator->initialize($this->context);
 

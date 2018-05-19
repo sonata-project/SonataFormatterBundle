@@ -15,11 +15,26 @@ namespace Sonata\FormatterBundle\Tests\Controller;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Sonata\AdminBundle\Admin\Pool as AdminPool;
+use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Templating\TemplateRegistry;
 use Sonata\AdminBundle\Templating\TemplateRegistryInterface;
 use Sonata\FormatterBundle\Controller\CkeditorAdminController;
+use Sonata\MediaBundle\Admin\BaseMediaAdmin;
+use Sonata\MediaBundle\Model\CategoryManagerInterface;
+use Sonata\MediaBundle\Model\MediaInterface;
+use Sonata\MediaBundle\Model\MediaManagerInterface;
+use Sonata\MediaBundle\Provider\MediaProviderInterface;
+use Sonata\MediaBundle\Provider\Pool as MediaPool;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormRenderer;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
 
 class EntityWithGetId
 {
@@ -40,9 +55,9 @@ class CkeditorAdminControllerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->container = $this->prophesize('Symfony\Component\DependencyInjection\ContainerInterface');
-        $this->admin = $this->prophesize('Sonata\MediaBundle\Admin\BaseMediaAdmin');
-        $this->request = $this->prophesize('Symfony\Component\HttpFoundation\Request');
+        $this->container = $this->prophesize(ContainerInterface::class);
+        $this->admin = $this->prophesize(BaseMediaAdmin::class);
+        $this->request = $this->prophesize(Request::class);
 
         $this->configureCRUDController();
 
@@ -52,12 +67,12 @@ class CkeditorAdminControllerTest extends TestCase
 
     public function testBrowserAction(): void
     {
-        $datagrid = $this->prophesize('Sonata\AdminBundle\Datagrid\DatagridInterface');
-        $pool = $this->prophesize('Sonata\MediaBundle\Provider\Pool');
-        $categoryManager = $this->prophesize('Sonata\MediaBundle\Model\CategoryManagerInterface');
-        $category = $this->prophesize('Sonata\FormatterBundle\Tests\Controller\EntityWithGetId');
-        $form = $this->prophesize('Symfony\Component\Form\Form');
-        $formView = $this->prophesize('Symfony\Component\Form\FormView');
+        $datagrid = $this->prophesize(DatagridInterface::class);
+        $pool = $this->prophesize(MediaPool::class);
+        $categoryManager = $this->prophesize(CategoryManagerInterface::class);
+        $category = $this->prophesize(EntityWithGetId::class);
+        $form = $this->prophesize(Form::class);
+        $formView = $this->prophesize(FormView::class);
 
         $this->configureSetFormTheme($formView->reveal(), 'filterTheme');
         $this->configureRender('templateList', Argument::type('array'), 'renderResponse');
@@ -94,11 +109,11 @@ class CkeditorAdminControllerTest extends TestCase
 
     public function testUpload(): void
     {
-        $media = $this->prophesize('Sonata\MediaBundle\Model\MediaInterface');
-        $mediaManager = $this->prophesize('Sonata\MediaBundle\Model\MediaManagerInterface');
-        $filesBag = $this->prophesize('Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface');
-        $pool = $this->prophesize('Sonata\MediaBundle\Provider\Pool');
-        $provider = $this->prophesize('Sonata\MediaBundle\Provider\MediaProviderInterface');
+        $media = $this->prophesize(MediaInterface::class);
+        $mediaManager = $this->prophesize(MediaManagerInterface::class);
+        $filesBag = $this->prophesize(AttributeBagInterface::class);
+        $pool = $this->prophesize(MediaPool::class);
+        $provider = $this->prophesize(MediaProviderInterface::class);
 
         $this->configureRender('templateList', Argument::type('array'), 'renderResponse');
         $pool->getDefaultContext()->willReturn('context');
@@ -119,14 +134,14 @@ class CkeditorAdminControllerTest extends TestCase
 
         $response = $this->controller->uploadAction($this->request->reveal());
 
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
+        $this->assertInstanceOf(Response::class, $response);
         $this->assertSame('renderResponse', $response->getContent());
     }
 
     private function configureCRUDController(): void
     {
-        $pool = $this->prophesize('Sonata\AdminBundle\Admin\Pool');
-        $breadcrumbsBuilder = $this->prophesize('Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface');
+        $pool = $this->prophesize(AdminPool::class);
+        $breadcrumbsBuilder = $this->prophesize(BreadcrumbsBuilderInterface::class);
 
         $this->configureGetCurrentRequest($this->request->reveal());
         $pool->getAdminByAdminCode('admin_code')->willReturn($this->admin->reveal());
@@ -170,9 +185,9 @@ class CkeditorAdminControllerTest extends TestCase
 
     private function configureRender($template, $data, $rendered): void
     {
-        $templating = $this->prophesize('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $response = $this->prophesize('Symfony\Component\HttpFoundation\Response');
-        $pool = $this->prophesize('Sonata\MediaBundle\Provider\Pool');
+        $templating = $this->prophesize(EngineInterface::class);
+        $response = $this->prophesize(Response::class);
+        $pool = $this->prophesize(MediaPool::class);
 
         $this->admin->getPersistentParameters()->willReturn(['param' => 'param']);
         $this->container->has('templating')->willReturn(true);

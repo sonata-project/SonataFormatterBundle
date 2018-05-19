@@ -16,6 +16,7 @@ namespace Sonata\FormatterBundle\Form\Type;
 use FOS\CKEditorBundle\Model\ConfigManagerInterface;
 use FOS\CKEditorBundle\Model\PluginManagerInterface;
 use FOS\CKEditorBundle\Model\TemplateManagerInterface;
+use FOS\CKEditorBundle\Model\ToolbarManagerInterface;
 use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -58,18 +59,25 @@ final class FormatterType extends AbstractType
      */
     private $templateManager;
 
+    /**
+     * @var ToolbarManagerInterface
+     */
+    private $toolbarManager;
+
     public function __construct(
         Pool $pool,
         TranslatorInterface $translator,
         ConfigManagerInterface $configManager,
         ?PluginManagerInterface $pluginManager = null,
-        ?TemplateManagerInterface $templateManager = null
+        ?TemplateManagerInterface $templateManager = null,
+        ?ToolbarManagerInterface $toolbarManager = null
     ) {
         $this->pool = $pool;
         $this->translator = $translator;
         $this->configManager = $configManager;
         $this->pluginManager = $pluginManager;
         $this->templateManager = $templateManager;
+        $this->toolbarManager = $toolbarManager;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -176,6 +184,10 @@ final class FormatterType extends AbstractType
 
         if (null !== $this->templateManager && $this->templateManager->hasTemplates()) {
             $options['ckeditor_templates'] = $this->templateManager->getTemplates();
+        }
+
+        if (null !== $this->toolbarManager && is_string($ckeditorConfiguration['toolbar'])) {
+            $ckeditorConfiguration['toolbar'] = $this->toolbarManager->resolveToolbar($ckeditorConfiguration['toolbar']);
         }
 
         $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;

@@ -17,6 +17,7 @@ use FOS\CKEditorBundle\Model\ConfigManagerInterface;
 use FOS\CKEditorBundle\Model\PluginManagerInterface;
 use FOS\CKEditorBundle\Model\StylesSetManagerInterface;
 use FOS\CKEditorBundle\Model\TemplateManagerInterface;
+use FOS\CKEditorBundle\Model\ToolbarManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormInterface;
@@ -45,16 +46,23 @@ final class SimpleFormatterType extends AbstractType
      */
     private $templateManager;
 
+    /**
+     * @var ToolbarManagerInterface
+     */
+    private $toolbarManager;
+
     public function __construct(
         ConfigManagerInterface $configManager,
         ?PluginManagerInterface $pluginManager = null,
         ?TemplateManagerInterface $templateManager = null,
-        ?StylesSetManagerInterface $stylesSetManager = null
+        ?StylesSetManagerInterface $stylesSetManager = null,
+        ?ToolbarManagerInterface $toolbarManager = null
     ) {
         $this->configManager = $configManager;
         $this->pluginManager = $pluginManager;
         $this->templateManager = $templateManager;
         $this->stylesSetManager = $stylesSetManager;
+        $this->toolbarManager = $toolbarManager;
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options): void
@@ -84,6 +92,10 @@ final class SimpleFormatterType extends AbstractType
             $options['ckeditor_style_sets'] = $this->stylesSetManager->getStylesSets();
         } else {
             $options['ckeditor_style_sets'] = [];
+        }
+
+        if (null !== $this->toolbarManager && is_string($ckeditorConfiguration['toolbar'])) {
+            $ckeditorConfiguration['toolbar'] = $this->toolbarManager->resolveToolbar($ckeditorConfiguration['toolbar']);
         }
 
         $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;
