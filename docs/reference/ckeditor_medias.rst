@@ -94,14 +94,14 @@ Here is an example to alter ``shortDescription`` field of the
 
     // ...
 
-    $formMapper->add('shortDescription', FormatterType::class, array(
+    $formMapper->add('shortDescription', FormatterType::class, [
         'source_field'         => 'rawDescription',
-        'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
+        'source_field_options' => ['attr' => ['class' => 'span10', 'rows' => 20]],
         'format_field'         => 'descriptionFormatter',
         'target_field'         => 'description',
         'ckeditor_context'     => 'default',
-        'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher()
-    ));
+        'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher(),
+    ]);
 
 And that is it, enjoy browsing and uploading your medias using
 ``SonataMediaBundle``.

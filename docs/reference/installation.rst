@@ -49,7 +49,7 @@ Register the bundles in ``bundles.php`` file:
 
     // app/AppKernel.php
 
-    $bundles = array(
+    $bundles = [
 
         // ...
 
@@ -58,7 +58,7 @@ Register the bundles in ``bundles.php`` file:
         new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
         new FOS\CKEditorBundle\FOSCKEditorBundle(),
         new Sonata\FormatterBundle\SonataFormatterBundle(),
-    );
+    ];
 
 Configuration
 =============

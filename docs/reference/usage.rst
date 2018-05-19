@@ -45,10 +45,10 @@ And initialize a form type:
 
     $formBuilder
         ->add('rawContent') // source content
-        ->add('contentFormatter', FormatterType::class, array(
+        ->add('contentFormatter', FormatterType::class, [
             'source_field' => 'rawContent',
-            'target_field' => 'content'
-        ))
+            'target_field' => 'content',
+        ])
 
 
 When data is populated, the ``content`` property will be populated with

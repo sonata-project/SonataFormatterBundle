@@ -20,10 +20,10 @@ been implemented to allow developers to force the input formatter value.
     <?php
     use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 
-    $formMapper->add('comment', SimpleFormatterType::class, array(
+    $formMapper->add('comment', SimpleFormatterType::class, [
         'format' => 'markdown',
         'ckeditor_context' => 'default', // optional
-    ));
+    ]);
 
 Advanced Formatter Widget
 =========================
@@ -75,23 +75,23 @@ Now, let us define a form to edit this post:
     use Sonata\FormatterBundle\Form\Type\FormatterType;
 
     $formBuilder
-        ->add('content', FormatterType::class, array(
+        ->add('content', FormatterType::class, [
             'event_dispatcher' => $formBuilder->getEventDispatcher(),
             'format_field'   => 'contentFormatter',
-            'format_field_options' => array(
+            'format_field_options' => [
                 'choices' => [
                     'text' => 'Text',
                     'markdown' => 'Markdown',
                 ],
                 'data' => 'markdown',
-            ),
-            'source_field'   => 'rawContent',
-            'source_field_options'      => array(
-                'attr' => array('class' => 'span10', 'rows' => 20)
-            ),
-            'listener'       => true,
-            'target_field'   => 'content'
-        ))
+            ],
+            'source_field' => 'rawContent',
+            'source_field_options' => [
+                'attr' => ['class' => 'span10', 'rows' => 20],
+            ],
+            'listener' => true,
+            'target_field' => 'content',
+        ])
 
 The form type defines a ``contentFormatter`` with a select choice
 (``sonata_formatter_type_selector``).
@@ -125,15 +125,15 @@ Here is the default ``CKEditor`` custom toolbar configuration, you can tweak:
 
     <?php
 
-    $ckeditor_toolbar_icons = array(
-        1 => array('Bold', 'Italic', 'Underline',
+    $ckeditor_toolbar_icons = [
+        1 => ['Bold', 'Italic', 'Underline',
             '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
             '-', 'Undo', 'Redo',
             '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
             '-', 'Blockquote',
-            '-', 'Image', 'Link', 'Unlink', 'Table'),
-        2 => array('Maximize', 'Source')
-    );
+            '-', 'Image', 'Link', 'Unlink', 'Table'],
+        2 => ['Maximize', 'Source'],
+    ];
 
 If you stop here, the most interesting part will not be present. Let's
 edit some configuration files.
