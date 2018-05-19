@@ -12,8 +12,8 @@ formats: ``markdown``, ``textile``, ``bbcode``, ``rawhtml``, or
 Simple Formatter Widget
 =======================
 
-The ``sonata_simple_formatter_type_selector`` widget has been
-implemented to allow developers to force the input formatter value.
+The ``Sonata\FormatterBundle\Form\Type\SimpleFormatterType`` widget has
+been implemented to allow developers to force the input formatter value.
 
 .. code-block:: php
 
@@ -28,10 +28,10 @@ implemented to allow developers to force the input formatter value.
 Advanced Formatter Widget
 =========================
 
-The ``sonata_formatter_type_selector`` widget has been implemented to
-allow end users to select the correct format for his/her need.  And
-depending on the format, the textarea will change to match its
-requirements.
+The ``Sonata\FormatterBundle\Form\Type\FormatterType`` widget has been
+implemented to allow end users to select the correct format for their
+need.  And depending on the format, the textarea will change to match
+its requirements.
 
 By default, the widget supports these types:
 
@@ -97,7 +97,8 @@ The form type defines a ``contentFormatter`` with a select choice
 (``sonata_formatter_type_selector``).
 The available formatter choices are ``text`` and ``markdown`` here, with
 the ``markdown`` formatter preselected.
-The ``sonata_formatter_type_selector`` takes various options:
+The ``Sonata\FormatterBundle\Form\Type\FormatterType`` takes various
+options:
 
 * ``listener`` (optional, default is ``true``);
 * ``event_dispatcher``: the form dispatcher to attach the "submit" event
