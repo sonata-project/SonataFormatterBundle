@@ -11,8 +11,9 @@ Usage
     .. code-block:: php
 
         <?php
-        // Use the service
-        $html = $this->container->get('sonata.formatter.pool')->transform('markdown', $text);
+        // Inject Sonata\FormatterBundle\Formatter\Pool in your class
+        assert($formatterPool instanceof Pool::class);
+        $html = $formatterPool->transform('markdown', $text);
 
     .. code-block:: jinja
 
