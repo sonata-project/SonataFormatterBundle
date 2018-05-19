@@ -1,7 +1,8 @@
 Formatter Bundle
 ================
 
-The ``SonataFormatterBundle`` provides text helpers to format text.
+The ``SonataFormatterBundle`` provides text helpers that will help you
+produce html from text formats that are easier to write, like Markdown.
 
 .. toctree::
    :caption: Reference Guide
