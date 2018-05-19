@@ -27,7 +27,8 @@ Usage
 Form
 ----
 
-The bundle provide a widget to format a text when the form is bound. Just declare 2 fields:
+The bundle provides a widget to format a text when the form is bound.
+You have to declare 2 fields:
 
 * `source content` field;
 * `formatter` field.
