@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.5.0](https://github.com/sonata-project/SonataFormatterBundle/compare/3.4.1...3.5.0) - 2018-05-22
+### Added
+- Added support for stylesSet (ivory_ck_editor configuration)
+- Added egeloen/ckeditor-bundle 6.0 dependency to composer.json
+
+### Deprecated
+- using of IvoryCKEditorBundle
+
+### Fixed
+- deprecations from the admin bundle about `render` vs `renderWithExtraParams`
+- Ckeditor toolbar config not loading
+
 ## [3.4.1](https://github.com/sonata-project/SonataFormatterBundle/compare/3.4.0...3.4.1) - 2018-02-02
 ### Changed
 - Switch all templates references to Twig namespaced syntax
