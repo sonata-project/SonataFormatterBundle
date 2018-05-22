@@ -5,16 +5,20 @@
 Use CKEditor to select medias in SonataMediaBundle
 ==================================================
 
-When using ``richhtml`` formatting option with ``CKEditor``, you can add a feature to select images directly
-from ``SonataMediaBundle`` or even upload new medias from the editor in ``SonataMediaBundle`` to add them to your content.
+When using the ``richhtml`` formatting option with ``CKEditor``, you can
+add a feature to select images directly from ``SonataMediaBundle`` or
+even upload new medias from the editor in ``SonataMediaBundle`` to add
+them to your content.
 
 It can be a quick way for editors to manage medias.
 
 Configuration
 -------------
 
-First of all, you have to define your ``FOSCKEditorBundle`` (already embedded in ``SonataFormatterBundle``) configuration.
-Be sure to have the ``fos/fos_ck_editor.yml`` configuration file available. It should contain something like this:
+First of all, you have to define your ``FOSCKEditorBundle`` (already
+embedded in ``SonataFormatterBundle``) configuration.  Be sure to have
+the ``fos/fos_ck_editor.yml`` configuration file available. It should
+contain something like this:
 
 .. code-block:: yaml
 
@@ -26,7 +30,10 @@ Be sure to have the ``fos/fos_ck_editor.yml`` configuration file available. It s
             default:
                 # default toolbar plus Format button
                 toolbar:
-                - [Bold, Italic, Underline, -, Cut, Copy, Paste, PasteText, PasteFromWord, -, Undo, Redo, -, NumberedList, BulletedList, -, Outdent, Indent, -, Blockquote, -, Image, Link, Unlink, Table]
+                - [Bold, Italic, Underline, -, Cut, Copy, Paste,
+                  PasteText, PasteFromWord, -, Undo, Redo, -,
+                  NumberedList, BulletedList, -, Outdent, Indent, -,
+                  Blockquote, -, Image, Link, Unlink, Table]
                 - [Format, Maximize, Source]
 
                 filebrowserBrowseRoute: admin_sonata_media_media_ckeditor_browser
@@ -46,7 +53,8 @@ Be sure to have the ``fos/fos_ck_editor.yml`` configuration file available. It s
 
 You can provide custom routes and a custom context to match your needs.
 
-Second step, don't forget to import this ``fos/fos_ck_editor.yml`` file in your ``app/config.yml`` like this:
+Second step, do not forget to import this ``fos/fos_ck_editor.yml`` file
+in your ``app/config.yml`` like this:
 
 .. code-block:: yaml
 
@@ -57,8 +65,9 @@ Second step, don't forget to import this ``fos/fos_ck_editor.yml`` file in your 
   # FOSCKEditor
   - { resource: fos/fos_ck_editor.yml }
 
-This third step is optional. You can do it if you need to define some custom browsing and uploading templates.
-To do so, add these few lines in your ``sonata_formatter.yml`` file:
+This third step is optional. You can do it if you need to define some
+custom browsing and uploading templates. To do so, add these few lines
+in your ``sonata_formatter.yml`` file:
 
 .. code-block:: yaml
 
@@ -73,9 +82,10 @@ To do so, add these few lines in your ``sonata_formatter.yml`` file:
               browser: '@SonataFormatter/Ckeditor/browser.html.twig'
               upload: '@SonataFormatter/Ckeditor/upload.html.twig'
 
-Last step takes place in your admin class. You just have to specify the ``ckeditor_context`` parameter to activate ``CKEditor``.
-
-Here is an example to alter `shortDescription` field of the `ProductAdmin`:
+Last step takes place in your admin class. You just have to specify the
+``ckeditor_context`` parameter to activate ``CKEditor``.
+Here is an example to alter ``shortDescription`` field of the
+``ProductAdmin``:
 
 .. code-block:: php
 
@@ -84,22 +94,24 @@ Here is an example to alter `shortDescription` field of the `ProductAdmin`:
 
     // ...
 
-    $formMapper->add('shortDescription', FormatterType::class, array(
+    $formMapper->add('shortDescription', FormatterType::class, [
         'source_field'         => 'rawDescription',
-        'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
+        'source_field_options' => ['attr' => ['class' => 'span10', 'rows' => 20]],
         'format_field'         => 'descriptionFormatter',
         'target_field'         => 'description',
         'ckeditor_context'     => 'default',
-        'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher()
-    ));
+        'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher(),
+    ]);
 
-And that's it, enjoy browsing and uploading your medias using ``SonataMediaBundle``.
+And that is it, enjoy browsing and uploading your medias using
+``SonataMediaBundle``.
 
 Custom image media format returned to CKEditor
 ----------------------------------------------
 
-When you upload an image using CKEditor, the image URL returned by the server leads to the original size.
-You can configure custom image format in ``SonataMediaBundle``:
+When you upload an image using CKEditor, the image URL returned by the
+server leads to the original size. You can configure custom image format
+in ``SonataMediaBundle``:
 
 .. code-block:: yaml
 
