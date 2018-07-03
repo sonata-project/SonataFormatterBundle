@@ -56,7 +56,7 @@ class TwigFormatterTest extends TestCase
 
         $extensions = $formatter->getExtensions();
 
-        $this->assertSame(0, count($extensions));
+        $this->assertCount(0, $extensions);
     }
 }
 
