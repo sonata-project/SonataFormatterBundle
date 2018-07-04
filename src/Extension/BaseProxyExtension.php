@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\Extension;
 
 use Twig\Extension\AbstractExtension;
-use Twig\ExtensionInterface;
+use Twig\Extension\ExtensionInterface;
 
 abstract class BaseProxyExtension extends AbstractExtension implements ExtensionInterface
 {
