@@ -41,6 +41,7 @@ contain something like this:
                 # Display images by default when clicking the image dialog browse button
                 filebrowserImageBrowseRouteParameters:
                     provider: sonata.media.provider.image
+                filebrowserUploadMethod: form
                 filebrowserUploadRoute: admin_sonata_media_media_ckeditor_upload
                 filebrowserUploadRouteParameters:
                     provider: sonata.media.provider.file
