@@ -82,7 +82,7 @@ class SonataFormatterExtension extends Extension
         $pool->addArgument($config['default_formatter']);
 
         foreach ($config['formatters'] as $code => $configuration) {
-            if (0 == count($configuration['extensions'])) {
+            if (0 == \count($configuration['extensions'])) {
                 $env = null;
             } else {
                 $env = new Reference($this->createEnvironment(
