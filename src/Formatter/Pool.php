@@ -42,11 +42,11 @@ class Pool implements LoggerAwareInterface
      */
     public function __construct($defaultFormatter = null)
     {
-        if (2 == func_num_args()) {
-            list($logger, $defaultFormatter) = func_get_args();
+        if (2 == \func_num_args()) {
+            list($logger, $defaultFormatter) = \func_get_args();
             $this->logger = $logger;
             $this->defaultFormatter = $defaultFormatter;
-        } elseif (1 == func_num_args()) {
+        } elseif (1 == \func_num_args()) {
             if ($defaultFormatter instanceof LoggerInterface) {
                 $this->logger = $defaultFormatter;
             } else {

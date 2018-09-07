@@ -163,7 +163,7 @@ class SimpleFormatterType extends AbstractType
             $options['ckeditor_style_sets'] = [];
         }
 
-        if (null !== $this->toolbarManager && is_string($ckeditorConfiguration['toolbar'])) {
+        if (null !== $this->toolbarManager && \is_string($ckeditorConfiguration['toolbar'])) {
             $ckeditorConfiguration['toolbar'] = $this->toolbarManager->resolveToolbar($ckeditorConfiguration['toolbar']);
         }
 
