@@ -82,7 +82,7 @@ final class FormatterType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        if (is_array($options['format_field'])) {
+        if (\is_array($options['format_field'])) {
             list($formatField, $formatPropertyPath) = $options['format_field'];
             $options['format_field_options']['property_path'] = $formatPropertyPath;
         } else {
@@ -95,7 +95,7 @@ final class FormatterType extends AbstractType
             $options['format_field_options']['data'] = $this->pool->getDefaultFormatter();
         }
 
-        if (is_array($options['source_field'])) {
+        if (\is_array($options['source_field'])) {
             list($sourceField, $sourcePropertyPath) = $options['source_field'];
             $options['source_field_options']['property_path'] = $sourcePropertyPath;
         } else {
@@ -108,7 +108,7 @@ final class FormatterType extends AbstractType
         // If there's only one possible format, do not display the choices
         $formatChoices = $builder->get($formatField)->getOption('choices');
 
-        if (1 === count($formatChoices)) {
+        if (1 === \count($formatChoices)) {
             // Remove the choice field
             unset($options['format_field_options']['choices']);
             $builder->remove($formatField);
@@ -141,14 +141,14 @@ final class FormatterType extends AbstractType
 
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
-        if (is_array($options['source_field'])) {
+        if (\is_array($options['source_field'])) {
             list($sourceField) = $options['source_field'];
             $view->vars['source_field'] = $sourceField;
         } else {
             $view->vars['source_field'] = $options['source_field'];
         }
 
-        if (is_array($options['format_field'])) {
+        if (\is_array($options['format_field'])) {
             list($formatField) = $options['format_field'];
             $view->vars['format_field'] = $formatField;
         } else {
@@ -186,7 +186,7 @@ final class FormatterType extends AbstractType
             $options['ckeditor_templates'] = $this->templateManager->getTemplates();
         }
 
-        if (null !== $this->toolbarManager && is_string($ckeditorConfiguration['toolbar'])) {
+        if (null !== $this->toolbarManager && \is_string($ckeditorConfiguration['toolbar'])) {
             $ckeditorConfiguration['toolbar'] = $this->toolbarManager->resolveToolbar($ckeditorConfiguration['toolbar']);
         }
 
@@ -212,7 +212,7 @@ final class FormatterType extends AbstractType
             'choices' => $formatters,
         ];
 
-        if (count($formatters) > 1) {
+        if (\count($formatters) > 1) {
             $formatFieldOptions['choice_translation_domain'] = 'SonataFormatterBundle';
 
             // choices_as_values options is not needed in SF 3.0+

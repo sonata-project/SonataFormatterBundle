@@ -76,19 +76,19 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
         $this->buildAllowed();
 
         foreach ($tags as $tag) {
-            if (!in_array($tag, $this->allowedTags)) {
+            if (!\in_array($tag, $this->allowedTags)) {
                 throw new SecurityError(sprintf('Tag "%s" is not allowed.', $tag));
             }
         }
 
         foreach ($filters as $filter) {
-            if (!in_array($filter, $this->allowedFilters)) {
+            if (!\in_array($filter, $this->allowedFilters)) {
                 throw new SecurityError(sprintf('Filter "%s" is not allowed.', $filter));
             }
         }
 
         foreach ($functions as $function) {
-            if (!in_array($function, $this->allowedFunctions)) {
+            if (!\in_array($function, $this->allowedFunctions)) {
                 throw new SecurityError(sprintf('Function "%s" is not allowed.', $function));
             }
         }
@@ -106,7 +106,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
         $method = strtolower($method);
         foreach ($this->allowedMethods as $class => $methods) {
             if ($obj instanceof $class) {
-                $allowed = in_array($method, $methods);
+                $allowed = \in_array($method, $methods);
 
                 break;
             }
@@ -117,7 +117,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
                 sprintf(
                     'Calling "%s" method on a "%s" object is not allowed.',
                     $method,
-                    get_class($obj)
+                    \get_class($obj)
                 )
             );
         }
@@ -130,7 +130,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
         $allowed = false;
         foreach ($this->allowedProperties as $class => $properties) {
             if ($obj instanceof $class) {
-                $allowed = in_array($property, is_array($properties) ? $properties : [$properties]);
+                $allowed = \in_array($property, \is_array($properties) ? $properties : [$properties]);
 
                 break;
             }
@@ -141,7 +141,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
                 sprintf(
                     'Calling "%s" property on a "%s" object is not allowed.',
                     $property,
-                    get_class($obj)
+                    \get_class($obj)
                 )
             );
         }
