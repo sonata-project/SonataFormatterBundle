@@ -53,10 +53,10 @@ final class SimpleFormatterType extends AbstractType
 
     public function __construct(
         ConfigManagerInterface $configManager,
-        ?PluginManagerInterface $pluginManager = null,
-        ?TemplateManagerInterface $templateManager = null,
-        ?StylesSetManagerInterface $stylesSetManager = null,
-        ?ToolbarManagerInterface $toolbarManager = null
+        PluginManagerInterface $pluginManager,
+        TemplateManagerInterface $templateManager,
+        StylesSetManagerInterface $stylesSetManager,
+        ToolbarManagerInterface $toolbarManager
     ) {
         $this->configManager = $configManager;
         $this->pluginManager = $pluginManager;
@@ -80,21 +80,21 @@ final class SimpleFormatterType extends AbstractType
             $ckeditorConfiguration['filebrowserImageUploadRouteParameters']['format'] = $options['ckeditor_image_format'];
         }
 
-        if (null !== $this->pluginManager && $this->pluginManager->hasPlugins()) {
+        if ($this->pluginManager->hasPlugins()) {
             $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
         }
 
-        if (null !== $this->templateManager && $this->templateManager->hasTemplates()) {
+        if ($this->templateManager->hasTemplates()) {
             $options['ckeditor_templates'] = $this->templateManager->getTemplates();
         }
 
-        if (null !== $this->stylesSetManager && $this->stylesSetManager->hasStylesSets()) {
+        if ($this->stylesSetManager->hasStylesSets()) {
             $options['ckeditor_style_sets'] = $this->stylesSetManager->getStylesSets();
         } else {
             $options['ckeditor_style_sets'] = [];
         }
 
-        if (null !== $this->toolbarManager && \is_string($ckeditorConfiguration['toolbar'])) {
+        if (\is_string($ckeditorConfiguration['toolbar'])) {
             $ckeditorConfiguration['toolbar'] = $this->toolbarManager->resolveToolbar($ckeditorConfiguration['toolbar']);
         }
 
@@ -107,11 +107,6 @@ final class SimpleFormatterType extends AbstractType
         $view->vars['format'] = $options['format'];
     }
 
-    /**
-     * Symfony >= 3.
-     *
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -150,10 +145,5 @@ final class SimpleFormatterType extends AbstractType
     public function getBlockPrefix()
     {
         return 'sonata_simple_formatter_type';
-    }
-
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 }
