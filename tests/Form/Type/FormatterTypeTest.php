@@ -17,6 +17,7 @@ use FOS\CKEditorBundle\Model\ConfigManagerInterface;
 use FOS\CKEditorBundle\Model\PluginManagerInterface;
 use FOS\CKEditorBundle\Model\TemplateManagerInterface;
 use FOS\CKEditorBundle\Model\ToolbarManagerInterface;
+use PHPUnit\Framework\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Sonata\FormatterBundle\Formatter\Pool;
@@ -29,7 +30,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatorInterface;
-use PHPUnit\Framework\MockObject;
 
 /**
  * @author Hugo Briand <briand@ekino.com>

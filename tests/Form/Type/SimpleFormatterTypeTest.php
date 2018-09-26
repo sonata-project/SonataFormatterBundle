@@ -14,16 +14,16 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\Tests\Form\Type;
 
 use FOS\CKEditorBundle\Model\ConfigManagerInterface;
+use FOS\CKEditorBundle\Model\PluginManagerInterface;
 use FOS\CKEditorBundle\Model\StylesSetManagerInterface;
+use FOS\CKEditorBundle\Model\TemplateManagerInterface;
+use FOS\CKEditorBundle\Model\ToolbarManagerInterface;
+use PHPUnit\Framework\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use FOS\CKEditorBundle\Model\PluginManagerInterface;
-use FOS\CKEditorBundle\Model\TemplateManagerInterface;
-use FOS\CKEditorBundle\Model\ToolbarManagerInterface;
-use PHPUnit\Framework\MockObject;
 
 class SimpleFormatterTypeTest extends TestCase
 {
@@ -75,6 +75,7 @@ class SimpleFormatterTypeTest extends TestCase
             $this->toolbarManager
         );
     }
+
     public function testBuildForm(): void
     {
         $formBuilder = $this->createMock(FormBuilderInterface::class);
