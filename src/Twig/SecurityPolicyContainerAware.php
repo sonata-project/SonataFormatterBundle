@@ -18,12 +18,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig\Markup;
 use Twig\Sandbox\SecurityError;
 use Twig\Sandbox\SecurityPolicyInterface;
-use Twig\TemplateInterface;
 
 /**
- * @throws \Twig_Sandbox_SecurityError
+ * @throws SecurityError
  *
- * Some code are adapted work from the Twig_Sandbox_SecurityPolicy class
+ * Some code are adapted work from the Twig\Sandbox\SecurityPolicy class
  *
  * @author fabien.potencier@symfony.com
  * @author thomas.rabaix@sonata-project.org
@@ -98,7 +97,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
     {
         $this->buildAllowed();
 
-        if ($obj instanceof TemplateInterface || $obj instanceof Markup) {
+        if ($obj instanceof Markup) {
             return true;
         }
 

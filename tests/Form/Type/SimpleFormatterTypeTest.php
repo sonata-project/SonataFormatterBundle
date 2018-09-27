@@ -14,7 +14,11 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\Tests\Form\Type;
 
 use FOS\CKEditorBundle\Model\ConfigManagerInterface;
+use FOS\CKEditorBundle\Model\PluginManagerInterface;
 use FOS\CKEditorBundle\Model\StylesSetManagerInterface;
+use FOS\CKEditorBundle\Model\TemplateManagerInterface;
+use FOS\CKEditorBundle\Model\ToolbarManagerInterface;
+use PHPUnit\Framework\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,34 +27,77 @@ use Symfony\Component\Form\FormView;
 
 class SimpleFormatterTypeTest extends TestCase
 {
+    /**
+     * @var ConfigManagerInterface|MockObject
+     */
+    private $configManager;
+
+    /**
+     * @var PluginManagerInterface|MockObject
+     */
+    private $pluginManager;
+
+    /**
+     * @var TemplateManagerInterface|MockObject
+     */
+    private $templateManager;
+
+    /**
+     * @var StylesSetManagerInterface|MockObject
+     */
+    private $stylesSetManager;
+
+    /**
+     * @var ToolbarManagerInterface|MockObject
+     */
+    private $toolbarManager;
+
+    /**
+     * @var SimpleFormatterType
+     */
+    private $formType;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->configManager = $this->createMock(ConfigManagerInterface::class);
+        $this->pluginManager = $this->createMock(PluginManagerInterface::class);
+        $this->templateManager = $this->createMock(TemplateManagerInterface::class);
+        $this->stylesSetManager = $this->createMock(StylesSetManagerInterface::class);
+        $this->toolbarManager = $this->createMock(ToolbarManagerInterface::class);
+
+        $this->formType = new SimpleFormatterType(
+            $this->configManager,
+            $this->pluginManager,
+            $this->templateManager,
+            $this->stylesSetManager,
+            $this->toolbarManager
+        );
+    }
+
     public function testBuildForm(): void
     {
-        $configManager = $this->createMock(ConfigManagerInterface::class);
         $formBuilder = $this->createMock(FormBuilderInterface::class);
-
-        $type = new SimpleFormatterType($configManager);
 
         $options = ['format' => 'format'];
 
-        $type->buildForm($formBuilder, $options);
+        $this->formType->buildForm($formBuilder, $options);
     }
 
     public function testBuildViewWithDefaultConfig(): void
     {
-        $configManager = $this->createMock(ConfigManagerInterface::class);
         $view = $this->createMock(FormView::class);
         $form = $this->createMock(FormInterface::class);
 
-        $configManager->expects($this->once())
+        $this->configManager->expects($this->once())
             ->method('getConfig')
             ->with('context')
             ->will($this->returnValue(['toolbar' => ['Button1']]));
         $view->vars['id'] = 'SomeId';
         $view->vars['name'] = 'SomeName';
 
-        $type = new SimpleFormatterType($configManager);
-
-        $type->buildView($view, $form, [
+        $this->formType->buildView($view, $form, [
             'format' => 'format',
             'ckeditor_context' => 'context',
             'ckeditor_image_format' => 'format',
@@ -68,8 +115,6 @@ class SimpleFormatterTypeTest extends TestCase
 
     public function testBuildViewWithStylesSet(): void
     {
-        $configManager = $this->createMock(ConfigManagerInterface::class);
-        $stylesSetManager = $this->createMock(StylesSetManagerInterface::class);
         $view = $this->createMock(FormView::class);
         $form = $this->createMock(FormInterface::class);
 
@@ -91,23 +136,21 @@ class SimpleFormatterTypeTest extends TestCase
             ],
         ];
 
-        $configManager->expects($this->once())
+        $this->configManager->expects($this->once())
             ->method('getConfig')
             ->with('context')
             ->will($this->returnValue(['toolbar' => ['Button1']]));
-        $stylesSetManager->expects($this->once())
+        $this->stylesSetManager->expects($this->once())
             ->method('getStylesSets')
             ->will($this->returnValue($styleSets));
-        $stylesSetManager->expects($this->once())
+        $this->stylesSetManager->expects($this->once())
             ->method('hasStylesSets')
             ->will($this->returnValue(true));
 
         $view->vars['id'] = 'SomeId';
         $view->vars['name'] = 'SomeName';
 
-        $type = new SimpleFormatterType($configManager, null, null, $stylesSetManager);
-
-        $type->buildView($view, $form, [
+        $this->formType->buildView($view, $form, [
             'format' => 'format',
             'ckeditor_context' => 'context',
             'ckeditor_image_format' => 'format',

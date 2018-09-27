@@ -27,7 +27,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -68,9 +67,9 @@ final class FormatterType extends AbstractType
         Pool $pool,
         TranslatorInterface $translator,
         ConfigManagerInterface $configManager,
-        ?PluginManagerInterface $pluginManager = null,
-        ?TemplateManagerInterface $templateManager = null,
-        ?ToolbarManagerInterface $toolbarManager = null
+        PluginManagerInterface $pluginManager,
+        TemplateManagerInterface $templateManager,
+        ToolbarManagerInterface $toolbarManager
     ) {
         $this->pool = $pool;
         $this->translator = $translator;
@@ -178,15 +177,15 @@ final class FormatterType extends AbstractType
             $ckeditorConfiguration['filebrowserImageUploadRouteParameters']['format'] = $options['ckeditor_image_format'];
         }
 
-        if (null !== $this->pluginManager && $this->pluginManager->hasPlugins()) {
+        if ($this->pluginManager->hasPlugins()) {
             $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
         }
 
-        if (null !== $this->templateManager && $this->templateManager->hasTemplates()) {
+        if ($this->templateManager->hasTemplates()) {
             $options['ckeditor_templates'] = $this->templateManager->getTemplates();
         }
 
-        if (null !== $this->toolbarManager && \is_string($ckeditorConfiguration['toolbar'])) {
+        if (\is_string($ckeditorConfiguration['toolbar'])) {
             $ckeditorConfiguration['toolbar'] = $this->toolbarManager->resolveToolbar($ckeditorConfiguration['toolbar']);
         }
 
@@ -200,11 +199,8 @@ final class FormatterType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $pool = $this->pool;
-        $translator = $this->translator;
-
         $formatters = [];
-        foreach ($pool->getFormatters() as $code => $instance) {
+        foreach ($this->pool->getFormatters() as $code => $instance) {
             $formatters[$code] = $code;
         }
 
@@ -214,11 +210,6 @@ final class FormatterType extends AbstractType
 
         if (\count($formatters) > 1) {
             $formatFieldOptions['choice_translation_domain'] = 'SonataFormatterBundle';
-
-            // choices_as_values options is not needed in SF 3.0+
-            if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
-                $formatFieldOptions['choices_as_values'] = true;
-            }
         }
 
         $resolver->setDefaults([
@@ -258,10 +249,5 @@ final class FormatterType extends AbstractType
     public function getBlockPrefix(): string
     {
         return 'sonata_formatter_type';
-    }
-
-    public function getName(): string
-    {
-        return $this->getBlockPrefix();
     }
 }

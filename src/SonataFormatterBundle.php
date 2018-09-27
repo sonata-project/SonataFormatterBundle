@@ -13,30 +13,8 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle;
 
-use FOS\CKEditorBundle\Form\Type\CKEditorType as FOSCKEditorType;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType as IvoryCKEditorType;
-use Sonata\CoreBundle\Form\FormHelper;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class SonataFormatterBundle extends Bundle
 {
-    public function build(ContainerBuilder $container): void
-    {
-        $this->registerFormMapping();
-    }
-
-    public function boot(): void
-    {
-        $this->registerFormMapping();
-    }
-
-    public function registerFormMapping(): void
-    {
-        FormHelper::registerFormTypeMapping([
-            'ckeditor' => class_exists(FOSCKEditorType::class) ? FOSCKEditorType::class : IvoryCKEditorType::class,
-            'sonata_formatter_type' => 'Sonata\FormatterBundle\Form\Type\FormatterType',
-            'sonata_simple_formatter_type' => 'Sonata\FormatterBundle\Form\Type\SimpleFormatterType',
-        ]);
-    }
 }
