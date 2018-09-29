@@ -40,6 +40,7 @@
         "symfony/property-access": "^3.4 || ^4.0",
         "symfony/translation": "^3.4 || ^4.0",
         "symfony/twig-bridge": "^3.4 || ^4.0",
+        "symfony/validator": "^3.4 || ^4.0",
         "twig/twig": "^2.4"
     },
     "conflict": {
@@ -50,8 +51,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^3.0",
         "sonata-project/admin-bundle": "^3.31",
         "sonata-project/media-bundle": "^3.10",
-        "symfony/phpunit-bridge": "^4.1",
-        "symfony/validator": "^3.4 || ^4.0"
+        "symfony/phpunit-bridge": "^4.1"
     },
     "suggest": {
         "sonata-project/admin-bundle": "For using the admin media browser.",
