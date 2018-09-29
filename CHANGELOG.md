@@ -9,8 +9,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 - ckeditor assets
-- support for PHP 5.3 through 5.5 was dropped
-- support for Symfony 2.3 through 2.7 was dropped
+- support for PHP 5.5 through 7.0 was dropped
+- support for Symfony 2.8 through 3.3 was dropped
 
 ## [3.5.0](https://github.com/sonata-project/SonataFormatterBundle/compare/3.4.1...3.5.0) - 2018-05-22
 ### Added
