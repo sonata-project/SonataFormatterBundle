@@ -11,6 +11,7 @@
 
 namespace Sonata\FormatterBundle\Tests\DependencyInjection;
 
+use InvalidArgumentException;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sonata\FormatterBundle\DependencyInjection\SonataFormatterExtension;
 
@@ -66,6 +67,26 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('sonata.formatter.form.type.selector');
         $this->assertContainerBuilderHasService('sonata.formatter.block.formatter');
         $this->assertContainerBuilderHasService('sonata.formatter.ckeditor.extension');
+    }
+
+    public function testItThrowsOnInvalidDefaultFormatter()
+    {
+        $this->setParameter('kernel.bundles', []);
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            'SonataFormatterBundle - Invalid default formatter : tixt, available : ["text", "tuxt"]'
+        );
+
+        $this->load([
+            'default_formatter' => 'tixt',
+            'formatters' => ['tuxt' => [
+                'service' => 'sonata.formatter.text.text',
+                'extensions' => [
+                    'sonata.formatter.twig.control_flow',
+                    'sonata.formatter.twig.gist',
+                ],
+            ]],
+        ]);
     }
 
     public function testGetLoader()
