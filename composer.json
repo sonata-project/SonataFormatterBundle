@@ -26,6 +26,7 @@
         "php": "^7.1",
         "friendsofsymfony/ckeditor-bundle": "^1.0",
         "knplabs/knp-markdown-bundle": "^1.7",
+        "psr/log": "^1.0",
         "sonata-project/block-bundle": "^3.11",
         "sonata-project/core-bundle": "^3.9",
         "symfony/config": "^3.4 || ^4.0",
