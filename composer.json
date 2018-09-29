@@ -26,6 +26,7 @@
         "php": "^5.6 || ^7.0",
         "egeloen/ckeditor-bundle": "^4.0 || ^5.0 || ^6.0",
         "knplabs/knp-markdown-bundle": "^1.7",
+        "psr/log": "^1.0",
         "sonata-project/block-bundle": "^3.11",
         "sonata-project/core-bundle": "^3.9",
         "symfony/config": "^2.8 || ^3.2 || ^4.0",
