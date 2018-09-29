@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.0](https://github.com/sonata-project/SonataFormatterBundle/compare/3.5.0...4.0.0) - 2018-09-29
+
+### Added
+- PHP 7.1 type hints
+
+### Removed
+- ckeditor assets
+- support for PHP 5.3 through 5.5 was dropped
+- support for Symfony 2.3 through 2.7 was dropped
+
 ## [3.5.0](https://github.com/sonata-project/SonataFormatterBundle/compare/3.4.1...3.5.0) - 2018-05-22
 ### Added
 - Added support for stylesSet (ivory_ck_editor configuration)
