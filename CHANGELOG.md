@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.1.0](https://github.com/sonata-project/SonataFormatterBundle/compare/4.0.0...4.1.0) - 2018-09-30
+
+### Added
+- the `final` Sonata\FormatterBundle\Formatter\Pool class now implements a `Sonata\FormatterBundle\Formatter\PoolInterface`
+
 ## [4.0.0](https://github.com/sonata-project/SonataFormatterBundle/compare/3.5.0...4.0.0) - 2018-09-29
 
 ### Added
