@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Form\EventListener;
 
-use Sonata\FormatterBundle\Formatter\Pool;
+use Sonata\FormatterBundle\Formatter\PoolInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 final class FormatterListener
 {
     /**
-     * @var Pool
+     * @var PoolInterface
      */
     private $pool;
 
@@ -39,7 +39,7 @@ final class FormatterListener
      */
     private $targetField;
 
-    public function __construct(Pool $pool, string $formatField, string $sourceField, string $targetField)
+    public function __construct(PoolInterface $pool, string $formatField, string $sourceField, string $targetField)
     {
         $this->pool = $pool;
 

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Twig\Extension;
 
-use Sonata\FormatterBundle\Formatter\Pool;
+use Sonata\FormatterBundle\Formatter\PoolInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -23,11 +23,11 @@ use Twig\TwigFilter;
 final class TextFormatterExtension extends AbstractExtension
 {
     /**
-     * @var Pool
+     * @var PoolInterface
      */
     protected $pool;
 
-    public function __construct(Pool $pool)
+    public function __construct(PoolInterface $pool)
     {
         $this->pool = $pool;
     }
