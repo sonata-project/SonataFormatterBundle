@@ -18,7 +18,7 @@ use FOS\CKEditorBundle\Model\PluginManagerInterface;
 use FOS\CKEditorBundle\Model\TemplateManagerInterface;
 use FOS\CKEditorBundle\Model\ToolbarManagerInterface;
 use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
-use Sonata\FormatterBundle\Formatter\Pool;
+use Sonata\FormatterBundle\Formatter\PoolInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -34,7 +34,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 final class FormatterType extends AbstractType
 {
     /**
-     * @var Pool
+     * @var PoolInterface
      */
     protected $pool;
 
@@ -64,7 +64,7 @@ final class FormatterType extends AbstractType
     private $toolbarManager;
 
     public function __construct(
-        Pool $pool,
+        PoolInterface $pool,
         TranslatorInterface $translator,
         ConfigManagerInterface $configManager,
         PluginManagerInterface $pluginManager,

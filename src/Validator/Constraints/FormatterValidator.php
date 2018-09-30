@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Validator\Constraints;
 
-use Sonata\FormatterBundle\Formatter\Pool;
+use Sonata\FormatterBundle\Formatter\PoolInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -23,11 +23,11 @@ use Symfony\Component\Validator\ConstraintValidator;
 final class FormatterValidator extends ConstraintValidator
 {
     /**
-     * @var Pool
+     * @var PoolInterface
      */
     protected $pool;
 
-    public function __construct(Pool $pool)
+    public function __construct(PoolInterface $pool)
     {
         $this->pool = $pool;
     }
