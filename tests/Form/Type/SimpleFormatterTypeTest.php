@@ -76,6 +76,9 @@ class SimpleFormatterTypeTest extends TestCase
         );
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testBuildForm(): void
     {
         $formBuilder = $this->createMock(FormBuilderInterface::class);
