@@ -58,7 +58,7 @@ final class FormatterListener
         // make sure the listener works with array
         $data = $event->getData();
 
-        $accessor->setValue($data, $this->targetField, $this->pool->transform($format, $source));
+        $accessor->setValue($data, $this->targetField, $source ? $this->pool->transform($format, $source) : null);
 
         $event->setData($data);
     }
