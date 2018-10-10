@@ -74,7 +74,7 @@ class CkeditorAdminControllerTest extends TestCase
         $form = $this->prophesize(Form::class);
         $formView = $this->prophesize(FormView::class);
 
-        $this->configureSetFormTheme($formView->reveal(), 'filterTheme');
+        $this->configureSetFormTheme($formView->reveal(), ['filterTheme']);
         $this->configureRender('templateList', Argument::type('array'), 'renderResponse');
         $datagrid->setValue('context', null, 'another_context')->shouldBeCalled();
         $datagrid->setValue('category', null, 1)->shouldBeCalled();
@@ -97,7 +97,7 @@ class CkeditorAdminControllerTest extends TestCase
         $this->admin->getDatagrid()->willReturn($datagrid->reveal());
         $this->admin->getPersistentParameter('context', 'context')->willReturn('another_context');
         $this->admin->getPersistentParameter('provider')->willReturn('provider');
-        $this->admin->getFilterTheme()->willReturn('filterTheme');
+        $this->admin->getFilterTheme()->willReturn(['filterTheme']);
         $this->request->get('filter')->willReturn([]);
         $this->request->get('category')->willReturn(2);
 
@@ -170,7 +170,7 @@ class CkeditorAdminControllerTest extends TestCase
         $requestStack->getCurrentRequest()->willReturn($request);
     }
 
-    private function configureSetFormTheme($formView, $formTheme): void
+    private function configureSetFormTheme($formView, array $formTheme): void
     {
         $twig = $this->prophesize(\Twig_Environment::class);
 
