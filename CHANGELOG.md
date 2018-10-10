@@ -2,6 +2,25 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.1.1](https://github.com/sonata-project/SonataFormatterBundle/compare/4.1.0...4.1.1) - 2018-10-04
+### Fixed
+- Catch null values in FormatterListener
+
+## [4.1.0](https://github.com/sonata-project/SonataFormatterBundle/compare/4.0.0...4.1.0) - 2018-09-30
+
+### Added
+- the `final` Sonata\FormatterBundle\Formatter\Pool class now implements a `Sonata\FormatterBundle\Formatter\PoolInterface`
+
+## [4.0.0](https://github.com/sonata-project/SonataFormatterBundle/compare/3.5.0...4.0.0) - 2018-09-29
+
+### Added
+- PHP 7.1 type hints
+
+### Removed
+- ckeditor assets
+- support for PHP 5.5 through 7.0 was dropped
+- support for Symfony 2.8 through 3.3 was dropped
+
 ## [3.5.0](https://github.com/sonata-project/SonataFormatterBundle/compare/3.4.1...3.5.0) - 2018-05-22
 ### Added
 - Added support for stylesSet (ivory_ck_editor configuration)
