@@ -1,0 +1,12 @@
+{
+  "name": "@sonata-project/formatter-bundle",
+  "version": "0.1.0",
+  "homepage": "https://sonata-project.org/bundles/formatter",
+  "description": "Sonata Formatter Bundle assets",
+  "dependencies": {
+    "ckeditor": "^4.3",
+    "font-awesome": "^4.7",
+    "ionicons": "^2.0",
+    "markitup": "^3.0.0-0"
+  }
+}
