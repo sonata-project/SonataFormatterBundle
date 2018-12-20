@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Form\Type;
 
-use FOS\CKEditorBundle\Model\ConfigManagerInterface;
-use FOS\CKEditorBundle\Model\PluginManagerInterface;
-use FOS\CKEditorBundle\Model\TemplateManagerInterface;
-use FOS\CKEditorBundle\Model\ToolbarManagerInterface;
 use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 use Sonata\FormatterBundle\Formatter\PoolInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -43,40 +39,12 @@ final class FormatterType extends AbstractType
      */
     protected $translator;
 
-    /**
-     * @var ConfigManagerInterface
-     */
-    protected $configManager;
-
-    /**
-     * @var PluginManagerInterface
-     */
-    protected $pluginManager;
-
-    /**
-     * @var TemplateManagerInterface
-     */
-    private $templateManager;
-
-    /**
-     * @var ToolbarManagerInterface
-     */
-    private $toolbarManager;
-
     public function __construct(
         PoolInterface $pool,
-        TranslatorInterface $translator,
-        ConfigManagerInterface $configManager,
-        PluginManagerInterface $pluginManager,
-        TemplateManagerInterface $templateManager,
-        ToolbarManagerInterface $toolbarManager
+        TranslatorInterface $translator
     ) {
         $this->pool = $pool;
         $this->translator = $translator;
-        $this->configManager = $configManager;
-        $this->pluginManager = $pluginManager;
-        $this->templateManager = $templateManager;
-        $this->toolbarManager = $toolbarManager;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -156,44 +124,6 @@ final class FormatterType extends AbstractType
 
         $view->vars['format_field_options'] = $options['format_field_options'];
 
-        $defaultConfig = $this->configManager->getDefaultConfig();
-
-        if ($this->configManager->hasConfig($defaultConfig)) {
-            $ckeditorConfiguration = $this->configManager->getConfig($defaultConfig);
-        } else {
-            $ckeditorConfiguration = [];
-        }
-
-        if (!array_key_exists('toolbar', $ckeditorConfiguration)) {
-            $ckeditorConfiguration['toolbar'] = array_values($options['ckeditor_toolbar_icons']);
-        }
-
-        if ($options['ckeditor_context']) {
-            $contextConfig = $this->configManager->getConfig($options['ckeditor_context']);
-            $ckeditorConfiguration = array_merge($ckeditorConfiguration, $contextConfig);
-        }
-
-        if ($options['ckeditor_image_format']) {
-            $ckeditorConfiguration['filebrowserImageUploadRouteParameters']['format'] = $options['ckeditor_image_format'];
-        }
-
-        if ($this->pluginManager->hasPlugins()) {
-            $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
-        }
-
-        if ($this->templateManager->hasTemplates()) {
-            $options['ckeditor_templates'] = $this->templateManager->getTemplates();
-        }
-
-        if (\is_string($ckeditorConfiguration['toolbar'])) {
-            $ckeditorConfiguration['toolbar'] = $this->toolbarManager->resolveToolbar($ckeditorConfiguration['toolbar']);
-        }
-
-        $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;
-        $view->vars['ckeditor_basepath'] = $options['ckeditor_basepath'];
-        $view->vars['ckeditor_plugins'] = $options['ckeditor_plugins'];
-        $view->vars['ckeditor_templates'] = $options['ckeditor_templates'];
-
         $view->vars['source_id'] = str_replace($view->vars['name'], $view->vars['source_field'], $view->vars['id']);
     }
 
@@ -216,20 +146,6 @@ final class FormatterType extends AbstractType
             'inherit_data' => true,
             'event_dispatcher' => null,
             'format_field' => null,
-            'ckeditor_toolbar_icons' => [[
-                 'Bold', 'Italic', 'Underline',
-                 '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
-                 '-', 'Undo', 'Redo',
-                 '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
-                 '-', 'Blockquote',
-                 '-', 'Image', 'Link', 'Unlink', 'Table', ],
-                 ['Maximize', 'Source'],
-            ],
-            'ckeditor_basepath' => 'bundles/sonataformatter/vendor/ckeditor',
-            'ckeditor_context' => null,
-            'ckeditor_image_format' => null,
-            'ckeditor_plugins' => [],
-            'ckeditor_templates' => [],
             'format_field_options' => $formatFieldOptions,
             'source_field' => null,
             'source_field_options' => [

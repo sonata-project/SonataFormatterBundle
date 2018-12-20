@@ -14,4 +14,3 @@ produce html from text formats that are easier to write, like Markdown.
    reference/usage
    reference/formatter_widget
    reference/formatter_block
-   reference/ckeditor_medias

@@ -16,7 +16,7 @@ namespace Sonata\FormatterBundle\Tests\Formatter;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Sonata\FormatterBundle\Formatter\Pool;
-use Sonata\FormatterBundle\Formatter\RawFormatter;
+use Sonata\FormatterBundle\Formatter\TextFormatter;
 use Twig\Environment;
 use Twig\Error\SyntaxError;
 use Twig\Sandbox\SecurityError;
@@ -26,7 +26,7 @@ class PoolTest extends TestCase
 {
     public function testPool(): void
     {
-        $formatter = new RawFormatter();
+        $formatter = new TextFormatter();
         $env = $this->createMock(Environment::class);
         $template = $this->createMock(Template::class);
 
@@ -55,7 +55,7 @@ class PoolTest extends TestCase
 
     public function testSyntaxError(): void
     {
-        $formatter = new RawFormatter();
+        $formatter = new TextFormatter();
         $env = $this->createMock(Environment::class);
         $template = $this->createMock(Template::class);
 
@@ -73,7 +73,7 @@ class PoolTest extends TestCase
 
     public function testTwigSandboxSecurityError(): void
     {
-        $formatter = new RawFormatter();
+        $formatter = new TextFormatter();
         $env = $this->createMock(Environment::class);
         $template = $this->createMock(Template::class);
 
@@ -93,7 +93,7 @@ class PoolTest extends TestCase
     {
         $this->expectException('RuntimeException');
 
-        $formatter = new RawFormatter();
+        $formatter = new TextFormatter();
         $env = $this->createMock(Environment::class);
         $template = $this->createMock(Template::class);
 

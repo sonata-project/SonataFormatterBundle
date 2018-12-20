@@ -38,7 +38,6 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
     public function testWithOptionalBundles(): void
     {
         $this->setParameter('kernel.bundles', array_flip([
-            'FOSCKEditorBundle',
             'SonataBlockBundle',
             'SonataMediaBundle',
         ]));
@@ -56,7 +55,6 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasService('sonata.formatter.form.type.selector');
         $this->assertContainerBuilderHasService('sonata.formatter.block.formatter');
-        $this->assertContainerBuilderHasService('sonata.formatter.ckeditor.extension');
     }
 
     public function testItThrowsOnInvalidDefaultFormatter(): void

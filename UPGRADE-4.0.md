@@ -25,3 +25,10 @@ to regenerate assets.
 PHP 7.1 type hints have been added wherever possible, you have to add them in
 types extending or implementing ours.
 
+
+# Removed formatters
+
+All specific Formatters were removed: 
+- `MarkdownFormatter`
+- `RawFormatter`
+- `TwigFormatter`
