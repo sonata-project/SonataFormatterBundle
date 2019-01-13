@@ -13,17 +13,15 @@ Simple Formatter Widget
 =======================
 
 The ``Sonata\FormatterBundle\Form\Type\SimpleFormatterType`` widget has
-been implemented to allow developers to force the input formatter value.
+been implemented to allow developers to force the input formatter value::
 
-.. code-block:: php
-
-    <?php
     use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 
-    $formMapper->add('comment', SimpleFormatterType::class, [
-        'format' => 'markdown',
-        'ckeditor_context' => 'default', // optional
-    ]);
+    $formMapper
+        ->add('comment', SimpleFormatterType::class, [
+            'format' => 'markdown',
+            'ckeditor_context' => 'default', // optional
+        ]);
 
 Advanced Formatter Widget
 =========================
@@ -67,11 +65,8 @@ So, the post model requires the following fields:
 * a ``rawContent`` field: store the original content from the user;
 * a ``content`` field: store the transformed content display to the visitor.
 
-Now, let us define a form to edit this post:
+Now, let us define a form to edit this post::
 
-.. code-block:: php
-
-    <?php
     use Sonata\FormatterBundle\Form\Type\FormatterType;
 
     $formBuilder
@@ -91,7 +86,7 @@ Now, let us define a form to edit this post:
             ],
             'listener' => true,
             'target_field' => 'content',
-        ])
+        ]);
 
 The form type defines a ``contentFormatter`` with a select choice
 (``sonata_formatter_type_selector``).
@@ -119,11 +114,7 @@ and to define a custom ``CKEditor`` toolbar configuration:
 * ``ckeditor_toolbar_icons`` : give CKEditor a custom toolbar
   configuration (optional)
 
-Here is the default ``CKEditor`` custom toolbar configuration, you can tweak:
-
-.. code-block:: php
-
-    <?php
+Here is the default ``CKEditor`` custom toolbar configuration, you can tweak::
 
     $ckeditor_toolbar_icons = [
         1 => ['Bold', 'Italic', 'Underline',
@@ -143,21 +134,18 @@ edit some configuration files.
     If you want to see an actual implementation of this can, you can
     have a look at the ``SonataNewsBundle``.
 
-
 Sonata Admin Integration
 ------------------------
 
-Of course, it is possible to use this feature with the
-``SonataAdminBundle``.
-Open the ``config.yml`` file and add the following lines (or extend the
-current configuration):
+To use this feature with SonataAdmin, add or extend the following lines to your config:
 
 .. code-block:: yaml
+
+    # config/packages/sonata_admin.yaml
 
     sonata_admin:
         assets:
             extra_javascripts:
-                # ...
                 - bundles/fosckeditor/ckeditor.js
                 - bundles/sonataformatter/vendor/markitup-markitup/markitup/jquery.markitup.js
                 - bundles/sonataformatter/markitup/sets/markdown/set.js
@@ -165,7 +153,6 @@ current configuration):
                 - bundles/sonataformatter/markitup/sets/textile/set.js
 
             extra_stylesheets:
-                # ...
                 - bundles/sonataformatter/markitup/skins/sonata/style.css
                 - bundles/sonataformatter/markitup/sets/markdown/style.css
                 - bundles/sonataformatter/markitup/sets/html/style.css
