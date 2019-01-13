@@ -23,41 +23,15 @@ Install SonataFormatterBundle:
 
     $ composer require sonata-project/formatter-bundle
 
-Register the bundles in ``bundles.php`` file:
-
-.. code-block:: php
-
-    <?php
+Register the bundles in ``bundles.php`` file::
 
     // config/bundles.php
 
     return [
-        //...
+        // ...
         Knp\Bundle\MarkdownBundle\KnpMarkdownBundle::class => ['all' => true],
         FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
         Sonata\FormatterBundle\SonataFormatterBundle::class => ['all' => true],
-    ];
-
-.. note::
-    If you are not using Symfony Flex, you should enable bundles in your
-    ``AppKernel.php``.
-
-
-.. code-block:: php
-
-    <?php
-
-    // app/AppKernel.php
-
-    $bundles = [
-
-        // ...
-
-        // SonataMarkItUpBundle is deprecated. All assets are now available in formatter bundle
-        // new Sonata\MarkItUpBundle\SonataMarkItUpBundle(),
-        new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
-        new FOS\CKEditorBundle\FOSCKEditorBundle(),
-        new Sonata\FormatterBundle\SonataFormatterBundle(),
     ];
 
 You have to install Ckeditor:
@@ -82,15 +56,11 @@ Add Twig configuration:
     # config/packages/twig.yaml
 
     twig:
-        debug:            "%kernel.debug%"
-        strict_variables: "%kernel.debug%"
+        debug:            '%kernel.debug%'
+        strict_variables: '%kernel.debug%'
 
         form_themes:
             - '@SonataFormatter/Form/formatter.html.twig'
-
-.. note::
-    If you are not using Symfony Flex, this configuration should be added
-    to ``app/config/config.yml``.
 
 Now add SonataFormatter configuration:
 
@@ -136,9 +106,5 @@ Now add SonataFormatter configuration:
             twig:
                 service: sonata.formatter.text.twigengine
                 extensions: [] # Twig formatter cannot have extensions
-
-.. note::
-    If you are not using Symfony Flex, this configuration should be added
-    to ``app/config/config.yml``.
 
 .. _`FOSCKEditorBundle`: https://github.com/FriendsOfSymfony/FOSCKEditorBundle
