@@ -5,27 +5,23 @@
 Usage
 =====
 
+Inject `Sonata\FormatterBundle\Formatter\Pool`` in your class::
 
-.. configuration-block::
+    assert($formatterPool instanceof Pool::class);
 
-    .. code-block:: php
+    $html = $formatterPool->transform('markdown', $text);
 
-        <?php
-        // Inject Sonata\FormatterBundle\Formatter\Pool in your class
-        assert($formatterPool instanceof Pool::class);
-        $html = $formatterPool->transform('markdown', $text);
+in a template:
 
-    .. code-block:: jinja
+.. code-block:: jinja
 
-        # Template usage
-        {{ my_data | format_text('markdown') }}
-
+    {{ my_data|format_text('markdown') }}
 
 .. note::
 
     By default, the ``Twig`` filter ``format_text`` is not marked as
-    ``safe``. So, if you want to ouput the correct result, just add the
-    ``| raw`` filter.
+    ``safe``. So, if you want to output the correct result, add the
+    ``|raw`` filter.
 
 Form
 ----
@@ -36,11 +32,8 @@ You have to declare 2 fields:
 * ``source content`` field;
 * ``formatter`` field.
 
-And initialize a form type:
+And initialize a form type::
 
-.. code-block:: php
-
-    <?php
     use Sonata\FormatterBundle\Form\Type\FormatterType;
 
     $formBuilder
@@ -48,8 +41,7 @@ And initialize a form type:
         ->add('contentFormatter', FormatterType::class, [
             'source_field' => 'rawContent',
             'target_field' => 'content',
-        ])
-
+        ]);
 
 When data is populated, the ``content`` property will be populated with
 the text transformed from the selected transformer name and the
