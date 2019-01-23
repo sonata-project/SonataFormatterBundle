@@ -79,7 +79,7 @@ final class LoaderSelector implements LoaderInterface
 
     private function isFile(string $name): bool
     {
-        if ('.html.twig' == substr($name, -10)) {
+        if ('.html.twig' === substr($name, -10)) {
             return true;
         }
 

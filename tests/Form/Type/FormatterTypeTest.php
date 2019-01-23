@@ -550,6 +550,6 @@ class FormatterTypeTest extends TestCase
             'choice_translation_domain' => 'SonataFormatterBundle',
         ];
 
-        $this->assertEquals($expectedOptions, $options['format_field_options']);
+        $this->assertSame($expectedOptions, $options['format_field_options']);
     }
 }
