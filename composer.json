@@ -5,9 +5,7 @@
     "keywords": [
         "sonata",
         "formatter",
-        "markdown",
-        "ckeditor",
-        "markitup"
+        "editor"
     ],
     "homepage": "https://sonata-project.org/bundles/formatter",
     "license": "MIT",
@@ -24,8 +22,6 @@
     ],
     "require": {
         "php": "^7.1",
-        "friendsofsymfony/ckeditor-bundle": "^1.0",
-        "knplabs/knp-markdown-bundle": "^1.7",
         "psr/log": "^1.0",
         "sonata-project/block-bundle": "^3.11",
         "sonata-project/core-bundle": "^3.9",
@@ -43,19 +39,9 @@
         "symfony/validator": "^3.4 || ^4.0",
         "twig/twig": "^2.4"
     },
-    "conflict": {
-        "sonata-project/admin-bundle": "<3.27",
-        "sonata-project/media-bundle": "<3.0"
-    },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^3.0",
-        "sonata-project/admin-bundle": "^3.31",
-        "sonata-project/media-bundle": "^3.10",
         "symfony/phpunit-bridge": "^4.1"
-    },
-    "suggest": {
-        "sonata-project/admin-bundle": "For using the admin media browser.",
-        "sonata-project/media-bundle": "For using the admin media browser."
     },
     "config": {
         "sort-packages": true

@@ -5,8 +5,6 @@
         "Thomas Rabaix <thomas.rabaix@gmail.com>"
     ],
     "dependencies": {
-        "markitup-markitup": "~1.1.6",
-        "ckeditor": "~4.3.4"
     },
     "license": "MIT",
     "private": true,

@@ -10,25 +10,9 @@
                 <source>sonata.formatter.block.formatter</source>
                 <target>Contenuto avanzato</target>
             </trans-unit>
-            <trans-unit id="markdown">
-                <source>markdown</source>
-                <target>Markdown</target>
-            </trans-unit>
             <trans-unit id="text">
                 <source>text</source>
                 <target>Testo</target>
-            </trans-unit>
-            <trans-unit id="rawhtml">
-                <source>rawhtml</source>
-                <target>Markup HTML</target>
-            </trans-unit>
-            <trans-unit id="richhtml">
-                <source>richhtml</source>
-                <target>Rich HTML</target>
-            </trans-unit>
-            <trans-unit id="twig">
-                <source>twig</source>
-                <target>Twig</target>
             </trans-unit>
             <trans-unit id="form.label_content">
                 <source>form.label_content</source>
