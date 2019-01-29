@@ -21,7 +21,7 @@ Install SonataFormatterBundle:
 
 .. code-block:: bash
 
-    $ composer require sonata-project/formatter-bundle
+    composer require sonata-project/formatter-bundle
 
 Register the bundles in ``bundles.php`` file::
 
@@ -38,13 +38,13 @@ You have to install Ckeditor:
 
 .. code-block:: bash
 
-    $  bin/console ckeditor:install
+    bin/console ckeditor:install
 
 and install Symfony assets:
 
 .. code-block:: bash
 
-    $  bin/console assets:install
+    bin/console assets:install
 
 Configuration
 =============
@@ -78,14 +78,12 @@ Now add SonataFormatter configuration:
                     - sonata.formatter.twig.gist
             #        - sonata.media.formatter.twig #keep this commented unless you are using media bundle.
 
-
             text:
                 service: sonata.formatter.text.text
                 extensions:
                     - sonata.formatter.twig.control_flow
                     - sonata.formatter.twig.gist
             #        - sonata.media.formatter.twig
-
 
             rawhtml:
                 service: sonata.formatter.text.raw
@@ -94,14 +92,12 @@ Now add SonataFormatter configuration:
                     - sonata.formatter.twig.gist
             #        - sonata.media.formatter.twig
 
-
             richhtml:
                 service: sonata.formatter.text.raw
                 extensions:
                     - sonata.formatter.twig.control_flow
                     - sonata.formatter.twig.gist
             #        - sonata.media.formatter.twig
-
 
             twig:
                 service: sonata.formatter.text.twigengine
