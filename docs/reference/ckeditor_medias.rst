@@ -54,17 +54,7 @@ It should contain something like this:
 
 You can provide custom routes and a custom context to match your needs.
 
-Second step, do not forget to import this ``config/packages/fos_ck_editor.yaml`` file
-in your ``config/packages/sonata_formatter.yaml`` like this:
-
-.. code-block:: yaml
-
-  # config/packages/sonata_formatter.yaml
-
-  # FOSCKEditor
-  - { resource: fos_ck_editor.yaml }
-
-This third step is optional. You can do it if you need to define some
+This second step is optional. You can do it if you need to define some
 custom browsing and uploading templates. To do so, add these few lines
 in your ``sonata_formatter.yml`` file:
 
