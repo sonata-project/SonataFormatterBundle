@@ -2,7 +2,6 @@
     double: Widget; Usage
     double: Widget; Configuration
 
-
 One recurrent need is to provide some kind of rich user interface to
 edit content.
 However, depending on the final target the content can have different
@@ -52,7 +51,6 @@ Preview
    :alt: formatter with MarkItUp!
 
    The formatter with MarkItUp!
-
 
 How to use it ?
 ---------------
