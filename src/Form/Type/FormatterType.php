@@ -57,8 +57,8 @@ final class FormatterType extends AbstractType
             $options['format_field_options']['property_path'] = $formatField;
         }
 
-        if (!array_key_exists('data', $options['format_field_options']) ||
-             !array_key_exists($options['format_field_options']['data'], $this->pool->getFormatters())) {
+        if (!\array_key_exists('data', $options['format_field_options']) ||
+             !\array_key_exists($options['format_field_options']['data'], $this->pool->getFormatters())) {
             $options['format_field_options']['data'] = $this->pool->getDefaultFormatter();
         }
 

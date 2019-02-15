@@ -8,7 +8,7 @@ Install SonataFormatterBundle:
 
 .. code-block:: bash
 
-    $ composer require sonata-project/formatter-bundle
+    composer require sonata-project/formatter-bundle
 
 Register the bundles in ``bundles.php`` file::
 
@@ -23,13 +23,13 @@ You have to install Ckeditor:
 
 .. code-block:: bash
 
-    $  bin/console ckeditor:install
+    bin/console ckeditor:install
 
 and install Symfony assets:
 
 .. code-block:: bash
 
-    $  bin/console assets:install
+    bin/console assets:install
 
 Configuration
 =============

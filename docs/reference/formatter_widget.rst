@@ -2,7 +2,6 @@
     double: Widget; Usage
     double: Widget; Configuration
 
-
 One recurrent need is to provide some kind of rich user interface to
 edit content.
 However, depending on the final target the content can have different
@@ -32,7 +31,6 @@ its requirements.
 By default, the widget supports these types:
 
 * `text` with a standard textarea widget;
-
 
 How to use it ?
 ---------------

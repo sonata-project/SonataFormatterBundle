@@ -48,7 +48,7 @@ final class SonataFormatterExtension extends Extension
             $loader->load('block.xml');
         }
 
-        if (!array_key_exists($config['default_formatter'], $config['formatters'])) {
+        if (!\array_key_exists($config['default_formatter'], $config['formatters'])) {
             throw new \InvalidArgumentException(sprintf(
                 'SonataFormatterBundle - Invalid default formatter: %s, available: %s',
                 $config['default_formatter'],
