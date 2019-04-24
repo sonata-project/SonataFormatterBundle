@@ -43,7 +43,7 @@ class FormatterListenerTest extends TestCase
     public function testWithValidFormatter(): void
     {
         $formatter = $this->createMock(FormatterInterface::class);
-        $formatter->expects($this->once())->method('transform')->will($this->returnCallback(function ($text) {
+        $formatter->expects($this->once())->method('transform')->will($this->returnCallback(static function ($text) {
             return strtoupper($text);
         }));
 
