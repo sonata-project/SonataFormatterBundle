@@ -41,7 +41,7 @@ final class FormatterBlockService extends AbstractAdminBlockService
     {
         $formMapper->add('settings', ImmutableArrayType::class, [
             'keys' => [
-                ['content', FormatterType::class, function (FormBuilderInterface $formBuilder) {
+                ['content', FormatterType::class, static function (FormBuilderInterface $formBuilder) {
                     return [
                         'event_dispatcher' => $formBuilder->getEventDispatcher(),
                         'format_field' => ['format', '[format]'],
