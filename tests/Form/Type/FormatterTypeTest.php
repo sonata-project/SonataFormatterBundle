@@ -65,11 +65,11 @@ class FormatterTypeTest extends TestCase
         $choiceFormBuilder->expects($this->once())
             ->method('getOption')
             ->with('choices')
-            ->will($this->returnValue(['foo' => 'bar']));
+            ->willReturn(['foo' => 'bar']);
 
         $formBuilder = $this->createMock(FormBuilderInterface::class);
         $formBuilder->expects($this->exactly(3))->method('add');
-        $formBuilder->expects($this->once())->method('get')->will($this->returnValue($choiceFormBuilder));
+        $formBuilder->expects($this->once())->method('get')->willReturn($choiceFormBuilder);
         $formBuilder->expects($this->once())->method('remove');
 
         $options = [
@@ -93,11 +93,11 @@ class FormatterTypeTest extends TestCase
         $choiceFormBuilder->expects($this->once())
             ->method('getOption')
             ->with('choices')
-            ->will($this->returnValue(['foo' => 'bar', 'foo2' => 'bar2']));
+            ->willReturn(['foo' => 'bar', 'foo2' => 'bar2']);
 
         $formBuilder = $this->createMock(FormBuilderInterface::class);
         $formBuilder->expects($this->exactly(2))->method('add');
-        $formBuilder->expects($this->once())->method('get')->will($this->returnValue($choiceFormBuilder));
+        $formBuilder->expects($this->once())->method('get')->willReturn($choiceFormBuilder);
 
         $options = [
             'format_field' => 'format',
@@ -125,7 +125,7 @@ class FormatterTypeTest extends TestCase
         $choiceFormBuilder->expects($this->once())
             ->method('getOption')
             ->with('choices')
-            ->will($this->returnValue($formatters));
+            ->willReturn($formatters);
 
         $options = [
             'format_field' => 'SomeFormatField',
@@ -147,7 +147,7 @@ class FormatterTypeTest extends TestCase
             'data' => $selectedFormat,
             'choices' => $formatters,
         ]);
-        $formBuilder->expects($this->at(1))->method('get')->will($this->returnValue($choiceFormBuilder));
+        $formBuilder->expects($this->at(1))->method('get')->willReturn($choiceFormBuilder);
 
         $this->formType->buildForm($formBuilder, $options);
     }
@@ -163,7 +163,7 @@ class FormatterTypeTest extends TestCase
         $choiceFormBuilder->expects($this->once())
             ->method('getOption')
             ->with('choices')
-            ->will($this->returnValue($formatters));
+            ->willReturn($formatters);
 
         $formBuilder = $this->createMock(FormBuilderInterface::class);
         $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', ChoiceType::class, [
@@ -171,7 +171,7 @@ class FormatterTypeTest extends TestCase
             'data' => $defaultFormatter = 'text',
             'choices' => $formatters,
         ]);
-        $formBuilder->expects($this->at(1))->method('get')->will($this->returnValue($choiceFormBuilder));
+        $formBuilder->expects($this->at(1))->method('get')->willReturn($choiceFormBuilder);
 
         $options = [
             'format_field' => 'SomeFormatField',

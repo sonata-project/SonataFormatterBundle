@@ -30,9 +30,9 @@ class PoolTest extends TestCase
         $env = $this->createMock(Environment::class);
         $template = $this->createMock(Template::class);
 
-        $template->expects($this->once())->method('render')->will($this->returnValue('Salut'));
+        $template->expects($this->once())->method('render')->willReturn('Salut');
 
-        $env->expects($this->once())->method('createTemplate')->will($this->returnValue($template));
+        $env->expects($this->once())->method('createTemplate')->willReturn($template);
 
         $pool = $this->getPool();
 
@@ -63,7 +63,7 @@ class PoolTest extends TestCase
             ->method('render')
             ->will($this->throwException(new SyntaxError('Error')));
 
-        $env->expects($this->once())->method('createTemplate')->will($this->returnValue($template));
+        $env->expects($this->once())->method('createTemplate')->willReturn($template);
 
         $pool = $this->getPool();
         $pool->add('foo', $formatter, $env);
@@ -81,7 +81,7 @@ class PoolTest extends TestCase
             ->method('render')
             ->will($this->throwException(new SecurityError('Error')));
 
-        $env->expects($this->once())->method('createTemplate')->will($this->returnValue($template));
+        $env->expects($this->once())->method('createTemplate')->willReturn($template);
 
         $pool = $this->getPool();
         $pool->add('foo', $formatter, $env);
@@ -101,7 +101,7 @@ class PoolTest extends TestCase
             ->method('render')
             ->will($this->throwException(new \RuntimeException('Error')));
 
-        $env->expects($this->once())->method('createTemplate')->will($this->returnValue($template));
+        $env->expects($this->once())->method('createTemplate')->willReturn($template);
 
         $pool = $this->getPool();
         $pool->add('foo', $formatter, $env);
