@@ -96,7 +96,7 @@ class SimpleFormatterTypeTest extends TestCase
         $this->configManager->expects($this->once())
             ->method('getConfig')
             ->with('context')
-            ->will($this->returnValue(['toolbar' => ['Button1']]));
+            ->willReturn(['toolbar' => ['Button1']]);
         $view->vars['id'] = 'SomeId';
         $view->vars['name'] = 'SomeName';
 
@@ -142,13 +142,13 @@ class SimpleFormatterTypeTest extends TestCase
         $this->configManager->expects($this->once())
             ->method('getConfig')
             ->with('context')
-            ->will($this->returnValue(['toolbar' => ['Button1']]));
+            ->willReturn(['toolbar' => ['Button1']]);
         $this->stylesSetManager->expects($this->once())
             ->method('getStylesSets')
-            ->will($this->returnValue($styleSets));
+            ->willReturn($styleSets);
         $this->stylesSetManager->expects($this->once())
             ->method('hasStylesSets')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $view->vars['id'] = 'SomeId';
         $view->vars['name'] = 'SomeName';

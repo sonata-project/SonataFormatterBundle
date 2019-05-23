@@ -22,7 +22,7 @@ class MarkdownFormatterTest extends TestCase
     public function testFormatter(): void
     {
         $parser = $this->createMock(MarkdownParserInterface::class);
-        $parser->expects($this->any())->method('transformMarkdown')->will($this->returnValue('<b>Salut</b>'));
+        $parser->expects($this->any())->method('transformMarkdown')->willReturn('<b>Salut</b>');
         $formatter = new MarkdownFormatter($parser);
 
         $this->assertSame('<b>Salut</b>', $formatter->transform('*Salut*'));
