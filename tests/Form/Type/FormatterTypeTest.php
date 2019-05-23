@@ -99,11 +99,11 @@ class FormatterTypeTest extends TestCase
         $choiceFormBuilder->expects($this->once())
             ->method('getOption')
             ->with('choices')
-            ->will($this->returnValue(['foo' => 'bar']));
+            ->willReturn(['foo' => 'bar']);
 
         $formBuilder = $this->createMock(FormBuilderInterface::class);
         $formBuilder->expects($this->exactly(3))->method('add');
-        $formBuilder->expects($this->once())->method('get')->will($this->returnValue($choiceFormBuilder));
+        $formBuilder->expects($this->once())->method('get')->willReturn($choiceFormBuilder);
         $formBuilder->expects($this->once())->method('remove');
 
         $options = [
@@ -127,11 +127,11 @@ class FormatterTypeTest extends TestCase
         $choiceFormBuilder->expects($this->once())
             ->method('getOption')
             ->with('choices')
-            ->will($this->returnValue(['foo' => 'bar', 'foo2' => 'bar2']));
+            ->willReturn(['foo' => 'bar', 'foo2' => 'bar2']);
 
         $formBuilder = $this->createMock(FormBuilderInterface::class);
         $formBuilder->expects($this->exactly(2))->method('add');
-        $formBuilder->expects($this->once())->method('get')->will($this->returnValue($choiceFormBuilder));
+        $formBuilder->expects($this->once())->method('get')->willReturn($choiceFormBuilder);
 
         $options = [
             'format_field' => 'format',
@@ -160,7 +160,7 @@ class FormatterTypeTest extends TestCase
         $choiceFormBuilder->expects($this->once())
             ->method('getOption')
             ->with('choices')
-            ->will($this->returnValue($formatters));
+            ->willReturn($formatters);
 
         $options = [
             'format_field' => 'SomeFormatField',
@@ -182,7 +182,7 @@ class FormatterTypeTest extends TestCase
             'data' => $selectedFormat,
             'choices' => $formatters,
         ]);
-        $formBuilder->expects($this->at(1))->method('get')->will($this->returnValue($choiceFormBuilder));
+        $formBuilder->expects($this->at(1))->method('get')->willReturn($choiceFormBuilder);
         $formBuilder->expects($this->at(2))->method('add')->with('SomeSourceField', TextareaType::class, [
             'property_path' => 'SomeSourceField',
         ]);
@@ -202,7 +202,7 @@ class FormatterTypeTest extends TestCase
         $choiceFormBuilder->expects($this->once())
             ->method('getOption')
             ->with('choices')
-            ->will($this->returnValue($formatters));
+            ->willReturn($formatters);
 
         $formBuilder = $this->createMock(FormBuilderInterface::class);
         $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', ChoiceType::class, [
@@ -210,7 +210,7 @@ class FormatterTypeTest extends TestCase
             'data' => $defaultFormatter = 'text',
             'choices' => $formatters,
         ]);
-        $formBuilder->expects($this->at(1))->method('get')->will($this->returnValue($choiceFormBuilder));
+        $formBuilder->expects($this->at(1))->method('get')->willReturn($choiceFormBuilder);
         $formBuilder->expects($this->at(2))->method('add')->with('SomeSourceField', TextareaType::class, [
             'property_path' => 'SomeSourceField',
         ]);
@@ -243,7 +243,7 @@ class FormatterTypeTest extends TestCase
         $choiceFormBuilder->expects($this->once())
             ->method('getOption')
             ->with('choices')
-            ->will($this->returnValue($formatters));
+            ->willReturn($formatters);
 
         $formBuilder = $this->createMock(FormBuilderInterface::class);
         $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', ChoiceType::class, [
@@ -251,7 +251,7 @@ class FormatterTypeTest extends TestCase
             'data' => $defaultFormatter = 'text',
             'choices' => $formatters,
         ]);
-        $formBuilder->expects($this->at(1))->method('get')->will($this->returnValue($choiceFormBuilder));
+        $formBuilder->expects($this->at(1))->method('get')->willReturn($choiceFormBuilder);
         $formBuilder->expects($this->at(2))->method('add')->with('SomeSourceField', TextareaType::class, [
             'property_path' => 'SomeSourceField',
         ]);
@@ -277,15 +277,15 @@ class FormatterTypeTest extends TestCase
     {
         $defaultConfig = 'default';
         $defaultConfigValues = ['toolbar' => ['Button1']];
-        $this->configManager->expects($this->once())->method('getDefaultConfig')->will($this->returnValue($defaultConfig));
+        $this->configManager->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
         $this->configManager->expects($this->once())
             ->method('hasConfig')
             ->with($defaultConfig)
-            ->will($this->returnValue(true));
+            ->willReturn(true);
         $this->configManager->expects($this->once())
             ->method('getConfig')
             ->with($defaultConfig)
-            ->will($this->returnValue($defaultConfigValues));
+            ->willReturn($defaultConfigValues);
 
         /** @var \Symfony\Component\Form\FormView $view */
         $view = $this->createMock(FormView::class);
@@ -310,11 +310,11 @@ class FormatterTypeTest extends TestCase
     public function testBuildViewWithoutDefaultConfig(): void
     {
         $defaultConfig = 'default';
-        $this->configManager->expects($this->once())->method('getDefaultConfig')->will($this->returnValue($defaultConfig));
+        $this->configManager->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
         $this->configManager->expects($this->once())
             ->method('hasConfig')
             ->with($defaultConfig)
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $ckEditorToolBarIcons = ['Icon 1'];
 
@@ -343,15 +343,15 @@ class FormatterTypeTest extends TestCase
     {
         $defaultConfig = 'default';
         $defaultConfigValues = ['toolbar' => ['Button 1']];
-        $this->configManager->expects($this->once())->method('getDefaultConfig')->will($this->returnValue($defaultConfig));
+        $this->configManager->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
         $this->configManager->expects($this->once())
             ->method('hasConfig')
             ->with($defaultConfig)
-            ->will($this->returnValue(true));
+            ->willReturn(true);
         $this->configManager->expects($this->once())
             ->method('getConfig')
             ->with($defaultConfig)
-            ->will($this->returnValue($defaultConfigValues));
+            ->willReturn($defaultConfigValues);
 
         $ckEditorToolBarIcons = ['Icon 1'];
 
@@ -412,15 +412,15 @@ class FormatterTypeTest extends TestCase
     {
         $defaultConfig = 'default';
         $defaultConfigValues = ['toolbar' => ['Button1']];
-        $this->configManager->expects($this->once())->method('getDefaultConfig')->will($this->returnValue($defaultConfig));
+        $this->configManager->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
         $this->configManager->expects($this->once())
             ->method('hasConfig')
             ->with($defaultConfig)
-            ->will($this->returnValue(true));
+            ->willReturn(true);
         $this->configManager->expects($this->once())
             ->method('getConfig')
             ->with($defaultConfig)
-            ->will($this->returnValue($defaultConfigValues));
+            ->willReturn($defaultConfigValues);
 
         /** @var FormView $view */
         $view = $this->createMock(FormView::class);
@@ -448,19 +448,19 @@ class FormatterTypeTest extends TestCase
         $toolbar_config = 'custom_toolbar';
         $defaultConfigValues = ['toolbar' => $toolbar_config];
         $custom_toolbar = ['Button 1'];
-        $this->configManager->expects($this->once())->method('getDefaultConfig')->will($this->returnValue($defaultConfig));
+        $this->configManager->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
         $this->configManager->expects($this->once())
             ->method('hasConfig')
             ->with($defaultConfig)
-            ->will($this->returnValue(true));
+            ->willReturn(true);
         $this->configManager->expects($this->once())
             ->method('getConfig')
             ->with($defaultConfig)
-            ->will($this->returnValue($defaultConfigValues));
+            ->willReturn($defaultConfigValues);
         $this->toolbarManager->expects($this->once())
             ->method('resolveToolbar')
             ->with($toolbar_config)
-            ->will($this->returnValue($custom_toolbar));
+            ->willReturn($custom_toolbar);
 
         /** @var FormView $view */
         $view = $this->createMock(FormView::class);
@@ -486,15 +486,15 @@ class FormatterTypeTest extends TestCase
     {
         $defaultConfig = 'default';
         $defaultConfigValues = ['toolbar' => ['Button1']];
-        $this->configManager->expects($this->once())->method('getDefaultConfig')->will($this->returnValue($defaultConfig));
+        $this->configManager->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
         $this->configManager->expects($this->once())
             ->method('hasConfig')
             ->with($defaultConfig)
-            ->will($this->returnValue(true));
+            ->willReturn(true);
         $this->configManager->expects($this->once())
             ->method('getConfig')
             ->with($defaultConfig)
-            ->will($this->returnValue($defaultConfigValues));
+            ->willReturn($defaultConfigValues);
 
         $templates = [
             'imagesPath' => '/bundles/mybundle/templates/images',
@@ -508,8 +508,8 @@ class FormatterTypeTest extends TestCase
             ],
         ];
 
-        $this->templateManager->expects($this->once())->method('hasTemplates')->will($this->returnValue(true));
-        $this->templateManager->expects($this->once())->method('getTemplates')->will($this->returnValue($templates));
+        $this->templateManager->expects($this->once())->method('hasTemplates')->willReturn(true);
+        $this->templateManager->expects($this->once())->method('getTemplates')->willReturn($templates);
 
         /** @var FormView $view */
         $view = $this->createMock(FormView::class);
