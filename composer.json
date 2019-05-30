@@ -41,7 +41,7 @@
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^3.0",
-        "symfony/phpunit-bridge": "^4.1"
+        "symfony/phpunit-bridge": "^4.3"
     },
     "config": {
         "sort-packages": true
