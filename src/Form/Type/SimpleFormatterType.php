@@ -67,7 +67,6 @@ final class SimpleFormatterType extends AbstractType
 
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
-
         $defaultConfig = $this->configManager->getDefaultConfig();
         if ($this->configManager->hasConfig($defaultConfig)) {
             $ckeditorConfiguration = $this->configManager->getConfig($defaultConfig);
