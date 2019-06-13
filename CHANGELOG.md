@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.1.3](https://github.com/sonata-project/SonataFormatterBundle/compare/4.1.2...4.1.3) - 2019-06-13
+
+### Fixed
+- Removed Twig deprecations
+- Fix deprecation for symfony/config 4.2+
+
 ## [4.1.2](https://github.com/sonata-project/SonataFormatterBundle/compare/4.1.1...4.1.2) - 2018-10-08
 ### Fixed
 - Wrong typehint on `setFormTheme` method
