@@ -18,6 +18,11 @@ use Sonata\FormatterBundle\Formatter\TwigFormatter;
 
 class TwigFormatterTest extends TestCase
 {
+    /**
+     * NEXT_MAJOR: Remove the group when deleting FormatterInterface.
+     *
+     * @group legacy
+     */
     public function testFormatter(): void
     {
         $loader = new MyStringLoader();

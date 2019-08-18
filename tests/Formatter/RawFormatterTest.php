@@ -18,6 +18,11 @@ use Sonata\FormatterBundle\Formatter\RawFormatter;
 
 class RawFormatterTest extends TestCase
 {
+    /**
+     * NEXT_MAJOR: Remove the group when deleting FormatterInterface.
+     *
+     * @group legacy
+     */
     public function testFormatter(): void
     {
         $formatter = new RawFormatter();

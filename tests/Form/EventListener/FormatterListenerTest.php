@@ -40,6 +40,11 @@ class FormatterListenerTest extends TestCase
         $listener->postSubmit($event);
     }
 
+    /**
+     * NEXT_MAJOR: Remove the group when deleting FormatterInterface.
+     *
+     * @group legacy
+     */
     public function testWithValidFormatter(): void
     {
         $formatter = $this->createMock(FormatterInterface::class);

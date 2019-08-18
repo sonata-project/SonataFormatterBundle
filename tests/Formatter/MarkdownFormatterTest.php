@@ -19,6 +19,11 @@ use Sonata\FormatterBundle\Formatter\MarkdownFormatter;
 
 class MarkdownFormatterTest extends TestCase
 {
+    /**
+     * NEXT_MAJOR: Remove the group when deleting FormatterInterface.
+     *
+     * @group legacy
+     */
     public function testFormatter(): void
     {
         $parser = $this->createMock(MarkdownParserInterface::class);

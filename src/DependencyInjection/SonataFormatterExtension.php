@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\DependencyInjection;
 
+use Sonata\FormatterBundle\Formatter\ExtendableFormatter;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -139,10 +140,12 @@ final class SonataFormatterExtension extends Extension
 
         $container->setDefinition(sprintf('sonata.formatter.twig.sandbox.%s', $code), $sandbox);
 
-        $env->addMethodCall('addExtension', [new Reference(sprintf('sonata.formatter.twig.sandbox.%s', $code))]);
+        if (is_a($env->getClass(), ExtendableFormatter::class)) {
+            $env->addMethodCall('addExtension', [new Reference(sprintf('sonata.formatter.twig.sandbox.%s', $code))]);
 
-        foreach ($extensions as $extension) {
-            $env->addMethodCall('addExtension', [new Reference($extension)]);
+            foreach ($extensions as $extension) {
+                $env->addMethodCall('addExtension', [new Reference($extension)]);
+            }
         }
 
         $lexer = new Definition(Lexer::class, [new Reference(sprintf('sonata.formatter.twig.env.%s', $code)), [

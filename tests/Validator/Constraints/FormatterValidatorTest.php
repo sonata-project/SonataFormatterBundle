@@ -70,6 +70,11 @@ class FormatterValidatorTest extends TestCase
         $validator->validate('existingFormatter', $this->constraint);
     }
 
+    /**
+     * NEXT_MAJOR: Remove the group when deleting FormatterInterface.
+     *
+     * @group legacy
+     */
     public function testValidCase(): void
     {
         $this->pool->add('existingFormatter', $this->createMock(FormatterInterface::class));

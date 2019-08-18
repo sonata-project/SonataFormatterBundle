@@ -13,16 +13,15 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Formatter;
 
-use Sonata\FormatterBundle\Extension\ExtensionInterface;
+@trigger_error(
+    'The '.__NAMESPACE__.'\FormatterInterface interface is deprecated since sonata-project/formatter-bundle 4.x, to be removed in 5.0. '.
+    'Use Formatter or ExtendableFormatter instead.',
+    E_USER_DEPRECATED
+);
 
-interface FormatterInterface
+/**
+ * @deprecated since sonata-project/formatter-bundle 4.x, to be removed in 5.0.
+ */
+interface FormatterInterface extends ExtendableFormatter
 {
-    public function transform(string $text);
-
-    public function addExtension(ExtensionInterface $extensionInterface);
-
-    /**
-     * @return ExtensionInterface[]
-     */
-    public function getExtensions(): array;
 }
