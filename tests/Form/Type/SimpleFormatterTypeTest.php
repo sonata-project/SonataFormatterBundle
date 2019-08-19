@@ -166,4 +166,54 @@ class SimpleFormatterTypeTest extends TestCase
 
         $this->assertSame($view->vars['ckeditor_style_sets'], $styleSets);
     }
+
+    public function testBuildViewWithToolbarOptionsSetAsPredefinedString(): void
+    {
+        $defaultConfig = 'default';
+        $defaultConfigValues = ['toolbar' => 'basic'];
+        $basicToolbarSets = [
+            0 => [
+                    0 => 'Bold',
+                    1 => 'Italic',
+                ],
+            1 => [
+                    0 => 'NumberedList',
+                    1 => 'BulletedList',
+
+                ],
+        ];
+
+        $this->configManager->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
+        $this->configManager->expects($this->once())
+            ->method('hasConfig')
+            ->with($defaultConfig)
+            ->willReturn(true);
+        $this->configManager->expects($this->once())
+            ->method('getConfig')
+            ->with($defaultConfig)
+            ->willReturn($defaultConfigValues);
+        $this->toolbarManager->expects($this->once())
+            ->method('resolveToolbar')
+            ->with('basic')
+            ->willReturn($basicToolbarSets);
+
+        /** @var \Symfony\Component\Form\FormView $view */
+        $view = $this->createMock(FormView::class);
+        $form = $this->createMock(FormInterface::class);
+        $this->formType->buildView($view, $form, [
+            'source_field' => 'SomeField',
+            'format_field' => 'SomeFormat',
+            'format_field_options' => 'SomeOptions',
+            'ckeditor_context' => null,
+            'ckeditor_image_format' => null,
+            'ckeditor_basepath' => '',
+            'ckeditor_plugins' => [],
+            'ckeditor_templates' => [],
+            'ckeditor_toolbar_icons' => [],
+            'format' => [],
+        ]);
+
+        $defaultConfigValues['toolbar'] = $basicToolbarSets;
+        $this->assertSame($view->vars['ckeditor_configuration'], $defaultConfigValues);
+    }
 }
