@@ -60,11 +60,7 @@ final class SonataFormatterExtension extends Extension
         }
 
         if (!\array_key_exists($config['default_formatter'], $config['formatters'])) {
-            throw new \InvalidArgumentException(sprintf(
-                'SonataFormatterBundle - Invalid default formatter: %s, available: %s',
-                $config['default_formatter'],
-                sprintf('["%s"]', implode('", "', array_keys($config['formatters'])))
-            ));
+            throw new \InvalidArgumentException(sprintf('SonataFormatterBundle - Invalid default formatter: %s, available: %s', $config['default_formatter'], sprintf('["%s"]', implode('", "', array_keys($config['formatters'])))));
         }
 
         $pool = $container->getDefinition('sonata.formatter.pool');

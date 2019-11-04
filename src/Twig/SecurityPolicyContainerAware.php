@@ -112,13 +112,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
         }
 
         if (!$allowed) {
-            throw new SecurityError(
-                sprintf(
-                    'Calling "%s" method on a "%s" object is not allowed.',
-                    $method,
-                    \get_class($obj)
-                )
-            );
+            throw new SecurityError(sprintf('Calling "%s" method on a "%s" object is not allowed.', $method, \get_class($obj)));
         }
     }
 
@@ -136,13 +130,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
         }
 
         if (!$allowed) {
-            throw new SecurityError(
-                sprintf(
-                    'Calling "%s" property on a "%s" object is not allowed.',
-                    $property,
-                    \get_class($obj)
-                )
-            );
+            throw new SecurityError(sprintf('Calling "%s" property on a "%s" object is not allowed.', $property, \get_class($obj)));
         }
     }
 
