@@ -16,10 +16,11 @@ namespace Sonata\FormatterBundle\Tests\Block;
 use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
+use Sonata\BlockBundle\Test\BlockServiceTestCase;
 use Sonata\FormatterBundle\Block\FormatterBlockService;
+use Symfony\Component\HttpFoundation\Response;
 
-class FormatterBlockServiceTest extends AbstractBlockServiceTestCase
+class FormatterBlockServiceTest extends BlockServiceTestCase
 {
     public function testExecute(): void
     {
@@ -32,18 +33,26 @@ class FormatterBlockServiceTest extends AbstractBlockServiceTestCase
             'template' => '@SonataFormatter/Block/block_formatter.html.twig',
         ]);
 
-        $blockService = new FormatterBlockService('block.service', $this->templating);
+        $response = new Response();
+
+        $this->twig->expects(static::once())->method('render')
+            ->with(
+                '@SonataFormatter/Block/block_formatter.html.twig',
+                [
+                    'settings' => $blockContext->getSettings(),
+                    'block'    => $blockContext->getBlock(),
+                ]
+            )
+            ->willReturn('TWIG_CONTENT')
+        ;
+
+        $blockService = new FormatterBlockService($this->twig);
         $blockService->execute($blockContext);
-
-        $this->assertSame('@SonataFormatter/Block/block_formatter.html.twig', $this->templating->view);
-
-        $this->assertInternalType('array', $this->templating->parameters['settings']);
-        $this->assertInstanceOf(BlockInterface::class, $this->templating->parameters['block']);
     }
 
     public function testDefaultSettings(): void
     {
-        $blockService = new FormatterBlockService('block.service', $this->templating);
+        $blockService = new FormatterBlockService($this->twig);
         $blockContext = $this->getBlockContext($blockService);
 
         $this->assertSettings([
