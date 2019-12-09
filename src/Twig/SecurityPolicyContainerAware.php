@@ -120,6 +120,8 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
                 )
             );
         }
+
+        return true;
     }
 
     public function checkPropertyAllowed($obj, $property): void
