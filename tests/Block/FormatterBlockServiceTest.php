@@ -37,7 +37,7 @@ class FormatterBlockServiceTest extends BlockServiceTestCase
 
         $this->assertSame('@SonataFormatter/Block/block_formatter.html.twig', $this->templating->view);
 
-        $this->assertInternalType('array', $this->templating->parameters['settings']);
+        $this->assertIsArray($this->templating->parameters['settings']);
         $this->assertInstanceOf(BlockInterface::class, $this->templating->parameters['block']);
     }
 
