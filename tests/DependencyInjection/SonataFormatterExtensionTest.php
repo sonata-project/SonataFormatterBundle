@@ -109,14 +109,14 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
         );
     }
 
-    protected function getContainerExtensions()
+    protected function getContainerExtensions(): array
     {
         return [
             new SonataFormatterExtension(),
         ];
     }
 
-    protected function getMinimalConfiguration()
+    protected function getMinimalConfiguration(): array
     {
         return [
             'default_formatter' => 'text',

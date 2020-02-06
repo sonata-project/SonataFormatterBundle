@@ -23,7 +23,7 @@
     "require": {
         "php": "^7.1",
         "psr/log": "^1.0",
-        "sonata-project/block-bundle": "^3.11",
+        "sonata-project/block-bundle": "^3.16.1",
         "sonata-project/core-bundle": "^3.9",
         "symfony/config": "^3.4 || ^4.0",
         "symfony/dependency-injection": "^3.2 || ^4.0",
@@ -40,8 +40,8 @@
         "twig/twig": "^2.4"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^3.0",
-        "symfony/phpunit-bridge": "^4.3"
+        "matthiasnoback/symfony-dependency-injection-test": "^4.0",
+        "symfony/phpunit-bridge": "^5.0"
     },
     "config": {
         "sort-packages": true

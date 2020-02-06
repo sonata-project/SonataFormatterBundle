@@ -16,10 +16,10 @@ namespace Sonata\FormatterBundle\Tests\Block;
 use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
+use Sonata\BlockBundle\Test\BlockServiceTestCase;
 use Sonata\FormatterBundle\Block\FormatterBlockService;
 
-class FormatterBlockServiceTest extends AbstractBlockServiceTestCase
+class FormatterBlockServiceTest extends BlockServiceTestCase
 {
     public function testExecute(): void
     {
@@ -37,7 +37,7 @@ class FormatterBlockServiceTest extends AbstractBlockServiceTestCase
 
         $this->assertSame('@SonataFormatter/Block/block_formatter.html.twig', $this->templating->view);
 
-        $this->assertInternalType('array', $this->templating->parameters['settings']);
+        $this->assertIsArray($this->templating->parameters['settings']);
         $this->assertInstanceOf(BlockInterface::class, $this->templating->parameters['block']);
     }
 
