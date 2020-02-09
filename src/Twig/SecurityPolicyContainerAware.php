@@ -45,17 +45,17 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
     private $allowedFunctions;
 
     /**
-     * @var string[]
+     * @var string[]|string[][]
      */
     private $allowedProperties;
 
     /**
-     * @var string[]
+     * @var string[][]
      */
     private $allowedMethods;
 
     /**
-     * @var ExtensionInterface[]
+     * @var string[]
      */
     private $extensions = [];
 
@@ -64,12 +64,20 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
      */
     private $container;
 
+    /**
+     * @param string[] $extensions
+     */
     public function __construct(ContainerInterface $container, array $extensions = [])
     {
         $this->container = $container;
         $this->extensions = $extensions;
     }
 
+    /**
+     * @param string[] $tags
+     * @param string[] $filters
+     * @param string[] $functions
+     */
     public function checkSecurity($tags, $filters, $functions): void
     {
         $this->buildAllowed();
@@ -93,6 +101,10 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
         }
     }
 
+    /**
+     * @param object $obj
+     * @param string $method
+     */
     public function checkMethodAllowed($obj, $method): bool
     {
         $this->buildAllowed();
@@ -120,8 +132,14 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
                 )
             );
         }
+
+        return true;
     }
 
+    /**
+     * @param object $obj
+     * @param string $property
+     */
     public function checkPropertyAllowed($obj, $property): void
     {
         $this->buildAllowed();
@@ -160,6 +178,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
 
         foreach ($this->extensions as $id) {
             $extension = $this->container->get($id);
+            \assert($extension instanceof ExtensionInterface);
 
             $this->allowedTags = array_merge($this->allowedTags, $extension->getAllowedTags());
             $this->allowedFilters = array_merge($this->allowedFilters, $extension->getAllowedFilters());
