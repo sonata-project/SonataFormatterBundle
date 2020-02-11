@@ -33,7 +33,6 @@
         "symfony/dependency-injection": "^3.4.26 || ^4.1.12",
         "symfony/event-dispatcher": "^3.2 || ^4.0",
         "symfony/form": "^3.4 || ^4.0",
-        "symfony/framework-bundle": "^3.4 || ^4.0",
         "symfony/framework-bundle": "^3.4.26 || ^4.1.12",
         "symfony/http-foundation": "^3.4.35 || ^4.2.12",
         "symfony/http-kernel": "^3.4 || ^4.0",
