@@ -44,7 +44,7 @@ final class FormatterType extends AbstractType
      * @var CKEditorConfigurationInterface
      */
     private $ckEditorConfiguration;
-    
+
     public function __construct(
         PoolInterface $pool,
         TranslatorInterface $translator,
