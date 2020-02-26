@@ -25,7 +25,7 @@ final class SimpleFormatterType extends AbstractType
     /**
      * @var CKEditorConfigurationInterface
      */
-    protected $ckEditorConfiguration;
+    private $ckEditorConfiguration;
 
     public function __construct(
         CKEditorConfigurationInterface $ckEditorConfiguration

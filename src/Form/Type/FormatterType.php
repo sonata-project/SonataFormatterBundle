@@ -43,7 +43,7 @@ final class FormatterType extends AbstractType
     /**
      * @var CKEditorConfigurationInterface
      */
-    protected $ckEditorConfiguration;
+    private $ckEditorConfiguration;
     
     public function __construct(
         PoolInterface $pool,
@@ -139,7 +139,7 @@ final class FormatterType extends AbstractType
         } catch (Exception $e) {
             $ckeditorConfiguration = [];
         }
-        
+
         if (!\array_key_exists('toolbar', $ckeditorConfiguration)) {
             $ckeditorConfiguration['toolbar'] = array_values($options['ckeditor_toolbar_icons']);
         }
