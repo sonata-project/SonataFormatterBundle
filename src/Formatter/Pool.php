@@ -40,7 +40,7 @@ final class Pool implements LoggerAwareInterface, PoolInterface
         $this->logger = new NullLogger();
     }
 
-    public function add(string $code, FormatterInterface $formatter, Environment $env = null): void
+    public function add(string $code, FormatterInterface $formatter, ?Environment $env = null): void
     {
         $this->formatters[$code] = [$formatter, $env];
     }
