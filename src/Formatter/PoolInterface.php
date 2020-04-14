@@ -17,7 +17,7 @@ use Twig\Environment;
 
 interface PoolInterface
 {
-    public function add(string $code, FormatterInterface $formatter, Environment $env = null): void;
+    public function add(string $code, FormatterInterface $formatter, ?Environment $env = null): void;
 
     public function has(string $code): bool;
 
