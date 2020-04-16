@@ -12,3 +12,4 @@ jobs:
           args: analyse
         env:
           CHECK_PLATFORM_REQUIREMENTS: false
+          COMPOSER_ROOT_VERSION: 4.1
