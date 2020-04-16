@@ -10,3 +10,5 @@ jobs:
         uses: "docker://oskarstark/phpstan-ga"
         with:
           args: analyse
+        env:
+          CHECK_PLATFORM_REQUIREMENTS: false
