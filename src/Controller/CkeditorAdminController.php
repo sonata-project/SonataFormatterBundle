@@ -133,6 +133,11 @@ final class CkeditorAdminController extends MediaAdminController
         if (isset($templates[$name])) {
             return $templates[$name];
         }
+
+        throw new \LogicException(sprintf(
+            'Template with name "%s" does not exist',
+            $name
+        ));
     }
 
     /**
