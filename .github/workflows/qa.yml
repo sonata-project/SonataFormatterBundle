@@ -13,3 +13,4 @@ jobs:
         env:
           CHECK_PLATFORM_REQUIREMENTS: false
           COMPOSER_ROOT_VERSION: 4.1
+          REQUIRE_DEV: true
