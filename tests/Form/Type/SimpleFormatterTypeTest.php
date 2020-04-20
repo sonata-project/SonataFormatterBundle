@@ -57,7 +57,7 @@ class SimpleFormatterTypeTest extends TestCase
      */
     private $formType;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
