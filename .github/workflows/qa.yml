@@ -10,3 +10,7 @@ jobs:
         uses: "docker://oskarstark/phpstan-ga"
         with:
           args: analyse
+        env:
+          CHECK_PLATFORM_REQUIREMENTS: false
+          COMPOSER_ROOT_VERSION: 4.1
+          REQUIRE_DEV: true
