@@ -24,7 +24,7 @@
         "php": "^7.1",
         "psr/log": "^1.0",
         "sonata-project/block-bundle": "^3.16.1",
-        "sonata-project/core-bundle": "^3.9",
+        "sonata-project/form-extensions": "^0.1 || ^1.4",
         "symfony/config": "^3.4 || ^4.0",
         "symfony/dependency-injection": "^3.4.26 || ^4.1.12",
         "symfony/event-dispatcher": "^3.2 || ^4.0",
