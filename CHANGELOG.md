@@ -2,6 +2,30 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.2.0](https://github.com/sonata-project/SonataFormatterBundle/compare/4.1.3...4.2.0) - 2020-06-23
+### Added
+- [[#417](https://github.com/sonata-project/SonataFormatterBundle/pull/417)]
+  Added new `Formatter` interface ([@core23](https://github.com/core23))
+- [[#417](https://github.com/sonata-project/SonataFormatterBundle/pull/417)]
+  Added new `ExtendableFormatter` interface
+([@core23](https://github.com/core23))
+
+### Fixed
+- [[#411](https://github.com/sonata-project/SonataFormatterBundle/pull/411)]
+  Fix possibility to easily switch the toolbar configuration by using the
+`full`, `standard` or `basic` keyword as toolbar with `SimpleFormatterType`
+([@mkiszka](https://github.com/mkiszka))
+- [[#435](https://github.com/sonata-project/SonataFormatterBundle/pull/435)]
+  Potential crash in `SecurityPolicyContainerAware::checkMethodAllowed()`
+([@greg0ire](https://github.com/greg0ire))
+
+### Removed
+- [[#464](https://github.com/sonata-project/SonataFormatterBundle/pull/464)]
+  Support for Symfony < 4.3 ([@wbloszyk](https://github.com/wbloszyk))
+- [[#459](https://github.com/sonata-project/SonataFormatterBundle/pull/459)]
+  Remove SonataCoreBundle dependencies
+([@wbloszyk](https://github.com/wbloszyk))
+
 ## [4.1.3](https://github.com/sonata-project/SonataFormatterBundle/compare/4.1.2...4.1.3) - 2019-06-13
 
 ### Fixed
