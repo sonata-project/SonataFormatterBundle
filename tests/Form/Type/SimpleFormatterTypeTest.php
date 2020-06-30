@@ -13,11 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\Form\Type;
 
-use FOS\CKEditorBundle\Model\ConfigManagerInterface;
-use FOS\CKEditorBundle\Model\PluginManagerInterface;
-use FOS\CKEditorBundle\Model\StylesSetManagerInterface;
-use FOS\CKEditorBundle\Model\TemplateManagerInterface;
-use FOS\CKEditorBundle\Model\ToolbarManagerInterface;
+use FOS\CKEditorBundle\Config\CKEditorConfigurationInterface;
 use PHPUnit\Framework\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
@@ -28,29 +24,9 @@ use Symfony\Component\Form\FormView;
 class SimpleFormatterTypeTest extends TestCase
 {
     /**
-     * @var ConfigManagerInterface|MockObject
+     * @var CKEditorConfigurationInterface|MockObject
      */
-    private $configManager;
-
-    /**
-     * @var PluginManagerInterface|MockObject
-     */
-    private $pluginManager;
-
-    /**
-     * @var TemplateManagerInterface|MockObject
-     */
-    private $templateManager;
-
-    /**
-     * @var StylesSetManagerInterface|MockObject
-     */
-    private $stylesSetManager;
-
-    /**
-     * @var ToolbarManagerInterface|MockObject
-     */
-    private $toolbarManager;
+    private $ckEditorConfiguration;
 
     /**
      * @var SimpleFormatterType
@@ -61,18 +37,10 @@ class SimpleFormatterTypeTest extends TestCase
     {
         parent::setUp();
 
-        $this->configManager = $this->createMock(ConfigManagerInterface::class);
-        $this->pluginManager = $this->createMock(PluginManagerInterface::class);
-        $this->templateManager = $this->createMock(TemplateManagerInterface::class);
-        $this->stylesSetManager = $this->createMock(StylesSetManagerInterface::class);
-        $this->toolbarManager = $this->createMock(ToolbarManagerInterface::class);
+        $this->ckEditorConfiguration = $this->createMock(CKEditorConfigurationInterface::class);
 
         $this->formType = new SimpleFormatterType(
-            $this->configManager,
-            $this->pluginManager,
-            $this->templateManager,
-            $this->stylesSetManager,
-            $this->toolbarManager
+            $this->ckEditorConfiguration
         );
     }
 
@@ -93,7 +61,7 @@ class SimpleFormatterTypeTest extends TestCase
         $view = $this->createMock(FormView::class);
         $form = $this->createMock(FormInterface::class);
 
-        $this->configManager->expects($this->once())
+        $this->ckEditorConfiguration->expects($this->once())
             ->method('getConfig')
             ->with('context')
             ->willReturn(['toolbar' => ['Button1']]);
@@ -139,7 +107,7 @@ class SimpleFormatterTypeTest extends TestCase
             ],
         ];
 
-        $this->configManager->expects($this->once())
+        $this->ckEditorConfiguration->expects($this->once())
             ->method('getConfig')
             ->with('context')
             ->willReturn(['toolbar' => ['Button1']]);
@@ -183,12 +151,8 @@ class SimpleFormatterTypeTest extends TestCase
                 ],
         ];
 
-        $this->configManager->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
-        $this->configManager->expects($this->once())
-            ->method('hasConfig')
-            ->with($defaultConfig)
-            ->willReturn(true);
-        $this->configManager->expects($this->once())
+        $this->ckEditorConfiguration->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
+        $this->ckEditorConfiguration->expects($this->once())
             ->method('getConfig')
             ->with($defaultConfig)
             ->willReturn($defaultConfigValues);
