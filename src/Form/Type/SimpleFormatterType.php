@@ -13,11 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Form\Type;
 
-use FOS\CKEditorBundle\Model\ConfigManagerInterface;
-use FOS\CKEditorBundle\Model\PluginManagerInterface;
-use FOS\CKEditorBundle\Model\StylesSetManagerInterface;
-use FOS\CKEditorBundle\Model\TemplateManagerInterface;
-use FOS\CKEditorBundle\Model\ToolbarManagerInterface;
+use FOS\CKEditorBundle\Config\CKEditorConfigurationInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormInterface;
@@ -27,59 +23,28 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class SimpleFormatterType extends AbstractType
 {
     /**
-     * @var ConfigManagerInterface
+     * @var CKEditorConfigurationInterface
      */
-    protected $configManager;
-
-    /**
-     * @var PluginManagerInterface
-     */
-    protected $pluginManager;
-
-    /**
-     * @var StylesSetManagerInterface
-     */
-    private $stylesSetManager;
-
-    /**
-     * @var TemplateManagerInterface
-     */
-    private $templateManager;
-
-    /**
-     * @var ToolbarManagerInterface
-     */
-    private $toolbarManager;
+    private $ckEditorConfiguration;
 
     public function __construct(
-        ConfigManagerInterface $configManager,
-        PluginManagerInterface $pluginManager,
-        TemplateManagerInterface $templateManager,
-        StylesSetManagerInterface $stylesSetManager,
-        ToolbarManagerInterface $toolbarManager
+        CKEditorConfigurationInterface $ckEditorConfiguration
     ) {
-        $this->configManager = $configManager;
-        $this->pluginManager = $pluginManager;
-        $this->templateManager = $templateManager;
-        $this->stylesSetManager = $stylesSetManager;
-        $this->toolbarManager = $toolbarManager;
+        $this->ckEditorConfiguration = $ckEditorConfiguration;
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
-        $defaultConfig = $this->configManager->getDefaultConfig();
-        if ($this->configManager->hasConfig($defaultConfig)) {
-            $ckeditorConfiguration = $this->configManager->getConfig($defaultConfig);
-        } else {
-            $ckeditorConfiguration = [];
-        }
+        $defaultConfig = $this->ckEditorConfiguration->getDefaultConfig();
+
+        $ckeditorConfiguration = $this->ckEditorConfiguration->getConfig($defaultConfig);
 
         if (!\array_key_exists('toolbar', $ckeditorConfiguration)) {
             $ckeditorConfiguration['toolbar'] = array_values($options['ckeditor_toolbar_icons']);
         }
 
         if ($options['ckeditor_context']) {
-            $contextConfig = $this->configManager->getConfig($options['ckeditor_context']);
+            $contextConfig = $this->ckEditorConfiguration->getConfig($options['ckeditor_context']);
             $ckeditorConfiguration = array_merge($ckeditorConfiguration, $contextConfig);
         }
 
@@ -87,22 +52,12 @@ final class SimpleFormatterType extends AbstractType
             $ckeditorConfiguration['filebrowserImageUploadRouteParameters']['format'] = $options['ckeditor_image_format'];
         }
 
-        if ($this->pluginManager->hasPlugins()) {
-            $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
-        }
-
-        if ($this->templateManager->hasTemplates()) {
-            $options['ckeditor_templates'] = $this->templateManager->getTemplates();
-        }
-
-        if ($this->stylesSetManager->hasStylesSets()) {
-            $options['ckeditor_style_sets'] = $this->stylesSetManager->getStylesSets();
-        } else {
-            $options['ckeditor_style_sets'] = [];
-        }
+        $options['ckeditor_plugins'] = $this->ckEditorConfiguration->getPlugins();
+        $options['ckeditor_templates'] = $this->ckEditorConfiguration->getTemplates();
+        $options['ckeditor_style_sets'] = $this->ckEditorConfiguration->getStyles();
 
         if (\is_string($ckeditorConfiguration['toolbar'])) {
-            $ckeditorConfiguration['toolbar'] = $this->toolbarManager->resolveToolbar($ckeditorConfiguration['toolbar']);
+            $ckeditorConfiguration['toolbar'] = $this->ckEditorConfiguration->getToolbar($ckeditorConfiguration['toolbar']);
         }
 
         $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;
