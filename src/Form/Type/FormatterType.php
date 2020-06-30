@@ -134,11 +134,7 @@ final class FormatterType extends AbstractType
 
         $defaultConfig = $this->ckEditorConfiguration->getDefaultConfig();
 
-        try {
-            $ckeditorConfiguration = $this->ckEditorConfiguration->getConfig($defaultConfig);
-        } catch (Exception $e) {
-            $ckeditorConfiguration = [];
-        }
+        $ckeditorConfiguration = $this->ckEditorConfiguration->getConfig($defaultConfig);
 
         if (!\array_key_exists('toolbar', $ckeditorConfiguration)) {
             $ckeditorConfiguration['toolbar'] = array_values($options['ckeditor_toolbar_icons']);
