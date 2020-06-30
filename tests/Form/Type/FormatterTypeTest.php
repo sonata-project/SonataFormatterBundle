@@ -60,7 +60,7 @@ class FormatterTypeTest extends TestCase
         $this->pool = new Pool('');
 
         $this->translator = $this->createMock(TranslatorInterface::class);
-        
+
         $this->ckEditorConfiguration = $this->createMock(CKEditorConfigurationInterface::class);
 
         $this->formType = new FormatterType(
@@ -345,7 +345,7 @@ class FormatterTypeTest extends TestCase
     {
         $defaultConfig = 'default';
         $this->ckEditorConfiguration->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
-        
+
         $ckEditorToolBarIcons = ['Icon 1'];
 
         $formatters = [];

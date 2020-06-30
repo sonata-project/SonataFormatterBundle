@@ -150,7 +150,6 @@ class SimpleFormatterTypeTest extends TestCase
             1 => [
                     0 => 'NumberedList',
                     1 => 'BulletedList',
-
                 ],
         ];
 
