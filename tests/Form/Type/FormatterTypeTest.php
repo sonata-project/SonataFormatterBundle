@@ -173,6 +173,7 @@ class FormatterTypeTest extends TestCase
         $this->pool->add('raw', new RawFormatter());
 
         $formatters = ['text' => 'Text', 'raw' => 'Raw'];
+        $defaultFormatter = 'text';
 
         $choiceFormBuilder = $this->createMock(FormBuilderInterface::class);
         $choiceFormBuilder->expects($this->once())
@@ -183,7 +184,7 @@ class FormatterTypeTest extends TestCase
         $formBuilder = $this->createMock(FormBuilderInterface::class);
         $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', ChoiceType::class, [
             'property_path' => 'SomeFormatField',
-            'data' => $defaultFormatter = 'text',
+            'data' => $defaultFormatter,
             'choices' => $formatters,
         ]);
         $formBuilder->expects($this->at(1))->method('get')->willReturn($choiceFormBuilder);
@@ -214,6 +215,7 @@ class FormatterTypeTest extends TestCase
         $this->pool->add('raw', new RawFormatter());
 
         $formatters = ['text' => 'Text', 'raw' => 'Raw'];
+        $defaultFormatter = 'text';
 
         $choiceFormBuilder = $this->createMock(FormBuilderInterface::class);
         $choiceFormBuilder->expects($this->once())
@@ -224,7 +226,7 @@ class FormatterTypeTest extends TestCase
         $formBuilder = $this->createMock(FormBuilderInterface::class);
         $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', ChoiceType::class, [
             'property_path' => 'SomeFormatField',
-            'data' => $defaultFormatter = 'text',
+            'data' => $defaultFormatter,
             'choices' => $formatters,
         ]);
         $formBuilder->expects($this->at(1))->method('get')->willReturn($choiceFormBuilder);
@@ -416,6 +418,10 @@ class FormatterTypeTest extends TestCase
             ->method('getConfig')
             ->with($defaultConfig)
             ->willReturn($defaultConfigValues);
+        $this->ckEditorConfiguration->expects($this->once())
+            ->method('getToolbar')
+            ->with($toolbar_config)
+            ->willReturn($custom_toolbar);
 
         /** @var FormView $view */
         $view = $this->createMock(FormView::class);
@@ -459,8 +465,7 @@ class FormatterTypeTest extends TestCase
             ],
         ];
 
-        $this->templateManager->expects($this->once())->method('hasTemplates')->willReturn(true);
-        $this->templateManager->expects($this->once())->method('getTemplates')->willReturn($templates);
+        $this->ckEditorConfiguration->expects($this->once())->method('getTemplates')->willReturn($templates);
 
         /** @var FormView $view */
         $view = $this->createMock(FormView::class);

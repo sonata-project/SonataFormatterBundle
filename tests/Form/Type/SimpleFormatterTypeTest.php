@@ -58,19 +58,22 @@ class SimpleFormatterTypeTest extends TestCase
 
     public function testBuildViewWithDefaultConfig(): void
     {
-        $view = $this->createMock(FormView::class);
-        $form = $this->createMock(FormInterface::class);
-
+        $defaultConfig = 'context';
+        $defaultConfigValues = ['toolbar' => ['Button1']];
+        $this->ckEditorConfiguration->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
         $this->ckEditorConfiguration->expects($this->once())
             ->method('getConfig')
-            ->with('context')
-            ->willReturn(['toolbar' => ['Button1']]);
+            ->with($defaultConfig)
+            ->willReturn($defaultConfigValues);
+
+        /** @var \Symfony\Component\Form\FormView $view */
+        $view = $this->createMock(FormView::class);
         $view->vars['id'] = 'SomeId';
         $view->vars['name'] = 'SomeName';
-
+        $form = $this->createMock(FormInterface::class);
         $this->formType->buildView($view, $form, [
             'format' => 'format',
-            'ckeditor_context' => 'context',
+            'ckeditor_context' => null,
             'ckeditor_image_format' => 'format',
             'ckeditor_basepath' => '',
             'ckeditor_plugins' => [],
@@ -86,8 +89,13 @@ class SimpleFormatterTypeTest extends TestCase
 
     public function testBuildViewWithStylesSet(): void
     {
-        $view = $this->createMock(FormView::class);
-        $form = $this->createMock(FormInterface::class);
+        $defaultConfig = 'context';
+        $defaultConfigValues = ['toolbar' => ['Button1']];
+        $this->ckEditorConfiguration->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
+        $this->ckEditorConfiguration->expects($this->once())
+            ->method('getConfig')
+            ->with($defaultConfig)
+            ->willReturn($defaultConfigValues);
 
         $styleSets = [
             'my_styleset' => [
@@ -108,22 +116,17 @@ class SimpleFormatterTypeTest extends TestCase
         ];
 
         $this->ckEditorConfiguration->expects($this->once())
-            ->method('getConfig')
-            ->with('context')
-            ->willReturn(['toolbar' => ['Button1']]);
-        $this->stylesSetManager->expects($this->once())
-            ->method('getStylesSets')
+            ->method('getStyles')
             ->willReturn($styleSets);
-        $this->stylesSetManager->expects($this->once())
-            ->method('hasStylesSets')
-            ->willReturn(true);
 
+        /** @var \Symfony\Component\Form\FormView $view */
+        $view = $this->createMock(FormView::class);
         $view->vars['id'] = 'SomeId';
         $view->vars['name'] = 'SomeName';
-
+        $form = $this->createMock(FormInterface::class);
         $this->formType->buildView($view, $form, [
             'format' => 'format',
-            'ckeditor_context' => 'context',
+            'ckeditor_context' => null,
             'ckeditor_image_format' => 'format',
             'ckeditor_basepath' => '',
             'ckeditor_plugins' => [],
@@ -156,8 +159,8 @@ class SimpleFormatterTypeTest extends TestCase
             ->method('getConfig')
             ->with($defaultConfig)
             ->willReturn($defaultConfigValues);
-        $this->toolbarManager->expects($this->once())
-            ->method('resolveToolbar')
+        $this->ckEditorConfiguration->expects($this->once())
+            ->method('getToolbar')
             ->with('basic')
             ->willReturn($basicToolbarSets);
 
