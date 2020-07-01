@@ -21,23 +21,28 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
+        "friendsofsymfony/ckeditor-bundle": "^1.0",
+        "knplabs/knp-markdown-bundle": "^1.7",
         "psr/log": "^1.0",
         "sonata-project/block-bundle": "^3.16.1",
         "sonata-project/form-extensions": "^0.1 || ^1.4",
-        "symfony/config": "^3.4 || ^4.0",
-        "symfony/dependency-injection": "^3.4.26 || ^4.1.12",
-        "symfony/event-dispatcher": "^3.2 || ^4.0",
-        "symfony/form": "^3.4 || ^4.0",
-        "symfony/framework-bundle": "^3.4.26 || ^4.1.12",
-        "symfony/http-foundation": "^3.4.35 || ^4.2.12",
-        "symfony/http-kernel": "^3.4 || ^4.0",
-        "symfony/options-resolver": "^3.4 || ^4.0",
-        "symfony/property-access": "^3.4 || ^4.0",
-        "symfony/translation": "^3.4 || ^4.0",
-        "symfony/twig-bridge": "^3.4 || ^4.0",
-        "symfony/validator": "^3.4 || ^4.0",
-        "twig/twig": "^2.4"
+        "symfony/config": "^4.3",
+        "symfony/dependency-injection": "^4.3",
+        "symfony/event-dispatcher": "^4.3",
+        "symfony/form": "^4.3",
+        "symfony/framework-bundle": "^4.3",
+        "symfony/http-foundation": "^4.3",
+        "symfony/http-kernel": "^4.3",
+        "symfony/options-resolver": "^4.3",
+        "symfony/property-access": "^4.3",
+        "symfony/translation": "^4.3",
+        "symfony/twig-bridge": "^4.3",
+        "symfony/validator": "^4.3",
+        "twig/twig": "^2.12.1"
+    },
+    "conflict": {
+        "sonata-project/core-bundle": "<3.20"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",
