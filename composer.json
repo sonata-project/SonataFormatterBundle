@@ -27,27 +27,27 @@
         "psr/log": "^1.0",
         "sonata-project/block-bundle": "^3.16.1",
         "sonata-project/form-extensions": "^0.1 || ^1.4",
-        "symfony/config": "^4.3",
-        "symfony/dependency-injection": "^4.3",
-        "symfony/event-dispatcher": "^4.3",
-        "symfony/form": "^4.3",
-        "symfony/framework-bundle": "^4.3",
-        "symfony/http-foundation": "^4.3",
-        "symfony/http-kernel": "^4.3",
-        "symfony/options-resolver": "^4.3",
-        "symfony/property-access": "^4.3",
-        "symfony/translation": "^4.3",
-        "symfony/twig-bridge": "^4.3",
-        "symfony/validator": "^4.3",
+        "symfony/config": "^4.4",
+        "symfony/dependency-injection": "^4.4",
+        "symfony/event-dispatcher": "^4.4",
+        "symfony/form": "^4.4",
+        "symfony/framework-bundle": "^4.4",
+        "symfony/http-foundation": "^4.4",
+        "symfony/http-kernel": "^4.4",
+        "symfony/options-resolver": "^4.4",
+        "symfony/property-access": "^4.4",
+        "symfony/translation": "^4.4",
+        "symfony/twig-bridge": "^4.4",
+        "symfony/validator": "^4.4",
         "twig/twig": "^2.12.1"
     },
     "conflict": {
         "sonata-project/core-bundle": "<3.20"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^4.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "sonata-project/admin-bundle": "^3.58",
-        "symfony/phpunit-bridge": "^5.0"
+        "symfony/phpunit-bridge": "^5.1"
     },
     "config": {
         "sort-packages": true
