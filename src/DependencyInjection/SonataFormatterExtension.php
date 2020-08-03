@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\DependencyInjection;
 
+use FOS\CKEditorBundle\Config\CKEditorConfigurationInterface;
 use Sonata\FormatterBundle\Formatter\ExtendableFormatter;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -48,7 +49,11 @@ final class SonataFormatterExtension extends Extension
         $bundles = $container->getParameter('kernel.bundles');
 
         if (isset($bundles['FOSCKEditorBundle'])) {
-            $loader->load('form.xml');
+            if (interface_exists(CKEditorConfigurationInterface::class)) {
+                $loader->load('form.xml');
+            } else {//NEXT_MAJOR: Remove this case
+                $loader->load('form_fcke1.xml');
+            }
         }
 
         if (isset($bundles['SonataBlockBundle'])) {
