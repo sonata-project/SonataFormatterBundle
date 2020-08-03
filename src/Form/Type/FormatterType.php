@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Form\Type;
 
+use FOS\CKEditorBundle\Config\CKEditorConfigurationInterface;
 use FOS\CKEditorBundle\Model\ConfigManagerInterface;
 use FOS\CKEditorBundle\Model\PluginManagerInterface;
 use FOS\CKEditorBundle\Model\TemplateManagerInterface;
@@ -45,6 +46,8 @@ final class FormatterType extends AbstractType
 
     /**
      * @var ConfigManagerInterface
+     *
+     * @deprecated since sonata-project/formatter bundle 4.x and will be removed in version 5.0.
      */
     protected $configManager;
 
@@ -52,6 +55,11 @@ final class FormatterType extends AbstractType
      * @var PluginManagerInterface
      */
     protected $pluginManager;
+
+    /**
+     * @var CKEditorConfigurationInterface
+     */
+    private $ckEditorConfiguration;
 
     /**
      * @var TemplateManagerInterface
@@ -63,17 +71,46 @@ final class FormatterType extends AbstractType
      */
     private $toolbarManager;
 
+    /**
+     * NEXT_MAJOR: Change signature for
+     * (PoolInterface $pool, TranslatorInterface $translator, CKEditorConfigurationInterface $ckEditorConfiguration).
+     *
+     * @param ConfigManagerInterface|CKEditorConfigurationInterface $configManagerOrCkEditorConfiguration
+     */
     public function __construct(
         PoolInterface $pool,
         TranslatorInterface $translator,
-        ConfigManagerInterface $configManager,
-        PluginManagerInterface $pluginManager,
-        TemplateManagerInterface $templateManager,
-        ToolbarManagerInterface $toolbarManager
+        object $configManagerOrCkEditorConfiguration,
+        ?PluginManagerInterface $pluginManager = null,
+        ?TemplateManagerInterface $templateManager = null,
+        ?ToolbarManagerInterface $toolbarManager = null
     ) {
+        if (!$configManagerOrCkEditorConfiguration instanceof CKEditorConfigurationInterface) {
+            @trigger_error(sprintf(
+                'Passing %s as argument 3 to %s() is deprecated since sonata-project/formatter-bundle 4.x'
+                .' and will throw a \TypeError in version 5.0. You must pass an instance of %s instead.',
+                \get_class($configManagerOrCkEditorConfiguration),
+                __METHOD__,
+                CKEditorConfigurationInterface::class
+            ), E_USER_DEPRECATED);
+
+            if (!$configManagerOrCkEditorConfiguration instanceof ConfigManagerInterface) {
+                throw new \TypeError(sprintf(
+                    'Argument 3 passed to %s() must be an instance of %s or %s, %s given.',
+                    __METHOD__,
+                    CKEditorConfigurationInterface::class,
+                    ConfigManagerInterface::class,
+                    \get_class($configManagerOrCkEditorConfiguration)
+                ));
+            }
+
+            $this->configManager = $configManagerOrCkEditorConfiguration;
+        } else {
+            $this->ckEditorConfiguration = $configManagerOrCkEditorConfiguration;
+        }
+
         $this->pool = $pool;
         $this->translator = $translator;
-        $this->configManager = $configManager;
         $this->pluginManager = $pluginManager;
         $this->templateManager = $templateManager;
         $this->toolbarManager = $toolbarManager;
@@ -156,12 +193,17 @@ final class FormatterType extends AbstractType
 
         $view->vars['format_field_options'] = $options['format_field_options'];
 
-        $defaultConfig = $this->configManager->getDefaultConfig();
+        if (null !== $this->ckEditorConfiguration) {
+            $defaultConfig = $this->ckEditorConfiguration->getDefaultConfig();
+            $ckeditorConfiguration = $this->ckEditorConfiguration->getConfig($defaultConfig);
+        } else {//NEXT_MAJOR: Remove this case
+            $defaultConfig = $this->configManager->getDefaultConfig();
 
-        if ($this->configManager->hasConfig($defaultConfig)) {
-            $ckeditorConfiguration = $this->configManager->getConfig($defaultConfig);
-        } else {
-            $ckeditorConfiguration = [];
+            if ($this->configManager->hasConfig($defaultConfig)) {
+                $ckeditorConfiguration = $this->configManager->getConfig($defaultConfig);
+            } else {
+                $ckeditorConfiguration = [];
+            }
         }
 
         if (!\array_key_exists('toolbar', $ckeditorConfiguration)) {
@@ -169,7 +211,12 @@ final class FormatterType extends AbstractType
         }
 
         if ($options['ckeditor_context']) {
-            $contextConfig = $this->configManager->getConfig($options['ckeditor_context']);
+            if (null !== $this->configManager) {//NEXT_MAJOR: Remove this case
+                $contextConfig = $this->configManager->getConfig($options['ckeditor_context']);
+            } else {
+                $contextConfig = $this->ckEditorConfiguration->getConfig($options['ckeditor_context']);
+            }
+
             $ckeditorConfiguration = array_merge($ckeditorConfiguration, $contextConfig);
         }
 
@@ -177,16 +224,22 @@ final class FormatterType extends AbstractType
             $ckeditorConfiguration['filebrowserImageUploadRouteParameters']['format'] = $options['ckeditor_image_format'];
         }
 
-        if ($this->pluginManager->hasPlugins()) {
-            $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
-        }
-
-        if ($this->templateManager->hasTemplates()) {
-            $options['ckeditor_templates'] = $this->templateManager->getTemplates();
-        }
-
-        if (\is_string($ckeditorConfiguration['toolbar'])) {
-            $ckeditorConfiguration['toolbar'] = $this->toolbarManager->resolveToolbar($ckeditorConfiguration['toolbar']);
+        if (null !== $this->ckEditorConfiguration) {
+            $options['ckeditor_plugins'] = $this->ckEditorConfiguration->getPlugins();
+            $options['ckeditor_templates'] = $this->ckEditorConfiguration->getTemplates();
+            if (\is_string($ckeditorConfiguration['toolbar'])) {
+                $ckeditorConfiguration['toolbar'] = $this->ckEditorConfiguration->getToolbar($ckeditorConfiguration['toolbar']);
+            }
+        } else {//NEXT_MAJOR: Remove this case
+            if ($this->pluginManager->hasPlugins()) {
+                $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
+            }
+            if ($this->templateManager->hasTemplates()) {
+                $options['ckeditor_templates'] = $this->templateManager->getTemplates();
+            }
+            if (\is_string($ckeditorConfiguration['toolbar'])) {
+                $ckeditorConfiguration['toolbar'] = $this->toolbarManager->resolveToolbar($ckeditorConfiguration['toolbar']);
+            }
         }
 
         $view->vars['ckeditor_configuration'] = $ckeditorConfiguration;
