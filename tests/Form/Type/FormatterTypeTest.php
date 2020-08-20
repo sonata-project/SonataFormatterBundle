@@ -159,7 +159,6 @@ class FormatterTypeTest extends TestCase
         $formatters = ['text' => 'Text'];
 
         $choiceFormBuilder = $this->createMock(FormBuilderInterface::class);
-
         $choiceFormBuilder->expects($this->once())
             ->method('getOption')
             ->with('choices')
