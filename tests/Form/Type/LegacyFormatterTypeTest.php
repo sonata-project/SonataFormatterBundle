@@ -70,6 +70,10 @@ class LegacyFormatterTypeTest extends TestCase
 
     protected function setUp(): void
     {
+        if (!class_exists(ConfigManagerInterface::class)) {
+            $this->markTestSkipped('Test only available using friendsofsymfony/ckeditor-bundle 1.x');
+        }
+
         parent::setUp();
 
         $this->pool = new Pool('');
