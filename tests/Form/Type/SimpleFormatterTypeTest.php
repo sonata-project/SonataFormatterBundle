@@ -35,6 +35,10 @@ class SimpleFormatterTypeTest extends TestCase
 
     protected function setUp(): void
     {
+        if (!class_exists(CKEditorConfigurationInterface::class)) {
+            $this->markTestSkipped('Test only available using friendsofsymfony/ckeditor-bundle 2.x');
+        }
+
         parent::setUp();
 
         $this->ckEditorConfiguration = $this->createMock(CKEditorConfigurationInterface::class);
