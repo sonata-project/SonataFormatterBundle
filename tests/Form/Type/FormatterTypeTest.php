@@ -19,6 +19,7 @@ use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Sonata\FormatterBundle\Formatter\TextFormatter;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -142,12 +143,20 @@ class FormatterTypeTest extends TestCase
         ];
 
         $formBuilder = $this->createMock(FormBuilderInterface::class);
-        $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', ChoiceType::class, [
-            'property_path' => 'SomeFormatField',
-            'data' => $selectedFormat,
-            'choices' => $formatters,
-        ]);
-        $formBuilder->expects($this->at(1))->method('get')->willReturn($choiceFormBuilder);
+        $formBuilder
+            ->method('add')
+            ->withConsecutive(
+                ['SomeFormatField', ChoiceType::class, [
+                    'property_path' => 'SomeFormatField',
+                    'data' => $selectedFormat,
+                    'choices' => $formatters,
+                ]],
+                ['SomeFormatField', HiddenType::class, [
+                    'property_path' => 'SomeFormatField',
+                    'data' => $selectedFormat,
+                ]]
+            );
+        $formBuilder->expects($this->once())->method('get')->willReturn($choiceFormBuilder);
 
         $this->formType->buildForm($formBuilder, $options);
     }
@@ -165,12 +174,20 @@ class FormatterTypeTest extends TestCase
             ->willReturn($formatters);
 
         $formBuilder = $this->createMock(FormBuilderInterface::class);
-        $formBuilder->expects($this->at(0))->method('add')->with('SomeFormatField', ChoiceType::class, [
-            'property_path' => 'SomeFormatField',
-            'data' => $defaultFormatter = 'text',
-            'choices' => $formatters,
-        ]);
-        $formBuilder->expects($this->at(1))->method('get')->willReturn($choiceFormBuilder);
+        $formBuilder
+            ->method('add')
+            ->withConsecutive(
+                ['SomeFormatField', ChoiceType::class, [
+                    'property_path' => 'SomeFormatField',
+                    'data' => $defaultFormatter = 'text',
+                    'choices' => $formatters,
+                ]],
+                ['SomeFormatField', HiddenType::class, [
+                    'property_path' => 'SomeFormatField',
+                    'data' => $defaultFormatter,
+                ]]
+            );
+        $formBuilder->expects($this->once())->method('get')->willReturn($choiceFormBuilder);
 
         $options = [
             'format_field' => 'SomeFormatField',
