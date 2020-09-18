@@ -15,6 +15,7 @@ namespace Sonata\FormatterBundle\Tests\Controller;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Sonata\AdminBundle\Admin\Pool as AdminPool;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Templating\TemplateRegistry;
@@ -48,6 +49,8 @@ class EntityWithGetId
 
 class CkeditorAdminControllerTest extends TestCase
 {
+    use ProphecyTrait;
+
     private $container;
     private $admin;
     private $request;

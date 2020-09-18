@@ -14,11 +14,14 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\Tests\Twig\Loader;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Sonata\FormatterBundle\Twig\Loader\LoaderSelector;
 use Twig\Loader\LoaderInterface;
 
 class LoaderSelectorTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testCanBeInstanciated(): void
     {
         $loaderSelector = new LoaderSelector(
