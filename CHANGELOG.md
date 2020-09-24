@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.3.0](https://github.com/sonata-project/SonataFormatterBundle/compare/4.2.0...4.3.0) - 2020-09-25
+### Added
+- [[#477](https://github.com/sonata-project/SonataFormatterBundle/pull/477)] Added support for symfony/options-resolver:^5.1 ([@phansys](https://github.com/phansys))
+- [[#477](https://github.com/sonata-project/SonataFormatterBundle/pull/477)] Added support for symfony/property-access:^5.1 ([@phansys](https://github.com/phansys))
+
+### Changed
+- [[#472](https://github.com/sonata-project/SonataFormatterBundle/pull/472)] Allow FOSCKEditor dependency to ^2.0 ([@bmaziere](https://github.com/bmaziere))
+
+### Deprecated
+- [[#472](https://github.com/sonata-project/SonataFormatterBundle/pull/472)] Deprecate usage of FOSCKEditor ^1.0 ([@bmaziere](https://github.com/bmaziere))
+
+### Removed
+- [[#469](https://github.com/sonata-project/SonataFormatterBundle/pull/469)] Support for Symfony < 4.4 ([@wbloszyk](https://github.com/wbloszyk))
+
 ## [4.2.0](https://github.com/sonata-project/SonataFormatterBundle/compare/4.1.3...4.2.0) - 2020-06-23
 ### Added
 - [[#417](https://github.com/sonata-project/SonataFormatterBundle/pull/417)]
@@ -90,7 +104,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 - Removed BC layer for older symfony versions
- 
+
 ## [3.3.0](https://github.com/sonata-project/SonataFormatterBundle/compare/3.2.3...3.3.0) - 2017-10-22
 ### Removed
 - Support for old versions of PHP and Symfony.

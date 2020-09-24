@@ -30,7 +30,7 @@ final class SimpleFormatterType extends AbstractType
     /**
      * @var ConfigManagerInterface
      *
-     * @deprecated since sonata-project/formatter bundle 4.x and will be removed in version 5.0.
+     * @deprecated since sonata-project/formatter bundle 4.3 and will be removed in version 5.0.
      */
     protected $configManager;
 
@@ -73,7 +73,7 @@ final class SimpleFormatterType extends AbstractType
     ) {
         if (!$configManagerOrCkEditorConfiguration instanceof CKEditorConfigurationInterface) {
             @trigger_error(sprintf(
-                'Passing %s as argument 1 to %s() is deprecated since sonata-project/formatter-bundle 4.x'
+                'Passing %s as argument 1 to %s() is deprecated since sonata-project/formatter-bundle 4.3'
                 .' and will throw a \TypeError in version 5.0. You must pass an instance of %s instead.',
                 \get_class($configManagerOrCkEditorConfiguration),
                 __METHOD__,
