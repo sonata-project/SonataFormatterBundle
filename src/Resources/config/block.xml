@@ -7,7 +7,7 @@
         <service id="sonata.formatter.block.formatter" class="%sonata.formatter.block.formatter.class%">
             <tag name="sonata.block"/>
             <argument>sonata.formatter.block.formatter</argument>
-            <argument type="service" id="sonata.templating"/>
+            <argument type="service" id="twig"/>
         </service>
     </services>
 </container>
