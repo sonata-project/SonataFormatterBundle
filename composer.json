@@ -27,7 +27,7 @@
         "friendsofsymfony/ckeditor-bundle": "^1.0 || ^2.0",
         "knplabs/knp-markdown-bundle": "^1.7",
         "psr/log": "^1.0",
-        "sonata-project/block-bundle": "^3.16.1",
+        "sonata-project/block-bundle": "^3.18.4 || ^4.0",
         "sonata-project/form-extensions": "^0.1 || ^1.4",
         "symfony/config": "^4.4",
         "symfony/dependency-injection": "^4.4",
