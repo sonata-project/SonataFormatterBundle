@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\DependencyInjection;
 
-use InvalidArgumentException;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sonata\FormatterBundle\DependencyInjection\SonataFormatterExtension;
 
@@ -62,7 +61,7 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
     public function testItThrowsOnInvalidDefaultFormatter(): void
     {
         $this->setParameter('kernel.bundles', []);
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(
             'SonataFormatterBundle - Invalid default formatter: tixt, available: ["text", "tuxt"]'
         );
