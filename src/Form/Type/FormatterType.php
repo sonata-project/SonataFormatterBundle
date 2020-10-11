@@ -50,7 +50,7 @@ final class FormatterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if (\is_array($options['format_field'])) {
-            list($formatField, $formatPropertyPath) = $options['format_field'];
+            [$formatField, $formatPropertyPath] = $options['format_field'];
             $options['format_field_options']['property_path'] = $formatPropertyPath;
         } else {
             $formatField = $options['format_field'];
@@ -63,7 +63,7 @@ final class FormatterType extends AbstractType
         }
 
         if (\is_array($options['source_field'])) {
-            list($sourceField, $sourcePropertyPath) = $options['source_field'];
+            [$sourceField, $sourcePropertyPath] = $options['source_field'];
             $options['source_field_options']['property_path'] = $sourcePropertyPath;
         } else {
             $sourceField = $options['source_field'];
@@ -109,14 +109,14 @@ final class FormatterType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         if (\is_array($options['source_field'])) {
-            list($sourceField) = $options['source_field'];
+            [$sourceField] = $options['source_field'];
             $view->vars['source_field'] = $sourceField;
         } else {
             $view->vars['source_field'] = $options['source_field'];
         }
 
         if (\is_array($options['format_field'])) {
-            list($formatField) = $options['format_field'];
+            [$formatField] = $options['format_field'];
             $view->vars['format_field'] = $formatField;
         } else {
             $view->vars['format_field'] = $options['format_field'];

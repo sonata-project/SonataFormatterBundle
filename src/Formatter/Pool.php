@@ -61,7 +61,7 @@ final class Pool implements LoggerAwareInterface, PoolInterface
 
     public function transform(string $code, string $text): string
     {
-        list($formatter, $env) = $this->get($code);
+        [$formatter, $env] = $this->get($code);
 
         // apply the selected formatter
         $text = $formatter->transform($text);
