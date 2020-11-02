@@ -22,8 +22,8 @@ class LoaderSelectorTest extends TestCase
     public function testCanBeInstanciated(): void
     {
         $loaderSelector = new LoaderSelector(
-            $this->prophesize(LoaderInterface::class)->reveal(),
-            $this->prophesize(LoaderInterface::class)->reveal()
+            $this->createStub(LoaderInterface::class),
+            $this->createStub(LoaderInterface::class)
         );
         $this->assertInstanceOf(
             LoaderSelector::class,
