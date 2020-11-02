@@ -14,11 +14,10 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\Tests\Controller;
 
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
+use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
 use Sonata\AdminBundle\Admin\Pool as AdminPool;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Templating\TemplateRegistry;
-use Sonata\AdminBundle\Templating\TemplateRegistryInterface;
 use Sonata\FormatterBundle\Controller\CkeditorAdminController;
 use Sonata\MediaBundle\Admin\BaseMediaAdmin;
 use Sonata\MediaBundle\Model\CategoryManagerInterface;
@@ -27,7 +26,7 @@ use Sonata\MediaBundle\Model\MediaManagerInterface;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
 use Sonata\MediaBundle\Provider\Pool as MediaPool;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\Form\FormView;
@@ -35,6 +34,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
+use Twig\Environment;
 
 class EntityWithGetId
 {
@@ -55,53 +55,55 @@ class CkeditorAdminControllerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->container = $this->prophesize(ContainerInterface::class);
-        $this->admin = $this->prophesize(BaseMediaAdmin::class);
-        $this->request = $this->prophesize(Request::class);
+        $this->container = new Container();
+        $this->admin = $this->createMock(BaseMediaAdmin::class);
+        $this->request = $this->createMock(Request::class);
 
         $this->configureCRUDController();
 
         $this->controller = new CkeditorAdminController();
-        $this->controller->setContainer($this->container->reveal());
+        $this->controller->setContainer($this->container);
     }
 
     public function testBrowserAction(): void
     {
-        $datagrid = $this->prophesize(DatagridInterface::class);
-        $pool = $this->prophesize(MediaPool::class);
-        $categoryManager = $this->prophesize(CategoryManagerInterface::class);
-        $category = $this->prophesize(EntityWithGetId::class);
-        $form = $this->prophesize(Form::class);
-        $formView = $this->prophesize(FormView::class);
+        $datagrid = $this->createMock(DatagridInterface::class);
+        $mediaPool = $this->createStub(MediaPool::class);
+        $categoryManager = $this->createMock(CategoryManagerInterface::class);
+        $category = $this->createStub(EntityWithGetId::class);
+        $form = $this->createStub(Form::class);
+        $formView = $this->createStub(FormView::class);
 
-        $this->configureSetFormTheme($formView->reveal(), ['filterTheme']);
-        $this->configureRender('templateList', Argument::type('array'), 'renderResponse');
-        $datagrid->setValue('context', null, 'another_context')->shouldBeCalled();
-        $datagrid->setValue('category', null, 1)->shouldBeCalled();
-        $datagrid->setValue('providerName', null, 'provider')->shouldBeCalled();
-        $datagrid->getResults()->willReturn([]);
-        $datagrid->getForm()->willReturn($form->reveal());
-        $pool->getDefaultContext()->willReturn('context');
-        $categoryManager->getRootCategory('another_context')->willReturn($category->reveal());
-        $categoryManager->findOneBy([
+        $this->configureSetFormTheme($formView, ['filterTheme']);
+        $this->configureRender('templateList', 'renderResponse');
+
+        $datagrid->expects($this->exactly(4))->method('setValue')->withConsecutive(
+            ['context', null, 'another_context'],
+            ['providerName', null, 'provider'],
+            ['category', null, 1]
+        );
+        $datagrid->method('getResults')->willReturn([]);
+        $datagrid->method('getForm')->willReturn($form);
+        $mediaPool->method('getDefaultContext')->willReturn('context');
+        $categoryManager->method('getRootCategory')->with('another_context')->willReturn($category);
+        $categoryManager->method('findOneBy')->with([
             'id' => 2,
             'context' => 'another_context',
-        ])->willReturn($category->reveal());
-        $category->getId()->willReturn(1);
-        $form->createView()->willReturn($formView->reveal());
-        $this->container->get('sonata.media.pool')->willReturn($pool->reveal());
-        $this->container->has('sonata.media.manager.category')->willReturn(true);
-        $this->container->get('sonata.media.manager.category')->willReturn($categoryManager->reveal());
-        $this->container->getParameter('kernel.bundles')->willReturn(['SonataMediaBundle' => true]);
-        $this->admin->checkAccess('list')->shouldBeCalled();
-        $this->admin->getDatagrid()->willReturn($datagrid->reveal());
-        $this->admin->getPersistentParameter('context', 'context')->willReturn('another_context');
-        $this->admin->getPersistentParameter('provider')->willReturn('provider');
-        $this->admin->getFilterTheme()->willReturn(['filterTheme']);
-        $this->request->get('filter')->willReturn([]);
-        $this->request->get('category')->willReturn(2);
+        ])->willReturn($category);
+        $category->method('getId')->willReturn(1);
+        $form->method('createView')->willReturn($formView);
+        $this->container->set('sonata.media.pool', $mediaPool);
+        $this->container->set('sonata.media.manager.category', $categoryManager);
+        $this->container->setParameter('kernel.bundles', ['SonataMediaBundle' => true]);
+        $this->admin->expects($this->once())->method('checkAccess')->with('list');
+        $this->admin->method('getDatagrid')->willReturn($datagrid);
+        $this->admin->method('getPersistentParameter')->willReturnMap([
+            ['context', 'context', 'another_context'],
+            ['provider', 'provider'],
+        ]);
+        $this->admin->method('getFilterTheme')->willReturn(['filterTheme']);
 
-        $response = $this->controller->browserAction($this->request->reveal());
+        $response = $this->controller->browserAction($this->request);
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
         $this->assertSame('renderResponse', $response->getContent());
@@ -109,30 +111,23 @@ class CkeditorAdminControllerTest extends TestCase
 
     public function testUpload(): void
     {
-        $media = $this->prophesize(MediaInterface::class);
-        $mediaManager = $this->prophesize(MediaManagerInterface::class);
-        $filesBag = $this->prophesize(AttributeBagInterface::class);
-        $pool = $this->prophesize(MediaPool::class);
-        $provider = $this->prophesize(MediaProviderInterface::class);
+        $media = $this->createStub(MediaInterface::class);
+        $mediaManager = $this->createMock(MediaManagerInterface::class);
+        $mediaPool = $this->createMock(MediaPool::class);
 
-        $this->configureRender('templateList', Argument::type('array'), 'renderResponse');
-        $pool->getDefaultContext()->willReturn('context');
-        $pool->getProvider('provider')->willReturn($provider->reveal());
-        $filesBag->get('upload')->willReturn(new \stdClass());
-        $mediaManager->create()->willReturn($media->reveal());
-        $mediaManager->save($media->reveal(), 'context', 'provider')->shouldBeCalled();
-        $this->admin->checkAccess('create')->shouldBeCalled();
-        $this->admin->createObjectSecurity($media->reveal())->shouldBeCalled();
-        $this->container->get('sonata.media.manager.media')->willReturn($mediaManager->reveal());
-        $this->container->getParameter('kernel.bundles')->willReturn(['SonataMediaBundle' => true]);
-        $this->container->get('sonata.media.pool')->willReturn($pool->reveal());
-        $this->request->get('provider')->willReturn('provider');
-        $this->request->isMethod('POST')->willReturn(true);
-        $this->request->files = $filesBag->reveal();
-        $this->request->get('context', 'context')->willReturn('context');
-        $this->request->get('format', 'reference')->willReturn('reference');
+        $this->configureRender('templateList', 'renderResponse');
+        $mediaPool->method('getDefaultContext')->willReturn('context');
+        $mediaPool->method('getProvider')->with('provider')
+            ->willReturn($this->createStub(MediaProviderInterface::class));
+        $mediaManager->method('create')->willReturn($media);
+        $mediaManager->expects($this->once())->method('save')->with($media, 'context', 'provider');
+        $this->admin->expects($this->once())->method('checkAccess')->with('create');
+        $this->admin->expects($this->once())->method('createObjectSecurity')->with($media);
+        $this->container->set('sonata.media.manager.media', $mediaManager);
+        $this->container->setParameter('kernel.bundles', ['SonataMediaBundle' => true]);
+        $this->container->set('sonata.media.pool', $mediaPool);
 
-        $response = $this->controller->uploadAction($this->request->reveal());
+        $response = $this->controller->uploadAction($this->request);
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame('renderResponse', $response->getContent());
@@ -140,63 +135,72 @@ class CkeditorAdminControllerTest extends TestCase
 
     private function configureCRUDController(): void
     {
-        $pool = $this->prophesize(AdminPool::class);
-        $breadcrumbsBuilder = $this->prophesize(BreadcrumbsBuilderInterface::class);
+        $adminPool = $this->createMock(AdminPool::class);
 
-        $this->configureGetCurrentRequest($this->request->reveal());
-        $pool->getAdminByAdminCode('admin_code')->willReturn($this->admin->reveal());
-        $this->request->isXmlHttpRequest()->willReturn(false);
-        $this->request->get('_xml_http_request')->willReturn(false);
-        $this->request->get('_sonata_admin')->willReturn('admin_code');
-        $this->request->get('uniqid')->shouldBeCalled();
-        $this->container->get('sonata.admin.pool')->willReturn($pool->reveal());
-        $this->container->get('sonata.admin.breadcrumbs_builder')->willReturn($breadcrumbsBuilder->reveal());
-        $this->admin->getTemplate('layout')->willReturn('layout.html.twig');
-        $this->admin->isChild()->willReturn(false);
-        $this->admin->setRequest($this->request->reveal())->shouldBeCalled();
+        $this->configureGetCurrentRequest();
 
-        if (interface_exists(TemplateRegistryInterface::class)) {
-            $this->container->get('admin_code.template_registry')->willReturn(new TemplateRegistry());
-            $this->admin->getCode()->willReturn('admin_code');
-        }
+        $adminPool->method('getAdminByAdminCode')->with('admin_code')->willReturn($this->admin);
+        $this->container->set('sonata.admin.pool', $adminPool);
+        $this->container->set(
+            'sonata.admin.breadcrumbs_builder',
+            $this->createStub(BreadcrumbsBuilderInterface::class)
+        );
+        $this->container->set('admin_code.template_registry', new TemplateRegistry());
+        $this->admin->method('getTemplate')->with('layout')->willReturn('layout.html.twig');
+        $this->admin->method('isChild')->willReturn(false);
+        $this->admin->method('getCode')->willReturn('admin_code');
     }
 
-    private function configureGetCurrentRequest($request): void
+    private function configureGetCurrentRequest(): void
     {
-        $requestStack = $this->prophesize(RequestStack::class);
+        $filesBag = $this->createMock(AttributeBagInterface::class);
 
-        $this->container->has('request_stack')->willReturn(true);
-        $this->container->get('request_stack')->willReturn($requestStack->reveal());
-        $requestStack->getCurrentRequest()->willReturn($request);
+        $filesBag->method('get')->with('upload')->willReturn(new \stdClass());
+
+        $this->request->files = $filesBag;
+        $this->request->method('isMethod')->with('POST')->willReturn(true);
+        $this->request->method('isXmlHttpRequest')->with()->willReturn(false);
+        $this->request->method('get')->willReturnMap([
+            ['provider', null, 'provider'],
+            ['context', 'context', 'context'],
+            ['format', 'reference', 'reference'],
+            ['_xml_http_request', null, false],
+            ['_sonata_admin', null, 'admin_code'],
+            ['filter', null, []],
+            ['category', null, 2],
+        ]);
+
+        $requestStack = new RequestStack();
+        $requestStack->push($this->request);
+
+        $this->admin->expects($this->once())->method('setRequest')->with($this->request);
+        $this->container->set('request_stack', $requestStack);
     }
 
     private function configureSetFormTheme($formView, array $formTheme): void
     {
-        $twig = $this->prophesize(\Twig_Environment::class);
+        $twig = $this->createMock(Environment::class);
+        $twigRenderer = $this->createMock(FormRenderer::class);
 
-        $twigRenderer = $this->prophesize(FormRenderer::class);
+        $this->container->set('twig', $twig);
 
-        $this->container->get('twig')->willReturn($twig->reveal());
-
-        $twig->getRuntime(FormRenderer::class)->willReturn($twigRenderer->reveal());
-
-        $twigRenderer->setTheme($formView, $formTheme)->shouldBeCalled();
+        $twig->method('getRuntime')->with(FormRenderer::class)->willReturn($twigRenderer);
+        $twigRenderer->expects($this->once())->method('setTheme')->with($formView, $formTheme);
     }
 
-    private function configureRender($template, $data, $rendered): void
+    private function configureRender($template, $rendered): void
     {
-        $templating = $this->prophesize(EngineInterface::class);
-        $response = $this->prophesize(Response::class);
-        $pool = $this->prophesize(MediaPool::class);
+        $templating = $this->createMock(EngineInterface::class);
+        $response = new Response($rendered);
 
-        $this->admin->getPersistentParameters()->willReturn(['param' => 'param']);
-        $this->container->has('templating')->willReturn(true);
-        $this->container->get('templating')->willReturn($templating->reveal());
-        $this->container->get('sonata.media.pool')->willReturn($pool->reveal());
-        $this->container->getParameter('sonata.formatter.ckeditor.configuration.templates')
-            ->willReturn(['browser' => $template, 'upload' => $template]);
-        $response->getContent()->willReturn($rendered);
-        $templating->renderResponse($template, $data, null)->willReturn($response->reveal());
-        $templating->render($template, $data)->willReturn($rendered);
+        $this->admin->method('getPersistentParameters')->willReturn(['param' => 'param']);
+        $this->container->set('templating', $templating);
+        $this->container->set('sonata.media.pool', $this->createStub(MediaPool::class));
+        $this->container->setParameter(
+            'sonata.formatter.ckeditor.configuration.templates',
+            ['browser' => $template, 'upload' => $template]
+        );
+        $templating->method('renderResponse')->with($template, $this->isType('array'), null)->willReturn($response);
+        $templating->method('render')->with($template, $this->isType('array'))->willReturn($rendered);
     }
 }
