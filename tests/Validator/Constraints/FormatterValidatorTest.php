@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\Validator\Constraints;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Formatter\FormatterInterface;
 use Sonata\FormatterBundle\Formatter\Pool;
@@ -24,7 +25,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class FormatterValidatorTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var ExecutionContextInterface|MockObject
      */
     private $context;
 
