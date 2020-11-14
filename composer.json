@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
         "knplabs/knp-markdown-bundle": "^1.7",
         "psr/log": "^1.0",
         "sonata-project/block-bundle": "^3.16.1",
@@ -44,9 +44,10 @@
         "sonata-project/core-bundle": "<3.20"
     },
     "require-dev": {
+        "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "sonata-project/admin-bundle": "^3.58",
-        "symfony/phpunit-bridge": "^5.1.1"
+        "symfony/phpunit-bridge": "^5.1.8"
     },
     "config": {
         "sort-packages": true
