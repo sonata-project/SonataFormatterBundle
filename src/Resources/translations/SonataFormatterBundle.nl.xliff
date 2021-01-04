@@ -8,15 +8,31 @@
             </trans-unit>
             <trans-unit id="sonata_formatter_block_formatter">
                 <source>sonata.formatter.block.formatter</source>
-                <target>sonata.formatter.block.formatter</target>
+                <target>Rich Text</target>
+            </trans-unit>
+            <trans-unit id="markdown">
+                <source>markdown</source>
+                <target>Markdown editor</target>
             </trans-unit>
             <trans-unit id="text">
                 <source>text</source>
-                <target>text</target>
+                <target>Tekst editor</target>
+            </trans-unit>
+            <trans-unit id="rawhtml">
+                <source>rawhtml</source>
+                <target>Html editor</target>
+            </trans-unit>
+            <trans-unit id="richhtml">
+                <source>richhtml</source>
+                <target>Grafische editor</target>
+            </trans-unit>
+            <trans-unit id="twig">
+                <source>twig</source>
+                <target>Twig editor</target>
             </trans-unit>
             <trans-unit id="form.label_content">
                 <source>form.label_content</source>
-                <target>form.label_content</target>
+                <target>Inhoud</target>
             </trans-unit>
         </body>
     </file>
