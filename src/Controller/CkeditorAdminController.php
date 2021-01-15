@@ -17,6 +17,7 @@ use Sonata\MediaBundle\Controller\MediaAdminController;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
 use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -118,6 +119,15 @@ final class CkeditorAdminController extends MediaAdminController
             $media,
             $request->get('format', MediaProviderInterface::FORMAT_REFERENCE)
         );
+
+        // handle specific json response (drag-n-drop Upload)
+        if ('json' === $request->get('responseType')) {
+            return new JsonResponse([
+                'uploaded' => 1,
+                'fileName' => $media->getName(),
+                'url' => $pool->getProvider($provider)->generatePublicUrl($media, $format),
+            ]);
+        }
 
         return $this->renderWithExtraParams($this->getTemplate('upload'), [
             'action' => 'list',
