@@ -92,7 +92,7 @@ final class FormatterType extends AbstractType
                 \get_class($configManagerOrCkEditorConfiguration),
                 __METHOD__,
                 CKEditorConfigurationInterface::class
-            ), E_USER_DEPRECATED);
+            ), \E_USER_DEPRECATED);
 
             if (!$configManagerOrCkEditorConfiguration instanceof ConfigManagerInterface) {
                 throw new \TypeError(sprintf(
