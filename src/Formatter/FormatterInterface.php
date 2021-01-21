@@ -16,7 +16,7 @@ namespace Sonata\FormatterBundle\Formatter;
 @trigger_error(
     'The '.__NAMESPACE__.'\FormatterInterface interface is deprecated since sonata-project/formatter-bundle 4.x, to be removed in 5.0. '.
     'Use Formatter or ExtendableFormatter instead.',
-    E_USER_DEPRECATED
+    \E_USER_DEPRECATED
 );
 
 /**
