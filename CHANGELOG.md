@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.4.0](https://github.com/sonata-project/SonataFormatterBundle/compare/4.3.0...4.4.0) - 2021-02-15
+### Added
+- [[#523](https://github.com/sonata-project/SonataFormatterBundle/pull/523)] Added support for `symfony/validator` ^5.1. ([@jorrit](https://github.com/jorrit))
+
+### Changed
+- [[#519](https://github.com/sonata-project/SonataFormatterBundle/pull/519)] Updates dutch translations ([@zghosts](https://github.com/zghosts))
+
 ## [4.3.0](https://github.com/sonata-project/SonataFormatterBundle/compare/4.2.0...4.3.0) - 2020-09-25
 ### Added
 - [[#477](https://github.com/sonata-project/SonataFormatterBundle/pull/477)] Added support for symfony/options-resolver:^5.1 ([@phansys](https://github.com/phansys))
