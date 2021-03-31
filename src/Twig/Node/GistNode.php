@@ -38,7 +38,6 @@ EOT
                 ,
                 $this->getNode('gist')->getAttribute('value'),
                 $this->getNode('file')->getAttribute('value')
-            ))
-        ;
+            ));
     }
 }
