@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\Controller;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
 use Sonata\AdminBundle\Admin\Pool as AdminPool;
@@ -25,7 +26,6 @@ use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Model\MediaManagerInterface;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
 use Sonata\MediaBundle\Provider\Pool as MediaPool;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormRenderer;
@@ -48,9 +48,29 @@ class EntityWithGetId
 
 class CkeditorAdminControllerTest extends TestCase
 {
+    /**
+     * @var Container
+     */
     private $container;
+
+    /**
+     * @var BaseMediaAdmin&MockObject
+     */
     private $admin;
+
+    /**
+     * @var Request&MockObject
+     */
     private $request;
+
+    /**
+     * @var Environment&MockObject
+     */
+    private $twig;
+
+    /**
+     * @var CkeditorAdminController
+     */
     private $controller;
 
     protected function setUp(): void
@@ -58,6 +78,9 @@ class CkeditorAdminControllerTest extends TestCase
         $this->container = new Container();
         $this->admin = $this->createMock(BaseMediaAdmin::class);
         $this->request = $this->createMock(Request::class);
+        $this->twig = $this->createMock(Environment::class);
+
+        $this->container->set('twig', $this->twig);
 
         $this->configureCRUDController();
 
@@ -179,28 +202,21 @@ class CkeditorAdminControllerTest extends TestCase
 
     private function configureSetFormTheme($formView, array $formTheme): void
     {
-        $twig = $this->createMock(Environment::class);
         $twigRenderer = $this->createMock(FormRenderer::class);
 
-        $this->container->set('twig', $twig);
-
-        $twig->method('getRuntime')->with(FormRenderer::class)->willReturn($twigRenderer);
+        $this->twig->method('getRuntime')->with(FormRenderer::class)->willReturn($twigRenderer);
         $twigRenderer->expects($this->once())->method('setTheme')->with($formView, $formTheme);
     }
 
     private function configureRender($template, $rendered): void
     {
-        $templating = $this->createMock(EngineInterface::class);
-        $response = new Response($rendered);
-
         $this->admin->method('getPersistentParameters')->willReturn(['param' => 'param']);
-        $this->container->set('templating', $templating);
         $this->container->set('sonata.media.pool', $this->createStub(MediaPool::class));
         $this->container->setParameter(
             'sonata.formatter.ckeditor.configuration.templates',
             ['browser' => $template, 'upload' => $template]
         );
-        $templating->method('renderResponse')->with($template, $this->isType('array'), null)->willReturn($response);
-        $templating->method('render')->with($template, $this->isType('array'))->willReturn($rendered);
+
+        $this->twig->method('render')->with($template, $this->isType('array'))->willReturn($rendered);
     }
 }
