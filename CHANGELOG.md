@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.5.0](https://github.com/sonata-project/SonataFormatterBundle/compare/4.4.0...4.5.0) - 2021-04-19
+### Added
+- [[#570](https://github.com/sonata-project/SonataFormatterBundle/pull/570)] Added php 8 support ([@jordisala1991](https://github.com/jordisala1991))
+
 ## [4.4.0](https://github.com/sonata-project/SonataFormatterBundle/compare/4.3.0...4.4.0) - 2021-02-15
 ### Added
 - [[#523](https://github.com/sonata-project/SonataFormatterBundle/pull/523)] Added support for `symfony/validator` ^5.1. ([@jorrit](https://github.com/jorrit))
