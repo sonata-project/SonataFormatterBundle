@@ -21,7 +21,8 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.3 || ^8.0",
+        "friendsofsymfony/ckeditor-bundle": "^1.0 || ^2.0",
         "knplabs/knp-markdown-bundle": "^1.7",
         "psr/log": "^1.0",
         "sonata-project/block-bundle": "^3.16.1",
