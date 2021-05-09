@@ -163,9 +163,9 @@ class CkeditorAdminControllerTest extends TestCase
         $this->configureGetCurrentRequest();
 
         $adminPool->method('getAdminByAdminCode')->with('admin_code')->willReturn($this->admin);
-        $this->container->set('sonata.admin.pool', $adminPool);
+        $this->container->set('sonata.admin.pool.do-not-use', $adminPool);
         $this->container->set(
-            'sonata.admin.breadcrumbs_builder',
+            'sonata.admin.breadcrumbs_builder.do-not-use',
             $this->createStub(BreadcrumbsBuilderInterface::class)
         );
         $this->container->set('admin_code.template_registry', new TemplateRegistry());
