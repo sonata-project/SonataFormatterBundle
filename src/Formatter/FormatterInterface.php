@@ -13,12 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Formatter;
 
-@trigger_error(
-    'The '.__NAMESPACE__.'\FormatterInterface interface is deprecated since sonata-project/formatter-bundle 4.2, to be removed in 5.0. '.
-    'Use Formatter or ExtendableFormatter instead.',
-    \E_USER_DEPRECATED
-);
-
 /**
  * @deprecated since sonata-project/formatter-bundle 4.2, to be removed in 5.0.
  */

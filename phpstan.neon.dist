@@ -1,61 +1,9 @@
+includes:
+    - phpstan-baseline.neon
+
 parameters:
     level: 1
-
+    bootstrapFiles:
+        - vendor/bin/.phpunit/phpunit/vendor/autoload.php
     paths:
         - src
-# Uncomment this, when phpstan extensions are allowed
-#        - tests
-
-    excludes_analyse:
-        - src/Test/AbstractWidgetTestCase.php
-        - tests/bootstrap.php
-
-    autoload_files:
-        - vendor/autoload.php
-
-    ignoreErrors:
-        -
-            # will be fixed in v5. Currently BC break
-            message: "#^Parameter \\$pluginManager of method Sonata\\\\FormatterBundle\\\\Form\\\\Type\\\\FormatterType\\:\\:__construct\\(\\) has invalid typehint type FOS\\\\CKEditorBundle\\\\Model\\\\PluginManagerInterface\\.$#"
-            count: 1
-            path: src/Form/Type/FormatterType.php
-        -
-            # will be fixed in v5. Currently BC break
-            message: "#^Parameter \\$templateManager of method Sonata\\\\FormatterBundle\\\\Form\\\\Type\\\\FormatterType\\:\\:__construct\\(\\) has invalid typehint type FOS\\\\CKEditorBundle\\\\Model\\\\TemplateManagerInterface\\.$#"
-            count: 1
-            path: src/Form/Type/FormatterType.php
-        -
-            # will be fixed in v5. Currently BC break
-            message: "#^Parameter \\$toolbarManager of method Sonata\\\\FormatterBundle\\\\Form\\\\Type\\\\FormatterType\\:\\:__construct\\(\\) has invalid typehint type FOS\\\\CKEditorBundle\\\\Model\\\\ToolbarManagerInterface\\.$#"
-            count: 1
-            path: src/Form/Type/FormatterType.php
-        -
-            # will be fixed in v5. Currently BC break
-            message: "#^Class FOS\\\\CKEditorBundle\\\\Model\\\\ConfigManagerInterface not found\\.#"
-            count: 2
-            path: src/Form/Type/FormatterType.php
-        -
-            # will be fixed in v5. Currently BC break
-            message: "#^Parameter \\$pluginManager of method Sonata\\\\FormatterBundle\\\\Form\\\\Type\\\\SimpleFormatterType\\:\\:__construct\\(\\) has invalid typehint type FOS\\\\CKEditorBundle\\\\Model\\\\PluginManagerInterface\\.$#"
-            count: 1
-            path: src/Form/Type/SimpleFormatterType.php
-        -
-            # will be fixed in v5. Currently BC break
-            message: "#^Parameter \\$templateManager of method Sonata\\\\FormatterBundle\\\\Form\\\\Type\\\\SimpleFormatterType\\:\\:__construct\\(\\) has invalid typehint type FOS\\\\CKEditorBundle\\\\Model\\\\TemplateManagerInterface\\.$#"
-            count: 1
-            path: src/Form/Type/SimpleFormatterType.php
-        -
-            # will be fixed in v5. Currently BC break
-            message: "#^Parameter \\$stylesSetManager of method Sonata\\\\FormatterBundle\\\\Form\\\\Type\\\\SimpleFormatterType\\:\\:__construct\\(\\) has invalid typehint type FOS\\\\CKEditorBundle\\\\Model\\\\StylesSetManagerInterface\\.$#"
-            count: 1
-            path: src/Form/Type/SimpleFormatterType.php
-        -
-            # will be fixed in v5. Currently BC break
-            message: "#^Parameter \\$toolbarManager of method Sonata\\\\FormatterBundle\\\\Form\\\\Type\\\\SimpleFormatterType\\:\\:__construct\\(\\) has invalid typehint type FOS\\\\CKEditorBundle\\\\Model\\\\ToolbarManagerInterface\\.$#"
-            count: 1
-            path: src/Form/Type/SimpleFormatterType.php
-        -
-            # will be fixed in v5. Currently BC break
-            message: "#^Class FOS\\\\CKEditorBundle\\\\Model\\\\ConfigManagerInterface not found\\.#"
-            count: 2
-            path: src/Form/Type/SimpleFormatterType.php
