@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\Twig;
 
-use Phpunit\Framework\TestCase;
+use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Twig\SecurityPolicyContainerAware;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

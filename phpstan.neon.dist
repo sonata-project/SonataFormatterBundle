@@ -1,16 +1,9 @@
+includes:
+    - phpstan-baseline.neon
+
 parameters:
     level: 1
-
+    bootstrapFiles:
+        - vendor/bin/.phpunit/phpunit/vendor/autoload.php
     paths:
         - src
-# Uncomment this, when phpstan extensions are allowed
-#        - tests
-
-    excludes_analyse:
-        - src/Test/AbstractWidgetTestCase.php
-        - tests/bootstrap.php
-
-    autoload_files:
-        - vendor/autoload.php
-
-    ignoreErrors:
