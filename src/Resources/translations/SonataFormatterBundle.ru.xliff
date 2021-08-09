@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file source-language="en" target-language="ru" datatype="plaintext" original="SonataFormatterBundle.en.xliff">
-        <body>
-            <trans-unit id="please_select_format_method">
-                <source>please_select_format_method</source>
-                <target>выберите способ форматирования текста</target>
-            </trans-unit>
-            <trans-unit id="sonata_formatter_block_formatter">
-                <source>sonata.formatter.block.formatter</source>
-                <target>Rich Text</target>
-            </trans-unit>
-            <trans-unit id="markdown">
-                <source>markdown</source>
-                <target>markdown</target>
-            </trans-unit>
-            <trans-unit id="text">
-                <source>text</source>
-                <target>text</target>
-            </trans-unit>
-            <trans-unit id="rawhtml">
-                <source>rawhtml</source>
-                <target>rawhtml</target>
-            </trans-unit>
-            <trans-unit id="richhtml">
-                <source>richhtml</source>
-                <target>richhtml</target>
-            </trans-unit>
-            <trans-unit id="twig">
-                <source>twig</source>
-                <target>twig</target>
-            </trans-unit>
-            <trans-unit id="form.label_content">
-                <source>form.label_content</source>
-                <target>Содержание</target>
-            </trans-unit>
-        </body>
-    </file>
+  <file source-language="en" target-language="ru" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="please_select_format_method">
+        <source>please_select_format_method</source>
+        <target>выберите способ форматирования текста</target>
+      </trans-unit>
+      <trans-unit id="sonata_formatter_block_formatter">
+        <source>sonata.formatter.block.formatter</source>
+        <target>Rich Text</target>
+      </trans-unit>
+      <trans-unit id="markdown">
+        <source>markdown</source>
+        <target>markdown</target>
+      </trans-unit>
+      <trans-unit id="text">
+        <source>text</source>
+        <target>text</target>
+      </trans-unit>
+      <trans-unit id="rawhtml">
+        <source>rawhtml</source>
+        <target>rawhtml</target>
+      </trans-unit>
+      <trans-unit id="richhtml">
+        <source>richhtml</source>
+        <target>richhtml</target>
+      </trans-unit>
+      <trans-unit id="twig">
+        <source>twig</source>
+        <target>twig</target>
+      </trans-unit>
+      <trans-unit id="form.label_content">
+        <source>form.label_content</source>
+        <target>Содержание</target>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>
