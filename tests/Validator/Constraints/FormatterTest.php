@@ -22,7 +22,7 @@ class FormatterTest extends TestCase
     {
         $constraint = new Formatter();
 
-        $this->assertSame('property', $constraint->getTargets());
-        $this->assertSame('sonata.formatter.validator.formatter', $constraint->validatedBy());
+        static::assertSame('property', $constraint->getTargets());
+        static::assertSame('sonata.formatter.validator.formatter', $constraint->validatedBy());
     }
 }

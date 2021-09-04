@@ -21,7 +21,7 @@ final class SecurityPolicyContainerAwareTest extends TestCase
 {
     public function testItCanBeInstantiated(): void
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             SecurityPolicyContainerAware::class,
             new SecurityPolicyContainerAware($this->createMock(ContainerInterface::class))
         );

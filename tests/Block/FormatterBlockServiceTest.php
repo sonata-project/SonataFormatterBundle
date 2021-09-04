@@ -35,10 +35,10 @@ class FormatterBlockServiceTest extends BlockServiceTestCase
         $blockService = new FormatterBlockService('block.service', $this->templating);
         $blockService->execute($blockContext);
 
-        $this->assertSame('@SonataFormatter/Block/block_formatter.html.twig', $this->templating->view);
+        static::assertSame('@SonataFormatter/Block/block_formatter.html.twig', $this->templating->view);
 
-        $this->assertIsArray($this->templating->parameters['settings']);
-        $this->assertInstanceOf(BlockInterface::class, $this->templating->parameters['block']);
+        static::assertIsArray($this->templating->parameters['settings']);
+        static::assertInstanceOf(BlockInterface::class, $this->templating->parameters['block']);
     }
 
     public function testDefaultSettings(): void

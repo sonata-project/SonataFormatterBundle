@@ -30,19 +30,19 @@ class PoolTest extends TestCase
         $env = $this->createMock(Environment::class);
         $template = $this->createMock(Template::class);
 
-        $template->expects($this->once())->method('render')->willReturn('Salut');
+        $template->expects(static::once())->method('render')->willReturn('Salut');
 
-        $env->expects($this->once())->method('createTemplate')->willReturn($template);
+        $env->expects(static::once())->method('createTemplate')->willReturn($template);
 
         $pool = $this->getPool();
 
-        $this->assertFalse($pool->has('foo'));
+        static::assertFalse($pool->has('foo'));
 
         $pool->add('foo', $formatter, $env);
 
-        $this->assertTrue($pool->has('foo'));
+        static::assertTrue($pool->has('foo'));
 
-        $this->assertSame('Salut', $pool->transform('foo', 'Salut'));
+        static::assertSame('Salut', $pool->transform('foo', 'Salut'));
     }
 
     public function testNonExistantFormatter(): void
@@ -59,16 +59,16 @@ class PoolTest extends TestCase
         $env = $this->createMock(Environment::class);
         $template = $this->createMock(Template::class);
 
-        $template->expects($this->once())
+        $template->expects(static::once())
             ->method('render')
-            ->will($this->throwException(new SyntaxError('Error')));
+            ->will(static::throwException(new SyntaxError('Error')));
 
-        $env->expects($this->once())->method('createTemplate')->willReturn($template);
+        $env->expects(static::once())->method('createTemplate')->willReturn($template);
 
         $pool = $this->getPool();
         $pool->add('foo', $formatter, $env);
 
-        $this->assertSame('Salut', $pool->transform('foo', 'Salut'));
+        static::assertSame('Salut', $pool->transform('foo', 'Salut'));
     }
 
     public function testTwigSandboxSecurityError(): void
@@ -77,16 +77,16 @@ class PoolTest extends TestCase
         $env = $this->createMock(Environment::class);
         $template = $this->createMock(Template::class);
 
-        $template->expects($this->once())
+        $template->expects(static::once())
             ->method('render')
-            ->will($this->throwException(new SecurityError('Error')));
+            ->will(static::throwException(new SecurityError('Error')));
 
-        $env->expects($this->once())->method('createTemplate')->willReturn($template);
+        $env->expects(static::once())->method('createTemplate')->willReturn($template);
 
         $pool = $this->getPool();
         $pool->add('foo', $formatter, $env);
 
-        $this->assertSame('Salut', $pool->transform('foo', 'Salut'));
+        static::assertSame('Salut', $pool->transform('foo', 'Salut'));
     }
 
     public function testUnexpectedException(): void
@@ -97,11 +97,11 @@ class PoolTest extends TestCase
         $env = $this->createMock(Environment::class);
         $template = $this->createMock(Template::class);
 
-        $template->expects($this->once())
+        $template->expects(static::once())
             ->method('render')
-            ->will($this->throwException(new \RuntimeException('Error')));
+            ->will(static::throwException(new \RuntimeException('Error')));
 
-        $env->expects($this->once())->method('createTemplate')->willReturn($template);
+        $env->expects(static::once())->method('createTemplate')->willReturn($template);
 
         $pool = $this->getPool();
         $pool->add('foo', $formatter, $env);
@@ -114,7 +114,7 @@ class PoolTest extends TestCase
         $pool = new Pool('default');
         $pool->setLogger($this->createMock(LoggerInterface::class));
 
-        $this->assertSame('default', $pool->getDefaultFormatter());
+        static::assertSame('default', $pool->getDefaultFormatter());
     }
 
     private function getPool()
