@@ -49,7 +49,7 @@ class FormatterValidatorTest extends TestCase
     public function testValidator(): void
     {
         $validator = new FormatterValidator($this->pool);
-        $this->assertInstanceOf(ConstraintValidator::class, $validator);
+        static::assertInstanceOf(ConstraintValidator::class, $validator);
     }
 
     /**
@@ -59,12 +59,12 @@ class FormatterValidatorTest extends TestCase
     {
         $this->constraint->message = $message = 'Constraint message';
 
-        $this->context->expects($this->once())
+        $this->context->expects(static::once())
             ->method('addViolation')
             ->with($message);
 
         $validator = new FormatterValidator($this->pool);
-        $this->assertInstanceOf(ConstraintValidator::class, $validator);
+        static::assertInstanceOf(ConstraintValidator::class, $validator);
 
         $validator->initialize($this->context);
 
@@ -82,11 +82,11 @@ class FormatterValidatorTest extends TestCase
 
         $this->constraint->message = $message = 'Constraint message';
 
-        $this->context->expects($this->never())
+        $this->context->expects(static::never())
             ->method('addViolation');
 
         $validator = new FormatterValidator($this->pool);
-        $this->assertInstanceOf(ConstraintValidator::class, $validator);
+        static::assertInstanceOf(ConstraintValidator::class, $validator);
 
         $validator->initialize($this->context);
 

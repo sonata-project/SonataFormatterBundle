@@ -25,7 +25,7 @@ class LoaderSelectorTest extends TestCase
             $this->createStub(LoaderInterface::class),
             $this->createStub(LoaderInterface::class)
         );
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             LoaderSelector::class,
             $loaderSelector
         );

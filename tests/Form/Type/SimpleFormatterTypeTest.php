@@ -36,7 +36,7 @@ class SimpleFormatterTypeTest extends TestCase
     protected function setUp(): void
     {
         if (!class_exists(CKEditorConfigurationInterface::class)) {
-            $this->markTestSkipped('Test only available using friendsofsymfony/ckeditor-bundle 2.x');
+            static::markTestSkipped('Test only available using friendsofsymfony/ckeditor-bundle 2.x');
         }
 
         parent::setUp();
@@ -64,8 +64,8 @@ class SimpleFormatterTypeTest extends TestCase
     {
         $defaultConfig = 'context';
         $defaultConfigValues = ['toolbar' => ['Button1']];
-        $this->ckEditorConfiguration->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
-        $this->ckEditorConfiguration->expects($this->once())
+        $this->ckEditorConfiguration->expects(static::once())->method('getDefaultConfig')->willReturn($defaultConfig);
+        $this->ckEditorConfiguration->expects(static::once())
             ->method('getConfig')
             ->with($defaultConfig)
             ->willReturn($defaultConfigValues);
@@ -85,7 +85,7 @@ class SimpleFormatterTypeTest extends TestCase
             'ckeditor_toolbar_icons' => [],
         ]);
 
-        $this->assertSame(
+        static::assertSame(
             $view->vars['ckeditor_configuration'],
             ['toolbar' => ['Button1'], 'filebrowserImageUploadRouteParameters' => ['format' => 'format']]
         );
@@ -95,8 +95,8 @@ class SimpleFormatterTypeTest extends TestCase
     {
         $defaultConfig = 'context';
         $defaultConfigValues = ['toolbar' => ['Button1']];
-        $this->ckEditorConfiguration->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
-        $this->ckEditorConfiguration->expects($this->once())
+        $this->ckEditorConfiguration->expects(static::once())->method('getDefaultConfig')->willReturn($defaultConfig);
+        $this->ckEditorConfiguration->expects(static::once())
             ->method('getConfig')
             ->with($defaultConfig)
             ->willReturn($defaultConfigValues);
@@ -119,7 +119,7 @@ class SimpleFormatterTypeTest extends TestCase
             ],
         ];
 
-        $this->ckEditorConfiguration->expects($this->once())
+        $this->ckEditorConfiguration->expects(static::once())
             ->method('getStyles')
             ->willReturn($styleSets);
 
@@ -139,7 +139,7 @@ class SimpleFormatterTypeTest extends TestCase
             'ckeditor_toolbar_icons' => [],
         ]);
 
-        $this->assertSame($view->vars['ckeditor_style_sets'], $styleSets);
+        static::assertSame($view->vars['ckeditor_style_sets'], $styleSets);
     }
 
     public function testBuildViewWithToolbarOptionsSetAsPredefinedString(): void
@@ -157,12 +157,12 @@ class SimpleFormatterTypeTest extends TestCase
             ],
         ];
 
-        $this->ckEditorConfiguration->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
-        $this->ckEditorConfiguration->expects($this->once())
+        $this->ckEditorConfiguration->expects(static::once())->method('getDefaultConfig')->willReturn($defaultConfig);
+        $this->ckEditorConfiguration->expects(static::once())
             ->method('getConfig')
             ->with($defaultConfig)
             ->willReturn($defaultConfigValues);
-        $this->ckEditorConfiguration->expects($this->once())
+        $this->ckEditorConfiguration->expects(static::once())
             ->method('getToolbar')
             ->with('basic')
             ->willReturn($basicToolbarSets);
@@ -184,6 +184,6 @@ class SimpleFormatterTypeTest extends TestCase
         ]);
 
         $defaultConfigValues['toolbar'] = $basicToolbarSets;
-        $this->assertSame($view->vars['ckeditor_configuration'], $defaultConfigValues);
+        static::assertSame($view->vars['ckeditor_configuration'], $defaultConfigValues);
     }
 }

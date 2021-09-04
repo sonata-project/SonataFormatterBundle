@@ -60,7 +60,7 @@ class LegacySimpleFormatterTypeTest extends TestCase
     protected function setUp(): void
     {
         if (!class_exists(ConfigManagerInterface::class)) {
-            $this->markTestSkipped('Test only available using friendsofsymfony/ckeditor-bundle 1.x');
+            static::markTestSkipped('Test only available using friendsofsymfony/ckeditor-bundle 1.x');
         }
 
         parent::setUp();
@@ -97,7 +97,7 @@ class LegacySimpleFormatterTypeTest extends TestCase
         $view = $this->createMock(FormView::class);
         $form = $this->createMock(FormInterface::class);
 
-        $this->configManager->expects($this->once())
+        $this->configManager->expects(static::once())
             ->method('getConfig')
             ->with('context')
             ->willReturn(['toolbar' => ['Button1']]);
@@ -114,7 +114,7 @@ class LegacySimpleFormatterTypeTest extends TestCase
             'ckeditor_toolbar_icons' => [],
         ]);
 
-        $this->assertSame(
+        static::assertSame(
             $view->vars['ckeditor_configuration'],
             ['toolbar' => ['Button1'], 'filebrowserImageUploadRouteParameters' => ['format' => 'format']]
         );
@@ -143,14 +143,14 @@ class LegacySimpleFormatterTypeTest extends TestCase
             ],
         ];
 
-        $this->configManager->expects($this->once())
+        $this->configManager->expects(static::once())
             ->method('getConfig')
             ->with('context')
             ->willReturn(['toolbar' => ['Button1']]);
-        $this->stylesSetManager->expects($this->once())
+        $this->stylesSetManager->expects(static::once())
             ->method('getStylesSets')
             ->willReturn($styleSets);
-        $this->stylesSetManager->expects($this->once())
+        $this->stylesSetManager->expects(static::once())
             ->method('hasStylesSets')
             ->willReturn(true);
 
@@ -168,7 +168,7 @@ class LegacySimpleFormatterTypeTest extends TestCase
             'ckeditor_toolbar_icons' => [],
         ]);
 
-        $this->assertSame($view->vars['ckeditor_style_sets'], $styleSets);
+        static::assertSame($view->vars['ckeditor_style_sets'], $styleSets);
     }
 
     public function testBuildViewWithToolbarOptionsSetAsPredefinedString(): void
@@ -187,16 +187,16 @@ class LegacySimpleFormatterTypeTest extends TestCase
             ],
         ];
 
-        $this->configManager->expects($this->once())->method('getDefaultConfig')->willReturn($defaultConfig);
-        $this->configManager->expects($this->once())
+        $this->configManager->expects(static::once())->method('getDefaultConfig')->willReturn($defaultConfig);
+        $this->configManager->expects(static::once())
             ->method('hasConfig')
             ->with($defaultConfig)
             ->willReturn(true);
-        $this->configManager->expects($this->once())
+        $this->configManager->expects(static::once())
             ->method('getConfig')
             ->with($defaultConfig)
             ->willReturn($defaultConfigValues);
-        $this->toolbarManager->expects($this->once())
+        $this->toolbarManager->expects(static::once())
             ->method('resolveToolbar')
             ->with('basic')
             ->willReturn($basicToolbarSets);
@@ -218,6 +218,6 @@ class LegacySimpleFormatterTypeTest extends TestCase
         ]);
 
         $defaultConfigValues['toolbar'] = $basicToolbarSets;
-        $this->assertSame($view->vars['ckeditor_configuration'], $defaultConfigValues);
+        static::assertSame($view->vars['ckeditor_configuration'], $defaultConfigValues);
     }
 }
