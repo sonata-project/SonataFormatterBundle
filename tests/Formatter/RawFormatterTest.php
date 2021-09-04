@@ -27,7 +27,7 @@ class RawFormatterTest extends TestCase
     {
         $formatter = new RawFormatter();
 
-        $this->assertSame('Salut', $formatter->transform('Salut'));
-        $this->assertSame('<p>Salut<br />Ca va ?</p>', $formatter->transform('<p>Salut<br />Ca va ?</p>'));
+        static::assertSame('Salut', $formatter->transform('Salut'));
+        static::assertSame('<p>Salut<br />Ca va ?</p>', $formatter->transform('<p>Salut<br />Ca va ?</p>'));
     }
 }

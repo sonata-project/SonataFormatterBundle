@@ -100,7 +100,7 @@ class CkeditorAdminControllerTest extends TestCase
         $this->configureSetFormTheme($formView, ['filterTheme']);
         $this->configureRender('templateList', 'renderResponse');
 
-        $datagrid->expects($this->exactly(4))->method('setValue')->withConsecutive(
+        $datagrid->expects(static::exactly(4))->method('setValue')->withConsecutive(
             ['context', null, 'another_context'],
             ['providerName', null, 'provider'],
             ['category', null, 1]
@@ -118,7 +118,7 @@ class CkeditorAdminControllerTest extends TestCase
         $this->container->set('sonata.media.pool', $mediaPool);
         $this->container->set('sonata.media.manager.category', $categoryManager);
         $this->container->setParameter('kernel.bundles', ['SonataMediaBundle' => true]);
-        $this->admin->expects($this->once())->method('checkAccess')->with('list');
+        $this->admin->expects(static::once())->method('checkAccess')->with('list');
         $this->admin->method('getDatagrid')->willReturn($datagrid);
         $this->admin->method('getPersistentParameter')->willReturnMap([
             ['context', 'context', 'another_context'],
@@ -128,8 +128,8 @@ class CkeditorAdminControllerTest extends TestCase
 
         $response = $this->controller->browserAction($this->request);
 
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
-        $this->assertSame('renderResponse', $response->getContent());
+        static::assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
+        static::assertSame('renderResponse', $response->getContent());
     }
 
     public function testUpload(): void
@@ -143,17 +143,17 @@ class CkeditorAdminControllerTest extends TestCase
         $mediaPool->method('getProvider')->with('provider')
             ->willReturn($this->createStub(MediaProviderInterface::class));
         $mediaManager->method('create')->willReturn($media);
-        $mediaManager->expects($this->once())->method('save')->with($media, 'context', 'provider');
-        $this->admin->expects($this->once())->method('checkAccess')->with('create');
-        $this->admin->expects($this->once())->method('createObjectSecurity')->with($media);
+        $mediaManager->expects(static::once())->method('save')->with($media, 'context', 'provider');
+        $this->admin->expects(static::once())->method('checkAccess')->with('create');
+        $this->admin->expects(static::once())->method('createObjectSecurity')->with($media);
         $this->container->set('sonata.media.manager.media', $mediaManager);
         $this->container->setParameter('kernel.bundles', ['SonataMediaBundle' => true]);
         $this->container->set('sonata.media.pool', $mediaPool);
 
         $response = $this->controller->uploadAction($this->request);
 
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertSame('renderResponse', $response->getContent());
+        static::assertInstanceOf(Response::class, $response);
+        static::assertSame('renderResponse', $response->getContent());
     }
 
     private function configureCRUDController(): void
@@ -196,7 +196,7 @@ class CkeditorAdminControllerTest extends TestCase
         $requestStack = new RequestStack();
         $requestStack->push($this->request);
 
-        $this->admin->expects($this->once())->method('setRequest')->with($this->request);
+        $this->admin->expects(static::once())->method('setRequest')->with($this->request);
         $this->container->set('request_stack', $requestStack);
     }
 
@@ -205,7 +205,7 @@ class CkeditorAdminControllerTest extends TestCase
         $twigRenderer = $this->createMock(FormRenderer::class);
 
         $this->twig->method('getRuntime')->with(FormRenderer::class)->willReturn($twigRenderer);
-        $twigRenderer->expects($this->once())->method('setTheme')->with($formView, $formTheme);
+        $twigRenderer->expects(static::once())->method('setTheme')->with($formView, $formTheme);
     }
 
     private function configureRender($template, $rendered): void
@@ -217,6 +217,6 @@ class CkeditorAdminControllerTest extends TestCase
             ['browser' => $template, 'upload' => $template]
         );
 
-        $this->twig->method('render')->with($template, $this->isType('array'))->willReturn($rendered);
+        $this->twig->method('render')->with($template, static::isType('array'))->willReturn($rendered);
     }
 }

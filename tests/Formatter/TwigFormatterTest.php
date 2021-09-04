@@ -31,13 +31,13 @@ class TwigFormatterTest extends TestCase
         $formatter = new TwigFormatter($twig);
 
         // Checking, that formatter can process twig template, passed as string
-        $this->assertSame('0,1,2,3,', $formatter->transform('{% for i in range(0, 3) %}{{ i }},{% endfor %}'));
+        static::assertSame('0,1,2,3,', $formatter->transform('{% for i in range(0, 3) %}{{ i }},{% endfor %}'));
 
         // Checking, that formatter does not changed loader
         if (class_exists('\Twig_Loader_String')) {
-            $this->assertNotInstanceOf('\\Twig_Loader_String', $twig->getLoader());
+            static::assertNotInstanceOf('\\Twig_Loader_String', $twig->getLoader());
         }
-        $this->assertInstanceOf('Sonata\\FormatterBundle\\Tests\\Formatter\\MyStringLoader', $twig->getLoader());
+        static::assertInstanceOf('Sonata\\FormatterBundle\\Tests\\Formatter\\MyStringLoader', $twig->getLoader());
     }
 
     public function testAddFormatterExtension(): void
@@ -61,7 +61,7 @@ class TwigFormatterTest extends TestCase
 
         $extensions = $formatter->getExtensions();
 
-        $this->assertCount(0, $extensions);
+        static::assertCount(0, $extensions);
     }
 }
 

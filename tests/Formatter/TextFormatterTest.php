@@ -27,7 +27,7 @@ class TextFormatterTest extends TestCase
     {
         $formatter = new TextFormatter();
 
-        $this->assertSame('Salut', $formatter->transform('Salut'));
-        $this->assertSame("Salut<br />\nCa va ?", $formatter->transform("Salut\nCa va ?"));
+        static::assertSame('Salut', $formatter->transform('Salut'));
+        static::assertSame("Salut<br />\nCa va ?", $formatter->transform("Salut\nCa va ?"));
     }
 }
