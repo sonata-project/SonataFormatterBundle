@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.6.0](https://github.com/sonata-project/SonataFormatterBundle/compare/4.5.0...4.6.0) - 2021-09-13
+### Added
+- [[#506](https://github.com/sonata-project/SonataFormatterBundle/pull/506)] Add support for `sonata-project/block-bundle` 4.x ([@core23](https://github.com/core23))
+
 ## [4.5.0](https://github.com/sonata-project/SonataFormatterBundle/compare/4.4.0...4.5.0) - 2021-04-19
 ### Added
 - [[#570](https://github.com/sonata-project/SonataFormatterBundle/pull/570)] Added php 8 support ([@jordisala1991](https://github.com/jordisala1991))
