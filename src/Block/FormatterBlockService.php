@@ -40,34 +40,6 @@ final class FormatterBlockService extends AbstractBlockService implements Editab
         ], $response);
     }
 
-    /**
-     * @deprecated since sonata-project/formatter-bundle 4.x, to be removed in 5.0.
-     *
-     * NEXT_MAJOR: Remove this method
-     */
-    public function buildEditForm(\Sonata\AdminBundle\Form\FormMapper $formMapper, BlockInterface $block): void
-    {
-        @trigger_error(
-            sprintf('The %s method is deprecated since sonata-project/formatter-bundle 4.x, to be removed in 5.0.', __METHOD__).
-            \E_USER_DEPRECATED
-        );
-
-        $formMapper->add('settings', ImmutableArrayType::class, [
-            'keys' => [
-                ['content', FormatterType::class, static function (FormBuilderInterface $formBuilder) {
-                    return [
-                        'event_dispatcher' => $formBuilder->getEventDispatcher(),
-                        'format_field' => ['format', '[format]'],
-                        'source_field' => ['rawContent', '[rawContent]'],
-                        'target_field' => '[content]',
-                        'label' => 'form.label_content',
-                    ];
-                }],
-            ],
-            'translation_domain' => 'SonataFormatterBundle',
-        ]);
-    }
-
     public function configureEditForm(FormMapper $form, BlockInterface $block): void
     {
         $form->add('settings', ImmutableArrayType::class, [
@@ -103,27 +75,6 @@ final class FormatterBlockService extends AbstractBlockService implements Editab
             'content' => '<b>Insert your custom content here</b>',
             'template' => '@SonataFormatter/Block/block_formatter.html.twig',
         ]);
-    }
-
-    /**
-     * @deprecated since sonata-project/formatter-bundle 4.x, to be removed in 5.0.
-     *
-     * NEXT_MAJOR: Remove this method
-     */
-    public function getBlockMetadata($code = null): Metadata
-    {
-        @trigger_error(
-            sprintf('The %s method is deprecated since sonata-project/formatter-bundle 4.x, to be removed in 5.0.', __METHOD__).
-            \E_USER_DEPRECATED
-        );
-
-        return new Metadata(
-            $this->getName(),
-            null !== $code ? $code : $this->getName(),
-            false,
-            'SonataFormatterBundle',
-            ['class' => 'fa fa-file-text-o']
-        );
     }
 
     public function getMetadata(): MetadataInterface
