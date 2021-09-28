@@ -18,11 +18,6 @@ use Sonata\FormatterBundle\Formatter\TextFormatter;
 
 class TextFormatterTest extends TestCase
 {
-    /**
-     * NEXT_MAJOR: Remove the group when deleting FormatterInterface.
-     *
-     * @group legacy
-     */
     public function testFormatter(): void
     {
         $formatter = new TextFormatter();
