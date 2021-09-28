@@ -15,7 +15,7 @@ namespace Sonata\FormatterBundle\Formatter;
 
 use Sonata\FormatterBundle\Extension\ExtensionInterface;
 
-abstract class BaseFormatter implements FormatterInterface
+abstract class BaseFormatter implements ExtendableFormatter
 {
     /**
      * @var ExtensionInterface[]
