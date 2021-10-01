@@ -7,7 +7,7 @@
         "formatter",
         "editor"
     ],
-    "homepage": "https://sonata-project.org/bundles/formatter",
+    "homepage": "https://docs.sonata-project.org/projects/SonataFormatterBundle",
     "license": "MIT",
     "authors": [
         {
