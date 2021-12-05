@@ -1,14 +1,13 @@
 {
     "name": "sonata-project/formatter-bundle",
-    "type": "symfony-bundle",
     "description": "Symfony SonataFormatterBundle",
+    "license": "MIT",
+    "type": "symfony-bundle",
     "keywords": [
         "sonata",
         "formatter",
         "editor"
     ],
-    "homepage": "https://docs.sonata-project.org/projects/SonataFormatterBundle",
-    "license": "MIT",
     "authors": [
         {
             "name": "Thomas Rabaix",
@@ -20,6 +19,7 @@
             "homepage": "https://github.com/sonata-project/SonataFormatterBundle/contributors"
         }
     ],
+    "homepage": "https://docs.sonata-project.org/projects/SonataFormatterBundle",
     "require": {
         "php": "^7.3 || ^8.0",
         "friendsofsymfony/ckeditor-bundle": "^1.0 || ^2.0",
@@ -41,9 +41,6 @@
         "symfony/validator": "^4.4 || ^5.1",
         "twig/twig": "^2.12.1"
     },
-    "conflict": {
-        "sonata-project/core-bundle": "<3.20"
-    },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
@@ -54,8 +51,8 @@
         "sonata-project/admin-bundle": "^3.98.2",
         "symfony/phpunit-bridge": "^5.1.8"
     },
-    "config": {
-        "sort-packages": true
+    "conflict": {
+        "sonata-project/core-bundle": "<3.20"
     },
     "autoload": {
         "psr-4": {
@@ -66,5 +63,8 @@
         "psr-4": {
             "Sonata\\FormatterBundle\\Tests\\": "tests/"
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }
