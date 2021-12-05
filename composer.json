@@ -1,7 +1,8 @@
 {
     "name": "sonata-project/formatter-bundle",
-    "type": "symfony-bundle",
     "description": "Symfony SonataFormatterBundle",
+    "license": "MIT",
+    "type": "symfony-bundle",
     "keywords": [
         "sonata",
         "formatter",
@@ -9,8 +10,6 @@
         "ckeditor",
         "markitup"
     ],
-    "homepage": "https://docs.sonata-project.org/projects/SonataFormatterBundle",
-    "license": "MIT",
     "authors": [
         {
             "name": "Thomas Rabaix",
@@ -22,6 +21,7 @@
             "homepage": "https://github.com/sonata-project/SonataFormatterBundle/contributors"
         }
     ],
+    "homepage": "https://docs.sonata-project.org/projects/SonataFormatterBundle",
     "require": {
         "php": "^7.3 || ^8.0",
         "friendsofsymfony/ckeditor-bundle": "^1.0 || ^2.0",
@@ -43,11 +43,6 @@
         "symfony/validator": "^4.4 || ^5.1",
         "twig/twig": "^2.12.1"
     },
-    "conflict": {
-        "sonata-project/admin-bundle": "<3.34",
-        "sonata-project/core-bundle": "<3.20",
-        "sonata-project/media-bundle": "<3.20"
-    },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
@@ -59,17 +54,14 @@
         "sonata-project/media-bundle": "^3.10",
         "symfony/phpunit-bridge": "^5.1.8"
     },
+    "conflict": {
+        "sonata-project/admin-bundle": "<3.34",
+        "sonata-project/core-bundle": "<3.20",
+        "sonata-project/media-bundle": "<3.20"
+    },
     "suggest": {
         "sonata-project/admin-bundle": "For using the admin media browser.",
         "sonata-project/media-bundle": "For using the admin media browser."
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "4.x-dev"
-        }
     },
     "autoload": {
         "psr-4": {
@@ -79,6 +71,14 @@
     "autoload-dev": {
         "psr-4": {
             "Sonata\\FormatterBundle\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "4.x-dev"
         }
     }
 }
