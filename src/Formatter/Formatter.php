@@ -15,8 +15,5 @@ namespace Sonata\FormatterBundle\Formatter;
 
 interface Formatter
 {
-    /**
-     * @return string
-     */
-    public function transform(string $text);
+    public function transform(string $text): string;
 }

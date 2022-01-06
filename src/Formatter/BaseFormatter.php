@@ -22,9 +22,9 @@ abstract class BaseFormatter implements ExtendableFormatter
      */
     protected $extensions = [];
 
-    public function addExtension(ExtensionInterface $extensionInterface): void
+    public function addExtension(ExtensionInterface $extension): void
     {
-        $this->extensions[] = $extensionInterface;
+        $this->extensions[] = $extension;
     }
 
     /**

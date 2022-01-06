@@ -47,7 +47,7 @@ final class SimpleFormatterType extends AbstractType
         return TextareaType::class;
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sonata_simple_formatter_type';
     }

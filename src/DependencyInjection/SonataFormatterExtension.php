@@ -143,7 +143,7 @@ final class SonataFormatterExtension extends Extension
         ]]);
         $lexer->setPublic(false);
 
-        $container->setDefinition(new Reference(sprintf('sonata.formatter.twig.lexer.%s', $code)), $lexer);
+        $container->setDefinition(sprintf('sonata.formatter.twig.lexer.%s', $code), $lexer);
 
         $env->addMethodCall('setLexer', [new Reference(sprintf('sonata.formatter.twig.lexer.%s', $code))]);
 

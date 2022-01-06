@@ -25,7 +25,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Translation\TranslatorInterface;
 
 final class FormatterType extends AbstractType
 {
@@ -34,17 +33,9 @@ final class FormatterType extends AbstractType
      */
     protected $pool;
 
-    /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
-    public function __construct(
-        PoolInterface $pool,
-        TranslatorInterface $translator
-    ) {
+    public function __construct(PoolInterface $pool)
+    {
         $this->pool = $pool;
-        $this->translator = $translator;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

@@ -45,37 +45,6 @@ class FormatterBlockServiceTest extends BlockServiceTestCase
         $blockService->execute($blockContext);
     }
 
-    /**
-     * @group legacy
-     */
-    public function testExecuteWithDeprecatedTeamplating(): void
-    {
-        if (!class_exists('Sonata\BlockBundle\Block\Service\AbstractAdminBlockService')) {
-            static::markTestSkipped('Skipped for block-bundle 4');
-
-            return;
-        }
-
-        $block = new Block();
-
-        $blockContext = new BlockContext($block, [
-            'format' => 'richhtml',
-            'rawContent' => '<b>Insert your custom content here</b>',
-            'content' => '<b>Insert your custom content here</b>',
-            'template' => '@SonataFormatter/Block/block_formatter.html.twig',
-        ]);
-
-        $response = new Response();
-
-        $blockService = new FormatterBlockService('block.service', $this->templating);
-        $blockService->execute($blockContext);
-
-        static::assertSame('@SonataFormatter/Block/block_formatter.html.twig', $this->templating->view);
-
-        static::assertIsArray($this->templating->parameters['settings']);
-        static::assertInstanceOf(Block::class, $this->templating->parameters['block']);
-    }
-
     public function testDefaultSettings(): void
     {
         $blockService = new FormatterBlockService($this->twig);
