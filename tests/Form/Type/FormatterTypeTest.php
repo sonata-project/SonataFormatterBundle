@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\Form\Type;
 
-use PHPUnit\Framework\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Sonata\FormatterBundle\Formatter\Pool;
@@ -24,7 +23,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -37,11 +35,6 @@ class FormatterTypeTest extends TestCase
     private $pool;
 
     /**
-     * @var TranslatorInterface|MockObject
-     */
-    private $translator;
-
-    /**
      * @var FormatterType
      */
     private $formType;
@@ -52,12 +45,7 @@ class FormatterTypeTest extends TestCase
 
         $this->pool = new Pool('');
 
-        $this->translator = $this->createMock(TranslatorInterface::class);
-
-        $this->formType = new FormatterType(
-            $this->pool,
-            $this->translator
-        );
+        $this->formType = new FormatterType($this->pool);
     }
 
     public function testBuildFormOneChoice(): void

@@ -15,6 +15,7 @@ namespace Sonata\FormatterBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sonata\FormatterBundle\DependencyInjection\SonataFormatterExtension;
+use Twig\Loader\LoaderInterface;
 
 class SonataFormatterExtensionTest extends AbstractExtensionTestCase
 {
@@ -81,7 +82,7 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
         $this->setParameter('kernel.bundles', []);
         $this->load();
         static::assertInstanceOf(
-            '\Twig_LoaderInterface',
+            LoaderInterface::class,
             $this->container->get('sonata.formatter.twig.loader.text')
         );
     }

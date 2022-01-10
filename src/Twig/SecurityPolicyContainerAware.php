@@ -17,6 +17,7 @@ use Sonata\FormatterBundle\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig\Markup;
 use Twig\Sandbox\SecurityError;
+use Twig\Sandbox\SecurityNotAllowedMethodError;
 use Twig\Sandbox\SecurityPolicyInterface;
 
 /**
@@ -105,12 +106,12 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
      * @param object $obj
      * @param string $method
      */
-    public function checkMethodAllowed($obj, $method): bool
+    public function checkMethodAllowed($obj, $method): void
     {
         $this->buildAllowed();
 
         if ($obj instanceof Markup) {
-            return true;
+            return;
         }
 
         $allowed = false;
@@ -124,16 +125,17 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
         }
 
         if (!$allowed) {
-            throw new SecurityError(
+            $class = \get_class($obj);
+            throw new SecurityNotAllowedMethodError(
                 sprintf(
                     'Calling "%s" method on a "%s" object is not allowed.',
                     $method,
-                    \get_class($obj)
-                )
+                    $class
+                ),
+                $class,
+                $method
             );
         }
-
-        return true;
     }
 
     /**

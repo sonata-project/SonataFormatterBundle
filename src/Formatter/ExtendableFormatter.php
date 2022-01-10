@@ -17,7 +17,7 @@ use Sonata\FormatterBundle\Extension\ExtensionInterface;
 
 interface ExtendableFormatter extends Formatter
 {
-    public function addExtension(ExtensionInterface $extension);
+    public function addExtension(ExtensionInterface $extension): void;
 
     /**
      * @return ExtensionInterface[]
