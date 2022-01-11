@@ -87,28 +87,6 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
         );
     }
 
-    /**
-     * @group legacy
-     */
-    public function testLoadWithoutDefaultFormatter(): void
-    {
-        $this->setParameter('kernel.bundles', []);
-        $this->load([
-            'formatters' => ['text' => [
-                'service' => 'sonata.formatter.text.text',
-                'extensions' => [
-                    'sonata.formatter.twig.control_flow',
-                    'sonata.formatter.twig.gist',
-                ],
-            ]],
-        ]);
-        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
-            'sonata.formatter.pool',
-            0,
-            'text'
-        );
-    }
-
     protected function getContainerExtensions(): array
     {
         return [
