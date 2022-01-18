@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\DependencyInjection;
 
 use Sonata\FormatterBundle\Formatter\ExtendableFormatter;
+use Sonata\FormatterBundle\Twig\Loader\LoaderSelector;
+use Sonata\FormatterBundle\Twig\SecurityPolicyContainerAware;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -21,6 +23,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Twig\Environment;
 use Twig\Extension\SandboxExtension;
 use Twig\Lexer;
 use Twig\Loader\ArrayLoader;
@@ -104,13 +107,13 @@ final class SonataFormatterExtension extends Extension
 
         $container->setDefinition(sprintf('sonata.formatter.twig.loader.%s', $code), $loader);
 
-        $loaderSelector = new Definition('Sonata\FormatterBundle\Twig\Loader\LoaderSelector', [
+        $loaderSelector = new Definition(LoaderSelector::class, [
             new Reference(sprintf('sonata.formatter.twig.loader.%s', $code)),
             new Reference('twig.loader'),
         ]);
         $loaderSelector->setPublic(false);
 
-        $env = new Definition('Twig_Environment', [$loaderSelector, [
+        $env = new Definition(Environment::class, [$loaderSelector, [
             'debug' => false,
             'strict_variables' => false,
             'charset' => 'UTF-8',
@@ -119,7 +122,7 @@ final class SonataFormatterExtension extends Extension
 
         $container->setDefinition(sprintf('sonata.formatter.twig.env.%s', $code), $env);
 
-        $sandboxPolicy = new Definition('Sonata\FormatterBundle\Twig\SecurityPolicyContainerAware', [new Reference('service_container'), $extensions]);
+        $sandboxPolicy = new Definition(SecurityPolicyContainerAware::class, [new Reference('service_container'), $extensions]);
         $sandboxPolicy->setPublic(false);
         $container->setDefinition(sprintf('sonata.formatter.twig.sandbox.%s.policy', $code), $sandboxPolicy);
 
