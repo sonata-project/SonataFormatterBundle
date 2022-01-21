@@ -51,9 +51,6 @@ class FormatterValidatorTest extends TestCase
         static::assertInstanceOf(ConstraintValidator::class, $validator);
     }
 
-    /**
-     * @group legacy
-     */
     public function testInvalidCase(): void
     {
         $this->constraint->message = $message = 'Constraint message';
