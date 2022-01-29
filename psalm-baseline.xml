@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.19.0@a2ad69ae4f5ab1f7d225a8dc4e2ec2d9415ed599">
+    <file src="src/Controller/CkeditorAdminController.php">
+        <InvalidExtendClass occurrences="1">
+            <code>MediaAdminController</code>
+        </InvalidExtendClass>
+    </file>
+    <file src="src/Form/Type/FormatterType.php">
+        <UndefinedClass occurrences="3">
+            <code>?PluginManagerInterface</code>
+            <code>?TemplateManagerInterface</code>
+            <code>?ToolbarManagerInterface</code>
+        </UndefinedClass>
+        <UndefinedDocblockClass occurrences="14">
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;pluginManager</code>
+            <code>$this-&gt;pluginManager</code>
+            <code>$this-&gt;templateManager</code>
+            <code>$this-&gt;templateManager</code>
+            <code>$this-&gt;toolbarManager</code>
+            <code>ConfigManagerInterface</code>
+            <code>ConfigManagerInterface|CKEditorConfigurationInterface</code>
+            <code>PluginManagerInterface</code>
+            <code>TemplateManagerInterface</code>
+            <code>ToolbarManagerInterface</code>
+        </UndefinedDocblockClass>
+    </file>
+    <file src="src/Form/Type/SimpleFormatterType.php">
+        <UndefinedClass occurrences="4">
+            <code>?PluginManagerInterface</code>
+            <code>?StylesSetManagerInterface</code>
+            <code>?TemplateManagerInterface</code>
+            <code>?ToolbarManagerInterface</code>
+        </UndefinedClass>
+        <UndefinedDocblockClass occurrences="17">
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;pluginManager</code>
+            <code>$this-&gt;pluginManager</code>
+            <code>$this-&gt;stylesSetManager</code>
+            <code>$this-&gt;stylesSetManager</code>
+            <code>$this-&gt;templateManager</code>
+            <code>$this-&gt;templateManager</code>
+            <code>$this-&gt;toolbarManager</code>
+            <code>ConfigManagerInterface</code>
+            <code>ConfigManagerInterface|CKEditorConfigurationInterface</code>
+            <code>PluginManagerInterface</code>
+            <code>StylesSetManagerInterface</code>
+            <code>TemplateManagerInterface</code>
+            <code>ToolbarManagerInterface</code>
+        </UndefinedDocblockClass>
+    </file>
+    <file src="src/Twig/SecurityPolicyContainerAware.php">
+        <ContainerDependency occurrences="1">
+            <code>ContainerInterface $container</code>
+        </ContainerDependency>
+    </file>
+    <file src="tests/Form/Type/FormatterTypeTest.php">
+        <UndefinedDocblockClass occurrences="16">
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>CKEditorConfigurationInterface|MockObject</code>
+            <code>TranslatorInterface|MockObject</code>
+        </UndefinedDocblockClass>
+    </file>
+    <file src="tests/Form/Type/LegacyFormatterTypeTest.php">
+        <UndefinedClass occurrences="3">
+            <code>PluginManagerInterface</code>
+            <code>TemplateManagerInterface</code>
+            <code>ToolbarManagerInterface</code>
+        </UndefinedClass>
+        <UndefinedDocblockClass occurrences="25">
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;templateManager</code>
+            <code>$this-&gt;templateManager</code>
+            <code>$this-&gt;toolbarManager</code>
+            <code>ConfigManagerInterface|MockObject</code>
+            <code>PluginManagerInterface|MockObject</code>
+            <code>TemplateManagerInterface|MockObject</code>
+            <code>ToolbarManagerInterface|MockObject</code>
+            <code>TranslatorInterface|MockObject</code>
+        </UndefinedDocblockClass>
+    </file>
+    <file src="tests/Form/Type/LegacySimpleFormatterTypeTest.php">
+        <UndefinedClass occurrences="4">
+            <code>PluginManagerInterface</code>
+            <code>StylesSetManagerInterface</code>
+            <code>TemplateManagerInterface</code>
+            <code>ToolbarManagerInterface</code>
+        </UndefinedClass>
+        <UndefinedDocblockClass occurrences="13">
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;configManager</code>
+            <code>$this-&gt;stylesSetManager</code>
+            <code>$this-&gt;stylesSetManager</code>
+            <code>$this-&gt;toolbarManager</code>
+            <code>ConfigManagerInterface|MockObject</code>
+            <code>PluginManagerInterface|MockObject</code>
+            <code>StylesSetManagerInterface|MockObject</code>
+            <code>TemplateManagerInterface|MockObject</code>
+            <code>ToolbarManagerInterface|MockObject</code>
+        </UndefinedDocblockClass>
+    </file>
+    <file src="tests/Form/Type/SimpleFormatterTypeTest.php">
+        <UndefinedDocblockClass occurrences="9">
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>$this-&gt;ckEditorConfiguration</code>
+            <code>CKEditorConfigurationInterface|MockObject</code>
+        </UndefinedDocblockClass>
+    </file>
+    <file src="tests/Formatter/TwigFormatterTest.php">
+        <UndefinedClass occurrences="1">
+            <code>'\\Twig_Loader_String'</code>
+        </UndefinedClass>
+        <UndefinedInterface occurrences="1">
+            <code>\Twig_LoaderInterface</code>
+        </UndefinedInterface>
+    </file>
+</files>
