@@ -63,4 +63,4 @@ jobs:
                   composer-options: --prefer-dist --prefer-stable
 
             - name: Psalm
-              run: vendor/bin/psalm --show-info=false --stats --output-format=github --threads=$(nproc) --shepherd --php-version=8.0
+              run: vendor/bin/psalm --show-info=false --stats --output-format=github --threads=$(nproc) --shepherd --php-version=8.1
