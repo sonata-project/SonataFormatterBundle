@@ -2,3 +2,10 @@ parameters:
     level: 1
     paths:
         - src
+    treatPhpDocTypesAsCertain: false
+    checkGenericClassInNonGenericObjectType: true
+    checkInternalClassCaseSensitivity: true
+    checkMissingIterableValueType: true
+    checkMissingVarTagTypehint: true
+    checkMissingTypehints: true
+    checkUninitializedProperties: true

@@ -44,11 +44,15 @@
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpstan/extension-installer": "^1.0",
-        "phpstan/phpstan": "^1.0",
+        "phpstan/phpstan": "^1.4",
         "phpstan/phpstan-phpunit": "^1.0",
+        "phpstan/phpstan-symfony": "^1.1",
         "phpunit/phpunit": "^9.5",
+        "psalm/plugin-phpunit": "^0.16.1",
+        "psalm/plugin-symfony": "^3.1",
         "sonata-project/admin-bundle": "^4.0",
-        "symfony/phpunit-bridge": "^6.0"
+        "symfony/phpunit-bridge": "^6.0",
+        "vimeo/psalm": "^4.19"
     },
     "autoload": {
         "psr-4": {

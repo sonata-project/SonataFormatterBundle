@@ -10,6 +10,7 @@ Symfony SonataFormatterBundle
 
 [![Latest Stable Version](https://poser.pugx.org/sonata-project/formatter-bundle/v/stable)](https://packagist.org/packages/sonata-project/formatter-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/sonata-project/formatter-bundle/v/unstable)](https://packagist.org/packages/sonata-project/formatter-bundle)
+[![Psalm Type Coverage][shepherd_stable_badge]][shepherd_stable_link]
 [![License](https://poser.pugx.org/sonata-project/formatter-bundle/license)](https://packagist.org/packages/sonata-project/formatter-bundle)
 
 [![Total Downloads](https://poser.pugx.org/sonata-project/formatter-bundle/downloads)](https://packagist.org/packages/sonata-project/formatter-bundle)
@@ -44,6 +45,8 @@ This package is available under the [MIT license](LICENSE).
 [coverage_stable_link]: https://codecov.io/gh/sonata-project/SonataFormatterBundle/branch/4.x
 [coverage_unstable_badge]: https://codecov.io/gh/sonata-project/SonataFormatterBundle/branch/5.x/graph/badge.svg
 [coverage_unstable_link]: https://codecov.io/gh/sonata-project/SonataFormatterBundle/branch/5.x
+[shepherd_stable_badge]: https://shepherd.dev/github/sonata-project/SonataFormatterBundle/coverage.svg
+[shepherd_stable_link]: https://shepherd.dev/github/sonata-project/SonataFormatterBundle
 [documentation_stable_badge]: https://readthedocs.org/projects/sonataformatterbundle/badge/?version=4.x
 [documentation_stable_link]: https://docs.sonata-project.org/projects/SonataFormatterBundle/en/4.x/?badge=4.x
 [documentation_unstable_badge]: https://readthedocs.org/projects/sonataformatterbundle/badge/?version=5.x
