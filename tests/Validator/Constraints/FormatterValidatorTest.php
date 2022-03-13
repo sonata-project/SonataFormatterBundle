@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class FormatterValidatorTest extends TestCase
 {
     /**
-     * @var ExecutionContextInterface|MockObject
+     * @var ExecutionContextInterface&MockObject
      */
     private $context;
 

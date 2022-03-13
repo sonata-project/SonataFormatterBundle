@@ -16,6 +16,8 @@ namespace Sonata\FormatterBundle\Extension;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\ExtensionInterface;
+use Twig\Extension\GlobalsInterface;
+use Twig\Extension\InitRuntimeInterface;
 
 abstract class BaseProxyExtension extends AbstractExtension implements ExtensionInterface
 {
@@ -46,9 +48,16 @@ abstract class BaseProxyExtension extends AbstractExtension implements Extension
         return [];
     }
 
+    /**
+     * @psalm-suppress UndefinedClass, UndefinedInterfaceMethod
+     */
     public function initRuntime(Environment $environment): void
     {
-        $this->getTwigExtension()->initRuntime($environment);
+        $extension = $this->getTwigExtension();
+
+        if ($extension instanceof InitRuntimeInterface) {
+            $extension->initRuntime($environment);
+        }
     }
 
     public function getTokenParsers(): array
@@ -83,6 +92,12 @@ abstract class BaseProxyExtension extends AbstractExtension implements Extension
 
     public function getGlobals(): array
     {
-        return $this->getTwigExtension()->getGlobals();
+        $extension = $this->getTwigExtension();
+
+        if ($extension instanceof GlobalsInterface) {
+            return $extension->getGlobals();
+        }
+
+        return [];
     }
 }

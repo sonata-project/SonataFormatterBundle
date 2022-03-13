@@ -50,6 +50,7 @@ final class SonataFormatterExtension extends Extension
         $loader->load('validators.xml');
 
         $bundles = $container->getParameter('kernel.bundles');
+        \assert(\is_array($bundles));
 
         if (isset($bundles['SonataBlockBundle'])) {
             $loader->load('block.xml');

@@ -34,20 +34,6 @@ final class LoaderSelector implements LoaderInterface
         $this->fileLoader = $fileLoader;
     }
 
-    public function getSource(string $name): string
-    {
-        $source = $this->getLoader($name)->getSource($name);
-
-        if ($this->isFile($name)) {
-            $from = ['{#', '{{', '{%', '%}', '}}', '#}'];
-            $to = ['<#', '<%=', '<%', '%>', '%>', '#>'];
-
-            $source = str_replace($from, $to, $source);
-        }
-
-        return $source;
-    }
-
     public function getSourceContext($name): Source
     {
         return $this->getLoader($name)->getSourceContext($name);

@@ -22,10 +22,10 @@
     "homepage": "https://docs.sonata-project.org/projects/SonataFormatterBundle",
     "require": {
         "php": "^7.3 || ^8.0",
-        "friendsofsymfony/ckeditor-bundle": "^1.0 || ^2.0",
+        "friendsofsymfony/ckeditor-bundle": "^2.0",
         "psr/log": "^1.0 || ^2.0 || ^3.0",
         "sonata-project/block-bundle": "^4.0",
-        "sonata-project/form-extensions": "^0.1 || ^1.4",
+        "sonata-project/form-extensions": "^1.4",
         "symfony/config": "^4.4 || ^5.3 || ^6.0",
         "symfony/dependency-injection": "^4.4 || ^5.3 || ^6.0",
         "symfony/event-dispatcher": "^4.4 || ^5.3 || ^6.0",
@@ -65,6 +65,10 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "phpstan/extension-installer": true
+        }
     }
 }

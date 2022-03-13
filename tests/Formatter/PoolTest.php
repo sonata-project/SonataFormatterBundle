@@ -46,7 +46,7 @@ class PoolTest extends TestCase
 
     public function testNonExistantFormatter(): void
     {
-        $this->expectException('RuntimeException');
+        $this->expectException(\RuntimeException::class);
 
         $pool = $this->getPool();
         $pool->get('foo');
@@ -86,7 +86,7 @@ class PoolTest extends TestCase
 
     public function testUnexpectedException(): void
     {
-        $this->expectException('RuntimeException');
+        $this->expectException(\RuntimeException::class);
 
         $formatter = new TextFormatter();
 
@@ -118,6 +118,9 @@ class PoolTest extends TestCase
         return $pool;
     }
 
+    /**
+     * @psalm-suppress InternalMethod
+     */
     private function getEnv(Template $template): Environment
     {
         $env = $this->createMock(Environment::class);

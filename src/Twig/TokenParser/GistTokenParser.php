@@ -19,6 +19,9 @@ use Twig\TokenParser\AbstractTokenParser;
 
 final class GistTokenParser extends AbstractTokenParser
 {
+    /**
+     * @psalm-suppress InternalMethod
+     */
     public function parse(Token $token): GistNode
     {
         $gist = $this->parser->getExpressionParser()->parseExpression();

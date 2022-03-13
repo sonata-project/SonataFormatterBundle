@@ -61,6 +61,8 @@ final class FormatterType extends AbstractType
             $options['source_field_options']['property_path'] = $sourceField;
         }
 
+        \assert(\is_string($formatField));
+
         $builder->add($formatField, ChoiceType::class, $options['format_field_options']);
 
         // If there's only one possible format, do not display the choices
