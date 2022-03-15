@@ -60,7 +60,7 @@ final class LoaderSelector implements LoaderInterface
 
     /**
      * @param string $name
-     * @param int $time
+     * @param int    $time
      */
     public function isFresh($name, $time): bool
     {
