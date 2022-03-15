@@ -34,21 +34,34 @@ final class LoaderSelector implements LoaderInterface
         $this->fileLoader = $fileLoader;
     }
 
+    /**
+     * @param string $name
+     */
     public function getSourceContext($name): Source
     {
         return $this->getLoader($name)->getSourceContext($name);
     }
 
+    /**
+     * @param string $name
+     */
     public function exists($name): bool
     {
         return $this->getLoader($name)->exists($name);
     }
 
+    /**
+     * @param string $name
+     */
     public function getCacheKey($name): string
     {
         return $this->getLoader($name)->getCacheKey($name);
     }
 
+    /**
+     * @param string $name
+     * @param int $time
+     */
     public function isFresh($name, $time): bool
     {
         return false;

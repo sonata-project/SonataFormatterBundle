@@ -110,7 +110,7 @@ class PoolTest extends TestCase
         static::assertSame('default', $pool->getDefaultFormatter());
     }
 
-    private function getPool()
+    private function getPool(): Pool
     {
         $pool = new Pool('whatever');
         $pool->setLogger($this->createMock(LoggerInterface::class));

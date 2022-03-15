@@ -33,6 +33,9 @@ final class FormatterValidator extends ConstraintValidator
         $this->pool = $pool;
     }
 
+    /**
+     * @param mixed $value
+     */
     public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof Formatter) {
