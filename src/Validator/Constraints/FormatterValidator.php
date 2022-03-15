@@ -16,6 +16,7 @@ namespace Sonata\FormatterBundle\Validator\Constraints;
 use Sonata\FormatterBundle\Formatter\PoolInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 /**
  * @author Romain Mouillard <romain.mouillard@gmail.com>
@@ -34,6 +35,10 @@ final class FormatterValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint): void
     {
+        if (!$constraint instanceof Formatter) {
+            throw new UnexpectedTypeException($constraint, Formatter::class);
+        }
+
         if (!$this->pool->has($value)) {
             $this->context->addViolation($constraint->message);
         }
