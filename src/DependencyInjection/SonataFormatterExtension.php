@@ -132,7 +132,7 @@ final class SonataFormatterExtension extends Extension
 
         $container->setDefinition(sprintf('sonata.formatter.twig.sandbox.%s', $code), $sandbox);
 
-        if (is_a($env->getClass(), ExtendableFormatter::class)) {
+        if (is_a($env->getClass(), ExtendableFormatter::class, true)) {
             $env->addMethodCall('addExtension', [new Reference(sprintf('sonata.formatter.twig.sandbox.%s', $code))]);
 
             foreach ($extensions as $extension) {
