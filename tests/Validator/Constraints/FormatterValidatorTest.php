@@ -26,17 +26,11 @@ class FormatterValidatorTest extends TestCase
     /**
      * @var ExecutionContextInterface&MockObject
      */
-    private $context;
+    private ExecutionContextInterface $context;
 
-    /**
-     * @var Pool
-     */
-    private $pool;
+    private Pool $pool;
 
-    /**
-     * @var Formatter
-     */
-    private $constraint;
+    private Formatter $constraint;
 
     protected function setUp(): void
     {

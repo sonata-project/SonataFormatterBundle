@@ -29,15 +29,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class FormatterTypeTest extends TestCase
 {
-    /**
-     * @var Pool
-     */
-    private $pool;
+    private Pool $pool;
 
-    /**
-     * @var FormatterType
-     */
-    private $formType;
+    private FormatterType $formType;
 
     protected function setUp(): void
     {

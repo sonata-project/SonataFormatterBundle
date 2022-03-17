@@ -19,10 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class SimpleFormatterTypeTest extends TestCase
 {
-    /**
-     * @var SimpleFormatterType
-     */
-    private $formType;
+    private SimpleFormatterType $formType;
 
     protected function setUp(): void
     {

@@ -23,26 +23,41 @@ abstract class BaseProxyExtension extends AbstractExtension implements Extension
 {
     abstract public function getTwigExtension(): ExtensionInterface;
 
+    /**
+     * @return string[]
+     */
     public function getAllowedFilters(): array
     {
         return [];
     }
 
+    /**
+     * @return string[]
+     */
     public function getAllowedTags(): array
     {
         return [];
     }
 
+    /**
+     * @return string[]
+     */
     public function getAllowedFunctions(): array
     {
         return [];
     }
 
+    /**
+     * @return string[]
+     */
     public function getAllowedProperties(): array
     {
         return [];
     }
 
+    /**
+     * @return string[]
+     */
     public function getAllowedMethods(): array
     {
         return [];
@@ -89,11 +104,17 @@ abstract class BaseProxyExtension extends AbstractExtension implements Extension
         return $this->getTwigExtension()->getFunctions();
     }
 
+    /**
+     * @return array{0?: array<string, array{precedence: int, class: class-string}>, 1?: array<string, array{precedence: int, class: class-string, associativity: int}>}
+     */
     public function getOperators(): array
     {
         return $this->getTwigExtension()->getOperators();
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getGlobals(): array
     {
         $extension = $this->getTwigExtension();

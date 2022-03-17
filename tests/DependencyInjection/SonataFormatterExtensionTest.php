@@ -15,6 +15,7 @@ namespace Sonata\FormatterBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sonata\FormatterBundle\DependencyInjection\SonataFormatterExtension;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Twig\Loader\LoaderInterface;
 
 class SonataFormatterExtensionTest extends AbstractExtensionTestCase
@@ -87,6 +88,9 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
         );
     }
 
+    /**
+     * @return ExtensionInterface[]
+     */
     protected function getContainerExtensions(): array
     {
         return [
@@ -94,6 +98,9 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
         ];
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function getMinimalConfiguration(): array
     {
         return [

@@ -67,20 +67,20 @@ final class SonataFormatterExtension extends Extension
         $pool = $container->getDefinition('sonata.formatter.pool');
         $pool->addArgument($config['default_formatter']);
 
-        foreach ($config['formatters'] as $code => $configuration) {
-            if (0 === \count($configuration['extensions'])) {
+        foreach ($config['formatters'] as $code => $formatterConfig) {
+            if (0 === \count($formatterConfig['extensions'])) {
                 $env = null;
             } else {
                 $env = new Reference($this->createEnvironment(
                     $container,
                     $code,
-                    $configuration['extensions']
+                    $formatterConfig['extensions']
                 ));
             }
 
             $pool->addMethodCall(
                 'add',
-                [$code, new Reference($configuration['service']), $env]
+                [$code, new Reference($formatterConfig['service']), $env]
             );
         }
     }
@@ -100,6 +100,9 @@ final class SonataFormatterExtension extends Extension
         return 'sonata_formatter';
     }
 
+    /**
+     * @param string[] $extensions
+     */
     private function createEnvironment(ContainerBuilder $container, string $code, array $extensions): string
     {
         $loader = new Definition(ArrayLoader::class);
@@ -132,7 +135,7 @@ final class SonataFormatterExtension extends Extension
 
         $container->setDefinition(sprintf('sonata.formatter.twig.sandbox.%s', $code), $sandbox);
 
-        if (is_a($env->getClass(), ExtendableFormatter::class, true)) {
+        if (null !== $env->getClass() && is_a($env->getClass(), ExtendableFormatter::class, true)) {
             $env->addMethodCall('addExtension', [new Reference(sprintf('sonata.formatter.twig.sandbox.%s', $code))]);
 
             foreach ($extensions as $extension) {

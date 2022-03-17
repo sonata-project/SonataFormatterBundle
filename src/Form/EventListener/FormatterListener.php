@@ -19,25 +19,13 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 
 final class FormatterListener
 {
-    /**
-     * @var PoolInterface
-     */
-    private $pool;
+    private PoolInterface $pool;
 
-    /**
-     * @var string
-     */
-    private $formatField;
+    private string $formatField;
 
-    /**
-     * @var string
-     */
-    private $sourceField;
+    private string $sourceField;
 
-    /**
-     * @var string
-     */
-    private $targetField;
+    private string $targetField;
 
     public function __construct(PoolInterface $pool, string $formatField, string $sourceField, string $targetField)
     {
@@ -58,7 +46,11 @@ final class FormatterListener
         // make sure the listener works with array
         $data = $event->getData();
 
-        $accessor->setValue($data, $this->targetField, $source ? $this->pool->transform($format, $source) : null);
+        $accessor->setValue(
+            $data,
+            $this->targetField,
+            \is_string($source) ? $this->pool->transform($format, $source) : null
+        );
 
         $event->setData($data);
     }

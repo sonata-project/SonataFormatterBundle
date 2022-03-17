@@ -21,7 +21,7 @@ use Twig\Sandbox\SecurityNotAllowedMethodError;
 use Twig\Sandbox\SecurityPolicyInterface;
 
 /**
- * Some code are adapted work from the Twig\Sandbox\SecurityPolicy class.
+ * Some code is adapted work from the Twig\Sandbox\SecurityPolicy class.
  *
  * @author fabien.potencier@symfony.com
  * @author thomas.rabaix@sonata-project.org
@@ -31,42 +31,36 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
     /**
      * @var string[]
      */
-    private $allowedTags = [];
+    private array $allowedTags = [];
 
     /**
      * @var string[]
      */
-    private $allowedFilters = [];
+    private array $allowedFilters = [];
 
     /**
      * @var string[]
      */
-    private $allowedFunctions = [];
+    private array $allowedFunctions = [];
 
     /**
      * @var string[]|string[][]
      */
-    private $allowedProperties = [];
+    private array $allowedProperties = [];
 
     /**
      * @var string[][]
      */
-    private $allowedMethods = [];
+    private array $allowedMethods = [];
 
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
+    private ContainerInterface $container;
 
     /**
      * @var string[]
      */
-    private $extensions = [];
+    private array $extensions = [];
 
-    /**
-     * @var bool
-     */
-    private $allowedBuilt = false;
+    private bool $allowedBuilt = false;
 
     /**
      * @psalm-suppress ContainerDependency

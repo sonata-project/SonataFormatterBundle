@@ -21,7 +21,7 @@
     ],
     "homepage": "https://docs.sonata-project.org/projects/SonataFormatterBundle",
     "require": {
-        "php": "^7.3 || ^8.0",
+        "php": "^7.4 || ^8.0",
         "friendsofsymfony/ckeditor-bundle": "^2.0",
         "psr/log": "^1.0 || ^2.0 || ^3.0",
         "sonata-project/block-bundle": "^4.0",
@@ -46,6 +46,7 @@
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^1.4",
         "phpstan/phpstan-phpunit": "^1.0",
+        "phpstan/phpstan-strict-rules": "^1.0",
         "phpstan/phpstan-symfony": "^1.1",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.16.1",

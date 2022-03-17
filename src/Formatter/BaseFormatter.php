@@ -20,7 +20,7 @@ abstract class BaseFormatter implements ExtendableFormatter
     /**
      * @var ExtensionInterface[]
      */
-    protected $extensions = [];
+    protected array $extensions = [];
 
     public function addExtension(ExtensionInterface $extension): void
     {

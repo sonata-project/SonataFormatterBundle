@@ -17,7 +17,6 @@ use Sonata\BlockBundle\Block\BlockContext;
 use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Test\BlockServiceTestCase;
 use Sonata\FormatterBundle\Block\FormatterBlockService;
-use Symfony\Component\HttpFoundation\Response;
 
 class FormatterBlockServiceTest extends BlockServiceTestCase
 {
@@ -31,8 +30,6 @@ class FormatterBlockServiceTest extends BlockServiceTestCase
             'content' => '<b>Insert your custom content here</b>',
             'template' => '@SonataFormatter/Block/block_formatter.html.twig',
         ]);
-
-        $response = new Response();
 
         $this->twig->expects(static::once())->method('render')
             ->with('@SonataFormatter/Block/block_formatter.html.twig', [

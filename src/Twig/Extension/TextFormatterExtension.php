@@ -22,22 +22,16 @@ use Twig\TwigFilter;
  */
 final class TextFormatterExtension extends AbstractExtension
 {
-    /**
-     * @var PoolInterface
-     */
-    protected $pool;
+    private PoolInterface $pool;
 
     public function __construct(PoolInterface $pool)
     {
         $this->pool = $pool;
     }
 
-    public function getTokenParsers(): array
-    {
-        return [
-        ];
-    }
-
+    /**
+     * @return TwigFilter[]
+     */
     public function getFilters(): array
     {
         return [
