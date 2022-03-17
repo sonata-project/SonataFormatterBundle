@@ -73,6 +73,8 @@ final class Pool implements LoggerAwareInterface, PoolInterface
                 $text = $template->render([]);
             }
         } catch (SyntaxError $e) {
+            \assert(null !== $this->logger);
+
             $this->logger->critical(sprintf(
                 '[FormatterBundle::transform] %s - Error while parsing twig template : %s',
                 $code,
@@ -82,6 +84,8 @@ final class Pool implements LoggerAwareInterface, PoolInterface
                 'exception' => $e,
             ]);
         } catch (SecurityError $e) {
+            \assert(null !== $this->logger);
+
             $this->logger->critical(sprintf(
                 '[FormatterBundle::transform] %s - the user try an non white-listed keyword : %s',
                 $code,

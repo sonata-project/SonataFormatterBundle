@@ -31,27 +31,32 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
     /**
      * @var string[]
      */
-    private $allowedTags;
+    private $allowedTags = [];
 
     /**
      * @var string[]
      */
-    private $allowedFilters;
+    private $allowedFilters = [];
 
     /**
      * @var string[]
      */
-    private $allowedFunctions;
+    private $allowedFunctions = [];
 
     /**
      * @var string[]|string[][]
      */
-    private $allowedProperties;
+    private $allowedProperties = [];
 
     /**
      * @var string[][]
      */
-    private $allowedMethods;
+    private $allowedMethods = [];
+
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
 
     /**
      * @var string[]
@@ -59,9 +64,9 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
     private $extensions = [];
 
     /**
-     * @var ContainerInterface
+     * @var bool
      */
-    private $container;
+    private $allowedBuilt = false;
 
     /**
      * @psalm-suppress ContainerDependency
@@ -140,16 +145,16 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
 
     /**
      * @param object $obj
-     * @param string $property
+     * @param string $method
      */
-    public function checkPropertyAllowed($obj, $property): void
+    public function checkPropertyAllowed($obj, $method): void
     {
         $this->buildAllowed();
 
         $allowed = false;
         foreach ($this->allowedProperties as $class => $properties) {
             if ($obj instanceof $class) {
-                $allowed = \in_array($property, \is_array($properties) ? $properties : [$properties], true);
+                $allowed = \in_array($method, \is_array($properties) ? $properties : [$properties], true);
 
                 break;
             }
@@ -159,7 +164,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
             throw new SecurityError(
                 sprintf(
                     'Calling "%s" property on a "%s" object is not allowed.',
-                    $property,
+                    $method,
                     \get_class($obj)
                 )
             );
@@ -168,15 +173,9 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
 
     private function buildAllowed(): void
     {
-        if (null !== $this->allowedTags) {
+        if ($this->allowedBuilt) {
             return;
         }
-
-        $this->allowedTags = [];
-        $this->allowedFilters = [];
-        $this->allowedFunctions = [];
-        $this->allowedMethods = [];
-        $this->allowedProperties = [];
 
         foreach ($this->extensions as $id) {
             $extension = $this->container->get($id);
@@ -193,5 +192,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
 
             $this->allowedMethods = array_merge_recursive($this->allowedMethods, $extension->getAllowedMethods());
         }
+
+        $this->allowedBuilt = true;
     }
 }

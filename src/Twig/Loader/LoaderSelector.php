@@ -34,35 +34,47 @@ final class LoaderSelector implements LoaderInterface
         $this->fileLoader = $fileLoader;
     }
 
-    public function getSource(string $name): string
+    /**
+     * @param string $name
+     */
+    public function getSourceContext($name): Source
     {
-        $source = $this->getLoader($name)->getSource($name);
+        $source = $this->getLoader($name)->getSourceContext($name);
 
         if ($this->isFile($name)) {
             $from = ['{#', '{{', '{%', '%}', '}}', '#}'];
             $to = ['<#', '<%=', '<%', '%>', '%>', '#>'];
 
-            $source = str_replace($from, $to, $source);
+            return new Source(
+                str_replace($from, $to, $source->getCode()),
+                $source->getName(),
+                $source->getPath()
+            );
         }
 
         return $source;
     }
 
-    public function getSourceContext($name): Source
-    {
-        return $this->getLoader($name)->getSourceContext($name);
-    }
-
+    /**
+     * @param string $name
+     */
     public function exists($name): bool
     {
         return $this->getLoader($name)->exists($name);
     }
 
+    /**
+     * @param string $name
+     */
     public function getCacheKey($name): string
     {
         return $this->getLoader($name)->getCacheKey($name);
     }
 
+    /**
+     * @param string $name
+     * @param int    $time
+     */
     public function isFresh($name, $time): bool
     {
         return false;

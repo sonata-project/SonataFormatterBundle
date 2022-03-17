@@ -25,7 +25,7 @@ class FormatterListenerTest extends TestCase
 {
     public function testWithInvalidFormatter(): void
     {
-        $this->expectException('RuntimeException');
+        $this->expectException(\RuntimeException::class);
 
         $pool = $this->getPool();
 
@@ -43,7 +43,7 @@ class FormatterListenerTest extends TestCase
     public function testWithValidFormatter(): void
     {
         $formatter = $this->createMock(Formatter::class);
-        $formatter->expects(static::once())->method('transform')->willReturnCallback(static function ($text) {
+        $formatter->expects(static::once())->method('transform')->willReturnCallback(static function (string $text) {
             return strtoupper($text);
         });
 
@@ -69,7 +69,7 @@ class FormatterListenerTest extends TestCase
         static::assertSame($expected, $event->getData());
     }
 
-    private function getPool()
+    private function getPool(): Pool
     {
         $pool = new Pool('whatever');
         $pool->setLogger($this->createMock(LoggerInterface::class));
