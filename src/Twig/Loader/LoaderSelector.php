@@ -18,15 +18,9 @@ use Twig\Source;
 
 final class LoaderSelector implements LoaderInterface
 {
-    /**
-     * @var LoaderInterface
-     */
-    private $stringLoader;
+    private LoaderInterface $stringLoader;
 
-    /**
-     * @var LoaderInterface
-     */
-    private $fileLoader;
+    private LoaderInterface $fileLoader;
 
     public function __construct(LoaderInterface $stringLoader, LoaderInterface $fileLoader)
     {

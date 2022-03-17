@@ -15,13 +15,28 @@ namespace Sonata\FormatterBundle\Extension;
 
 interface ExtensionInterface
 {
+    /**
+     * @return string[]
+     */
     public function getAllowedFilters(): array;
 
+    /**
+     * @return string[]
+     */
     public function getAllowedTags(): array;
 
+    /**
+     * @return string[]
+     */
     public function getAllowedFunctions(): array;
 
+    /**
+     * @return array<class-string, array<string>>
+     */
     public function getAllowedProperties(): array;
 
+    /**
+     * @return array<class-string, array<string>>
+     */
     public function getAllowedMethods(): array;
 }

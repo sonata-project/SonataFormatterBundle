@@ -25,14 +25,11 @@ final class Pool implements LoggerAwareInterface, PoolInterface
     use LoggerAwareTrait;
 
     /**
-     * @var array
+     * @var array<string, array{Formatter, Environment|null}>
      */
-    protected $formatters = [];
+    private array $formatters = [];
 
-    /**
-     * @var string
-     */
-    protected $defaultFormatter;
+    private string $defaultFormatter;
 
     public function __construct(string $defaultFormatter)
     {
@@ -68,8 +65,8 @@ final class Pool implements LoggerAwareInterface, PoolInterface
 
         try {
             // apply custom extension
-            if ($env) {
-                $template = $env->createTemplate($text ?: '');
+            if (null !== $env) {
+                $template = $env->createTemplate($text);
                 $text = $template->render([]);
             }
         } catch (SyntaxError $e) {

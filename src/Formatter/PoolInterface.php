@@ -21,10 +21,16 @@ interface PoolInterface
 
     public function has(string $code): bool;
 
+    /**
+     * @return array{Formatter, Environment|null}
+     */
     public function get(string $code): array;
 
     public function transform(string $code, string $text): string;
 
+    /**
+     * @return array<string, array{Formatter, Environment|null}>
+     */
     public function getFormatters(): array;
 
     public function getDefaultFormatter(): string;

@@ -19,15 +19,12 @@ use Symfony\Component\Translation\Loader\XliffFileLoader;
 
 class XliffTest extends TestCase
 {
-    /**
-     * @var XliffFileLoader
-     */
-    protected $loader;
+    protected XliffFileLoader $loader;
 
     /**
      * @var string[]
      */
-    protected $errors = [];
+    protected array $errors = [];
 
     protected function setUp(): void
     {
@@ -35,12 +32,9 @@ class XliffTest extends TestCase
     }
 
     /**
-     * @doesNotPerformAssertions
      * @dataProvider getXliffPaths
-     *
-     * @param string $path
      */
-    public function testXliff($path): void
+    public function testXliff(string $path): void
     {
         $this->validatePath($path);
 
@@ -50,7 +44,7 @@ class XliffTest extends TestCase
     }
 
     /**
-     * @return array List all path to validate xliff
+     * @return array<array{string}> List all path to validate xliff
      */
     public function getXliffPaths(): array
     {
@@ -60,7 +54,7 @@ class XliffTest extends TestCase
     /**
      * @param string $file The path to the xliff file
      */
-    protected function validateXliff($file): void
+    protected function validateXliff(string $file): void
     {
         try {
             $this->loader->load($file, 'en');
@@ -73,9 +67,10 @@ class XliffTest extends TestCase
     /**
      * @param string $path The path to lookup for Xliff file
      */
-    protected function validatePath($path): void
+    protected function validatePath(string $path): void
     {
         $files = glob(sprintf('%s/*.xliff', $path));
+        static::assertNotFalse($files);
 
         foreach ($files as $file) {
             $this->validateXliff($file);

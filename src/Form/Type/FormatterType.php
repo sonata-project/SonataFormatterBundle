@@ -28,10 +28,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class FormatterType extends AbstractType
 {
-    /**
-     * @var PoolInterface
-     */
-    protected $pool;
+    private PoolInterface $pool;
 
     public function __construct(PoolInterface $pool)
     {
@@ -83,7 +80,7 @@ final class FormatterType extends AbstractType
         /*
          * The listener option only work if the source field is after the current field
          */
-        if ($options['listener']) {
+        if (true === $options['listener']) {
             if (!$options['event_dispatcher'] instanceof EventDispatcherInterface) {
                 throw new \RuntimeException('The event_dispatcher option must be an instance of EventDispatcherInterface');
             }

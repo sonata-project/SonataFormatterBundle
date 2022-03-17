@@ -20,10 +20,7 @@ use Symfony\Component\Validator\Constraint;
  */
 final class Formatter extends Constraint
 {
-    /**
-     * @var string
-     */
-    public $message = 'The formatter is not valid';
+    public string $message = 'The formatter is not valid';
 
     public function validatedBy(): string
     {

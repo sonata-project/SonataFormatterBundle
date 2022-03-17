@@ -43,9 +43,8 @@ abstract class BaseExtension extends AbstractExtension implements ExtensionInter
         return [];
     }
 
-    public function initRuntime(Environment $environment): array
+    public function initRuntime(Environment $environment): void
     {
-        return [];
     }
 
     public function getTokenParsers(): array
@@ -73,11 +72,17 @@ abstract class BaseExtension extends AbstractExtension implements ExtensionInter
         return [];
     }
 
+    /**
+     * @return array{0?: array<string, array{precedence: int, class: class-string}>, 1?: array<string, array{precedence: int, class: class-string, associativity: int}>}
+     */
     public function getOperators(): array
     {
         return [];
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getGlobals(): array
     {
         return [];

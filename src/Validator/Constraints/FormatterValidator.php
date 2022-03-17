@@ -17,16 +17,14 @@ use Sonata\FormatterBundle\Formatter\PoolInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 /**
  * @author Romain Mouillard <romain.mouillard@gmail.com>
  */
 final class FormatterValidator extends ConstraintValidator
 {
-    /**
-     * @var PoolInterface
-     */
-    protected $pool;
+    private PoolInterface $pool;
 
     public function __construct(PoolInterface $pool)
     {
@@ -40,6 +38,10 @@ final class FormatterValidator extends ConstraintValidator
     {
         if (!$constraint instanceof Formatter) {
             throw new UnexpectedTypeException($constraint, Formatter::class);
+        }
+
+        if (!\is_string($value)) {
+            throw new UnexpectedValueException($value, 'string');
         }
 
         if (!$this->pool->has($value)) {
