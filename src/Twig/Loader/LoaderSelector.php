@@ -39,7 +39,20 @@ final class LoaderSelector implements LoaderInterface
      */
     public function getSourceContext($name): Source
     {
-        return $this->getLoader($name)->getSourceContext($name);
+        $source = $this->getLoader($name)->getSourceContext($name);
+
+        if ($this->isFile($name)) {
+            $from = ['{#', '{{', '{%', '%}', '}}', '#}'];
+            $to = ['<#', '<%=', '<%', '%>', '%>', '#>'];
+
+            return new Source(
+                str_replace($from, $to, $source->getCode()),
+                $source->getName(),
+                $source->getPath()
+            );
+        }
+
+        return $source;
     }
 
     /**
