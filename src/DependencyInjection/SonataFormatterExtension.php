@@ -51,7 +51,7 @@ final class SonataFormatterExtension extends Extension
         if (isset($bundles['FOSCKEditorBundle'])) {
             if (interface_exists(CKEditorConfigurationInterface::class)) {
                 $loader->load('form.xml');
-            } else {//NEXT_MAJOR: Remove this case
+            } else {// NEXT_MAJOR: Remove this case
                 $loader->load('form_fcke1.xml');
             }
         }
