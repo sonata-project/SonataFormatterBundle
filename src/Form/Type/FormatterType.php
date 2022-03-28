@@ -196,7 +196,7 @@ final class FormatterType extends AbstractType
         if (null !== $this->ckEditorConfiguration) {
             $defaultConfig = $this->ckEditorConfiguration->getDefaultConfig();
             $ckeditorConfiguration = $this->ckEditorConfiguration->getConfig($defaultConfig);
-        } else {//NEXT_MAJOR: Remove this case
+        } else {// NEXT_MAJOR: Remove this case
             $defaultConfig = $this->configManager->getDefaultConfig();
 
             if ($this->configManager->hasConfig($defaultConfig)) {
@@ -211,7 +211,7 @@ final class FormatterType extends AbstractType
         }
 
         if ($options['ckeditor_context']) {
-            if (null !== $this->configManager) {//NEXT_MAJOR: Remove this case
+            if (null !== $this->configManager) {// NEXT_MAJOR: Remove this case
                 $contextConfig = $this->configManager->getConfig($options['ckeditor_context']);
             } else {
                 $contextConfig = $this->ckEditorConfiguration->getConfig($options['ckeditor_context']);
@@ -230,7 +230,7 @@ final class FormatterType extends AbstractType
             if (\is_string($ckeditorConfiguration['toolbar'])) {
                 $ckeditorConfiguration['toolbar'] = $this->ckEditorConfiguration->getToolbar($ckeditorConfiguration['toolbar']);
             }
-        } else {//NEXT_MAJOR: Remove this case
+        } else {// NEXT_MAJOR: Remove this case
             if ($this->pluginManager->hasPlugins()) {
                 $options['ckeditor_plugins'] = $this->pluginManager->getPlugins();
             }
