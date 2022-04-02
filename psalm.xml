@@ -21,5 +21,6 @@
                 <referencedClass name="UnitEnum"/>
             </errorLevel>
         </UndefinedDocblockClass>
+        <InternalMethod errorLevel="suppress"/>
     </issueHandlers>
 </psalm>

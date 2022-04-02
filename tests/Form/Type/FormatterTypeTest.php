@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\Form\Type;
 
+use FOS\CKEditorBundle\Config\CKEditorConfigurationInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Sonata\FormatterBundle\Formatter\Pool;
@@ -33,13 +35,18 @@ class FormatterTypeTest extends TestCase
 
     private FormatterType $formType;
 
+    /**
+     * @var CKEditorConfigurationInterface&MockObject
+     */
+    private CKEditorConfigurationInterface $ckEditorConfiguration;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->pool = new Pool('');
-
-        $this->formType = new FormatterType($this->pool);
+        $this->ckEditorConfiguration = $this->createMock(CKEditorConfigurationInterface::class);
+        $this->formType = new FormatterType($this->pool, $this->ckEditorConfiguration);
     }
 
     public function testBuildFormOneChoice(): void
@@ -190,6 +197,11 @@ class FormatterTypeTest extends TestCase
 
     public function testBuildViewWithFormatter(): void
     {
+        $defaultConfig = 'default';
+        $this->ckEditorConfiguration->expects(static::once())->method('getDefaultConfig')->willReturn($defaultConfig);
+
+        $ckEditorToolBarIcons = ['Icon 1'];
+
         $formatters = [];
         $formatters['text'] = 'Text';
         $formatters['html'] = 'HTML';
@@ -208,6 +220,12 @@ class FormatterTypeTest extends TestCase
                 'choices' => $formatters,
                 'data' => $format,
             ],
+            'ckeditor_context' => null,
+            'ckeditor_image_format' => null,
+            'ckeditor_basepath' => '',
+            'ckeditor_plugins' => [],
+            'ckeditor_templates' => [],
+            'ckeditor_toolbar_icons' => $ckEditorToolBarIcons,
         ]);
 
         static::assertSame($view->vars['format_field_options']['data'], $format);

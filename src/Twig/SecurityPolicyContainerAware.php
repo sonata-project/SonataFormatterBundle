@@ -139,16 +139,16 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
 
     /**
      * @param object $obj
-     * @param string $method
+     * @param string $property
      */
-    public function checkPropertyAllowed($obj, $method): void
+    public function checkPropertyAllowed($obj, $property): void
     {
         $this->buildAllowed();
 
         $allowed = false;
         foreach ($this->allowedProperties as $class => $properties) {
             if ($obj instanceof $class) {
-                $allowed = \in_array($method, \is_array($properties) ? $properties : [$properties], true);
+                $allowed = \in_array($property, \is_array($properties) ? $properties : [$properties], true);
 
                 break;
             }
@@ -158,7 +158,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
             throw new SecurityError(
                 sprintf(
                     'Calling "%s" property on a "%s" object is not allowed.',
-                    $method,
+                    $property,
                     \get_class($obj)
                 )
             );

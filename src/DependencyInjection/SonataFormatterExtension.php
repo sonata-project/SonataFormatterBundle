@@ -44,7 +44,6 @@ final class SonataFormatterExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('formatter.xml');
-        $loader->load('form.xml');
         $loader->load('twig.xml');
 
         $loader->load('validators.xml');
@@ -53,15 +52,15 @@ final class SonataFormatterExtension extends Extension
         \assert(\is_array($bundles));
 
         if (isset($bundles['FOSCKEditorBundle'])) {
-            if (interface_exists(CKEditorConfigurationInterface::class)) {
-                $loader->load('form.xml');
-            } else {// NEXT_MAJOR: Remove this case
-                $loader->load('form_fcke1.xml');
-            }
+            $loader->load('form.xml');
         }
 
         if (isset($bundles['SonataBlockBundle'])) {
             $loader->load('block.xml');
+        }
+
+        if (isset($bundles['SonataMediaBundle'])) {
+            $loader->load('ckeditor.xml');
         }
 
         if (!\array_key_exists($config['default_formatter'], $config['formatters'])) {
@@ -91,6 +90,11 @@ final class SonataFormatterExtension extends Extension
                 [$code, new Reference($formatterConfig['service']), $env]
             );
         }
+
+        $container->setParameter(
+            'sonata.formatter.ckeditor.configuration.templates',
+            $config['ckeditor']['templates']
+        );
     }
 
     public function getXsdValidationBasePath(): string

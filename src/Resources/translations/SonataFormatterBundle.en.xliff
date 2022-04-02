@@ -14,6 +14,10 @@
         <source>text</source>
         <target>text</target>
       </trans-unit>
+      <trans-unit id="richhtml">
+        <source>richhtml</source>
+        <target>richhtml</target>
+      </trans-unit>
       <trans-unit id="form.label_content">
         <source>form.label_content</source>
         <target>Content</target>

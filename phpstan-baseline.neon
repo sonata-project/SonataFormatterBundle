@@ -3,6 +3,3 @@ parameters:
         - # https://github.com/phpstan/phpstan-strict-rules/issues/130
             message: '#^Call to static method PHPUnit\\Framework\\Assert::.* will always evaluate to true\.$#'
             path: tests/
-        - # https://github.com/twigphp/Twig/pull/3667
-            message: '#^Parameter .* of method Sonata\\FormatterBundle\\Twig\\SecurityPolicyContainerAware\:\:.* should be contravariant with parameter .* of method Twig\\Sandbox\\SecurityPolicyInterface\:\:.*$#'
-            path: src/Twig/SecurityPolicyContainerAware.php
