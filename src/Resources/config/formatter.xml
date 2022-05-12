@@ -2,6 +2,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sonata.formatter.text.text.class">Sonata\FormatterBundle\Formatter\TextFormatter</parameter>
+        <parameter key="sonata.formatter.text.raw.class">Sonata\FormatterBundle\Formatter\RawFormatter</parameter>
     </parameters>
     <services>
         <service id="sonata.formatter.pool" class="Sonata\FormatterBundle\Formatter\Pool">
@@ -10,6 +11,9 @@
             </call>
         </service>
         <service id="sonata.formatter.text.text" class="%sonata.formatter.text.text.class%">
+            <tag name="sonata.text.formatter"/>
+        </service>
+        <service id="sonata.formatter.text.raw" class="%sonata.formatter.text.raw.class%">
             <tag name="sonata.text.formatter"/>
         </service>
     </services>
