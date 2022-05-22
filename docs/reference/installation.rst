@@ -4,6 +4,8 @@
 Installation
 ============
 
+First, you need to install `FOSCKEditorBundle`_.
+
 Install SonataFormatterBundle:
 
 .. code-block:: bash
@@ -16,6 +18,7 @@ Register the bundles in ``bundles.php`` file::
 
     return [
         // ...
+        FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
         Sonata\FormatterBundle\SonataFormatterBundle::class => ['all' => true],
     ];
 
@@ -61,3 +64,12 @@ Now add SonataFormatter configuration:
                 extensions:
                     - sonata.formatter.twig.control_flow
                     - sonata.formatter.twig.gist
+
+            richhtml:
+                service: sonata.formatter.text.raw
+                extensions:
+                    - sonata.formatter.twig.control_flow
+                    - sonata.formatter.twig.gist
+            #        - sonata.media.formatter.twig # keep this commented unless you are using media bundle.
+
+.. _`FOSCKEditorBundle`: https://github.com/FriendsOfSymfony/FOSCKEditorBundle

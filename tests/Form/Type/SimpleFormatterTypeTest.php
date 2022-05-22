@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\Form\Type;
 
+use FOS\CKEditorBundle\Config\CKEditorConfigurationInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,11 +23,17 @@ class SimpleFormatterTypeTest extends TestCase
 {
     private SimpleFormatterType $formType;
 
+    /**
+     * @var CKEditorConfigurationInterface&MockObject
+     */
+    private CKEditorConfigurationInterface $ckEditorConfiguration;
+
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->formType = new SimpleFormatterType();
+        $this->ckEditorConfiguration = $this->createMock(CKEditorConfigurationInterface::class);
+        $this->formType = new SimpleFormatterType($this->ckEditorConfiguration);
     }
 
     /**

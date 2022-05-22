@@ -118,9 +118,6 @@ class PoolTest extends TestCase
         return $pool;
     }
 
-    /**
-     * @psalm-suppress InternalMethod
-     */
     private function getEnv(Template $template): Environment
     {
         $env = $this->createMock(Environment::class);

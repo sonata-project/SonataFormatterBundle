@@ -9,6 +9,27 @@
     </div>
 
     {{ form_widget(form.children[source_field]) }}
+
+    <script>
+        jQuery(document).ready(function() {
+            // This code requires CKEDITOR
+            if (typeof CKEDITOR === 'undefined') {
+                return;
+            }
+
+            jQuery('#{{ form.children[format_field].vars.id }}').change(function() {
+                {{ ckeditor_destroy(form.children[source_field].vars.id) }}
+
+                var val = jQuery(this).val();
+
+                if (val === 'richhtml') {
+                    {% include '@SonataFormatter/Form/ckeditor.html.twig' with {'ckeditor_field_id': form.children[source_field].vars.id} %}
+                }
+            });
+
+            jQuery('#{{ form.children[format_field].vars.id }}').trigger('change');
+        });
+    </script>
 {% endblock sonata_formatter_type_widget %}
 
 {% block sonata_simple_formatter_type_widget %}
@@ -16,5 +37,18 @@
     <!-- widget: sonata_simple_formatter_type_widget -->
 
     {{ form_widget(form) }}
+
+    <script>
+        jQuery(document).ready(function() {
+            // This code requires CKEDITOR
+            if (typeof CKEDITOR === 'undefined') {
+                return;
+            }
+
+            {% if format == 'richhtml' %}
+                {% include '@SonataFormatter/Form/ckeditor.html.twig' with {'ckeditor_field_id': form.vars.id} %}
+            {% endif %}
+        });
+    </script>
 
 {% endblock sonata_simple_formatter_type_widget %}

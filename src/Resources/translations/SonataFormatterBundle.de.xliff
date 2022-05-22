@@ -14,6 +14,10 @@
         <source>text</source>
         <target>Text Editor</target>
       </trans-unit>
+      <trans-unit id="richhtml">
+        <source>richhtml</source>
+        <target>Grafischer Editor</target>
+      </trans-unit>
       <trans-unit id="form.label_content">
         <source>form.label_content</source>
         <target>Inhalt</target>
