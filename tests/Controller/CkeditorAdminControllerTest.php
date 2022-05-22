@@ -22,6 +22,7 @@ use Sonata\AdminBundle\Templating\MutableTemplateRegistryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\FormatterBundle\Controller\CkeditorAdminController;
+use Sonata\FormatterBundle\Tests\Fixtures\Entity;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Model\MediaManagerInterface;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
@@ -36,30 +37,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
-
-class EntityWithGetId
-{
-    /**
-     * @var string|int|null
-     */
-    private $id;
-
-    /**
-     * @param int|string $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return int|string|null
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-}
 
 class CkeditorAdminControllerTest extends TestCase
 {
@@ -155,7 +132,7 @@ class CkeditorAdminControllerTest extends TestCase
         $datagrid = $this->createMock(DatagridInterface::class);
         $mediaPool = new MediaPool('context');
         $categoryManager = $this->createMock(CategoryManagerInterface::class);
-        $category = $this->createStub(EntityWithGetId::class);
+        $category = $this->createStub(Entity::class);
         $form = $this->createStub(Form::class);
         $formView = $this->createStub(FormView::class);
 

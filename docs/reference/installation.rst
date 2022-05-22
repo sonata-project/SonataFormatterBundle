@@ -4,18 +4,7 @@
 Installation
 ============
 
-If you are using Symfony4 you will need to make some adjustments, if not
-you can skip to "Install SonataFormatterBundle".
-
-First you will need to add a line to your `composer.json`:
-
-.. code-block:: javascript
-
-    "replace": {
-        "egeloen/ckeditor-bundle": "*"
-    }
-
-And after that you need to install `FOSCKEditorBundle`_.
+First, you need to install `FOSCKEditorBundle`_.
 
 Install SonataFormatterBundle:
 
