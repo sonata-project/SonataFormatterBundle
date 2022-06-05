@@ -123,7 +123,7 @@ file that was distributed with this source code.
                                             <a href="{{ path(object.reference) }}" class="select" style="float: left; margin-right: 6px;">
 {#                                                {% thumbnail object, 'admin' with {'width': 75, 'height': 60}#}
 {#                                                    {% set runtimeConfig = {"thumbnail": {"size": [75, 60] }} %}#}
-                                                    <img src="{{ object.admi  | imagine_filter('thumbnail', runtimeConfig) }}" />
+                                                    <img src="{{ object.admin  | imagine_filter('thumbnail', runtimeConfig) }}" />
                                             </a>
 
                                             <strong><a href="{{ path(object, 'reference') }}" class="select">{{ object.name }}</a></strong> <br />
