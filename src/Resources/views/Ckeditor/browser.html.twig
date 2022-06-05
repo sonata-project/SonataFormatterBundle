@@ -86,7 +86,7 @@ file that was distributed with this source code.
                     <table class="table table-bordered table-striped">
                         {% block table_header %}
                             <thead>
-                            <tr class="sonata-ba-list-field-header">{% spaceless %}
+                            <tr class="sonata-ba-list-field-header">{% apply spaceless %}
                                 {% for field_description in admin.list.elements %}
                                     {% if field_description.getOption('code') == '_batch' or field_description.name == '_action' %}
                                         {# Disable batch and actions #}
@@ -109,7 +109,7 @@ file that was distributed with this source code.
 
                                     {% endif %}
                                 {% endfor %}
-                                {% endspaceless %}</tr>
+                                {% end apply %}</tr>
                             </thead>
                         {% endblock %}
 
