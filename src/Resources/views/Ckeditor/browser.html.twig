@@ -119,15 +119,24 @@ file that was distributed with this source code.
                                 <tr>
                                     <td colspan="{{ (admin.list.elements|length) - 1}}">
                                         <div>
-                                            <a href="{{ path(object, 'reference') }}" class="select" style="float: left; margin-right: 6px;">{% thumbnail object, 'admin' with {'width': 75, 'height': 60} %}</a>
+{#                                            <a href="{{ path(object, 'reference') }}" class="select" style="float: left; margin-right: 6px;">#}
+                                            <a href="{{ path(object.reference) }}" class="select" style="float: left; margin-right: 6px;">
+{#                                                {% thumbnail object, 'admin' with {'width': 75, 'height': 60}#}
+{#                                                    {% set runtimeConfig = {"thumbnail": {"size": [75, 60] }} %}#}
+                                                    <img src="{{ object.admi  | imagine_filter('thumbnail', runtimeConfig) }}" />
+                                            </a>
 
                                             <strong><a href="{{ path(object, 'reference') }}" class="select">{{ object.name }}</a></strong> <br />
-                                            {{ object.providerName|trans({}, 'SonataMediaBundle') }}{% if object.width %}: {{ object.width }}{% if object.height %}x{{ object.height }}{% endif %}px{% endif %}
+                                            {{ object.providerName|trans({}, 'SonataMediaBundle') }}
+                                            {% if object.width %}: {{ object.width }}{% if object.height %}x{{ object.height }}{% endif %}px{% endif %}
 
                                             {% if formats[object.id]|length > 0 %}
                                                 - {{ 'title.formats'|trans({}, 'SonataMediaBundle') }}:
                                                 {% for name, format in formats[object.id] %}
-                                                    <a href="{{ path(object, name) }}" class="select">{{ name }}</a> {% if format.width %}({{ format.width }}{% if format.height %}x{{ format.height }}{% endif %}px){% endif %}
+                                                    <a href="{{ path(object, name) }}" class="select">{{ name }}</a>
+
+
+                                                    {% if format.width %}({{ format.width }}{% if format.height %}x{{ format.height }}{% endif %}px){% endif %}
                                                 {% endfor %}
                                             {% endif %}
                                             <br />
