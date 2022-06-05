@@ -6,6 +6,9 @@
     <services>
         <service id="sonata.formatter.ckeditor.extension" class="%sonata.formatter.ckeditor.extension.class%">
             <tag name="sonata.admin.extension" target="sonata.media.admin.media"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
         </service>
     </services>
 </container>
