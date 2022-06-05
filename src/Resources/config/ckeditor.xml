@@ -12,9 +12,9 @@
                  class="%sonata.formatter.ckeditor.extension.controller.class%" public="true">
 
             <tag name="container.service_subscriber" />
-            <tag name="controller.service_arguments" />
+<!--            <tag name="controller.service_arguments" />-->
             <call method="setContainer">
-                <argument type="service" id="@Psr\Container\ContainerInterface"/>
+                <argument type="service" id="Psr\Container\ContainerInterface"/>
             </call>
         </service>
     </services>

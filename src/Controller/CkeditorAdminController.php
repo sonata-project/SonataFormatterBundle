@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Controller;
 
+use Psr\Container\ContainerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
@@ -35,6 +36,10 @@ final class CkeditorAdminController extends CRUDController{
 //    {
 //        $this->container = $container;
 //    }
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
 
     public static function getSubscribedServices(): array
     {
