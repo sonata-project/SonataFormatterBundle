@@ -10,9 +10,11 @@
         </service>
         <service id="sonata.formatter.ckeditor.extension.controller" class="%sonata.formatter.ckeditor.extension.controller.class%">
             <tag name="controller.service_arguments" />
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+<!--            <call method="setContainer">-->
+<!--                <argument type="service" id="service_container"/>-->
+<!--            </call>            <call method="setContainer">-->
+<!--                <argument type="service" id="service_container"/>-->
+<!--            </call>-->
         </service>
     </services>
 </container>
