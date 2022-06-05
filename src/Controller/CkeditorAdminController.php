@@ -20,6 +20,7 @@ use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Model\MediaManagerInterface;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
 use Sonata\MediaBundle\Provider\Pool;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -29,6 +30,12 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  * @phpstan-extends CRUDController<object>
  */
 final class CkeditorAdminController extends CRUDController{
+
+    public function __construct(Container $container)
+    {
+        $this->container = $container;
+    }
+
     public static function getSubscribedServices(): array
     {
         return [
