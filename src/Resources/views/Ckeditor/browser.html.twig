@@ -86,7 +86,7 @@ file that was distributed with this source code.
                     <table class="table table-bordered table-striped">
                         {% block table_header %}
                             <thead>
-                            <tr class="sonata-ba-list-field-header">
+                            <tr class="sonata-ba-list-field-header">{% spaceless %}
                                 {% for field_description in admin.list.elements %}
                                     {% if field_description.getOption('code') == '_batch' or field_description.name == '_action' %}
                                         {# Disable batch and actions #}
@@ -100,16 +100,16 @@ file that was distributed with this source code.
                                             {% set sort_by              = current ? admin.datagrid.values._sort_order : field_description.options._sort_order %}
                                         {% endif %}
 
-                                        {% spaceless %}
+
                                             <th class="sonata-ba-list-field-header-{{ field_description.type}} {% if sortable %} sonata-ba-list-field-header-order-{{ sort_by|lower }} {{ sort_active_class }}{% endif %}">
                                                 {% if sortable %}<a href="{{ admin.generateUrl('ckeditor_browser', sort_parameters) }}">{% endif %}
                                                     {{ admin.trans(field_description.label) }}
                                                     {% if sortable %}</a>{% endif %}
                                             </th>
-                                        {% endspaceless %}
+
                                     {% endif %}
                                 {% endfor %}
-                            </tr>
+                                {% endspaceless %}</tr>
                             </thead>
                         {% endblock %}
 
