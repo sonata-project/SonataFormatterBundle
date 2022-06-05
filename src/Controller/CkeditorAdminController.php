@@ -31,10 +31,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 final class CkeditorAdminController extends CRUDController{
 
-    public function __construct(Container $container)
-    {
-        $this->container = $container;
-    }
+//    public function __construct(Container $container)
+//    {
+//        $this->container = $container;
+//    }
 
     public static function getSubscribedServices(): array
     {
