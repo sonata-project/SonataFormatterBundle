@@ -274,7 +274,7 @@ file that was distributed with this source code.
                                     <div class="form-group" id="filter-{{ admin.uniqid }}-{{ filter.name }}" sonata-filter="{{ (filter.options['show_filter'] is same as(true) or filter.options['show_filter'] is null) ? 'true' : 'false' }}" style="display: {% if (filter.isActive() and filter.options['show_filter'] is null) or (filter.options['show_filter'] is same as(true)) %}block{% else %}none{% endif %}">
                                         {% if filter.label is not same as(false) %}
                                             <label for="{{ form.children[filter.formName].children['value'].vars.id }}" class="col-sm-3 control-label">
-                                                {{ filter.label|trans(, {}, filter.translationDomain) }}
+                                                {{ filter.label|trans( {}, filter.translationDomain) }}
                                             </label>
                                         {% endif %}
                                         {% set attr = form.children[filter.formName].children['type'].vars.attr|default({}) %}
