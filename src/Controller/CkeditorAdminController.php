@@ -134,13 +134,13 @@ final class CkeditorAdminController extends CRUDController{
      * @throws AccessDeniedException
      * @throws NotFoundHttpException
      */
-    public function uploadAction(Request $request): Response
+    public function uploadAction(Request $request,MediaManagerInterface $mediaManager): Response
     {
         $this->checkIfMediaBundleIsLoaded();
 
         $this->admin->checkAccess('create');
 
-        $mediaManager = $this->container->get('sonata.media.manager.media');
+//        $mediaManager = $this->container->get('sonata.media.manager.media');
         \assert($mediaManager instanceof MediaManagerInterface);
 
         $provider = $request->get('provider');
