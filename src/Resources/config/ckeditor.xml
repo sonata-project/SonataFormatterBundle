@@ -17,5 +17,6 @@
                 <argument type="service" id="Psr\Container\ContainerInterface"/>
             </call>
         </service>
+        <service id="Sonata\MediaBundle\Model\MediaManagerInterface" alias="sonata.media.manager.media"/>
     </services>
 </container>
