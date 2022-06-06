@@ -47,6 +47,7 @@ final class CkeditorAdminController extends CRUDController{
                 'sonata.media.pool' => Pool::class,
                 'sonata.media.manager.category' => '?'.CategoryManagerInterface::class,
                 'sonata.media.manager.context' => '?'.ContextManagerInterface::class,
+                'sonata.media.manager.media' => '?'.MediaManagerInterface::class,
             ] + parent::getSubscribedServices();
     }
 
