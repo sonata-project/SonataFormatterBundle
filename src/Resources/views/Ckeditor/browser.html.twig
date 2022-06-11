@@ -87,29 +87,28 @@ file that was distributed with this source code.
                         {% block table_header %}
                             <thead>
                             <tr class="sonata-ba-list-field-header">{% apply spaceless %}
-                                {% for field_description in admin.list.elements %}
-                                    {% if field_description.getOption('code') == '_batch' or field_description.name == '_action' %}
-                                        {# Disable batch and actions #}
-                                    {% else %}
-                                        {% set sortable = false %}
-                                        {% if field_description.options.sortable is defined and field_description.options.sortable%}
-                                            {% set sortable             = true %}
-                                            {% set sort_parameters      = datagrid.sortparameters(field_description, datagrid)|merge(ckParameters) %}
-                                            {% set current              = datagrid.query.getSortBy == field_description or datagrid.query.getSortBy == sort_parameters.filter._sort_by %}
-                                            {% set sort_active_class    = current ? 'sonata-ba-list-field-order-active' : '' %}
-                                            {% set sort_order              = current ? datagrid.query._sort_order : field_description.options._sort_order %}
-                                        {% endif %}
+                                    {% for field_description in admin.list.elements %}
+                                        {% if field_description.getOption('code') == '_batch' or field_description.name == '_action' %}
+                                            {# Disable batch and actions #}
+                                        {% else %}
+                                            {% set sortable = false %}
+                                            {% if field_description.options.sortable is defined and field_description.options.sortable%}
+                                                {% set sortable             = true %}
+                                                {% set sort_parameters      = datagrid.sortparameters(field_description, datagrid)|merge(ckParameters) %}
+                                                {% set current              = datagrid.query.getSortBy == field_description or datagrid.query.getSortBy == sort_parameters.filter._sort_by %}
+                                                {% set sort_active_class    = current ? 'sonata-ba-list-field-order-active' : '' %}
+                                                {% set sort_order              = current ? datagrid.query._sort_order : field_description.options._sort_order %}
+                                            {% endif %}
 
 
                                             <th class="sonata-ba-list-field-header-{{ field_description.type}} {% if sortable %} sonata-ba-list-field-header-order-{{ sort_order|lower }} {{ sort_active_class }}{% endif %}">
                                                 {% if sortable %}<a href="{{ admin.generateUrl('ckeditor_browser', sort_parameters) }}">{% endif %}
-{#                                                    {{ admin.trans(field_description.label) }}#}
                                                     {{ field_description.label|trans() }}
                                                     {% if sortable %}</a>{% endif %}
                                             </th>
 
-                                    {% endif %}
-                                {% endfor %}
+                                        {% endif %}
+                                    {% endfor %}
                                 {% endapply %}</tr>
                             </thead>
                         {% endblock %}
@@ -120,11 +119,8 @@ file that was distributed with this source code.
                                 <tr>
                                     <td colspan="{{ (admin.list.elements|length) - 1}}">
                                         <div>
-{#                                            <a href="{{ path(object, 'reference') }}" class="select" style="float: left; margin-right: 6px;">#}
                                             <a href="{{ sonata_path(object, 'reference') }}" class="select" style="float: left; margin-right: 6px;">
-{#                                                {% thumbnail object, 'admin' with {'width': 75, 'height': 60}#}
-{#                                                    {% set runtimeConfig = {"thumbnail": {"size": [75, 60] }} %}#}
-                                                    <img src="{{ sonata_media(object, 'admin', {sizes:[75, 60]}) }}">
+                                                {{ sonata_media(object, 'admin') }}
                                             </a>
 
                                             <strong><a href="{{ sonata_path(object, 'reference') }}" class="select">{{ object.name }}</a></strong> <br />
@@ -172,7 +168,7 @@ file that was distributed with this source code.
                                         {% endblock %}
 
                                         {% block num_results %}
-                                            {% trans with {'%count%': 'list_results_count'} from 'SonataAdminBundle' %}list_results_count{% endtrans %}
+                                            {% trans with {'%count%': datagrid.results|length } from 'SonataAdminBundle' %}list_results_count{% endtrans %}
                                             &nbsp;-&nbsp;
                                         {% endblock %}
 
@@ -181,9 +177,9 @@ file that was distributed with this source code.
                                                 {% trans from 'SonataAdminBundle' %}label_per_page{% endtrans %}</label>
                                             <select class="per-page small" id="{{ admin.uniqid }}_per_page" style="width: auto; height: auto">
                                                 {% for per_page in admin.getperpageoptions %}
-                                                    <option {% if per_page == datagrid.pager.maxperpage %}selected="selected"{% endif %} value="{{ admin.generateUrl('ckeditor_browser', {'filter': datagrid.values|merge({'_per_page': per_page})}|merge(ckParameters)) }}">
-                                                        {{ per_page }}
-                                                    </option>
+                                                <option {% if per_page == datagrid.pager.maxperpage %}selected="selected"{% endif %} value="{{ admin.generateUrl('ckeditor_browser', {'filter': datagrid.values|merge({'_per_page': per_page})}|merge(ckParameters)) }}">
+                                                    {{ per_page }}
+                                                </option>
                                                 {% endfor %}W
                                             </select>
                                         {% endblock %}
@@ -246,12 +242,12 @@ file that was distributed with this source code.
                 <ul class="dropdown-menu" role="menu">
                     {% for filter in datagrid.filters %}
                         {% if (filter.options['show_filter'] is same as(true) or filter.options['show_filter'] is null) %}
-                        <li>
-                            <a href="#" class="sonata-toggle-filter sonata-ba-action" filter-target="filter-{{ admin.uniqid }}-{{ filter.name }}" filter-container="filter-container-{{ admin.uniqid() }}">
-                                <i class="fa {{ (filter.isActive() or filter.options['show_filter']) ? 'fa-check-square-o' : 'fa-square-o' }}"></i>
-                                {{filter.label|trans({}, filter.translationDomain) }}
-                            </a>
-                        </li>
+                            <li>
+                                <a href="#" class="sonata-toggle-filter sonata-ba-action" filter-target="filter-{{ admin.uniqid }}-{{ filter.name }}" filter-container="filter-container-{{ admin.uniqid() }}">
+                                    <i class="fa {{ (filter.isActive() or filter.options['show_filter']) ? 'fa-check-square-o' : 'fa-square-o' }}"></i>
+                                    {{filter.label|trans({}, filter.translationDomain) }}
+                                </a>
+                            </li>
                         {% endif %}
                     {% endfor %}
                 </ul>
@@ -262,7 +258,7 @@ file that was distributed with this source code.
 
 {% block list_filters %}
     {% if datagrid.filters %}
-{#        {% form_theme form admin.getTemplate('filter') %}#}
+        {#        {% form_theme form admin.getTemplate('filter') %}#}
 
         <div class="col-xs-12 col-md-12 sonata-filters-box" style="display: {{ datagrid.hasDisplayableFilters ? 'block' : 'none' }}" id="filter-container-{{ admin.uniqid() }}">
             <div class="box box-primary" >
