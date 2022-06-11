@@ -77,7 +77,7 @@ file that was distributed with this source code.
 
     <div class="col-xs-12 col-md-9">
         <div class="box box-primary">
-            <div class="box-body {% if admin.datagrid.results|length > 0 %}table-responsive no-padding{% endif %}">
+            <div class="box-body {% if datagrid.results|length > 0 %}table-responsive no-padding{% endif %}">
                 {{ sonata_block_render_event('sonata.admin.list.table.top', { 'admin': admin }) }}
 
                 {% block list_header %}{% endblock %}
@@ -94,10 +94,10 @@ file that was distributed with this source code.
                                         {% set sortable = false %}
                                         {% if field_description.options.sortable is defined and field_description.options.sortable%}
                                             {% set sortable             = true %}
-                                            {% set sort_parameters      = datagrid.sortparameters(field_description, admin.datagrid)|merge(ckParameters) %}
-                                            {% set current              = datagrid.values._sort_by == field_description or admin.datagrid.values._sort_by.fieldName == sort_parameters.filter._sort_by %}
+                                            {% set sort_parameters      = datagrid.sortparameters(field_description, datagrid)|merge(ckParameters) %}
+                                            {% set current              = datagrid.query._sort_by == field_description or datagrid.query._sort_by.fieldName == sort_parameters.filter._sort_by %}
                                             {% set sort_active_class    = current ? 'sonata-ba-list-field-order-active' : '' %}
-                                            {% set sort_by              = current ? datagrid.values._sort_order : field_description.options._sort_order %}
+                                            {% set sort_by              = current ? datagrid.query._sort_order : field_description.options._sort_order %}
                                         {% endif %}
 
 
@@ -181,10 +181,10 @@ file that was distributed with this source code.
                                                 {% trans from 'SonataAdminBundle' %}label_per_page{% endtrans %}</label>
                                             <select class="per-page small" id="{{ admin.uniqid }}_per_page" style="width: auto; height: auto">
                                                 {% for per_page in admin.getperpageoptions %}
-                                                    <option {% if per_page == datagrid.pager.maxperpage %}selected="selected"{% endif %} value="{{ admin.generateUrl('ckeditor_browser', {'filter': admin.datagrid.values|merge({'_per_page': per_page})}|merge(ckParameters)) }}">
+                                                    <option {% if per_page == datagrid.pager.maxperpage %}selected="selected"{% endif %} value="{{ admin.generateUrl('ckeditor_browser', {'filter': datagrid.values|merge({'_per_page': per_page})}|merge(ckParameters)) }}">
                                                         {{ per_page }}
                                                     </option>
-                                                {% endfor %}
+                                                {% endfor %}W
                                             </select>
                                         {% endblock %}
                                     {% endblock %}
@@ -264,7 +264,7 @@ file that was distributed with this source code.
     {% if datagrid.filters %}
 {#        {% form_theme form admin.getTemplate('filter') %}#}
 
-        <div class="col-xs-12 col-md-12 sonata-filters-box" style="display: {{ admin.datagrid.hasDisplayableFilters ? 'block' : 'none' }}" id="filter-container-{{ admin.uniqid() }}">
+        <div class="col-xs-12 col-md-12 sonata-filters-box" style="display: {{ datagrid.hasDisplayableFilters ? 'block' : 'none' }}" id="filter-container-{{ admin.uniqid() }}">
             <div class="box box-primary" >
                 <div class="box-body">
                     <form class="sonata-filter-form form-horizontal {{ admin.isChild and 1 == datagrid.filters|length ? 'hide' : '' }}" action="{{ admin.generateUrl('ckeditor_browser') }}" method="GET" role="form">
