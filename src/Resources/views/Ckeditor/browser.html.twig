@@ -103,7 +103,8 @@ file that was distributed with this source code.
 
                                             <th class="sonata-ba-list-field-header-{{ field_description.type}} {% if sortable %} sonata-ba-list-field-header-order-{{ sort_by|lower }} {{ sort_active_class }}{% endif %}">
                                                 {% if sortable %}<a href="{{ admin.generateUrl('ckeditor_browser', sort_parameters) }}">{% endif %}
-                                                    {{ admin.trans(field_description.label) }}
+{#                                                    {{ admin.trans(field_description.label) }}#}
+                                                    {{ field_description.label|trans() }}
                                                     {% if sortable %}</a>{% endif %}
                                             </th>
 
