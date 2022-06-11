@@ -34,7 +34,6 @@ final class CkeditorAdminExtension extends AbstractAdminExtension
         ]);
 
         $collection->add('ckeditor_upload', 'ckeditor_upload', [
-//            '_controller' => CkeditorAdminController::class.'::uploadAction',
             '_controller' => 'sonata.formatter.ckeditor.extension.controller::uploadAction',
         ]);
     }
