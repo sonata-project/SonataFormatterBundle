@@ -95,13 +95,13 @@ file that was distributed with this source code.
                                         {% if field_description.options.sortable is defined and field_description.options.sortable%}
                                             {% set sortable             = true %}
                                             {% set sort_parameters      = datagrid.sortparameters(field_description, datagrid)|merge(ckParameters) %}
-                                            {% set current              = datagrid.query._sort_by == field_description or datagrid.query._sort_by.fieldName == sort_parameters.filter._sort_by %}
+                                            {% set current              = datagrid.query.getSortBy == field_description or datagrid.query.getSortBy == sort_parameters.filter._sort_by %}
                                             {% set sort_active_class    = current ? 'sonata-ba-list-field-order-active' : '' %}
-                                            {% set sort_by              = current ? datagrid.query._sort_order : field_description.options._sort_order %}
+                                            {% set sort_order              = current ? datagrid.query._sort_order : field_description.options._sort_order %}
                                         {% endif %}
 
 
-                                            <th class="sonata-ba-list-field-header-{{ field_description.type}} {% if sortable %} sonata-ba-list-field-header-order-{{ sort_by|lower }} {{ sort_active_class }}{% endif %}">
+                                            <th class="sonata-ba-list-field-header-{{ field_description.type}} {% if sortable %} sonata-ba-list-field-header-order-{{ sort_order|lower }} {{ sort_active_class }}{% endif %}">
                                                 {% if sortable %}<a href="{{ admin.generateUrl('ckeditor_browser', sort_parameters) }}">{% endif %}
 {#                                                    {{ admin.trans(field_description.label) }}#}
                                                     {{ field_description.label|trans() }}
