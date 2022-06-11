@@ -127,14 +127,14 @@ file that was distributed with this source code.
                                                     <img src="{{ sonata_media(object, 'admin', {sizes:'75px, 60px'}) }}" />
                                             </a>
 
-                                            <strong><a href="{{ path(object, 'reference') }}" class="select">{{ object.name }}</a></strong> <br />
+                                            <strong><a href="{{ sonata_path(object, 'reference') }}" class="select">{{ object.name }}</a></strong> <br />
                                             {{ object.providerName|trans({}, 'SonataMediaBundle') }}
                                             {% if object.width %}: {{ object.width }}{% if object.height %}x{{ object.height }}{% endif %}px{% endif %}
 
                                             {% if formats[object.id]|length > 0 %}
                                                 - {{ 'title.formats'|trans({}, 'SonataMediaBundle') }}:
                                                 {% for name, format in formats[object.id] %}
-                                                    <a href="{{ path(object, name) }}" class="select">{{ name }}</a>
+                                                    <a href="{{ sonata_path(object, name) }}" class="select">{{ name }}</a>
 
 
                                                     {% if format.width %}({{ format.width }}{% if format.height %}x{{ format.height }}{% endif %}px){% endif %}
