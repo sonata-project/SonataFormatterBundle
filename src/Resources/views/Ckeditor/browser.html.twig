@@ -124,7 +124,7 @@ file that was distributed with this source code.
                                             <a href="{{ sonata_path(object, 'reference') }}" class="select" style="float: left; margin-right: 6px;">
 {#                                                {% thumbnail object, 'admin' with {'width': 75, 'height': 60}#}
 {#                                                    {% set runtimeConfig = {"thumbnail": {"size": [75, 60] }} %}#}
-                                                    <img src="{{ sonata_media(object, 'admin', {sizes:'75px, 60px'}) }}" />
+                                                    <img src="{{ sonata_media(object, 'admin', {sizes:[75, 60]}) }}">
                                             </a>
 
                                             <strong><a href="{{ sonata_path(object, 'reference') }}" class="select">{{ object.name }}</a></strong> <br />
