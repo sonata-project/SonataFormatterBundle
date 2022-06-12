@@ -201,7 +201,7 @@ class LegacySimpleFormatterTypeTest extends TestCase
             ->with('basic')
             ->willReturn($basicToolbarSets);
 
-        /** @var \Symfony\Component\Form\FormView $view */
+        /** @var FormView $view */
         $view = $this->createMock(FormView::class);
         $form = $this->createMock(FormInterface::class);
         $this->formType->buildView($view, $form, [

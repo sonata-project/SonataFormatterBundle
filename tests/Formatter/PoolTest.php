@@ -47,7 +47,7 @@ class PoolTest extends TestCase
 
     public function testNonExistantFormatter(): void
     {
-        $this->expectException('RuntimeException');
+        $this->expectException(\RuntimeException::class);
 
         $pool = $this->getPool();
         $pool->get('foo');
@@ -91,7 +91,7 @@ class PoolTest extends TestCase
 
     public function testUnexpectedException(): void
     {
-        $this->expectException('RuntimeException');
+        $this->expectException(\RuntimeException::class);
 
         $formatter = new RawFormatter();
         $env = $this->createMock(Environment::class);

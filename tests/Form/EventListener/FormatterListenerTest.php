@@ -25,7 +25,7 @@ class FormatterListenerTest extends TestCase
 {
     public function testWithInvalidFormatter(): void
     {
-        $this->expectException('RuntimeException');
+        $this->expectException(\RuntimeException::class);
 
         $pool = $this->getPool();
 
