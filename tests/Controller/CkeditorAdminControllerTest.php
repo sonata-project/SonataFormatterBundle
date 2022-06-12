@@ -40,35 +40,23 @@ use Twig\Environment;
 
 class CkeditorAdminControllerTest extends TestCase
 {
-    /**
-     * @var Container
-     */
-    private $container;
+    private Container $container;
 
-    /**
-     * @var ParameterBag
-     */
-    private $parameterBag;
+    private ParameterBag $parameterBag;
 
     /**
      * @var AdminInterface<object>&MockObject
      */
     private $admin;
 
-    /**
-     * @var Request
-     */
-    private $request;
+    private Request $request;
 
     /**
      * @var Environment&MockObject
      */
     private $twig;
 
-    /**
-     * @var CkeditorAdminController
-     */
-    private $controller;
+    private CkeditorAdminController $controller;
 
     /**
      * @var MutableTemplateRegistryInterface&MockObject

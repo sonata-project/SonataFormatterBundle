@@ -47,15 +47,13 @@ final class FormatterBlockService extends AbstractBlockService implements Editab
     {
         $form->add('settings', ImmutableArrayType::class, [
             'keys' => [
-                ['content', FormatterType::class, static function (FormBuilderInterface $formBuilder) {
-                    return [
-                        'event_dispatcher' => $formBuilder->getEventDispatcher(),
-                        'format_field' => ['format', '[format]'],
-                        'source_field' => ['rawContent', '[rawContent]'],
-                        'target_field' => '[content]',
-                        'label' => 'form.label_content',
-                    ];
-                }],
+                ['content', FormatterType::class, static fn (FormBuilderInterface $formBuilder) => [
+                    'event_dispatcher' => $formBuilder->getEventDispatcher(),
+                    'format_field' => ['format', '[format]'],
+                    'source_field' => ['rawContent', '[rawContent]'],
+                    'target_field' => '[content]',
+                    'label' => 'form.label_content',
+                ]],
             ],
             'translation_domain' => 'SonataFormatterBundle',
         ]);
