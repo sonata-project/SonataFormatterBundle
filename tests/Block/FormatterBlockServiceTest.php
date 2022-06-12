@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\Tests\Block;
 
 use Sonata\BlockBundle\Block\BlockContext;
+use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Test\BlockServiceTestCase;
 use Sonata\FormatterBundle\Block\FormatterBlockService;
@@ -50,7 +51,7 @@ class FormatterBlockServiceTest extends BlockServiceTestCase
      */
     public function testExecuteWithDeprecatedTeamplating(): void
     {
-        if (!class_exists('Sonata\BlockBundle\Block\Service\AbstractAdminBlockService')) {
+        if (!class_exists(AbstractAdminBlockService::class)) {
             static::markTestSkipped('Skipped for block-bundle 4');
 
             return;

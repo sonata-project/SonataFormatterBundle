@@ -39,7 +39,7 @@ final class CkeditorAdminController extends MediaAdminController
 
         // set the default context
         if (!$filters || !\array_key_exists('context', $filters)) {
-            $context = $this->admin->getPersistentParameter('context', $this->get('sonata.media.pool')->getDefaultContext());
+            $context = $this->admin->getPersistentParameter('context') ?? $this->get('sonata.media.pool')->getDefaultContext();
         } else {
             $context = $filters['context']['value'];
         }

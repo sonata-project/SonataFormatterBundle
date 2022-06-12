@@ -121,14 +121,14 @@ class CkeditorAdminControllerTest extends TestCase
         $this->admin->expects(static::once())->method('checkAccess')->with('list');
         $this->admin->method('getDatagrid')->willReturn($datagrid);
         $this->admin->method('getPersistentParameter')->willReturnMap([
-            ['context', 'context', 'another_context'],
+            ['context', 'another_context'],
             ['provider', 'provider'],
         ]);
         $this->admin->method('getFilterTheme')->willReturn(['filterTheme']);
 
         $response = $this->controller->browserAction($this->request);
 
-        static::assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
+        static::assertInstanceOf(Response::class, $response);
         static::assertSame('renderResponse', $response->getContent());
     }
 

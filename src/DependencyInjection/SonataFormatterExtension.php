@@ -15,6 +15,8 @@ namespace Sonata\FormatterBundle\DependencyInjection;
 
 use FOS\CKEditorBundle\Config\CKEditorConfigurationInterface;
 use Sonata\FormatterBundle\Formatter\ExtendableFormatter;
+use Sonata\FormatterBundle\Twig\Loader\LoaderSelector;
+use Sonata\FormatterBundle\Twig\SecurityPolicyContainerAware;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -121,7 +123,7 @@ final class SonataFormatterExtension extends Extension
 
         $container->setDefinition(sprintf('sonata.formatter.twig.loader.%s', $code), $loader);
 
-        $loaderSelector = new Definition('Sonata\FormatterBundle\Twig\Loader\LoaderSelector', [
+        $loaderSelector = new Definition(LoaderSelector::class, [
             new Reference(sprintf('sonata.formatter.twig.loader.%s', $code)),
             new Reference('twig.loader'),
         ]);
@@ -136,7 +138,7 @@ final class SonataFormatterExtension extends Extension
 
         $container->setDefinition(sprintf('sonata.formatter.twig.env.%s', $code), $env);
 
-        $sandboxPolicy = new Definition('Sonata\FormatterBundle\Twig\SecurityPolicyContainerAware', [new Reference('service_container'), $extensions]);
+        $sandboxPolicy = new Definition(SecurityPolicyContainerAware::class, [new Reference('service_container'), $extensions]);
         $sandboxPolicy->setPublic(false);
         $container->setDefinition(sprintf('sonata.formatter.twig.sandbox.%s.policy', $code), $sandboxPolicy);
 

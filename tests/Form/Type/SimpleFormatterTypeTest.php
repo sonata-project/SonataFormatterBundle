@@ -70,7 +70,7 @@ class SimpleFormatterTypeTest extends TestCase
             ->with($defaultConfig)
             ->willReturn($defaultConfigValues);
 
-        /** @var \Symfony\Component\Form\FormView $view */
+        /** @var FormView $view */
         $view = $this->createMock(FormView::class);
         $view->vars['id'] = 'SomeId';
         $view->vars['name'] = 'SomeName';
@@ -123,7 +123,7 @@ class SimpleFormatterTypeTest extends TestCase
             ->method('getStyles')
             ->willReturn($styleSets);
 
-        /** @var \Symfony\Component\Form\FormView $view */
+        /** @var FormView $view */
         $view = $this->createMock(FormView::class);
         $view->vars['id'] = 'SomeId';
         $view->vars['name'] = 'SomeName';
@@ -167,7 +167,7 @@ class SimpleFormatterTypeTest extends TestCase
             ->with('basic')
             ->willReturn($basicToolbarSets);
 
-        /** @var \Symfony\Component\Form\FormView $view */
+        /** @var FormView $view */
         $view = $this->createMock(FormView::class);
         $form = $this->createMock(FormInterface::class);
         $this->formType->buildView($view, $form, [

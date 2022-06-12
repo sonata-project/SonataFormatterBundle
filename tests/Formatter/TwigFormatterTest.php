@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\Tests\Formatter;
 
 use PHPUnit\Framework\TestCase;
+use Sonata\FormatterBundle\Extension\GistExtension;
 use Sonata\FormatterBundle\Formatter\TwigFormatter;
 
 class TwigFormatterTest extends TestCase
@@ -49,7 +50,7 @@ class TwigFormatterTest extends TestCase
 
         $formatter = new TwigFormatter($twig);
 
-        $formatter->addExtension(new \Sonata\FormatterBundle\Extension\GistExtension());
+        $formatter->addExtension(new GistExtension());
     }
 
     public function testGetFormatterExtension(): void

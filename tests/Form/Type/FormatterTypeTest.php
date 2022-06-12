@@ -265,7 +265,7 @@ class FormatterTypeTest extends TestCase
             ->with($defaultConfig)
             ->willReturn($defaultConfigValues);
 
-        /** @var \Symfony\Component\Form\FormView $view */
+        /** @var FormView $view */
         $view = $this->createMock(FormView::class);
         $view->vars['id'] = 'SomeId';
         $view->vars['name'] = 'SomeName';
@@ -292,7 +292,7 @@ class FormatterTypeTest extends TestCase
 
         $ckEditorToolBarIcons = ['Icon 1'];
 
-        /** @var \Symfony\Component\Form\FormView $view */
+        /** @var FormView $view */
         $view = $this->createMock(FormView::class);
         $view->vars['id'] = 'SomeId';
         $view->vars['name'] = 'SomeName';
@@ -325,7 +325,7 @@ class FormatterTypeTest extends TestCase
 
         $ckEditorToolBarIcons = ['Icon 1'];
 
-        /** @var \Symfony\Component\Form\FormView $view */
+        /** @var FormView $view */
         $view = $this->createMock(FormView::class);
         $view->vars['id'] = 'SomeId';
         $view->vars['name'] = 'SomeName';
@@ -358,7 +358,7 @@ class FormatterTypeTest extends TestCase
 
         $format = 'html';
 
-        /** @var \Symfony\Component\Form\FormView $view */
+        /** @var FormView $view */
         $view = $this->createMock(FormView::class);
         $view->vars['id'] = 'SomeId';
         $view->vars['name'] = 'SomeName';
