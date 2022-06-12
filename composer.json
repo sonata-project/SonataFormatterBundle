@@ -1,5 +1,5 @@
 {
-    "name": "sonata-project/formatter-bundle",
+    "name": "sonata-project/formatter-bundle-tworks",
     "description": "Symfony SonataFormatterBundle",
     "license": "MIT",
     "type": "symfony-bundle",
