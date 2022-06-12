@@ -13,17 +13,26 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\App;
 
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use FOS\CKEditorBundle\FOSCKEditorBundle;
+use Knp\Bundle\MenuBundle\KnpMenuBundle;
+use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\BlockBundle\SonataBlockBundle;
+use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
+use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
+use Sonata\Form\Bridge\Symfony\SonataFormBundle;
 use Sonata\FormatterBundle\SonataFormatterBundle;
 use Sonata\MediaBundle\SonataMediaBundle;
+use Sonata\Twig\Bridge\Symfony\SonataTwigBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 
 /**
  * @psalm-suppress PropertyNotSetInConstructor
@@ -43,9 +52,17 @@ final class AppKernel extends Kernel
     {
         return [
             new FrameworkBundle(),
+            new SecurityBundle(),
             new TwigBundle(),
+            new DoctrineBundle(),
+            new KnpMenuBundle(),
             new FOSCKEditorBundle(),
+            new SonataFormBundle(),
+            new SonataTwigBundle(),
             new SonataBlockBundle(),
+            new SonataDoctrineBundle(),
+            new SonataAdminBundle(),
+            new SonataDoctrineORMAdminBundle(),
             new SonataMediaBundle(),
             new SonataFormatterBundle(),
         ];
@@ -73,44 +90,19 @@ final class AppKernel extends Kernel
      */
     protected function configureRoutes($routes): void
     {
+        $routes->import(__DIR__.'/Resources/config/routing/routes.yaml');
     }
 
-    protected function configureContainer(ContainerBuilder $containerBuilder, LoaderInterface $loader): void
+    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
-        $containerBuilder->loadFromExtension('framework', [
-            'secret' => 'MySecret',
-        ]);
+        $loader->load(__DIR__.'/Resources/config/config.yaml');
 
-        $containerBuilder->loadFromExtension('sonata_media', [
-            'default_context' => 'default',
-            'contexts' => [
-                'default' => [
-                    'download' => [
-                        'strategy' => 'sonata.media.security.public_strategy',
-                    ],
-                ],
-            ],
-            'cdn' => [
-                'server' => [
-                    'path' => '/uploads/media',
-                ],
-            ],
-            'filesystem' => [
-                'local' => [
-                    'directory' => '%kernel.project_dir%/uploads',
-                    'create' => true,
-                ],
-            ],
-        ]);
-
-        $containerBuilder->loadFromExtension('sonata_formatter', [
-            'default_formatter' => 'rawhtml',
-            'formatters' => [
-                'rawhtml' => [
-                    'service' => 'sonata.formatter.text.raw',
-                ],
-            ],
-        ]);
+        if (class_exists(AuthenticatorManager::class)) {
+            $loader->load(__DIR__.'/Resources/config/config_symfony_v5.yaml');
+        } else {
+            $loader->load(__DIR__.'/Resources/config/config_symfony_v4.yaml');
+        }
+        $container->setParameter('app.base_dir', $this->getBaseDir());
     }
 
     private function getBaseDir(): string
