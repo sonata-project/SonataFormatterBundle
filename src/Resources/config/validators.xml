@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <services>
-        <service id="sonata.formatter.validator.formatter" class="Sonata\FormatterBundle\Validator\Constraints\FormatterValidator">
-            <argument type="service" id="sonata.formatter.pool"/>
-            <tag name="validator.constraint_validator" alias="sonata.formatter.validator.formatter"/>
-        </service>
-    </services>
-</container>
