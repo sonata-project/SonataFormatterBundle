@@ -33,10 +33,11 @@ final class CkeditorAdminController extends CRUDController
     public static function getSubscribedServices(): array
     {
         return [
-                'sonata.media.pool' => Pool::class,
-                'sonata.media.manager.category' => '?'.CategoryManagerInterface::class,
-                'sonata.media.manager.context' => '?'.ContextManagerInterface::class,
-            ] + parent::getSubscribedServices();
+            'sonata.media.pool' => Pool::class,
+            'sonata.media.manager.media' => MediaManagerInterface::class,
+            'sonata.media.manager.category' => '?'.CategoryManagerInterface::class,
+            'sonata.media.manager.context' => '?'.ContextManagerInterface::class,
+        ] + parent::getSubscribedServices();
     }
 
     /**
