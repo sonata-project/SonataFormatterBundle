@@ -122,9 +122,9 @@ class PoolTest extends TestCase
     {
         $env = $this->createMock(Environment::class);
 
-        $env->expects(static::once())->method('createTemplate')->willReturnCallback(static function () use ($env, $template) {
-            return new TemplateWrapper($env, $template);
-        });
+        $env->expects(static::once())->method('createTemplate')->willReturnCallback(
+            static fn () => new TemplateWrapper($env, $template)
+        );
 
         return $env;
     }
