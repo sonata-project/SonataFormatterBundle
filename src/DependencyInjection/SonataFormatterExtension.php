@@ -20,7 +20,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Twig\Environment;
@@ -42,25 +42,25 @@ final class SonataFormatterExtension extends Extension
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('formatter.xml');
-        $loader->load('twig.xml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('formatter.php');
+        $loader->load('twig.php');
 
-        $loader->load('validators.xml');
+        $loader->load('validators.php');
 
         $bundles = $container->getParameter('kernel.bundles');
         \assert(\is_array($bundles));
 
         if (isset($bundles['FOSCKEditorBundle'])) {
-            $loader->load('form.xml');
+            $loader->load('form.php');
         }
 
         if (isset($bundles['SonataBlockBundle'])) {
-            $loader->load('block.xml');
+            $loader->load('block.php');
         }
 
         if (isset($bundles['SonataMediaBundle'])) {
-            $loader->load('ckeditor.xml');
+            $loader->load('ckeditor.php');
         }
 
         if (!\array_key_exists($config['default_formatter'], $config['formatters'])) {

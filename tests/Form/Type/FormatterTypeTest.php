@@ -208,7 +208,7 @@ class FormatterTypeTest extends TestCase
 
         $format = 'html';
 
-        /** @var \Symfony\Component\Form\FormView $view */
+        /** @var FormView $view */
         $view = $this->createMock(FormView::class);
         $view->vars['id'] = 'SomeId';
         $view->vars['name'] = 'SomeName';
