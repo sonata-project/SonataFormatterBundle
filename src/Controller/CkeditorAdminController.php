@@ -129,7 +129,7 @@ final class CkeditorAdminController extends CRUDController{
      * @throws AccessDeniedException
      * @throws NotFoundHttpException
      */
-    public function uploadAction(Request $request,MediaManagerInterface $mediaManager): Response
+    public function uploadAction(Request $request, MediaManagerInterface $mediaManager): Response
     {
         $this->checkIfMediaBundleIsLoaded();
 
