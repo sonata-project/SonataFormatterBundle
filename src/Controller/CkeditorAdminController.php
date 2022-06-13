@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Controller;
 
+use Psr\Container\ContainerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
@@ -28,8 +29,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * @phpstan-extends CRUDController<object>
  */
-final class CkeditorAdminController extends CRUDController
-{
+final class CkeditorAdminController extends CRUDController{
+
     public static function getSubscribedServices(): array
     {
         return [
