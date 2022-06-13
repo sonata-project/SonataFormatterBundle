@@ -168,7 +168,7 @@ file that was distributed with this source code.
                                         {% endblock %}
 
                                         {% block num_results %}
-                                            {% trans with {'%count%': datagrid.results|length } from 'SonataAdminBundle' %}list_results_count{% endtrans %}
+                                            {% trans with {'%count%': datagrid.pager.countResults } from 'SonataAdminBundle' %}list_results_count{% endtrans %}
                                             &nbsp;-&nbsp;
                                         {% endblock %}
 
@@ -180,7 +180,7 @@ file that was distributed with this source code.
                                                 <option {% if per_page == datagrid.pager.maxperpage %}selected="selected"{% endif %} value="{{ admin.generateUrl('ckeditor_browser', {'filter': datagrid.values|merge({'_per_page': per_page})}|merge(ckParameters)) }}">
                                                     {{ per_page }}
                                                 </option>
-                                                {% endfor %}W
+                                                {% endfor %}
                                             </select>
                                         {% endblock %}
                                     {% endblock %}
