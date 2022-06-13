@@ -31,11 +31,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 final class CkeditorAdminController extends CRUDController{
 
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
-    }
-
     public static function getSubscribedServices(): array
     {
         return [
@@ -135,7 +130,6 @@ final class CkeditorAdminController extends CRUDController{
 
         $this->admin->checkAccess('create');
 
-//        $mediaManager = $this->container->get('sonata.media.manager.media');
         \assert($mediaManager instanceof MediaManagerInterface);
 
         $provider = $request->get('provider');
