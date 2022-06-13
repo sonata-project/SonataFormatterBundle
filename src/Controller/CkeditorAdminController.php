@@ -29,8 +29,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * @phpstan-extends CRUDController<object>
  */
-final class CkeditorAdminController extends CRUDController{
-
+final class CkeditorAdminController extends CRUDController
+{
     public static function getSubscribedServices(): array
     {
         return [
