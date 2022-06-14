@@ -41,6 +41,8 @@ twig:
     exception_controller: null
     paths:
         - "%kernel.project_dir%/Resources/views"
+    form_themes:
+        - "@SonataFormatter/Form/formatter.html.twig"
     strict_variables: true
 
 sonata_media:

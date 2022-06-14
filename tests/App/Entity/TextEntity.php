@@ -72,7 +72,7 @@ class TextEntity
         $this->textFormat = $textFormat;
     }
 
-    public function gettextFormat(): ?string
+    public function getTextFormat(): ?string
     {
         return $this->textFormat;
     }

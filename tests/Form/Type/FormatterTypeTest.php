@@ -15,25 +15,24 @@ namespace Sonata\FormatterBundle\Tests\Form\Type;
 
 use FOS\CKEditorBundle\Config\CKEditorConfigurationInterface;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
+use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
+use Sonata\FormatterBundle\Formatter\FormatterInterface;
 use Sonata\FormatterBundle\Formatter\Pool;
-use Sonata\FormatterBundle\Formatter\TextFormatter;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Sonata\FormatterBundle\Tests\App\Entity\TextEntity;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormExtensionInterface;
+use Symfony\Component\Form\PreloadedExtension;
+use Symfony\Component\Form\Test\TypeTestCase;
+use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class FormatterTypeTest extends TestCase
+final class FormatterTypeTest extends TypeTestCase
 {
     private Pool $pool;
-
-    private FormatterType $formType;
 
     /**
      * @var CKEditorConfigurationInterface&MockObject
@@ -42,216 +41,177 @@ class FormatterTypeTest extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
-
-        $this->pool = new Pool('');
+        $this->pool = new Pool('text');
         $this->ckEditorConfiguration = $this->createMock(CKEditorConfigurationInterface::class);
-        $this->formType = new FormatterType($this->pool, $this->ckEditorConfiguration);
+
+        parent::setUp();
     }
 
-    public function testBuildFormOneChoice(): void
+    public function testRequiredOptions(): void
     {
-        $choiceFormBuilder = $this->createMock(FormBuilderInterface::class);
-        $choiceFormBuilder->expects(static::once())
-            ->method('getOption')
-            ->with('choices')
-            ->willReturn(['foo' => 'bar']);
+        $this->expectException(MissingOptionsException::class);
+        $this->expectExceptionMessage('An error has occurred resolving the options of the form "Sonata\FormatterBundle\Form\Type\FormatterType": The required options "format_field", "source_field" are missing.');
 
-        $formBuilder = $this->createMock(FormBuilderInterface::class);
-        $formBuilder->expects(static::exactly(3))->method('add');
-        $formBuilder->expects(static::once())->method('get')->willReturn($choiceFormBuilder);
-        $formBuilder->expects(static::once())->method('remove');
+        $this->factory->create(FormatterType::class);
+    }
 
-        $options = [
-            'format_field' => 'format',
-            'source_field' => 'source',
-            'format_field_options' => [
-                'property_path' => '',
-            ],
-            'source_field_options' => [
-                'property_path' => '',
-            ],
-            'listener' => false,
+    public function testWithoutListener(): void
+    {
+        $formData = ['text' => [
+            'rawText' => 'test source',
+        ]];
+        $model = new TextEntity();
+
+        $form = $this->factory->createBuilder(FormType::class, $model)
+            ->add('text', FormatterType::class, [
+                'format_field' => 'textFormat',
+                'source_field' => 'rawText',
+                'listener' => false,
+            ])
+            ->getForm();
+
+        static::assertTrue($form->get('text')->has('textFormat'));
+        static::assertTrue($form->get('text')->has('rawText'));
+
+        $form->submit($formData);
+
+        static::assertTrue($form->isSynchronized());
+        static::assertSame('test source', $model->getRawText());
+    }
+
+    public function testWithOneFormat(): void
+    {
+        $this->pool->add('text', $this->createStub(FormatterInterface::class));
+
+        $formData = ['text' => [
+            'rawText' => 'test source',
+        ]];
+        $model = new TextEntity();
+
+        $form = $this->factory->createBuilder(FormType::class, $model)
+            ->add('text', FormatterType::class, [
+                'format_field' => 'textFormat',
+                'source_field' => 'rawText',
+                'listener' => false,
+            ])
+            ->getForm();
+
+        $form->submit($formData);
+
+        static::assertTrue($form->isSynchronized());
+        static::assertSame('test source', $model->getRawText());
+        static::assertSame('text', $model->getTextFormat());
+    }
+
+    public function testWithMultipleFormat(): void
+    {
+        $this->pool->add('text', $this->createStub(FormatterInterface::class));
+        $this->pool->add('rawhtml', $this->createStub(FormatterInterface::class));
+
+        $formData = ['text' => [
+            'rawText' => 'test source',
+            'textFormat' => 'rawhtml',
+        ]];
+        $model = new TextEntity();
+
+        $form = $this->factory->createBuilder(FormType::class, $model)
+            ->add('text', FormatterType::class, [
+                'format_field' => 'textFormat',
+                'source_field' => 'rawText',
+                'listener' => false,
+            ])
+            ->getForm();
+
+        static::assertCount(2, $form->get('text')->get('textFormat')->getConfig()->getOption('choices'));
+
+        $form->submit($formData);
+
+        static::assertTrue($form->isSynchronized());
+        static::assertSame('test source', $model->getRawText());
+        static::assertSame('rawhtml', $model->getTextFormat());
+    }
+
+    public function testWithEventListener(): void
+    {
+        $formBuilder = $this->factory->createBuilder(FormType::class, null)
+            ->add('text', FormatterType::class, [
+                'format_field' => 'textFormat',
+                'source_field' => 'rawText',
+                'target_field' => 'text',
+            ]);
+
+        $listeners = $formBuilder->get('text')->getEventDispatcher()->getListeners(FormEvents::SUBMIT);
+
+        static::assertCount(1, $listeners);
+        static::assertIsArray($listeners[0]);
+        static::assertCount(2, $listeners[0]);
+        static::assertInstanceOf(FormatterListener::class, $listeners[0][0]);
+        static::assertSame('postSubmit', $listeners[0][1]);
+    }
+
+    public function testWithPropertyPaths(): void
+    {
+        $this->pool->add('text', $this->createStub(FormatterInterface::class));
+
+        $formData = ['targetText' => [
+            'textRaw' => 'test source',
+        ]];
+        $model = new TextEntity();
+
+        $form = $this->factory->createBuilder(FormType::class, $model)
+            ->add('targetText', FormatterType::class, [
+                'format_field' => 'formatText',
+                'format_field_options' => [
+                    'property_path' => 'textFormat',
+                ],
+                'source_field' => 'textRaw',
+                'source_field_options' => [
+                    'property_path' => 'rawText',
+                ],
+                'target_field' => 'text',
+            ])
+            ->getForm();
+
+        $form->submit($formData);
+
+        static::assertTrue($form->isSynchronized());
+        static::assertSame('text', $model->getTextFormat());
+        static::assertSame('test source', $model->getRawText());
+    }
+
+    public function testFormView(): void
+    {
+        $this->ckEditorConfiguration->expects(static::once())->method('getDefaultConfig')->willReturn('default');
+
+        $this->pool->add('text', $this->createStub(FormatterInterface::class));
+        $this->pool->add('rawhtml', $this->createStub(FormatterInterface::class));
+
+        $view = $this->factory->createBuilder(FormType::class, null)
+            ->add('text', FormatterType::class, [
+                'format_field' => 'textFormat',
+                'source_field' => 'rawText',
+                'listener' => false,
+            ])
+            ->getForm()
+            ->createView();
+
+        static::assertSame('rawText', $view->children['text']->vars['source_field']);
+        static::assertSame('textFormat', $view->children['text']->vars['format_field']);
+        static::assertIsArray($view->children['text']->vars['ckeditor_configuration']);
+        static::assertSame([], $view->children['text']->vars['ckeditor_plugins']);
+        static::assertSame([], $view->children['text']->vars['ckeditor_templates']);
+        static::assertSame([], $view->children['text']->vars['ckeditor_style_sets']);
+    }
+
+    /**
+     * @return FormExtensionInterface[]
+     */
+    protected function getExtensions(): array
+    {
+        return [
+            new PreloadedExtension([
+                new FormatterType($this->pool, $this->ckEditorConfiguration),
+            ], []),
         ];
-
-        $this->formType->buildForm($formBuilder, $options);
-    }
-
-    public function testBuildFormSeveralChoices(): void
-    {
-        $choiceFormBuilder = $this->createMock(FormBuilderInterface::class);
-        $choiceFormBuilder->expects(static::once())
-            ->method('getOption')
-            ->with('choices')
-            ->willReturn(['foo' => 'bar', 'foo2' => 'bar2']);
-
-        $formBuilder = $this->createMock(FormBuilderInterface::class);
-        $formBuilder->expects(static::exactly(2))->method('add');
-        $formBuilder->expects(static::once())->method('get')->willReturn($choiceFormBuilder);
-
-        $options = [
-            'format_field' => 'format',
-            'source_field' => 'source',
-            'format_field_options' => [
-                'property_path' => '',
-            ],
-            'source_field_options' => [
-                'property_path' => '',
-            ],
-            'listener' => false,
-        ];
-
-        $this->formType->buildForm($formBuilder, $options);
-    }
-
-    public function testBuildFormWithCustomFormatter(): void
-    {
-        $this->pool->add('text', new TextFormatter());
-
-        $formatters = ['text' => 'Text'];
-
-        $choiceFormBuilder = $this->createMock(FormBuilderInterface::class);
-
-        $choiceFormBuilder->expects(static::once())
-            ->method('getOption')
-            ->with('choices')
-            ->willReturn($formatters);
-
-        $options = [
-            'format_field' => 'SomeFormatField',
-            'source_field' => 'SomeSourceField',
-            'format_field_options' => [
-                'property_path' => '',
-                'data' => $selectedFormat = 'text',
-                'choices' => $formatters,
-            ],
-            'source_field_options' => [
-                'property_path' => '',
-            ],
-            'listener' => false,
-        ];
-
-        $formBuilder = $this->createMock(FormBuilderInterface::class);
-        $formBuilder
-            ->method('add')
-            ->withConsecutive(
-                ['SomeFormatField', ChoiceType::class, [
-                    'property_path' => 'SomeFormatField',
-                    'data' => $selectedFormat,
-                    'choices' => $formatters,
-                ]],
-                ['SomeFormatField', HiddenType::class, [
-                    'property_path' => 'SomeFormatField',
-                    'data' => $selectedFormat,
-                ]]
-            );
-        $formBuilder->expects(static::once())->method('get')->willReturn($choiceFormBuilder);
-
-        $this->formType->buildForm($formBuilder, $options);
-    }
-
-    public function testBuildFormWithDefaultFormatter(): void
-    {
-        $this->pool->add('text', new TextFormatter());
-
-        $formatters = ['text' => 'Text'];
-
-        $choiceFormBuilder = $this->createMock(FormBuilderInterface::class);
-        $choiceFormBuilder->expects(static::once())
-            ->method('getOption')
-            ->with('choices')
-            ->willReturn($formatters);
-
-        $formBuilder = $this->createMock(FormBuilderInterface::class);
-        $formBuilder
-            ->method('add')
-            ->withConsecutive(
-                ['SomeFormatField', ChoiceType::class, [
-                    'property_path' => 'SomeFormatField',
-                    'data' => $defaultFormatter = 'text',
-                    'choices' => $formatters,
-                ]],
-                ['SomeFormatField', HiddenType::class, [
-                    'property_path' => 'SomeFormatField',
-                    'data' => $defaultFormatter,
-                ]]
-            );
-        $formBuilder->expects(static::once())->method('get')->willReturn($choiceFormBuilder);
-
-        $options = [
-            'format_field' => 'SomeFormatField',
-            'source_field' => 'SomeSourceField',
-            'format_field_options' => [
-                'property_path' => '',
-                'data' => 'text',
-                'choices' => $formatters,
-            ],
-            'source_field_options' => [
-                'property_path' => '',
-            ],
-            'listener' => false,
-        ];
-
-        $this->formType->buildForm($formBuilder, $options);
-    }
-
-    public function testBuildViewWithFormatter(): void
-    {
-        $defaultConfig = 'default';
-        $this->ckEditorConfiguration->expects(static::once())->method('getDefaultConfig')->willReturn($defaultConfig);
-
-        $ckEditorToolBarIcons = ['Icon 1'];
-
-        $formatters = [];
-        $formatters['text'] = 'Text';
-        $formatters['html'] = 'HTML';
-
-        $format = 'html';
-
-        /** @var FormView $view */
-        $view = $this->createMock(FormView::class);
-        $view->vars['id'] = 'SomeId';
-        $view->vars['name'] = 'SomeName';
-        $form = $this->createMock(FormInterface::class);
-        $this->formType->buildView($view, $form, [
-            'source_field' => 'SomeField',
-            'format_field' => 'SomeFormat',
-            'format_field_options' => [
-                'choices' => $formatters,
-                'data' => $format,
-            ],
-            'ckeditor_context' => null,
-            'ckeditor_image_format' => null,
-            'ckeditor_basepath' => '',
-            'ckeditor_plugins' => [],
-            'ckeditor_templates' => [],
-            'ckeditor_toolbar_icons' => $ckEditorToolBarIcons,
-        ]);
-
-        static::assertSame($view->vars['format_field_options']['data'], $format);
-    }
-
-    public function testOptions(): void
-    {
-        $this->pool->add('text', new TextFormatter());
-
-        $optionsResolver = new OptionsResolver();
-        $optionsResolver->setDefaults([
-            'source_field' => 'sourceField',
-            'target_field' => 'targetField',
-            'format_field' => 'formatField',
-        ]);
-
-        $this->formType->configureOptions($optionsResolver);
-
-        $options = $optionsResolver->resolve();
-
-        $expectedOptions = [
-            'choices' => [
-                'text' => 'text',
-            ],
-        ];
-
-        static::assertSame($expectedOptions, $options['format_field_options']);
     }
 }
