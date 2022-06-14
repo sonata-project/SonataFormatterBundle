@@ -236,6 +236,11 @@ class FormatterTypeTest extends TestCase
         $this->pool->add('text', new TextFormatter());
 
         $optionsResolver = new OptionsResolver();
+        $optionsResolver->setDefaults([
+            'source_field' => 'sourceField',
+            'target_field' => 'targetField',
+            'format_field' => 'formatField',
+        ]);
 
         $this->formType->configureOptions($optionsResolver);
 
