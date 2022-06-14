@@ -14,7 +14,8 @@ file that was distributed with this source code.
     <!-- widget: sonata_formatter_type_widget -->
     <div style="margin-bottom: 5px;">
         {{ form_widget(form.children[format_field]) }}
-        {% if format_field_options.choices|length > 1 %}
+
+        {% if form.children[format_field].vars.choices|length > 1 %}
             <i>{{ "please_select_format_method"|trans({}, "SonataFormatterBundle") }}</i>
         {% endif %}
     </div>
