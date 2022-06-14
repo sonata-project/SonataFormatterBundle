@@ -102,6 +102,8 @@ final class AppKernel extends Kernel
         } else {
             $loader->load(__DIR__.'/Resources/config/config_symfony_v4.yaml');
         }
+
+        $loader->load(__DIR__.'/Resources/config/services.php');
         $container->setParameter('app.base_dir', $this->getBaseDir());
     }
 

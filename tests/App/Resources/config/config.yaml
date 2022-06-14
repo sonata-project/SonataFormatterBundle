@@ -25,6 +25,18 @@ doctrine:
                         is_bundle: false
                         prefix: Sonata\FormatterBundle\Tests\App\Entity
 
+fos_ck_editor:
+    configs:
+        default:
+            toolbar:
+                - [Undo, Redo]
+                - [Bold, Italic, -, RemoveFormat]
+                - [Link, Unlink]
+                - [NumberedList, BulletedList, Blockquote]
+                - [Image]
+                - [Maximize]
+                - [Source]
+
 sonata_media:
     db_driver: doctrine_orm
     class:
@@ -49,7 +61,9 @@ sonata_block:
     http_cache: false
 
 sonata_formatter:
-    default_formatter: rawhtml
+    default_formatter: text
     formatters:
+        text:
+            service: sonata.formatter.text.text
         rawhtml:
             service: sonata.formatter.text.raw
