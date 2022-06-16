@@ -43,9 +43,4 @@ final class TextFormatterExtension extends AbstractExtension
     {
         return $this->pool->transform($type, $text);
     }
-
-    public function getName(): string
-    {
-        return 'sonata_text_formatter';
-    }
 }
