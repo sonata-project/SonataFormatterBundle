@@ -31,7 +31,7 @@ final class TextEntityAdmin extends AbstractAdmin
                 'format' => 'rawhtml',
             ])
             ->add('text', FormatterType::class, [
-                'listener' => false,
+                'event_dispatcher' => $form->getFormBuilder()->getEventDispatcher(),
                 'format_field' => 'textFormat',
                 'source_field' => 'rawText',
                 'target_field' => 'text',

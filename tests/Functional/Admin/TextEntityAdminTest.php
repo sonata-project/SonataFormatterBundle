@@ -89,6 +89,22 @@ final class TextEntityAdminTest extends WebTestCase
             'textEntity[text][rawText]' => 'Sample Raw HTML',
         ]];
 
+        yield 'Create TextEntity Raw HTML With Gist' => ['/admin/tests/app/textentity/create', [
+            'uniqid' => 'textEntity',
+        ], 'btn_create_and_list', [
+            'textEntity[simpleText]' => 'simple text',
+            'textEntity[text][textFormat]' => 'rawhtml',
+            'textEntity[text][rawText]' => "Sample Raw HTML with some <% gist '1552362', 'gistfile1.txt' %>",
+        ]];
+
+        yield 'Create TextEntity Raw HTML With Control Flow' => ['/admin/tests/app/textentity/create', [
+            'uniqid' => 'textEntity',
+        ], 'btn_create_and_list', [
+            'textEntity[simpleText]' => 'simple text',
+            'textEntity[text][textFormat]' => 'rawhtml',
+            'textEntity[text][rawText]' => 'Sample Raw HTML with some <% for i in 1..5 %><% if i > 2 %><%= i %><% endif %><% endfor %>',
+        ]];
+
         yield 'Edit TextEntity' => ['/admin/tests/app/textentity/1/edit', [], 'btn_update_and_list'];
     }
 

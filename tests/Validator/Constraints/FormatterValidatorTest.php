@@ -15,6 +15,7 @@ namespace Sonata\FormatterBundle\Tests\Validator\Constraints;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Sonata\FormatterBundle\Formatter\FormatterInterface;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Sonata\FormatterBundle\Validator\Constraints\Formatter;
 use Sonata\FormatterBundle\Validator\Constraints\FormatterValidator;
@@ -63,7 +64,7 @@ class FormatterValidatorTest extends TestCase
 
     public function testValidCase(): void
     {
-        $this->pool->add('existingFormatter', $this->createMock(\Sonata\FormatterBundle\Formatter\Formatter::class));
+        $this->pool->add('existingFormatter', $this->createMock(FormatterInterface::class));
 
         $this->constraint->message = $message = 'Constraint message';
 

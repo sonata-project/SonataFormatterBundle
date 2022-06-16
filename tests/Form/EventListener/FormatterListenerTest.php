@@ -16,7 +16,7 @@ namespace Sonata\FormatterBundle\Tests\Form\EventListener;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
-use Sonata\FormatterBundle\Formatter\Formatter;
+use Sonata\FormatterBundle\Formatter\FormatterInterface;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormInterface;
@@ -42,7 +42,7 @@ class FormatterListenerTest extends TestCase
 
     public function testWithValidFormatter(): void
     {
-        $formatter = $this->createMock(Formatter::class);
+        $formatter = $this->createMock(FormatterInterface::class);
         $formatter->expects(static::once())->method('transform')->willReturnCallback(
             static fn (string $text) => strtoupper($text)
         );
