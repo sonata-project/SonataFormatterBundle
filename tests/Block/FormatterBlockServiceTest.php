@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\Tests\Block;
 
 use Sonata\BlockBundle\Block\BlockContext;
+use Sonata\BlockBundle\Form\Mapper\FormMapper;
 use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Test\BlockServiceTestCase;
 use Sonata\FormatterBundle\Block\FormatterBlockService;
@@ -39,6 +40,13 @@ class FormatterBlockServiceTest extends BlockServiceTestCase
             ->willReturn('TWIG_CONTENT');
 
         $blockService = new FormatterBlockService($this->twig);
+
+        $formMapper = $this->createMock(FormMapper::class);
+        $formMapper->expects(static::exactly(2))->method('add');
+
+        $blockService->configureCreateForm($formMapper, $block);
+        $blockService->configureEditForm($formMapper, $block);
+
         $blockService->execute($blockContext);
     }
 

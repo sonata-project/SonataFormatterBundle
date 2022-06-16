@@ -57,8 +57,19 @@ sonata_media:
             directory: "%kernel.project_dir%/uploads"
             create: true
 
+sonata_admin:
+    dashboard:
+        blocks:
+            - type: sonata.formatter.block.formatter
+              settings:
+                  rawContent: >
+                      <h2>Example Block Configuration</h2>
+                      This is for testing purposes
+
 sonata_block:
     http_cache: false
+    blocks:
+        sonata.formatter.block.formatter: null
 
 sonata_formatter:
     default_formatter: text
