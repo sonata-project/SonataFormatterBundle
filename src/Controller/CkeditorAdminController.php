@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Controller;
 
-use Psr\Container\ContainerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
