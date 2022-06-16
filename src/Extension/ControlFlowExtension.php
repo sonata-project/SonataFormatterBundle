@@ -32,7 +32,9 @@ final class ControlFlowExtension extends BaseExtension
 
     public function getAllowedFunctions(): array
     {
-        return [];
+        return [
+            'range',
+        ];
     }
 
     public function getName(): string

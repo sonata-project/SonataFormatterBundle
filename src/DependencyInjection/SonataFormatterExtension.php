@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\DependencyInjection;
 
-use Sonata\FormatterBundle\Formatter\ExtendableFormatter;
 use Sonata\FormatterBundle\Twig\Loader\LoaderSelector;
 use Sonata\FormatterBundle\Twig\SecurityPolicyContainerAware;
 use Symfony\Component\Config\Definition\Processor;
@@ -81,7 +80,6 @@ final class SonataFormatterExtension extends Extension
                 $env = new Reference($this->createEnvironment(
                     $container,
                     $code,
-                    $formatterConfig['service'],
                     $formatterConfig['extensions']
                 ));
             }
@@ -119,7 +117,6 @@ final class SonataFormatterExtension extends Extension
     private function createEnvironment(
         ContainerBuilder $container,
         string $code,
-        string $formatterId,
         array $extensions
     ): string {
         $loader = new Definition(ArrayLoader::class);
@@ -152,16 +149,10 @@ final class SonataFormatterExtension extends Extension
 
         $container->setDefinition(sprintf('sonata.formatter.twig.sandbox.%s', $code), $sandbox);
 
-        $formatterDefinition = $container->getDefinition($formatterId);
-        if (
-            null !== $formatterDefinition->getClass()
-            && is_a($formatterDefinition->getClass(), ExtendableFormatter::class, true)
-        ) {
-            $formatterDefinition->addMethodCall('addExtension', [new Reference(sprintf('sonata.formatter.twig.sandbox.%s', $code))]);
+        $env->addMethodCall('addExtension', [new Reference(sprintf('sonata.formatter.twig.sandbox.%s', $code))]);
 
-            foreach ($extensions as $extension) {
-                $formatterDefinition->addMethodCall('addExtension', [new Reference($extension)]);
-            }
+        foreach ($extensions as $extension) {
+            $env->addMethodCall('addExtension', [new Reference($extension)]);
         }
 
         $lexer = new Definition(Lexer::class, [new Reference(sprintf('sonata.formatter.twig.env.%s', $code)), [

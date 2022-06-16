@@ -67,3 +67,6 @@ sonata_formatter:
             service: sonata.formatter.text.text
         rawhtml:
             service: sonata.formatter.text.raw
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist

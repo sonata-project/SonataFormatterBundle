@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Formatter;
 
-interface Formatter
+interface FormatterInterface
 {
     public function transform(string $text): string;
 }
