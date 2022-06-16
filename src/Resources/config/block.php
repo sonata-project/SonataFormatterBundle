@@ -16,15 +16,10 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->parameters()
-
-        ->set('sonata.formatter.block.formatter.class', FormatterBlockService::class);
-
     // Use "service" function for creating references to services when dropping support for Symfony 4.4
-    // Use "param" function for creating references to parameters when dropping support for Symfony 5.1
     $containerConfigurator->services()
 
-        ->set('sonata.formatter.block.formatter', '%sonata.formatter.block.formatter.class%')
+        ->set('sonata.formatter.block.formatter', FormatterBlockService::class)
             ->tag('sonata.block')
             ->args([
                 new ReferenceConfigurator('twig'),

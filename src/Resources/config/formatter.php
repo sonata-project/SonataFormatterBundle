@@ -18,14 +18,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->parameters()
-
-        ->set('sonata.formatter.text.text.class', TextFormatter::class)
-
-        ->set('sonata.formatter.text.raw.class', RawFormatter::class);
-
     // Use "service" function for creating references to services when dropping support for Symfony 4.4
-    // Use "param" function for creating references to parameters when dropping support for Symfony 5.1
     $containerConfigurator->services()
 
         ->set('sonata.formatter.pool', Pool::class)
@@ -33,9 +26,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 new ReferenceConfigurator('logger'),
             ])
 
-        ->set('sonata.formatter.text.text', '%sonata.formatter.text.text.class%')
+        ->set('sonata.formatter.text.text', TextFormatter::class)
             ->tag('sonata.text.formatter')
 
-        ->set('sonata.formatter.text.raw', '%sonata.formatter.text.raw.class%')
+        ->set('sonata.formatter.text.raw', RawFormatter::class)
             ->tag('sonata.text.formatter');
 };

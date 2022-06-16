@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\App;
 
+use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use FOS\CKEditorBundle\FOSCKEditorBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
@@ -51,6 +52,7 @@ final class AppKernel extends Kernel
     public function registerBundles(): iterable
     {
         return [
+            new DAMADoctrineTestBundle(),
             new FrameworkBundle(),
             new SecurityBundle(),
             new TwigBundle(),
