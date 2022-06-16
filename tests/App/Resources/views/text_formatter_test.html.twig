@@ -1,0 +1,20 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{%- apply spaceless|format_text('rawhtml')|raw %}
+    <h1>Test</h1>
+    <% for i in 1..5 %>
+        <% if i > 2 %>
+            <%= i %>
+        <% endif %>
+    <% endfor %>
+    <% gist '1552362', 'gistfile1.txt' %>
+{% endapply -%}

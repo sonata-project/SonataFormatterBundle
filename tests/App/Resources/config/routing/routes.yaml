@@ -6,3 +6,7 @@ _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin
+
+text_format:
+    path: /text_format
+    controller: Sonata\FormatterBundle\Tests\App\Controller\TextFormatterController::test
