@@ -1,0 +1,83 @@
+framework:
+    test: true
+    secret: secret
+    http_method_override: false
+
+security:
+    role_hierarchy: null
+    firewalls:
+        test:
+            security: false
+    access_control: null
+
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        path: "%app.base_dir%sonata_media_test.db3"
+    orm:
+        entity_managers:
+            default:
+                mappings:
+                    SonataMediaBundle: null
+                    SonataFormatterTest:
+                        type: annotation
+                        dir: "%kernel.project_dir%/Entity"
+                        is_bundle: false
+                        prefix: Sonata\FormatterBundle\Tests\App\Entity
+
+fos_ck_editor:
+    configs:
+        default:
+            toolbar:
+                - [Undo, Redo]
+                - [Bold, Italic, -, RemoveFormat]
+                - [Link, Unlink]
+                - [NumberedList, BulletedList, Blockquote]
+                - [Image]
+                - [Maximize]
+                - [Source]
+
+sonata_media:
+    db_driver: doctrine_orm
+    class:
+        media: Sonata\FormatterBundle\Tests\App\Entity\Media
+        gallery: Sonata\FormatterBundle\Tests\App\Entity\Gallery
+        gallery_item: Sonata\FormatterBundle\Tests\App\Entity\GalleryItem
+    force_disable_category: true
+    default_context: default
+    contexts:
+        default:
+            download:
+                strategy: sonata.media.security.public_strategy
+    cdn:
+        server:
+            path: /uploads/media
+    filesystem:
+        local:
+            directory: "%kernel.project_dir%/uploads"
+            create: true
+
+sonata_admin:
+    dashboard:
+        blocks:
+            - type: sonata.formatter.block.formatter
+              settings:
+                  rawContent: >
+                      <h2>Example Block Configuration</h2>
+                      This is for testing purposes
+
+sonata_block:
+    http_cache: false
+    blocks:
+        sonata.formatter.block.formatter: null
+
+sonata_formatter:
+    default_formatter: text
+    formatters:
+        text:
+            service: sonata.formatter.text.text
+        rawhtml:
+            service: sonata.formatter.text.raw
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist

@@ -32,11 +32,8 @@ final class ControlFlowExtension extends BaseExtension
 
     public function getAllowedFunctions(): array
     {
-        return [];
-    }
-
-    public function getName(): string
-    {
-        return 'sonata_formatter_extension_flow';
+        return [
+            'range',
+        ];
     }
 }

@@ -102,7 +102,7 @@ file that was distributed with this source code.
 
                                             <th class="sonata-ba-list-field-header-{{ field_description.type}} {% if sortable %} sonata-ba-list-field-header-order-{{ sort_by|lower }} {{ sort_active_class }}{% endif %}">
                                                 {% if sortable %}<a href="{{ admin.generateUrl('ckeditor_browser', sort_parameters) }}">{% endif %}
-                                                    {{ field_description.label|trans() }}
+                                                    {{ field_description.label|trans }}
                                                     {% if sortable %}</a>{% endif %}
                                             </th>
 
@@ -237,15 +237,13 @@ file that was distributed with this source code.
                 </a>
 
                 <ul class="dropdown-menu" role="menu">
-                    {% for filter in datagrid.filters %}
-                        {% if (filter.options['show_filter'] is same as(true) or filter.options['show_filter'] is null) %}
-                            <li>
-                                <a href="#" class="sonata-toggle-filter sonata-ba-action" filter-target="filter-{{ admin.uniqid }}-{{ filter.name }}" filter-container="filter-container-{{ admin.uniqid() }}">
-                                    <i class="fa {{ (filter.isActive() or filter.options['show_filter']) ? 'fa-check-square-o' : 'fa-square-o' }}"></i>
-                                    {{filter.label|trans({}, filter.translationDomain) }}
-                                </a>
-                            </li>
-                        {% endif %}
+
+                    {% for filter in admin.datagrid.filters|filter(filter => filter.options['show_filter'] is same as(true) or filter.options['show_filter'] is null) %}
+                        <li>
+                            <a href="#" class="sonata-toggle-filter sonata-ba-action" filter-target="filter-{{ admin.uniqid }}-{{ filter.name }}" filter-container="filter-container-{{ admin.uniqid() }}">
+                                <i class="fa {{ (filter.isActive() or filter.options['show_filter']) ? 'fa-check-square-o' : 'fa-square-o' }}"></i>{{ filter.label|trans({}, filter.translationDomain) }}
+                            </a>
+                        </li>
                     {% endfor %}
                 </ul>
             </li>
@@ -254,8 +252,8 @@ file that was distributed with this source code.
 {% endblock %}
 
 {% block list_filters %}
-    {% if datagrid.filters %}
-        {#        {% form_theme form admin.getTemplate('filter') %}#}
+    {% if admin.datagrid.filters %}
+        {% form_theme form get_admin_template('filter', admin.code) %}
 
         <div class="col-xs-12 col-md-12 sonata-filters-box" style="display: {{ datagrid.hasDisplayableFilters ? 'block' : 'none' }}" id="filter-container-{{ admin.uniqid() }}">
             <div class="box box-primary" >

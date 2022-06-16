@@ -11,17 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Sonata\FormatterBundle\Block\FormatterBlockService;
+use Sonata\FormatterBundle\Tests\App\Admin\TextEntityAdmin;
+use Sonata\FormatterBundle\Tests\App\Entity\TextEntity;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "service" function for creating references to services when dropping support for Symfony 4.4
     $containerConfigurator->services()
 
-        ->set('sonata.formatter.block.formatter', FormatterBlockService::class)
-            ->tag('sonata.block')
-            ->args([
-                new ReferenceConfigurator('twig'),
+        ->set(TextEntityAdmin::class)
+            ->tag('sonata.admin', [
+                'model_class' => TextEntity::class,
+                'manager_type' => 'orm',
             ]);
 };

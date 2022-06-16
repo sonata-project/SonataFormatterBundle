@@ -17,19 +17,19 @@ use Twig\Environment;
 
 interface PoolInterface
 {
-    public function add(string $code, Formatter $formatter, ?Environment $env = null): void;
+    public function add(string $code, FormatterInterface $formatter, ?Environment $env = null): void;
 
     public function has(string $code): bool;
 
     /**
-     * @return array{Formatter, Environment|null}
+     * @return array{FormatterInterface, Environment|null}
      */
     public function get(string $code): array;
 
     public function transform(string $code, string $text): string;
 
     /**
-     * @return array<string, array{Formatter, Environment|null}>
+     * @return array<string, array{FormatterInterface, Environment|null}>
      */
     public function getFormatters(): array;
 

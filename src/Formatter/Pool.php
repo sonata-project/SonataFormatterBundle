@@ -25,7 +25,7 @@ final class Pool implements LoggerAwareInterface, PoolInterface
     use LoggerAwareTrait;
 
     /**
-     * @var array<string, array{Formatter, Environment|null}>
+     * @var array<string, array{FormatterInterface, Environment|null}>
      */
     private array $formatters = [];
 
@@ -37,7 +37,7 @@ final class Pool implements LoggerAwareInterface, PoolInterface
         $this->logger = new NullLogger();
     }
 
-    public function add(string $code, Formatter $formatter, ?Environment $env = null): void
+    public function add(string $code, FormatterInterface $formatter, ?Environment $env = null): void
     {
         $this->formatters[$code] = [$formatter, $env];
     }

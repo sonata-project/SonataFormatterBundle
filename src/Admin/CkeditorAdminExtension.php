@@ -16,7 +16,6 @@ namespace Sonata\FormatterBundle\Admin;
 use Sonata\AdminBundle\Admin\AbstractAdminExtension;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
-use Sonata\FormatterBundle\Controller\CkeditorAdminController;
 
 /**
  * Adds browser and upload routes to the Admin.
@@ -34,7 +33,7 @@ final class CkeditorAdminExtension extends AbstractAdminExtension
         ]);
 
         $collection->add('ckeditor_upload', 'ckeditor_upload', [
-            '_controller' => 'sonata.formatter.ckeditor.extension.controller::uploadAction',
+            '_controller' => 'sonata.formatter.ckeditor.controller::uploadAction',
         ]);
     }
 }
