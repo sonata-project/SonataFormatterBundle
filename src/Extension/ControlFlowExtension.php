@@ -36,9 +36,4 @@ final class ControlFlowExtension extends BaseExtension
             'range',
         ];
     }
-
-    public function getName(): string
-    {
-        return 'sonata_formatter_extension_flow';
-    }
 }

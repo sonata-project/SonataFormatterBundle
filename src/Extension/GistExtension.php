@@ -35,9 +35,4 @@ final class GistExtension extends BaseExtension
             new GistTokenParser(),
         ];
     }
-
-    public function getName(): string
-    {
-        return 'sonata_formatter_extension_gist';
-    }
 }
