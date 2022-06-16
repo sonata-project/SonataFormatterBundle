@@ -31,9 +31,10 @@ final class GistNode extends Node
     public function compile(Compiler $compiler): void
     {
         $compiler
+            ->addDebugInfo($this)
             ->write(sprintf(
                 <<<EOT
-echo '<div class="sonata-gist"><script src="https://gist.github.com/%s.js?file=%s"></script></div>';\n,
+echo '<div class="sonata-gist"><script src="https://gist.github.com/%s.js?file=%s"></script></div>';\n
 EOT
                 ,
                 $this->getNode('gist')->getAttribute('value'),
