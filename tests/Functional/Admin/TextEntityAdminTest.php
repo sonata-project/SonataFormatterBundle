@@ -105,6 +105,14 @@ final class TextEntityAdminTest extends WebTestCase
             'textEntity[text][rawText]' => 'Sample Raw HTML with some <% for i in 1..5 %><% if i > 2 %><%= i %><% endif %><% endfor %>',
         ]];
 
+        yield 'Create TextEntity Raw HTML With Media' => ['/admin/tests/app/textentity/create', [
+            'uniqid' => 'textEntity',
+        ], 'btn_create_and_list', [
+            'textEntity[simpleText]' => 'simple text',
+            'textEntity[text][textFormat]' => 'rawhtml',
+            'textEntity[text][rawText]' => 'Sample Raw HTML with some <%= sonata_media(1, "reference") %>',
+        ]];
+
         yield 'Edit TextEntity' => ['/admin/tests/app/textentity/1/edit', [], 'btn_update_and_list'];
     }
 

@@ -14,6 +14,7 @@ declare(strict_types=1);
 use Psr\Container\ContainerInterface;
 use Sonata\FormatterBundle\Admin\CkeditorAdminExtension;
 use Sonata\FormatterBundle\Controller\CkeditorAdminController;
+use Sonata\FormatterBundle\Extension\MediaExtension;
 use Sonata\MediaBundle\Model\MediaManagerInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
@@ -30,5 +31,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->set('sonata.formatter.ckeditor.controller', CkeditorAdminController::class)
             ->public()
             ->tag('container.service_subscriber')
-            ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)]);
+            ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)])
+
+        ->set('sonata.formatter.twig.media', MediaExtension::class)
+            ->public();
 };

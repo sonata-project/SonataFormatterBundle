@@ -15,8 +15,10 @@ namespace Sonata\FormatterBundle\DependencyInjection;
 
 use Sonata\FormatterBundle\Twig\Loader\LoaderSelector;
 use Sonata\FormatterBundle\Twig\SecurityPolicyContainerAware;
+use Sonata\MediaBundle\Twig\MediaRuntime;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
@@ -26,6 +28,7 @@ use Twig\Environment;
 use Twig\Extension\SandboxExtension;
 use Twig\Lexer;
 use Twig\Loader\ArrayLoader;
+use Twig\RuntimeLoader\ContainerRuntimeLoader;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
@@ -59,7 +62,7 @@ final class SonataFormatterExtension extends Extension
         }
 
         if (isset($bundles['SonataMediaBundle'])) {
-            $loader->load('ckeditor.php');
+            $loader->load('media.php');
         }
 
         if (!\array_key_exists($config['default_formatter'], $config['formatters'])) {
@@ -119,6 +122,9 @@ final class SonataFormatterExtension extends Extension
         string $code,
         array $extensions
     ): string {
+        $bundles = $container->getParameter('kernel.bundles');
+        \assert(\is_array($bundles));
+
         $loader = new Definition(ArrayLoader::class);
 
         $loader->setPublic(false);
@@ -150,6 +156,18 @@ final class SonataFormatterExtension extends Extension
         $container->setDefinition(sprintf('sonata.formatter.twig.sandbox.%s', $code), $sandbox);
 
         $env->addMethodCall('addExtension', [new Reference(sprintf('sonata.formatter.twig.sandbox.%s', $code))]);
+
+        if (isset($bundles['SonataMediaBundle'])) {
+            $runtimeLoader = new Definition(ContainerRuntimeLoader::class, [
+                ServiceLocatorTagPass::register($container, [
+                    MediaRuntime::class => new Reference('sonata.media.twig.runtime'),
+                ]),
+            ]);
+
+            $container->setDefinition(sprintf('sonata.formatter.twig.runtime_loader.%s', $code), $runtimeLoader);
+
+            $env->addMethodCall('addRuntimeLoader', [new Reference(sprintf('sonata.formatter.twig.runtime_loader.%s', $code))]);
+        }
 
         foreach ($extensions as $extension) {
             $env->addMethodCall('addExtension', [new Reference($extension)]);
