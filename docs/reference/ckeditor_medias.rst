@@ -36,17 +36,17 @@ It should contain something like this:
                   Blockquote, -, Image, Link, Unlink, Table]
                 - [Format, Maximize, Source]
 
-                filebrowserBrowseRoute: admin_sonata_media_media_ckeditor_browser
-                filebrowserImageBrowseRoute: admin_sonata_media_media_ckeditor_browser
+                filebrowserBrowseRoute: admin_sonata_media_media_browser
+                filebrowserImageBrowseRoute: admin_sonata_media_media_browser
                 # Display images by default when clicking the image dialog browse button
                 filebrowserImageBrowseRouteParameters:
                     provider: sonata.media.provider.image
                 filebrowserUploadMethod: form
-                filebrowserUploadRoute: admin_sonata_media_media_ckeditor_upload
+                filebrowserUploadRoute: admin_sonata_media_media_upload
                 filebrowserUploadRouteParameters:
                     provider: sonata.media.provider.file
                 # Upload file as image when sending a file from the image dialog
-                filebrowserImageUploadRoute: admin_sonata_media_media_ckeditor_upload
+                filebrowserImageUploadRoute: admin_sonata_media_media_upload
                 filebrowserImageUploadRouteParameters:
                     provider: sonata.media.provider.image
                     context: my-context # Optional, to upload in a custom context
@@ -114,7 +114,7 @@ Then you can pass this format to CKEditor:
     fos_ck_editor:
         configs:
             default:
-                filebrowserImageUploadRoute: admin_sonata_media_media_ckeditor_upload
+                filebrowserImageUploadRoute: admin_sonata_media_media_upload
                 filebrowserImageUploadRouteParameters:
                     provider: sonata.media.provider.image
                     context: default
