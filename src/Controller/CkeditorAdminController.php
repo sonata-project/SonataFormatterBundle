@@ -48,6 +48,7 @@ final class CkeditorAdminController extends CRUDController
         $this->checkIfMediaBundleIsLoaded();
 
         $this->admin->checkAccess('list');
+        $this->admin->setListMode('browser');
 
         $filters = $request->query->all()['filter'] ?? [];
 
