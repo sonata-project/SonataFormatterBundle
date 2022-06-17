@@ -1,0 +1,28 @@
+{% for object in admin.datagrid.results %}
+    <tr>
+        <td colspan="{{ admin.list.elements|length }}">
+            <div>
+                <a href="{{ sonata_path(object, 'reference') }}" class="select" style="float: left; margin-right: 6px;">
+                    {{ sonata_thumbnail(object, 'admin', {'width': 75, 'height': 60}) }}
+                </a>
+
+                <strong>
+                    <a href="{{ sonata_path(object, 'reference') }}" class="select">{{ object.name }}</a>
+                </strong>
+
+                <br />
+
+                {{ object.providerName|trans({}, 'SonataMediaBundle') }}{% if object.width %}: {{ object.width }}{% if object.height %}x{{ object.height }}{% endif %}px{% endif %}
+
+                {% if formats[object.id]|length > 0 %}
+                    - {{ 'title.formats'|trans({}, 'SonataMediaBundle') }}:
+                    {% for name, format in formats[object.id] %}
+                        <a href="{{ sonata_path(object, name) }}" class="select">{{ name }}</a> {% if format.width %}({{ format.width }}{% if format.height %}x{{ format.height }}{% endif %}px){% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                <br />
+            </div>
+        </td>
+    </tr>
+{% endfor %}

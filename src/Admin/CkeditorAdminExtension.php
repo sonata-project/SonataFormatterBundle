@@ -26,6 +26,23 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
  */
 final class CkeditorAdminExtension extends AbstractAdminExtension
 {
+    public function configure(AdminInterface $admin): void
+    {
+        $admin->setTemplate('outer_list_rows_browser', '@SonataFormatter/Ckeditor/list_outer_rows_browser.html.twig');
+    }
+
+    public function configurePersistentParameters(AdminInterface $admin, array $parameters): array
+    {
+        if ($admin->hasRequest()) {
+            $request = $admin->getRequest();
+
+            $parameters['CKEditor'] = $request->query->get('CKEditor');
+            $parameters['CKEditorFuncNum'] = $request->query->get('CKEditorFuncNum');
+        }
+
+        return $parameters;
+    }
+
     public function configureRoutes(AdminInterface $admin, RouteCollectionInterface $collection): void
     {
         $collection->add('browser', null, [
