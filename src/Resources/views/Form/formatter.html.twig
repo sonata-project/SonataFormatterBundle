@@ -34,7 +34,7 @@ file that was distributed with this source code.
                 var val = jQuery(this).val();
 
                 if (val === 'richhtml') {
-                    {% include '@SonataFormatter/Form/ckeditor.html.twig' with {'ckeditor_field_id': form.children[source_field].vars.id} %}
+                    {{ include('@SonataFormatter/Form/ckeditor.html.twig', {'ckeditor_field_id': form.children[source_field].vars.id}) }}
                 }
             });
 
@@ -57,7 +57,7 @@ file that was distributed with this source code.
             }
 
             {% if format == 'richhtml' %}
-                {% include '@SonataFormatter/Form/ckeditor.html.twig' with {'ckeditor_field_id': form.vars.id} %}
+                {{ include('@SonataFormatter/Form/ckeditor.html.twig', {'ckeditor_field_id': form.vars.id}) }}
             {% endif %}
         });
     </script>
