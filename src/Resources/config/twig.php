@@ -14,6 +14,7 @@ declare(strict_types=1);
 use Sonata\FormatterBundle\Extension\ControlFlowExtension;
 use Sonata\FormatterBundle\Extension\GistExtension;
 use Sonata\FormatterBundle\Twig\Extension\TextFormatterExtension;
+use Sonata\FormatterBundle\Twig\TextFormatterRuntime;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
@@ -23,6 +24,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
         ->set('sonata.formatter.text.twig', TextFormatterExtension::class)
             ->tag('twig.extension')
+
+        ->set('sonata.formatter.twig.text_formatter_runtime', TextFormatterRuntime::class)
+            ->tag('twig.runtime')
             ->args([
                 new ReferenceConfigurator('sonata.formatter.pool'),
             ])
