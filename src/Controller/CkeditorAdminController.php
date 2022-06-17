@@ -116,6 +116,7 @@ final class CkeditorAdminController extends CRUDController
             'datagrid' => $datagrid,
             'root_category' => $rootCategory,
             'formats' => $formats,
+            'export_formats' => [],
         ]);
     }
 
