@@ -9,19 +9,13 @@ Inject `Sonata\FormatterBundle\Formatter\Pool`` in your class::
 
     assert($formatterPool instanceof Pool::class);
 
-    $html = $formatterPool->transform('markdown', $text);
+    $html = $formatterPool->transform('rawhtml', $text);
 
 in a template:
 
 .. code-block:: jinja
 
-    {{ my_data|format_text('markdown') }}
-
-.. note::
-
-    By default, the ``Twig`` filter ``format_text`` is not marked as
-    ``safe``. So, if you want to output the correct result, add the
-    ``|raw`` filter.
+    {{ my_data|format_text('rawhtml') }}
 
 Form
 ----

@@ -18,3 +18,27 @@ dependency injection override to change the default values for the removed servi
 
 If you need to change something that you believe it should be handled somehow in configuration,
 please open an issue and we will discuss it.
+
+## Browser and upload route changed
+
+Routes for upload and browser have changed. Keep in mind to change your FOSCkeditorBundle configuration route values.
+
+Old:
+
+```
+admin_app_sonata_media_media_ckeditor_browser
+admin_app_sonata_media_media_ckeditor_upload
+```
+
+New:
+
+```
+admin_app_sonata_media_media_browser
+admin_app_sonata_media_media_upload
+```
+
+## Classes removed
+
+The following classes are removed without being deprecated on 4.x:
+
+`Sonata\FormatterBundle\Extension\BaseProxyExtension`
