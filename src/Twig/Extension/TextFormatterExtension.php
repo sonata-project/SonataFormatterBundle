@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Twig\Extension;
 
-use Sonata\FormatterBundle\Formatter\PoolInterface;
+use Sonata\FormatterBundle\Twig\TextFormatterRuntime;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -22,25 +22,13 @@ use Twig\TwigFilter;
  */
 final class TextFormatterExtension extends AbstractExtension
 {
-    private PoolInterface $pool;
-
-    public function __construct(PoolInterface $pool)
-    {
-        $this->pool = $pool;
-    }
-
     /**
      * @return TwigFilter[]
      */
     public function getFilters(): array
     {
         return [
-            new TwigFilter('format_text', [$this, 'transform']),
+            new TwigFilter('format_text', [TextFormatterRuntime::class, 'transform'], ['is_safe' => ['html']]),
         ];
-    }
-
-    public function transform(string $text, string $type): string
-    {
-        return $this->pool->transform($type, $text);
     }
 }
