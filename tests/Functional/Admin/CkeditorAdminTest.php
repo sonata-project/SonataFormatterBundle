@@ -47,13 +47,13 @@ final class CkeditorAdminTest extends WebTestCase
      */
     public static function provideCrudUrlsCases(): iterable
     {
-        yield 'Ckeditor Browser Media' => ['/admin/tests/app/media/ckeditor_browser'];
+        yield 'Ckeditor Browser Media' => ['/admin/tests/app/media/browser'];
 
-        yield 'Ckeditor Browser Media with filters' => ['/admin/tests/app/media/ckeditor_browser', [
+        yield 'Ckeditor Browser Media with filters' => ['/admin/tests/app/media/browser', [
             'provider' => 'sonata.media.provider.image',
         ]];
 
-        yield 'Ckeditor Upload Media' => ['/admin/tests/app/media/ckeditor_upload', [
+        yield 'Ckeditor Upload Media' => ['/admin/tests/app/media/upload', [
             'provider' => 'sonata.media.provider.image',
         ], [
             'upload' => new UploadedFile(__DIR__.'/../../Fixtures/logo.jpg', 'logo.jpg'),
