@@ -36,17 +36,17 @@ It should contain something like this:
                   Blockquote, -, Image, Link, Unlink, Table]
                 - [Format, Maximize, Source]
 
-                filebrowserBrowseRoute: admin_sonata_media_media_browser
-                filebrowserImageBrowseRoute: admin_sonata_media_media_browser
+                filebrowserBrowseRoute: admin_app_sonata_media_media_browser
+                filebrowserImageBrowseRoute: admin_app_sonata_media_media_browser
                 # Display images by default when clicking the image dialog browse button
                 filebrowserImageBrowseRouteParameters:
                     provider: sonata.media.provider.image
                 filebrowserUploadMethod: form
-                filebrowserUploadRoute: admin_sonata_media_media_upload
+                filebrowserUploadRoute: admin_app_sonata_media_media_upload
                 filebrowserUploadRouteParameters:
                     provider: sonata.media.provider.file
                 # Upload file as image when sending a file from the image dialog
-                filebrowserImageUploadRoute: admin_sonata_media_media_upload
+                filebrowserImageUploadRoute: admin_app_sonata_media_media_upload
                 filebrowserImageUploadRouteParameters:
                     provider: sonata.media.provider.image
                     context: my-context # Optional, to upload in a custom context
