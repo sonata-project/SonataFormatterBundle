@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\Functional\Admin;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sonata\FormatterBundle\Tests\App\AppKernel;
+use Sonata\FormatterBundle\Tests\App\Entity\Media;
+use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -30,6 +33,8 @@ final class CkeditorAdminTest extends WebTestCase
     {
         $client = self::createClient();
 
+        $this->prepareData();
+
         $client->request('GET', $url, $parameters, $files);
 
         self::assertResponseIsSuccessful();
@@ -44,6 +49,10 @@ final class CkeditorAdminTest extends WebTestCase
     {
         yield 'Ckeditor Browser Media' => ['/admin/tests/app/media/ckeditor_browser'];
 
+        yield 'Ckeditor Browser Media with filters' => ['/admin/tests/app/media/ckeditor_browser', [
+            'provider' => 'sonata.media.provider.image',
+        ]];
+
         yield 'Ckeditor Upload Media' => ['/admin/tests/app/media/ckeditor_upload', [
             'provider' => 'sonata.media.provider.image',
         ], [
@@ -57,5 +66,28 @@ final class CkeditorAdminTest extends WebTestCase
     protected static function getKernelClass(): string
     {
         return AppKernel::class;
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    private function prepareData(): void
+    {
+        // TODO: Simplify this when dropping support for Symfony 4.
+        // @phpstan-ignore-next-line
+        $container = method_exists($this, 'getContainer') ? self::getContainer() : self::$container;
+        $manager = $container->get('doctrine.orm.entity_manager');
+        \assert($manager instanceof EntityManagerInterface);
+
+        $media = new Media();
+        $media->setName('name.jpg');
+        $media->setProviderStatus(MediaInterface::STATUS_OK);
+        $media->setContext('default');
+        $media->setProviderReference('name.jpg');
+        $media->setProviderName('sonata.media.provider.image');
+        $media->setBinaryContent(realpath(__DIR__.'/../../Fixtures/logo.jpg'));
+
+        $manager->persist($media);
+        $manager->flush();
     }
 }
