@@ -41,7 +41,6 @@ file that was distributed with this source code.
     </script>
 {% endblock %}
 
-
 {% block preview %}{% endblock %}
 
 {% import _self as tree %}
@@ -92,17 +91,19 @@ file that was distributed with this source code.
                                         {# Disable batch and actions #}
                                     {% else %}
                                         {% set sortable = false %}
-                                        {% if field_description.options.sortable is defined and field_description.options.sortable%}
+                                        {% if field_description.option('sortable', false) %}
                                             {% set sortable             = true %}
-                                            {% set sort_parameters      = admin.modelmanager.sortparameters(field_description, admin.datagrid)|merge(ckParameters) %}
-                                            {% set current              = admin.datagrid.values._sort_by == field_description or admin.datagrid.values._sort_by.fieldName == sort_parameters.filter._sort_by %}
+                                            {% set sort_parameters      = admin.datagrid.sortparameters(field_description) %}
+                                            {% set current              = admin.datagrid.values[constant('Sonata\\AdminBundle\\Datagrid\\DatagridInterface::SORT_BY')] is defined
+                                                and (admin.datagrid.values[constant('Sonata\\AdminBundle\\Datagrid\\DatagridInterface::SORT_BY')] == field_description
+                                                    or admin.datagrid.values[constant('Sonata\\AdminBundle\\Datagrid\\DatagridInterface::SORT_BY')].name == sort_parameters.filter[constant('Sonata\\AdminBundle\\Datagrid\\DatagridInterface::SORT_BY')]) %}
                                             {% set sort_active_class    = current ? 'sonata-ba-list-field-order-active' : '' %}
-                                            {% set sort_by              = current ? admin.datagrid.values._sort_order : field_description.options._sort_order %}
+                                            {% set sort_by              = current ? admin.datagrid.values[constant('Sonata\\AdminBundle\\Datagrid\\DatagridInterface::SORT_ORDER')] : field_description.option(constant('Sonata\\AdminBundle\\Datagrid\\DatagridInterface::SORT_ORDER'), sort_parameters.filter[constant('Sonata\\AdminBundle\\Datagrid\\DatagridInterface::SORT_ORDER')]) %}
                                         {% endif %}
 
                                         {% apply spaceless %}
                                             <th class="sonata-ba-list-field-header-{{ field_description.type}} {% if sortable %} sonata-ba-list-field-header-order-{{ sort_by|lower }} {{ sort_active_class }}{% endif %}">
-                                                {% if sortable %}<a href="{{ admin.generateUrl('ckeditor_browser', sort_parameters) }}">{% endif %}
+                                                {% if sortable %}<a href="{{ admin.generateUrl(action, sort_parameters) }}">{% endif %}
                                                     {{ field_description.label|trans }}
                                                     {% if sortable %}</a>{% endif %}
                                             </th>
@@ -156,26 +157,7 @@ file that was distributed with this source code.
                             {% if not app.request.isXmlHttpRequest %}
                                 <div class="pull-right">
                                     {% block pager_results %}
-                                        {% block num_pages %}
-                                            {{ admin.datagrid.pager.page }} / {{ admin.datagrid.pager.lastpage }}
-                                            &nbsp;-&nbsp;
-                                        {% endblock %}
-
-                                        {% block num_results %}
-                                            {{ 'list_results_count'|trans({'%count%': admin.datagrid.pager.nbresults}, 'SonataAdminBundle') }}
-                                            &nbsp;-&nbsp;
-                                        {% endblock %}
-
-                                        {% block max_per_page %}
-                                            <label class="control-label" for="{{ admin.uniqid }}_per_page">{{ 'label_per_page'|trans({}, 'SonataAdminBundle') }}</label>
-                                            <select class="per-page small" id="{{ admin.uniqid }}_per_page" style="width: auto; height: auto">
-                                                {% for per_page in admin.getperpageoptions %}
-                                                    <option {% if per_page == admin.datagrid.pager.maxperpage %}selected="selected"{% endif %} value="{{ admin.generateUrl('ckeditor_browser', {'filter': admin.datagrid.values|merge({'_per_page': per_page})}|merge(ckParameters)) }}">
-                                                        {{ per_page }}
-                                                    </option>
-                                                {% endfor %}
-                                            </select>
-                                        {% endblock %}
+                                        {{ include(get_admin_template('pager_results', admin.code)) }}
                                     {% endblock %}
                                 </div>
 
@@ -185,28 +167,28 @@ file that was distributed with this source code.
                                         <div class="text-center">
                                             <ul class="pagination">
                                                 {% if admin.datagrid.pager.page > 2  %}
-                                                    <li><a href="{{ admin.generateUrl('ckeditor_browser', admin.modelmanager.paginationparameters(admin.datagrid, 1)|merge(ckParameters)) }}" title="{{ 'link_first_pager'|trans({}, 'SonataAdminBundle') }}">&laquo;</a></li>
+                                                    <li><a href="{{ admin.generateUrl(action, admin.modelmanager.paginationparameters(admin.datagrid, 1)|merge(ckParameters)) }}" title="{{ 'link_first_pager'|trans({}, 'SonataAdminBundle') }}">&laquo;</a></li>
                                                 {% endif %}
 
                                                 {% if admin.datagrid.pager.page != admin.datagrid.pager.previouspage %}
-                                                    <li><a href="{{ admin.generateUrl('ckeditor_browser', admin.modelmanager.paginationparameters(admin.datagrid, admin.datagrid.pager.previouspage)|merge(ckParameters)) }}" title="{{ 'link_previous_pager'|trans({}, 'SonataAdminBundle') }}">&lsaquo;</a></li>
+                                                    <li><a href="{{ admin.generateUrl(action, admin.modelmanager.paginationparameters(admin.datagrid, admin.datagrid.pager.previouspage)|merge(ckParameters)) }}" title="{{ 'link_previous_pager'|trans({}, 'SonataAdminBundle') }}">&lsaquo;</a></li>
                                                 {% endif %}
 
                                                 {# Set the number of pages to display in the pager #}
                                                 {% for page in admin.datagrid.pager.getLinks(admin_pool.getOption('pager_links')) %}
                                                     {% if page == admin.datagrid.pager.page %}
-                                                        <li class="active"><a href="{{ admin.generateUrl('ckeditor_browser', admin.modelmanager.paginationparameters(admin.datagrid, page)|merge(ckParameters)) }}">{{ page }}</a></li>
+                                                        <li class="active"><a href="{{ admin.generateUrl(action, admin.modelmanager.paginationparameters(admin.datagrid, page)|merge(ckParameters)) }}">{{ page }}</a></li>
                                                     {% else %}
-                                                        <li><a href="{{ admin.generateUrl('ckeditor_browser', admin.modelmanager.paginationparameters(admin.datagrid, page)|merge(ckParameters)) }}">{{ page }}</a></li>
+                                                        <li><a href="{{ admin.generateUrl(action, admin.modelmanager.paginationparameters(admin.datagrid, page)|merge(ckParameters)) }}">{{ page }}</a></li>
                                                     {% endif %}
                                                 {% endfor %}
 
                                                 {% if admin.datagrid.pager.page != admin.datagrid.pager.nextpage %}
-                                                    <li><a href="{{ admin.generateUrl('ckeditor_browser', admin.modelmanager.paginationparameters(admin.datagrid, admin.datagrid.pager.nextpage)|merge(ckParameters)) }}" title="{{ 'link_next_pager'|trans({}, 'SonataAdminBundle') }}">&rsaquo;</a></li>
+                                                    <li><a href="{{ admin.generateUrl(action, admin.modelmanager.paginationparameters(admin.datagrid, admin.datagrid.pager.nextpage)|merge(ckParameters)) }}" title="{{ 'link_next_pager'|trans({}, 'SonataAdminBundle') }}">&rsaquo;</a></li>
                                                 {% endif %}
 
                                                 {% if admin.datagrid.pager.page != admin.datagrid.pager.lastpage and admin.datagrid.pager.lastpage != admin.datagrid.pager.nextpage %}
-                                                    <li><a href="{{ admin.generateUrl('ckeditor_browser', admin.modelmanager.paginationparameters(admin.datagrid, admin.datagrid.pager.lastpage)|merge(ckParameters)) }}" title="{{ 'link_last_pager'|trans({}, 'SonataAdminBundle') }}">&raquo;</a></li>
+                                                    <li><a href="{{ admin.generateUrl(action, admin.modelmanager.paginationparameters(admin.datagrid, admin.datagrid.pager.lastpage)|merge(ckParameters)) }}" title="{{ 'link_last_pager'|trans({}, 'SonataAdminBundle') }}">&raquo;</a></li>
                                                 {% endif %}
                                             </ul>
                                         </div>
@@ -253,7 +235,7 @@ file that was distributed with this source code.
         <div class="col-xs-12 col-md-12 sonata-filters-box" style="display: {{ admin.datagrid.hasDisplayableFilters ? 'block' : 'none' }}" id="filter-container-{{ admin.uniqid() }}">
             <div class="box box-primary" >
                 <div class="box-body">
-                    <form class="sonata-filter-form form-horizontal {{ admin.isChild and 1 == admin.datagrid.filters|length ? 'hide' : '' }}" action="{{ admin.generateUrl('ckeditor_browser') }}" method="GET" role="form">
+                    <form class="sonata-filter-form form-horizontal {{ admin.isChild and 1 == admin.datagrid.filters|length ? 'hide' : '' }}" action="{{ admin.generateUrl(action) }}" method="GET" role="form">
                         {{ form_errors(form) }}
 
                         <div class="row">
@@ -294,7 +276,7 @@ file that was distributed with this source code.
                                         <i class="fa fa-filter"></i> {{ 'btn_filter'|trans({}, 'SonataAdminBundle') }}
                                     </button>
 
-                                    <a class="btn" href="{{ admin.generateUrl('ckeditor_browser', {filters: 'reset'}|merge(ckParameters)) }}">
+                                    <a class="btn" href="{{ admin.generateUrl(action, {filters: 'reset'}|merge(ckParameters)) }}">
                                         {{ 'link_reset_filter'|trans({}, 'SonataAdminBundle') }}
                                     </a>
                                 </div>
