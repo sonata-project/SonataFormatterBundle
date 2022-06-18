@@ -57,6 +57,8 @@ final class AddTwigExtensionsCompilerPass implements CompilerPassInterface
         Definition $env,
         array $extensions
     ): void {
+        $runtimes = [];
+
         foreach ($extensions as $extension) {
             $extensionDefinition = $container->getDefinition($extension);
             $extensionClass = $extensionDefinition->getClass();

@@ -24,7 +24,6 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Twig\Environment;
 use Twig\Extension\SandboxExtension;
-use Twig\Lexer;
 use Twig\Loader\ArrayLoader;
 
 /**
@@ -155,17 +154,6 @@ final class SonataFormatterExtension extends Extension
         $container->setDefinition(sprintf('sonata.formatter.twig.sandbox.%s', $code), $sandbox);
 
         $env->addMethodCall('addExtension', [new Reference(sprintf('sonata.formatter.twig.sandbox.%s', $code))]);
-
-        $lexer = new Definition(Lexer::class, [new Reference(sprintf('sonata.formatter.twig.env.%s', $code)), [
-            'tag_comment' => ['<#', '#>'],
-            'tag_block' => ['<%', '%>'],
-            'tag_variable' => ['<%=', '%>'],
-        ]]);
-        $lexer->setPublic(false);
-
-        $container->setDefinition(sprintf('sonata.formatter.twig.lexer.%s', $code), $lexer);
-
-        // $env->addMethodCall('setLexer', [new Reference(sprintf('sonata.formatter.twig.lexer.%s', $code))]);
 
         return sprintf('sonata.formatter.twig.env.%s', $code);
     }
