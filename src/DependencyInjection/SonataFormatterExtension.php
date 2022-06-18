@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\DependencyInjection;
 
 use Sonata\FormatterBundle\Twig\Loader\LoaderSelector;
-use Sonata\FormatterBundle\Twig\SecurityPolicyContainerAware;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -23,7 +22,6 @@ use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Twig\Environment;
-use Twig\Extension\SandboxExtension;
 use Twig\Loader\ArrayLoader;
 
 /**
@@ -73,14 +71,17 @@ final class SonataFormatterExtension extends Extension
         $pool->addArgument($config['default_formatter']);
 
         foreach ($config['formatters'] as $code => $formatterConfig) {
-            if (0 === \count($formatterConfig['extensions'])) {
-                $env = null;
-            } else {
-                $env = new Reference($this->createEnvironment(
-                    $container,
-                    $code,
-                    $formatterConfig['extensions']
-                ));
+            $env = null;
+
+            if (0 !== \count($formatterConfig['extensions'])) {
+                $envId = sprintf('sonata.formatter.twig.env.%s', $code);
+
+                $container->setDefinition(
+                    $envId,
+                    $this->createEnvironment()
+                );
+
+                $env = new Reference($envId);
             }
 
             $pool->addMethodCall(
@@ -115,46 +116,18 @@ final class SonataFormatterExtension extends Extension
         return 'sonata_formatter';
     }
 
-    /**
-     * @param string[] $extensions
-     */
-    private function createEnvironment(
-        ContainerBuilder $container,
-        string $code,
-        array $extensions
-    ): string {
-        $loader = new Definition(ArrayLoader::class);
-
-        $loader->setPublic(false);
-
-        $container->setDefinition(sprintf('sonata.formatter.twig.loader.%s', $code), $loader);
-
-        $loaderSelector = new Definition(LoaderSelector::class, [
-            new Reference(sprintf('sonata.formatter.twig.loader.%s', $code)),
-            new Reference('twig.loader'),
+    private function createEnvironment(): Definition
+    {
+        return new Definition(Environment::class, [
+            new Definition(LoaderSelector::class, [
+                new Definition(ArrayLoader::class),
+                new Reference('twig.loader'),
+            ]),
+            [
+                'debug' => false,
+                'strict_variables' => false,
+                'charset' => 'UTF-8',
+            ],
         ]);
-        $loaderSelector->setPublic(false);
-
-        $env = new Definition(Environment::class, [$loaderSelector, [
-            'debug' => false,
-            'strict_variables' => false,
-            'charset' => 'UTF-8',
-        ]]);
-        $env->setPublic(false);
-
-        $container->setDefinition(sprintf('sonata.formatter.twig.env.%s', $code), $env);
-
-        $sandboxPolicy = new Definition(SecurityPolicyContainerAware::class, [new Reference('service_container'), $extensions]);
-        $sandboxPolicy->setPublic(false);
-        $container->setDefinition(sprintf('sonata.formatter.twig.sandbox.%s.policy', $code), $sandboxPolicy);
-
-        $sandbox = new Definition(SandboxExtension::class, [$sandboxPolicy, true]);
-        $sandbox->setPublic(false);
-
-        $container->setDefinition(sprintf('sonata.formatter.twig.sandbox.%s', $code), $sandbox);
-
-        $env->addMethodCall('addExtension', [new Reference(sprintf('sonata.formatter.twig.sandbox.%s', $code))]);
-
-        return sprintf('sonata.formatter.twig.env.%s', $code);
     }
 }

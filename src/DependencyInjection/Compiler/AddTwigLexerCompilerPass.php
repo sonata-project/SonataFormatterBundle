@@ -36,21 +36,20 @@ final class AddTwigLexerCompilerPass implements CompilerPassInterface
         \assert(\is_array($formatters));
 
         foreach ($formatters as $code => $formatterConfig) {
-            if (0 !== \count($formatterConfig['extensions'])) {
-                $env = $container->getDefinition(sprintf('sonata.formatter.twig.env.%s', $code));
+            $envId = sprintf('sonata.formatter.twig.env.%s', $code);
 
-                $lexer = new Definition(Lexer::class, [new Reference(sprintf('sonata.formatter.twig.env.%s', $code)), [
-                    'tag_comment' => ['<#', '#>'],
-                    'tag_block' => ['<%', '%>'],
-                    'tag_variable' => ['<%=', '%>'],
-                ]]);
-                $lexer->setPublic(false);
-
-                $container->setDefinition(sprintf('sonata.formatter.twig.lexer.%s', $code), $lexer);
-
-                $env->addMethodCall('setLexer', [new Reference(sprintf('sonata.formatter.twig.lexer.%s', $code))]);
-
-                $container->setDefinition(sprintf('sonata.formatter.twig.env.%s', $code), $env);
+            if ($container->hasDefinition($envId)) {
+                $container->getDefinition($envId)
+                    ->addMethodCall('setLexer', [
+                        new Definition(Lexer::class, [
+                            new Reference($envId),
+                            [
+                                'tag_comment' => ['<#', '#>'],
+                                'tag_block' => ['<%', '%>'],
+                                'tag_variable' => ['<%=', '%>'],
+                            ],
+                        ]),
+                    ]);
             }
         }
     }

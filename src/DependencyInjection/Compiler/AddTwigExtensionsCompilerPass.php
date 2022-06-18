@@ -14,11 +14,13 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\DependencyInjection\Compiler;
 
 use Sonata\FormatterBundle\Extension\ExtensionInterface;
+use Sonata\FormatterBundle\Twig\SecurityPolicyContainerAware;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
+use Twig\Extension\SandboxExtension;
 use Twig\RuntimeLoader\ContainerRuntimeLoader;
 
 /**
@@ -38,12 +40,15 @@ final class AddTwigExtensionsCompilerPass implements CompilerPassInterface
         \assert(\is_array($formatters));
 
         foreach ($formatters as $code => $formatterConfig) {
-            if (0 !== \count($formatterConfig['extensions'])) {
-                $env = $container->getDefinition(sprintf('sonata.formatter.twig.env.%s', $code));
+            $envId = sprintf('sonata.formatter.twig.env.%s', $code);
 
-                $this->addExtensions($container, $code, $env, $formatterConfig['extensions']);
-
-                $container->setDefinition(sprintf('sonata.formatter.twig.env.%s', $code), $env);
+            if ($container->hasDefinition($envId)) {
+                $this->addExtensions(
+                    $container,
+                    $code,
+                    $container->getDefinition(sprintf('sonata.formatter.twig.env.%s', $code)),
+                    $formatterConfig['extensions']
+                );
             }
         }
     }
@@ -57,6 +62,16 @@ final class AddTwigExtensionsCompilerPass implements CompilerPassInterface
         Definition $env,
         array $extensions
     ): void {
+        $env->addMethodCall('addExtension', [
+            new Definition(SandboxExtension::class, [
+                new Definition(SecurityPolicyContainerAware::class, [
+                    new Reference('service_container'),
+                    $extensions,
+                ]),
+                true,
+            ]),
+        ]);
+
         $runtimes = [];
 
         foreach ($extensions as $extension) {
@@ -87,13 +102,11 @@ final class AddTwigExtensionsCompilerPass implements CompilerPassInterface
         }
 
         if ([] !== $runtimes) {
-            $runtimeLoader = new Definition(ContainerRuntimeLoader::class, [
-                ServiceLocatorTagPass::register($container, $runtimes),
+            $env->addMethodCall('addRuntimeLoader', [
+                new Definition(ContainerRuntimeLoader::class, [
+                    ServiceLocatorTagPass::register($container, $runtimes),
+                ]),
             ]);
-
-            $container->setDefinition(sprintf('sonata.formatter.twig.runtime_loader.%s', $code), $runtimeLoader);
-
-            $env->addMethodCall('addRuntimeLoader', [new Reference(sprintf('sonata.formatter.twig.runtime_loader.%s', $code))]);
         }
     }
 }

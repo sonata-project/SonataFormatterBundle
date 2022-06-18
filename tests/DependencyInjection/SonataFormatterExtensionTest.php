@@ -16,7 +16,6 @@ namespace Sonata\FormatterBundle\Tests\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sonata\FormatterBundle\DependencyInjection\SonataFormatterExtension;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use Twig\Loader\LoaderInterface;
 
 class SonataFormatterExtensionTest extends AbstractExtensionTestCase
 {
@@ -117,16 +116,6 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
     //         ]],
     //     ]);
     // }
-
-    public function testGetLoader(): void
-    {
-        $this->setParameter('kernel.bundles', []);
-        $this->load();
-        static::assertInstanceOf(
-            LoaderInterface::class,
-            $this->container->get('sonata.formatter.twig.loader.text')
-        );
-    }
 
     /**
      * @return ExtensionInterface[]
