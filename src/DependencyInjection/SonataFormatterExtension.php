@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\DependencyInjection;
 
+use Sonata\FormatterBundle\Extension\ExtensionInterface;
 use Sonata\FormatterBundle\Twig\Loader\LoaderSelector;
 use Sonata\FormatterBundle\Twig\SecurityPolicyContainerAware;
-use Sonata\MediaBundle\Twig\MediaRuntime;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
@@ -157,20 +157,38 @@ final class SonataFormatterExtension extends Extension
 
         $env->addMethodCall('addExtension', [new Reference(sprintf('sonata.formatter.twig.sandbox.%s', $code))]);
 
-        if (isset($bundles['SonataMediaBundle'])) {
+        $runtimes = [];
+
+        foreach ($extensions as $extension) {
+            $extensionDefinition = $container->getDefinition($extension);
+            $extensionClass = $extensionDefinition->getClass();
+
+            if (null === $extensionClass || !is_a($extensionClass, ExtensionInterface::class, true)) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Extension "%s" added to formatter "%s" do not implement %s interface.',
+                    $extension,
+                    $code,
+                    ExtensionInterface::class
+                ));
+            }
+
+            $env->addMethodCall('addExtension', [new Reference($extension)]);
+
+            $extensionRuntimes = $extensionClass::getAllowedRuntimes();
+
+            foreach ($extensionRuntimes as $extensionRuntimeId => $extensionRuntimeClass) {
+                $runtimes[$extensionRuntimeClass] = new Reference($extensionRuntimeId);
+            }
+        }
+
+        if ([] !== $runtimes) {
             $runtimeLoader = new Definition(ContainerRuntimeLoader::class, [
-                ServiceLocatorTagPass::register($container, [
-                    MediaRuntime::class => new Reference('sonata.media.twig.runtime'),
-                ]),
+                ServiceLocatorTagPass::register($container, $runtimes),
             ]);
 
             $container->setDefinition(sprintf('sonata.formatter.twig.runtime_loader.%s', $code), $runtimeLoader);
 
             $env->addMethodCall('addRuntimeLoader', [new Reference(sprintf('sonata.formatter.twig.runtime_loader.%s', $code))]);
-        }
-
-        foreach ($extensions as $extension) {
-            $env->addMethodCall('addExtension', [new Reference($extension)]);
         }
 
         $lexer = new Definition(Lexer::class, [new Reference(sprintf('sonata.formatter.twig.env.%s', $code)), [

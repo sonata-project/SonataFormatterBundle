@@ -45,4 +45,9 @@ final class MediaExtension extends BaseExtension
             'sonata_path',
         ];
     }
+
+    public static function getAllowedRuntimes(): array
+    {
+        return ['sonata.media.twig.runtime' => MediaRuntime::class];
+    }
 }

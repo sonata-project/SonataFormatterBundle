@@ -82,4 +82,9 @@ abstract class BaseExtension extends AbstractExtension implements ExtensionInter
     {
         return [];
     }
+
+    public static function getAllowedRuntimes(): array
+    {
+        return [];
+    }
 }

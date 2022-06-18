@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Extension;
 
+use Twig\Extension\RuntimeExtensionInterface;
+
 interface ExtensionInterface
 {
     /**
@@ -39,4 +41,9 @@ interface ExtensionInterface
      * @return array<class-string, array<string>>
      */
     public function getAllowedMethods(): array;
+
+    /**
+     * @return array<string, class-string<RuntimeExtensionInterface>>
+     */
+    public static function getAllowedRuntimes(): array;
 }
