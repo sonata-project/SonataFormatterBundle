@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Extension;
 
-use Twig\Extension\RuntimeExtensionInterface;
-
 interface ExtensionInterface
 {
     /**
@@ -43,7 +41,11 @@ interface ExtensionInterface
     public function getAllowedMethods(): array;
 
     /**
-     * @return array<string, class-string<RuntimeExtensionInterface>>
+     * This allows Extensions to allow custom runtimes needed
+     * to execute Twig Extensions. Here you should return an array
+     * of the ids defined on the container.
+     *
+     * @return array<string>
      */
     public static function getAllowedRuntimes(): array;
 }

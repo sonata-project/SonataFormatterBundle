@@ -48,6 +48,8 @@ final class MediaExtension extends BaseExtension
 
     public static function getAllowedRuntimes(): array
     {
-        return ['sonata.media.twig.runtime' => MediaRuntime::class];
+        return [
+            'sonata.media.twig.runtime',
+        ];
     }
 }

@@ -173,8 +173,13 @@ final class SonataFormatterExtension extends Extension
 
             $extensionRuntimes = $extensionClass::getAllowedRuntimes();
 
-            foreach ($extensionRuntimes as $extensionRuntimeId => $extensionRuntimeClass) {
-                $runtimes[$extensionRuntimeClass] = new Reference($extensionRuntimeId);
+            foreach ($extensionRuntimes as $extensionRuntime) {
+                $runtimeDefinition = $container->getDefinition($extensionRuntime);
+                $runtimeClass = $runtimeDefinition->getClass();
+
+                if (null !== $runtimeClass) {
+                    $runtimes[$runtimeClass] = new Reference($extensionRuntime);
+                }
             }
         }
 
