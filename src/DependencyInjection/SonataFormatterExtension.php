@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\DependencyInjection;
 
-use Sonata\FormatterBundle\Extension\ExtensionInterface;
 use Sonata\FormatterBundle\Twig\Loader\LoaderSelector;
 use Sonata\FormatterBundle\Twig\SecurityPolicyContainerAware;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
@@ -28,7 +26,6 @@ use Twig\Environment;
 use Twig\Extension\SandboxExtension;
 use Twig\Lexer;
 use Twig\Loader\ArrayLoader;
-use Twig\RuntimeLoader\ContainerRuntimeLoader;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
@@ -94,6 +91,11 @@ final class SonataFormatterExtension extends Extension
         }
 
         $container->setParameter(
+            'sonata.formatter.configuration.formatters',
+            $config['formatters']
+        );
+
+        $container->setParameter(
             'sonata.formatter.ckeditor.configuration.templates',
             $config['ckeditor']['templates']
         );
@@ -154,45 +156,6 @@ final class SonataFormatterExtension extends Extension
 
         $env->addMethodCall('addExtension', [new Reference(sprintf('sonata.formatter.twig.sandbox.%s', $code))]);
 
-        $runtimes = [];
-
-        foreach ($extensions as $extension) {
-            $extensionDefinition = $container->getDefinition($extension);
-            $extensionClass = $extensionDefinition->getClass();
-
-            if (null === $extensionClass || !is_a($extensionClass, ExtensionInterface::class, true)) {
-                throw new \InvalidArgumentException(sprintf(
-                    'Extension "%s" added to formatter "%s" do not implement %s interface.',
-                    $extension,
-                    $code,
-                    ExtensionInterface::class
-                ));
-            }
-
-            $env->addMethodCall('addExtension', [new Reference($extension)]);
-
-            $extensionRuntimes = $extensionClass::getAllowedRuntimes();
-
-            foreach ($extensionRuntimes as $extensionRuntime) {
-                $runtimeDefinition = $container->getDefinition($extensionRuntime);
-                $runtimeClass = $runtimeDefinition->getClass();
-
-                if (null !== $runtimeClass) {
-                    $runtimes[$runtimeClass] = new Reference($extensionRuntime);
-                }
-            }
-        }
-
-        if ([] !== $runtimes) {
-            $runtimeLoader = new Definition(ContainerRuntimeLoader::class, [
-                ServiceLocatorTagPass::register($container, $runtimes),
-            ]);
-
-            $container->setDefinition(sprintf('sonata.formatter.twig.runtime_loader.%s', $code), $runtimeLoader);
-
-            $env->addMethodCall('addRuntimeLoader', [new Reference(sprintf('sonata.formatter.twig.runtime_loader.%s', $code))]);
-        }
-
         $lexer = new Definition(Lexer::class, [new Reference(sprintf('sonata.formatter.twig.env.%s', $code)), [
             'tag_comment' => ['<#', '#>'],
             'tag_block' => ['<%', '%>'],
@@ -202,7 +165,7 @@ final class SonataFormatterExtension extends Extension
 
         $container->setDefinition(sprintf('sonata.formatter.twig.lexer.%s', $code), $lexer);
 
-        $env->addMethodCall('setLexer', [new Reference(sprintf('sonata.formatter.twig.lexer.%s', $code))]);
+        // $env->addMethodCall('setLexer', [new Reference(sprintf('sonata.formatter.twig.lexer.%s', $code))]);
 
         return sprintf('sonata.formatter.twig.env.%s', $code);
     }
