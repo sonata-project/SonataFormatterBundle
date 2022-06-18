@@ -117,6 +117,7 @@ final class CkeditorAdminController extends CRUDController
             'datagrid' => $datagrid,
             'root_category' => $rootCategory,
             'formats' => $formats,
+            'csrf_token' => $this->getCsrfToken('sonata.batch'),
             'export_formats' => [],
         ]);
     }
