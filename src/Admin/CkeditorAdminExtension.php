@@ -43,6 +43,15 @@ final class CkeditorAdminExtension extends AbstractAdminExtension
         return $parameters;
     }
 
+    public function configureBatchActions(AdminInterface $admin, array $actions): array
+    {
+        if ('browser' === $admin->getListMode()) {
+            return [];
+        }
+
+        return $actions;
+    }
+
     public function configureRoutes(AdminInterface $admin, RouteCollectionInterface $collection): void
     {
         $collection->add('browser', null, [
