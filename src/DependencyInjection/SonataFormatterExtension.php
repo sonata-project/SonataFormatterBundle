@@ -122,9 +122,6 @@ final class SonataFormatterExtension extends Extension
         string $code,
         array $extensions
     ): string {
-        $bundles = $container->getParameter('kernel.bundles');
-        \assert(\is_array($bundles));
-
         $loader = new Definition(ArrayLoader::class);
 
         $loader->setPublic(false);
