@@ -42,43 +42,7 @@ abstract class BaseExtension extends AbstractExtension implements ExtensionInter
         return [];
     }
 
-    public function getTokenParsers(): array
-    {
-        return [];
-    }
-
-    public function getNodeVisitors(): array
-    {
-        return [];
-    }
-
-    public function getFilters(): array
-    {
-        return [];
-    }
-
-    public function getTests(): array
-    {
-        return [];
-    }
-
-    public function getFunctions(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array{0?: array<string, array{precedence: int, class: class-string}>, 1?: array<string, array{precedence: int, class: class-string, associativity: int}>}
-     */
-    public function getOperators(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function getGlobals(): array
+    public static function getAllowedRuntimes(): array
     {
         return [];
     }

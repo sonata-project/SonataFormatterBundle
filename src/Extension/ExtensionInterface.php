@@ -39,4 +39,13 @@ interface ExtensionInterface
      * @return array<class-string, array<string>>
      */
     public function getAllowedMethods(): array;
+
+    /**
+     * This allows Extensions to allow custom runtimes needed
+     * to execute Twig Extensions. Here you should return an array
+     * of the ids defined on the container.
+     *
+     * @return array<string>
+     */
+    public static function getAllowedRuntimes(): array;
 }
