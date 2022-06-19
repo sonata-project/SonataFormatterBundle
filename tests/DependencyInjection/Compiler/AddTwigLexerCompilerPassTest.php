@@ -29,11 +29,9 @@ final class AddTwigLexerCompilerPassTest extends AbstractCompilerPassTestCase
     public function testAddsLexerToTwigEnvironments(): void
     {
         $this->container->setParameter('sonata.formatter.configuration.formatters', [
-            'text' => []
+            'text' => [],
         ]);
-
-        $this->container->register('sonata.formatter.twig.env.text')
-            ->setClass(Environment::class);
+        $this->container->register('sonata.formatter.twig.env.text', Environment::class);
 
         $this->compile();
 

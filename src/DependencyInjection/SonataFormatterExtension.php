@@ -76,10 +76,18 @@ final class SonataFormatterExtension extends Extension
             if (0 !== \count($formatterConfig['extensions'])) {
                 $envId = sprintf('sonata.formatter.twig.env.%s', $code);
 
-                $container->setDefinition(
-                    $envId,
-                    $this->createEnvironment()
-                );
+                $container->register($envId, Environment::class)
+                    ->setArguments([
+                        new Definition(LoaderSelector::class, [
+                            new Definition(ArrayLoader::class),
+                            new Reference('twig.loader'),
+                        ]),
+                        [
+                            'debug' => false,
+                            'strict_variables' => false,
+                            'charset' => 'UTF-8',
+                        ],
+                    ]);
 
                 $env = new Reference($envId);
             }
@@ -104,20 +112,5 @@ final class SonataFormatterExtension extends Extension
     public function getNamespace(): string
     {
         return 'http://www.sonata-project.org/schema/dic/formatter';
-    }
-
-    private function createEnvironment(): Definition
-    {
-        return new Definition(Environment::class, [
-            new Definition(LoaderSelector::class, [
-                new Definition(ArrayLoader::class),
-                new Reference('twig.loader'),
-            ]),
-            [
-                'debug' => false,
-                'strict_variables' => false,
-                'charset' => 'UTF-8',
-            ],
-        ]);
     }
 }
