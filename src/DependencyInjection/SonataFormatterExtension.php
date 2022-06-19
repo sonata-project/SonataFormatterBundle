@@ -101,19 +101,9 @@ final class SonataFormatterExtension extends Extension
         );
     }
 
-    public function getXsdValidationBasePath(): string
-    {
-        return __DIR__.'/../Resources/config/schema';
-    }
-
     public function getNamespace(): string
     {
         return 'http://www.sonata-project.org/schema/dic/formatter';
-    }
-
-    public function getAlias(): string
-    {
-        return 'sonata_formatter';
     }
 
     private function createEnvironment(): Definition
