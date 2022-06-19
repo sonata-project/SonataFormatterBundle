@@ -25,7 +25,6 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Twig\Environment;
 use Twig\Extension\SandboxExtension;
-use Twig\RuntimeLoader\ContainerRuntimeLoader;
 
 /**
  * @author Jordi Sala <jordism91@gmail.com>
@@ -50,13 +49,6 @@ final class AddTwigExtensionsCompilerPassTest extends AbstractCompilerPassTestCa
         );
 
         $this->compile();
-
-        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sonata.formatter.twig.env.text',
-            'addExtension',
-            [
-            ]
-        );
     }
 
     public function testAddExtensionsToEnvironment(): void
@@ -112,14 +104,9 @@ final class AddTwigExtensionsCompilerPassTest extends AbstractCompilerPassTestCa
             2
         );
 
-        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sonata.formatter.twig.env.text',
-            'addRuntimeLoader',
-            [
-                new Definition(ContainerRuntimeLoader::class, [
-                    new Reference('.service_locator.HQ_PEHI'),
-                ]),
-            ]
+        static::assertTrue(
+            $this->container->getDefinition('sonata.formatter.twig.env.text')
+                ->hasMethodCall('addRuntimeLoader')
         );
     }
 
