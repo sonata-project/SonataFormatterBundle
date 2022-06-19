@@ -54,20 +54,6 @@ It should contain something like this:
 
 You can provide custom routes and a custom context to match your needs.
 
-This second step is optional. You can do it if you need to define some
-custom browsing and uploading templates. To do so, add these few lines
-in your ``sonata_formatter.yaml`` file:
-
-.. code-block:: yaml
-
-  # config/packages/sonata_formatter.yaml
-
-  sonata_formatter:
-      ckeditor:
-          templates:
-              browser: '@SonataFormatter/Ckeditor/browser.html.twig'
-              upload: '@SonataFormatter/Ckeditor/upload.html.twig'
-
 Last step takes place in your admin class. You have to specify the
 ``ckeditor_context`` parameter to activate ``CKEditor``.
 Here is an example to alter ``shortDescription`` field of the

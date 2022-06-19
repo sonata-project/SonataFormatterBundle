@@ -118,11 +118,6 @@ Here is the default ``CKEditor`` custom toolbar configuration, you can tweak::
 If you stop here, the most interesting part will not be present. Let's
 edit some configuration files.
 
-.. note::
-
-    If you want to see an actual implementation of this can, you can
-    have a look at the ``SonataNewsBundle``.
-
 Sonata Admin Integration
 ------------------------
 
