@@ -13,26 +13,33 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Extension;
 
-use Sonata\FormatterBundle\Twig\TokenParser\GistTokenParser;
+use Twig\TwigFunction;
 
 final class GistExtension extends BaseExtension
 {
-    public function getAllowedTags(): array
+    public function getAllowedFunctions(): array
     {
         return [
             'gist',
         ];
     }
 
-    public function getAllowedFunctions(): array
-    {
-        return [];
-    }
-
-    public function getTokenParsers(): array
+    public function getFunctions(): array
     {
         return [
-            new GistTokenParser(),
+            new TwigFunction('gist', [$this, 'gist'], ['is_safe' => ['html']]),
         ];
+    }
+
+    public function gist(int $number, string $file): string
+    {
+        return sprintf(
+            <<<EOT
+<div class="sonata-gist"><script src="https://gist.github.com/%s.js?file=%s"></script></div>
+EOT
+                ,
+            $number,
+            $file
+        );
     }
 }

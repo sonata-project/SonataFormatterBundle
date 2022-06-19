@@ -22,9 +22,6 @@ use Twig\TwigFilter;
  */
 final class TextFormatterExtension extends AbstractExtension
 {
-    /**
-     * @return TwigFilter[]
-     */
     public function getFilters(): array
     {
         return [
