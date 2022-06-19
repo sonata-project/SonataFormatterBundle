@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -51,37 +50,6 @@ final class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
 
-        $this->addCkeditorSection($rootNode);
-
         return $treeBuilder;
-    }
-
-    /**
-     * @psalm-suppress PossiblyNullReference, PossiblyUndefinedMethod
-     *
-     * @see https://github.com/psalm/psalm-plugin-symfony/issues/174
-     */
-    private function addCkeditorSection(ArrayNodeDefinition $node): void
-    {
-        $node
-            ->children()
-                ->arrayNode('ckeditor')
-                ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('templates')
-                        ->addDefaultsIfNotSet()
-                        ->children()
-                            ->scalarNode('browser')
-                                ->defaultValue('@SonataFormatter/Ckeditor/browser.html.twig')
-                                ->cannotBeEmpty()
-                            ->end()
-                            ->scalarNode('upload')
-                                ->defaultValue('@SonataFormatter/Ckeditor/upload.html.twig')
-                                ->cannotBeEmpty()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end();
     }
 }

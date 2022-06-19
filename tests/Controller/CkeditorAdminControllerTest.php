@@ -78,10 +78,6 @@ class CkeditorAdminControllerTest extends TestCase
             'kernel.bundles' => [
                 'SonataMediaBundle' => true,
             ],
-            'sonata.formatter.ckeditor.configuration.templates' => [
-                'browser' => 'browser.html.twig',
-                'upload' => 'upload.html.twig',
-            ],
         ]);
 
         $requestStack = new RequestStack();
@@ -125,7 +121,7 @@ class CkeditorAdminControllerTest extends TestCase
         $formView = $this->createStub(FormView::class);
 
         $this->configureSetFormTheme($formView, ['filterTheme']);
-        $this->configureRender('browser.html.twig', 'renderResponse');
+        $this->configureRender('@SonataFormatter/Ckeditor/browser.html.twig', 'renderResponse');
 
         $datagrid->expects(static::exactly(4))->method('setValue')->withConsecutive(
             ['context', null, 'another_context'],
@@ -174,7 +170,7 @@ class CkeditorAdminControllerTest extends TestCase
         $mediaPool = new MediaPool('context');
         $mediaPool->addProvider('provider', $this->createStub(MediaProviderInterface::class));
 
-        $this->configureRender('upload.html.twig', 'renderResponse');
+        $this->configureRender('@SonataFormatter/Ckeditor/upload.html.twig', 'renderResponse');
         $mediaManager->method('create')->willReturn($media);
         $mediaManager->expects(static::once())->method('save')->with($media);
         $this->admin->expects(static::once())->method('checkAccess')->with('create');
@@ -204,10 +200,6 @@ class CkeditorAdminControllerTest extends TestCase
     {
         $this->admin->method('getPersistentParameters')->willReturn(['param' => 'param']);
         $this->container->set('sonata.media.pool', new MediaPool('context'));
-        $this->container->setParameter(
-            'sonata.formatter.ckeditor.configuration.templates',
-            ['browser' => $template, 'upload' => $template]
-        );
 
         $this->twig->method('render')->with($template, static::isType('array'))->willReturn($rendered);
     }

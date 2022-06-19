@@ -111,7 +111,7 @@ final class CkeditorAdminController extends CRUDController
         $formView = $datagrid->getForm()->createView();
         $this->setFormTheme($formView, $this->admin->getFilterTheme());
 
-        return $this->renderWithExtraParams($this->getTemplate('browser'), [
+        return $this->renderWithExtraParams('@SonataFormatter/Ckeditor/browser.html.twig', [
             'action' => 'browser',
             'form' => $formView,
             'datagrid' => $datagrid,
@@ -159,26 +159,11 @@ final class CkeditorAdminController extends CRUDController
             $request->get('format', MediaProviderInterface::FORMAT_REFERENCE)
         );
 
-        return $this->renderWithExtraParams($this->getTemplate('upload'), [
+        return $this->renderWithExtraParams('@SonataFormatter/Ckeditor/upload.html.twig', [
             'action' => 'list',
             'object' => $media,
             'format' => $format,
         ]);
-    }
-
-    private function getTemplate(string $name): string
-    {
-        $templates = $this->getParameter('sonata.formatter.ckeditor.configuration.templates');
-        \assert(\is_array($templates));
-
-        if (isset($templates[$name])) {
-            return $templates[$name];
-        }
-
-        throw new \LogicException(sprintf(
-            'Template with name "%s" does not exist',
-            $name
-        ));
     }
 
     /**
