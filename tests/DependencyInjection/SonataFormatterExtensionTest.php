@@ -79,44 +79,6 @@ class SonataFormatterExtensionTest extends AbstractExtensionTestCase
         ]);
     }
 
-    // public function testItThrowsOnInvalidFormatterExtension(): void
-    // {
-    //     $this->setParameter('kernel.bundles', []);
-    //     $this->expectException(\InvalidArgumentException::class);
-    //     $this->expectExceptionMessage(
-    //         'You have requested a non-existent service "sonata.formatter.twig.random".'
-    //     );
-
-    //     $this->load([
-    //         'default_formatter' => 'text',
-    //         'formatters' => ['text' => [
-    //             'service' => 'sonata.formatter.text.text',
-    //             'extensions' => [
-    //                 'sonata.formatter.twig.random',
-    //             ],
-    //         ]],
-    //     ]);
-    // }
-
-    // public function testItThrowsOnExtensionThatIsNotAnExtension(): void
-    // {
-    //     $this->setParameter('kernel.bundles', []);
-    //     $this->expectException(\InvalidArgumentException::class);
-    //     $this->expectExceptionMessage(
-    //         'Extension "sonata.formatter.pool" added to formatter "text" do not implement Sonata\FormatterBundle\Extension\ExtensionInterface interface.'
-    //     );
-
-    //     $this->load([
-    //         'default_formatter' => 'text',
-    //         'formatters' => ['text' => [
-    //             'service' => 'sonata.formatter.text.text',
-    //             'extensions' => [
-    //                 'sonata.formatter.pool',
-    //             ],
-    //         ]],
-    //     ]);
-    // }
-
     /**
      * @return ExtensionInterface[]
      */
