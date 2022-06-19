@@ -35,3 +35,9 @@ $input = new ArrayInput([
     'command' => 'doctrine:schema:create',
 ]);
 $application->run($input, new NullOutput());
+
+$input = new ArrayInput([
+    'command' => 'cache:clear',
+    '--no-warmup' => true,
+]);
+$application->run($input, new NullOutput());
