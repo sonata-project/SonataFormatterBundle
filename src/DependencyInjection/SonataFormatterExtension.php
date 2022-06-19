@@ -96,11 +96,6 @@ final class SonataFormatterExtension extends Extension
             'sonata.formatter.configuration.formatters',
             $config['formatters']
         );
-
-        $container->setParameter(
-            'sonata.formatter.ckeditor.configuration.templates',
-            $config['ckeditor']['templates']
-        );
     }
 
     public function getNamespace(): string
