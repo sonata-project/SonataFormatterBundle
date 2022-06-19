@@ -13,16 +13,13 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\DependencyInjection;
 
-use Sonata\FormatterBundle\Twig\Loader\LoaderSelector;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Twig\Environment;
-use Twig\Loader\ArrayLoader;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
@@ -78,10 +75,7 @@ final class SonataFormatterExtension extends Extension
 
                 $container->register($envId, Environment::class)
                     ->setArguments([
-                        new Definition(LoaderSelector::class, [
-                            new Definition(ArrayLoader::class),
-                            new Reference('twig.loader'),
-                        ]),
+                        new Reference('twig.loader'),
                         [
                             'debug' => false,
                             'strict_variables' => false,
