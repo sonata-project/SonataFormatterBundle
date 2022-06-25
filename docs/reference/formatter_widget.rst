@@ -57,16 +57,15 @@ Now, let us define a form to edit this post::
 
     use Sonata\FormatterBundle\Form\Type\FormatterType;
 
-    $formBuilder
+    $form
         ->add('content', FormatterType::class, [
-            'event_dispatcher' => $formBuilder->getEventDispatcher(),
             'format_field'   => 'contentFormatter',
             'format_field_options' => [
                 'choices' => [
                     'text' => 'Text',
                     'markdown' => 'Markdown',
                 ],
-                'data' => 'markdown',
+                'empty_data' => 'markdown',
             ],
             'source_field' => 'rawContent',
             'source_field_options' => [
@@ -84,8 +83,6 @@ The ``Sonata\FormatterBundle\Form\Type\FormatterType`` takes various
 options:
 
 * ``listener`` (optional, default is ``true``);
-* ``event_dispatcher``: the form dispatcher to attach the "submit" event
-  (optional, depends on the ``listener`` value);
 * ``format_field``: the entity's format field;
 * ``format_field_options``: the format field options (optional);
 * ``source_field``: the entity's source field;
@@ -105,13 +102,13 @@ and to define a custom ``CKEditor`` toolbar configuration:
 Here is the default ``CKEditor`` custom toolbar configuration, you can tweak::
 
     $ckeditor_toolbar_icons = [
-        1 => ['Bold', 'Italic', 'Underline',
+        ['Bold', 'Italic', 'Underline',
             '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
             '-', 'Undo', 'Redo',
             '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
             '-', 'Blockquote',
             '-', 'Image', 'Link', 'Unlink', 'Table'],
-        2 => ['Maximize', 'Source'],
+        ['Maximize', 'Source'],
     ];
 
 

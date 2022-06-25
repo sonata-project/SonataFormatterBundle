@@ -70,6 +70,6 @@ Now add SonataFormatter configuration:
                 extensions:
                     - sonata.formatter.twig.control_flow
                     - sonata.formatter.twig.gist
-            #        - sonata.media.formatter.twig # keep this commented unless you are using media bundle.
+                    # - sonata.formatter.twig.media # do not add this unless you are using media bundle.
 
 .. _`FOSCKEditorBundle`: https://github.com/FriendsOfSymfony/FOSCKEditorBundle
