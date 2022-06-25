@@ -42,3 +42,34 @@ admin_app_sonata_media_media_upload
 The following classes are removed without being deprecated on 4.x:
 
 `Sonata\FormatterBundle\Extension\BaseProxyExtension`
+
+## FormatterType without `event_dispatcher`
+
+You no longer have to provide `event_dispatcher` on the FormatterType options.
+
+Before:
+
+```
+    $form
+        ->add('shortDescription', FormatterType::class, [
+            'source_field' => 'rawDescription',
+            'format_field' => 'descriptionFormatter',
+            'target_field' => 'description',
+            'ckeditor_context' => 'default',
+            'listener' => true,
+            'event_dispatcher' => $formMapper->getFormBuilder()->getEventDispatcher(),
+        ]);
+```
+
+After:
+
+```
+    $form
+        ->add('shortDescription', FormatterType::class, [
+            'source_field' => 'rawDescription',
+            'format_field' => 'descriptionFormatter',
+            'target_field' => 'description',
+            'ckeditor_context' => 'default',
+            'listener' => true,
+        ]);
+```

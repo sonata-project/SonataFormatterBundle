@@ -61,14 +61,13 @@ Here is an example to alter ``shortDescription`` field of the
 
     use Sonata\FormatterBundle\Form\Type\FormatterType;
 
-    $formMapper
+    $form
         ->add('shortDescription', FormatterType::class, [
             'source_field' => 'rawDescription',
-            'source_field_options' => ['attr' => ['class' => 'span10', 'rows' => 20]],
             'format_field' => 'descriptionFormatter',
             'target_field' => 'description',
             'ckeditor_context' => 'default',
-            'event_dispatcher' => $formMapper->getFormBuilder()->getEventDispatcher(),
+            'listener' => true,
         ]);
 
 And that is it, enjoy browsing and uploading your medias using
@@ -110,7 +109,7 @@ Alternatively you can specify custom return image format per field::
 
     use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 
-    $formMapper
+    $form
         ->add('details', SimpleFormatterType::class, [
             'format' => 'richhtml',
             'ckeditor_context' => 'default',
