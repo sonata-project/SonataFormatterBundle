@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.7.0](https://github.com/sonata-project/SonataFormatterBundle/compare/4.6.1...4.7.0) - 2022-06-25
+### Changed
+- [[#672](https://github.com/sonata-project/SonataFormatterBundle/pull/672)] Bump minimum SonataAdminBundle and SonataMediaBundle versions required. ([@jordisala1991](https://github.com/jordisala1991))
+
+### Fixed
+- [[#672](https://github.com/sonata-project/SonataFormatterBundle/pull/672)] Fix deprecation with Twig 2. ([@jordisala1991](https://github.com/jordisala1991))
+
 ## [4.6.1](https://github.com/sonata-project/SonataFormatterBundle/compare/4.6.0...4.6.1) - 2021-09-14
 ### Fixed
 - [[#607](https://github.com/sonata-project/SonataFormatterBundle/pull/607)] Fix `sonata.formatter.block.formatter` service registration ([@core23](https://github.com/core23))
