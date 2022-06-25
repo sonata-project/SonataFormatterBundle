@@ -2,6 +2,33 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.0-alpha-1](https://github.com/sonata-project/SonataFormatterBundle/compare/4.x...5.0.0-alpha-1) - 2022-06-25
+### Added
+- [[#641](https://github.com/sonata-project/SonataFormatterBundle/pull/641)] Added support for Symfony 5 / Sonata Admin 4 / Twig 3. ([@jorrit](https://github.com/jorrit))
+- [[#683](https://github.com/sonata-project/SonataFormatterBundle/pull/683)] Add validations to form type options. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#696](https://github.com/sonata-project/SonataFormatterBundle/pull/696)] Added `MediaExtension` to render Media inside Formatters. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#696](https://github.com/sonata-project/SonataFormatterBundle/pull/696)] Added ability to use Twig runtimes on your Formatter Extensions via `getAllowedRuntimes`. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#663](https://github.com/sonata-project/SonataFormatterBundle/pull/663)] Added support for CKeditorBundle. ([@VincentLanglet](https://github.com/VincentLanglet))
+- [[#653](https://github.com/sonata-project/SonataFormatterBundle/pull/653)] Added support for `psr/log` ^2.0 and ^3.0. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#646](https://github.com/sonata-project/SonataFormatterBundle/pull/646)] Support for Symfony 6 ([@VincentLanglet](https://github.com/VincentLanglet))
+
+### Changed
+- [[#699](https://github.com/sonata-project/SonataFormatterBundle/pull/699)] Changed `gist` tag to be a function instead. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#691](https://github.com/sonata-project/SonataFormatterBundle/pull/691)] `format_text` filter is now lazy loaded. ([@jordisala1991](https://github.com/jordisala1991))
+
+### Fixed
+- [[#679](https://github.com/sonata-project/SonataFormatterBundle/pull/679)] Fix ckeditor browser and upload actions. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#664](https://github.com/sonata-project/SonataFormatterBundle/pull/664)] Adding extensions on formatters with config ([@VincentLanglet](https://github.com/VincentLanglet))
+
+### Removed
+- [[#683](https://github.com/sonata-project/SonataFormatterBundle/pull/683)] Remove `event_dispatcher` on FormatterType, since we provide it internally. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#701](https://github.com/sonata-project/SonataFormatterBundle/pull/701)] Removed template configuration. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#694](https://github.com/sonata-project/SonataFormatterBundle/pull/694)] Remove `Sonata\FormatterBundle\Extension\BaseProxyExtension`. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#691](https://github.com/sonata-project/SonataFormatterBundle/pull/691)] Clean up deprecated methods for Twig. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#687](https://github.com/sonata-project/SonataFormatterBundle/pull/687)] Removed `ExtendableFormatter` and `BaseFormatter`. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#686](https://github.com/sonata-project/SonataFormatterBundle/pull/686)] All container parameters that were used to customize classes. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#678](https://github.com/sonata-project/SonataFormatterBundle/pull/678)] Remove support for Symfony 5.3. ([@jordisala1991](https://github.com/jordisala1991))
+
 ## [4.6.1](https://github.com/sonata-project/SonataFormatterBundle/compare/4.6.0...4.6.1) - 2021-09-14
 ### Fixed
 - [[#607](https://github.com/sonata-project/SonataFormatterBundle/pull/607)] Fix `sonata.formatter.block.formatter` service registration ([@core23](https://github.com/core23))
