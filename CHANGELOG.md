@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.0](https://github.com/sonata-project/SonataFormatterBundle/compare/5.0.0-alpha-1...5.0.0) - 2022-07-12
+- No significant changes
+
 ## [5.0.0-alpha-1](https://github.com/sonata-project/SonataFormatterBundle/compare/4.x...5.0.0-alpha-1) - 2022-06-25
 ### Added
 - [[#641](https://github.com/sonata-project/SonataFormatterBundle/pull/641)] Added support for Symfony 5 / Sonata Admin 4 / Twig 3. ([@jorrit](https://github.com/jorrit))
