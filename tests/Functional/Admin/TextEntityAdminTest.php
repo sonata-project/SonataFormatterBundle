@@ -14,10 +14,8 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\Tests\Functional\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Sonata\FormatterBundle\Tests\App\AppKernel;
 use Sonata\FormatterBundle\Tests\App\Entity\TextEntity;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 final class TextEntityAdminTest extends WebTestCase
 {
@@ -43,7 +41,6 @@ final class TextEntityAdminTest extends WebTestCase
     public static function provideCrudUrlsCases(): iterable
     {
         yield 'Create TextEntity' => ['/admin/tests/app/textentity/create'];
-
         yield 'Edit TextEntity' => ['/admin/tests/app/textentity/1/edit'];
     }
 
@@ -114,14 +111,6 @@ final class TextEntityAdminTest extends WebTestCase
         ]];
 
         yield 'Edit TextEntity' => ['/admin/tests/app/textentity/1/edit', [], 'btn_update_and_list'];
-    }
-
-    /**
-     * @return class-string<KernelInterface>
-     */
-    protected static function getKernelClass(): string
-    {
-        return AppKernel::class;
     }
 
     /**
