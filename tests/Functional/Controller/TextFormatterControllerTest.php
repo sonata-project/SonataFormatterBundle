@@ -13,20 +13,18 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\Functional\Controller;
 
-use PHPUnit\Framework\TestCase;
-use Sonata\FormatterBundle\Tests\App\AppKernel;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class TextFormatterControllerTest extends TestCase
+final class TextFormatterControllerTest extends WebTestCase
 {
     /**
      * @requires extension gd
      */
     public function testTruncate(): void
     {
-        $client = new KernelBrowser(new AppKernel());
+        $client = static::createClient();
         $client->request(Request::METHOD_GET, '/text_format');
 
         static::assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());

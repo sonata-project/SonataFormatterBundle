@@ -14,12 +14,10 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\Tests\Functional\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Sonata\FormatterBundle\Tests\App\AppKernel;
 use Sonata\FormatterBundle\Tests\App\Entity\Media;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 final class CkeditorAdminTest extends WebTestCase
 {
@@ -58,14 +56,6 @@ final class CkeditorAdminTest extends WebTestCase
         ], [
             'upload' => new UploadedFile(__DIR__.'/../../Fixtures/logo.jpg', 'logo.jpg'),
         ]];
-    }
-
-    /**
-     * @return class-string<KernelInterface>
-     */
-    protected static function getKernelClass(): string
-    {
-        return AppKernel::class;
     }
 
     /**

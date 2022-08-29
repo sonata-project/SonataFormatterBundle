@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\Functional\Block;
 
-use Sonata\FormatterBundle\Tests\App\AppKernel;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 final class DashboardBlocksTest extends WebTestCase
 {
@@ -39,13 +37,5 @@ final class DashboardBlocksTest extends WebTestCase
     public static function provideCrudUrlsCases(): iterable
     {
         yield 'Ckeditor Browser Media' => ['/admin/dashboard'];
-    }
-
-    /**
-     * @return class-string<KernelInterface>
-     */
-    protected static function getKernelClass(): string
-    {
-        return AppKernel::class;
     }
 }
