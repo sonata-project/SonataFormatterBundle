@@ -15,8 +15,10 @@ use Sonata\FormatterBundle\Tests\App\AppKernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Filesystem\Filesystem;
 
-$application = new Application(new AppKernel());
+$kernel = new AppKernel($_SERVER['APP_ENV'], $_SERVER['APP_DEBUG']);
+$application = new Application($kernel);
 $application->setAutoExit(false);
 
 $input = new ArrayInput([
@@ -36,8 +38,4 @@ $input = new ArrayInput([
 ]);
 $application->run($input, new NullOutput());
 
-$input = new ArrayInput([
-    'command' => 'cache:clear',
-    '--no-warmup' => true,
-]);
-$application->run($input, new NullOutput());
+(new Filesystem())->remove([$kernel->getCacheDir()]);

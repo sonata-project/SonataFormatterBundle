@@ -65,6 +65,7 @@
         "sonata-project/media-bundle": "^4.2",
         "sonata-project/twig-extensions": "^1.0",
         "symfony/browser-kit": "^4.4 || ^5.4 || ^6.0",
+        "symfony/filesystem": "^4.4 || ^5.4 || ^6.0",
         "symfony/phpunit-bridge": "^6.1",
         "symfony/security-bundle": "^4.4 || ^5.4 || ^6.0",
         "vimeo/psalm": "^4.19"
