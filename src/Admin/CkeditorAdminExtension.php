@@ -28,7 +28,7 @@ final class CkeditorAdminExtension extends AbstractAdminExtension
 {
     public function configure(AdminInterface $admin): void
     {
-        $admin->setTemplate('outer_list_rows_browser', '@SonataFormatter/Ckeditor/list_outer_rows_browser.html.twig');
+        $admin->setTemplate('outer_list_rows_list', '@SonataFormatter/Ckeditor/list_outer_rows_browser.html.twig');
     }
 
     public function configurePersistentParameters(AdminInterface $admin, array $parameters): array
