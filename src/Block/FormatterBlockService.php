@@ -47,7 +47,7 @@ final class FormatterBlockService extends AbstractBlockService implements Editab
     {
         $form->add('settings', ImmutableArrayType::class, [
             'keys' => [
-                ['content', FormatterType::class, static fn (FormBuilderInterface $formBuilder) => [
+                ['content', FormatterType::class, [
                     'format_field' => 'format',
                     'source_field' => 'rawContent',
                     'target_field' => '[content]',
