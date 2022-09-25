@@ -23,7 +23,6 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Type\ImmutableArrayType;
 use Sonata\Form\Validator\ErrorElement;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -47,10 +46,9 @@ final class FormatterBlockService extends AbstractBlockService implements Editab
     {
         $form->add('settings', ImmutableArrayType::class, [
             'keys' => [
-                ['content', FormatterType::class, static fn (FormBuilderInterface $formBuilder) => [
-                    'event_dispatcher' => $formBuilder->getEventDispatcher(),
-                    'format_field' => ['format', '[format]'],
-                    'source_field' => ['rawContent', '[rawContent]'],
+                ['content', FormatterType::class, [
+                    'format_field' => 'format',
+                    'source_field' => 'rawContent',
                     'target_field' => '[content]',
                     'label' => 'form.label_content',
                 ]],
