@@ -15,16 +15,15 @@ namespace Sonata\FormatterBundle\Tests\Form\Type;
 
 use FOS\CKEditorBundle\Config\CKEditorConfigurationInterface;
 use PHPUnit\Framework\MockObject\MockObject;
-use Sonata\FormatterBundle\Form\EventListener\FormatterListener;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Sonata\FormatterBundle\Formatter\FormatterInterface;
 use Sonata\FormatterBundle\Formatter\Pool;
 use Sonata\FormatterBundle\Tests\App\Entity\TextEntity;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormExtensionInterface;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
 /**
@@ -53,6 +52,17 @@ final class FormatterTypeTest extends TypeTestCase
         $this->expectExceptionMessage('An error has occurred resolving the options of the form "Sonata\FormatterBundle\Form\Type\FormatterType": The required options "format_field", "source_field" are missing.');
 
         $this->factory->create(FormatterType::class);
+    }
+
+    public function testRequiredTargetField(): void
+    {
+        $this->expectException(InvalidOptionsException::class);
+        $this->expectExceptionMessage('When "listener" option is set to "true", "target_field" option is required');
+
+        $this->factory->create(FormatterType::class, null, [
+            'format_field' => 'format',
+            'source_field' => 'content',
+        ]);
     }
 
     public function testWithoutListener(): void
@@ -133,28 +143,42 @@ final class FormatterTypeTest extends TypeTestCase
 
     public function testWithEventListener(): void
     {
-        $formBuilder = $this->factory->createBuilder(FormType::class, null)
+        $formatter = $this->createMock(FormatterInterface::class);
+        $formatter->expects(static::once())->method('transform')->willReturn('test transformed');
+
+        $this->pool->add('text', $formatter);
+
+        $formData = ['text' => [
+            'rawText' => 'test source',
+            'textFormat' => 'text',
+        ]];
+        $model = new TextEntity();
+
+        $form = $this->factory->createBuilder(FormType::class, $model)
             ->add('text', FormatterType::class, [
                 'format_field' => 'textFormat',
                 'source_field' => 'rawText',
                 'target_field' => 'text',
-            ]);
+            ])
+            ->getForm();
 
-        $listeners = $formBuilder->get('text')->getEventDispatcher()->getListeners(FormEvents::PRE_SUBMIT);
+        $form->submit($formData);
 
-        static::assertCount(2, $listeners);
-        static::assertIsArray($listeners[1]);
-        static::assertCount(2, $listeners[1]);
-        static::assertInstanceOf(FormatterListener::class, $listeners[1][0]);
-        static::assertSame('postSubmit', $listeners[1][1]);
+        static::assertTrue($form->isSynchronized());
+        static::assertSame('test source', $model->getRawText());
+        static::assertSame('test transformed', $model->getText());
     }
 
     public function testWithPropertyPaths(): void
     {
-        $this->pool->add('text', $this->createStub(FormatterInterface::class));
+        $formatter = $this->createMock(FormatterInterface::class);
+        $formatter->expects(static::once())->method('transform')->willReturn('test transformed');
+
+        $this->pool->add('text', $formatter);
 
         $formData = ['targetText' => [
             'textRaw' => 'test source',
+            'formatText' => 'text',
         ]];
         $model = new TextEntity();
 
@@ -175,8 +199,8 @@ final class FormatterTypeTest extends TypeTestCase
         $form->submit($formData);
 
         static::assertTrue($form->isSynchronized());
-        static::assertSame('text', $model->getTextFormat());
         static::assertSame('test source', $model->getRawText());
+        static::assertSame('test transformed', $model->getText());
     }
 
     public function testFormView(): void
