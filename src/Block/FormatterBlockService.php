@@ -49,7 +49,7 @@ final class FormatterBlockService extends AbstractBlockService implements Editab
                 ['content', FormatterType::class, [
                     'format_field' => 'format',
                     'source_field' => 'rawContent',
-                    'target_field' => '[content]',
+                    'target_field' => 'content',
                     'label' => 'form.label_content',
                 ]],
             ],
