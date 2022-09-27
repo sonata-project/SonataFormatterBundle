@@ -140,13 +140,13 @@ final class FormatterTypeTest extends TypeTestCase
                 'target_field' => 'text',
             ]);
 
-        $listeners = $formBuilder->get('text')->getEventDispatcher()->getListeners(FormEvents::SUBMIT);
+        $listeners = $formBuilder->get('text')->getEventDispatcher()->getListeners(FormEvents::PRE_SUBMIT);
 
-        static::assertCount(1, $listeners);
-        static::assertIsArray($listeners[0]);
-        static::assertCount(2, $listeners[0]);
-        static::assertInstanceOf(FormatterListener::class, $listeners[0][0]);
-        static::assertSame('postSubmit', $listeners[0][1]);
+        static::assertCount(2, $listeners);
+        static::assertIsArray($listeners[1]);
+        static::assertCount(2, $listeners[1]);
+        static::assertInstanceOf(FormatterListener::class, $listeners[1][0]);
+        static::assertSame('postSubmit', $listeners[1][1]);
     }
 
     public function testWithPropertyPaths(): void

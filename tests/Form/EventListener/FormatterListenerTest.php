@@ -29,7 +29,7 @@ class FormatterListenerTest extends TestCase
 
         $pool = $this->getPool();
 
-        $listener = new FormatterListener($pool, '[format]', '[source]', '[target]');
+        $listener = new FormatterListener($pool, 'format', 'source', 'target');
 
         $event = new FormEvent($this->createMock(FormInterface::class), [
             'format' => 'error',
@@ -50,7 +50,7 @@ class FormatterListenerTest extends TestCase
         $pool = $this->getPool();
         $pool->add('myformat', $formatter);
 
-        $listener = new FormatterListener($pool, '[format]', '[source]', '[target]');
+        $listener = new FormatterListener($pool, 'format', 'source', 'target');
 
         $event = new FormEvent($this->createMock(FormInterface::class), [
             'format' => 'myformat',
