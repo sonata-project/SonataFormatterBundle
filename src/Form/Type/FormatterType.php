@@ -61,18 +61,24 @@ final class FormatterType extends AbstractType
             $formatOptions['choice_translation_domain'] = 'SonataFormatterBundle';
         }
 
+        $sourceOptions = $options['source_field_options'];
+
         $builder->add($formatField, $formatType, $formatOptions);
-        $builder->add($sourceField, TextareaType::class, $options['source_field_options']);
+        $builder->add($sourceField, TextareaType::class, $sourceOptions);
 
         /*
          * The listener option only work if the source field is after the current field
          */
         if (true === $options['listener']) {
+            $targetField = $options['target_field'];
+
+            $builder->add($targetField, HiddenType::class);
+
             $listener = new FormatterListener(
                 $this->pool,
-                $formatOptions['property_path'] ?? $formatField,
-                $options['source_field_options']['property_path'] ?? $sourceField,
-                $options['target_field']
+                $formatField,
+                $sourceField,
+                $targetField
             );
 
             $builder->addEventListener(FormEvents::PRE_SUBMIT, [$listener, 'postSubmit']);
