@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.1](https://github.com/sonata-project/SonataFormatterBundle/compare/5.0.0...5.0.1) - 2022-09-28
+### Fixed
+- [[#722](https://github.com/sonata-project/SonataFormatterBundle/pull/722)] Fix `FormatterType` listener option, now it should update `target_field` when listener is set to "true" (its default value). ([@jordisala1991](https://github.com/jordisala1991))
+- [[#721](https://github.com/sonata-project/SonataFormatterBundle/pull/721)] Fix FormatterBlockService to work with current form. ([@haivala](https://github.com/haivala))
+
 ## [5.0.0](https://github.com/sonata-project/SonataFormatterBundle/compare/5.0.0-alpha-1...5.0.0) - 2022-07-12
 - No significant changes
 

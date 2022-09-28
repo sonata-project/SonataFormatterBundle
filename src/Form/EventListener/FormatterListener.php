@@ -15,7 +15,6 @@ namespace Sonata\FormatterBundle\Form\EventListener;
 
 use Sonata\FormatterBundle\Formatter\PoolInterface;
 use Symfony\Component\Form\FormEvent;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 
 final class FormatterListener
 {
@@ -38,19 +37,18 @@ final class FormatterListener
 
     public function postSubmit(FormEvent $event): void
     {
-        $accessor = PropertyAccess::createPropertyAccessor();
-
-        $format = $accessor->getValue($event->getData(), $this->formatField);
-        $source = $accessor->getValue($event->getData(), $this->sourceField);
-
-        // make sure the listener works with array
         $data = $event->getData();
 
-        $accessor->setValue(
-            $data,
-            $this->targetField,
-            \is_string($source) ? $this->pool->transform($format, $source) : null
-        );
+        if (!\is_array($data)) {
+            return;
+        }
+
+        $source = $data[$this->sourceField] ?? null;
+        $format = $data[$this->formatField] ?? null;
+
+        $data[$this->targetField] = null !== $source && null !== $format ?
+            $this->pool->transform($format, $source) :
+            null;
 
         $event->setData($data);
     }

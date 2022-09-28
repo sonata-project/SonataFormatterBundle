@@ -24,6 +24,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class FormatterType extends AbstractType
@@ -43,7 +45,9 @@ final class FormatterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $formatField = $options['format_field'];
+        \assert(\is_string($formatField));
         $sourceField = $options['source_field'];
+        \assert(\is_string($sourceField));
 
         if (!isset($options['format_field_options']['empty_data']) ||
              !\array_key_exists($options['format_field_options']['empty_data'], $this->pool->getFormatters())) {
@@ -61,21 +65,28 @@ final class FormatterType extends AbstractType
             $formatOptions['choice_translation_domain'] = 'SonataFormatterBundle';
         }
 
+        $sourceOptions = $options['source_field_options'];
+
         $builder->add($formatField, $formatType, $formatOptions);
-        $builder->add($sourceField, TextareaType::class, $options['source_field_options']);
+        $builder->add($sourceField, TextareaType::class, $sourceOptions);
 
         /*
          * The listener option only work if the source field is after the current field
          */
         if (true === $options['listener']) {
+            $targetField = $options['target_field'];
+            \assert(\is_string($targetField));
+
+            $builder->add($targetField, HiddenType::class);
+
             $listener = new FormatterListener(
                 $this->pool,
-                $formatOptions['property_path'] ?? $formatField,
-                $options['source_field_options']['property_path'] ?? $sourceField,
-                $options['target_field']
+                $formatField,
+                $sourceField,
+                $targetField
             );
 
-            $builder->addEventListener(FormEvents::SUBMIT, [$listener, 'postSubmit']);
+            $builder->addEventListener(FormEvents::PRE_SUBMIT, [$listener, 'postSubmit']);
         }
     }
 
@@ -141,6 +152,14 @@ final class FormatterType extends AbstractType
             'format_field',
             'source_field',
         ]);
+
+        $resolver->setNormalizer('target_field', static function (Options $options, ?string $value): ?string {
+            if (true === $options['listener'] && null === $value) {
+                throw new InvalidOptionsException('When "listener" option is set to "true", "target_field" option is required');
+            }
+
+            return $value;
+        });
 
         $resolver->setAllowedTypes('format_field', 'string');
         $resolver->setAllowedTypes('source_field', 'string');
