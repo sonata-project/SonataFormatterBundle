@@ -51,6 +51,7 @@ final class FormatterBlockService extends AbstractBlockService implements Editab
                     'source_field' => 'rawContent',
                     'target_field' => 'content',
                     'label' => 'form.label_content',
+                    'translation_domain' => 'SonataFormatterBundle',
                 ]],
             ],
             'translation_domain' => 'SonataFormatterBundle',
