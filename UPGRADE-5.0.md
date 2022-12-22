@@ -1,4 +1,4 @@
-UPGRADE FROM 3.x to 4.0
+UPGRADE FROM 4.x to 5.0
 =======================
 
 ## Deprecations
