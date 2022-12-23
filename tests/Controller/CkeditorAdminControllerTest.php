@@ -47,14 +47,14 @@ class CkeditorAdminControllerTest extends TestCase
     /**
      * @var AdminInterface<object>&MockObject
      */
-    private $admin;
+    private AdminInterface $admin;
 
     private Request $request;
 
     /**
      * @var Environment&MockObject
      */
-    private $twig;
+    private Environment $twig;
 
     private CkeditorAdminController $controller;
 
