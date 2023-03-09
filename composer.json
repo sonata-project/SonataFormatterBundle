@@ -43,8 +43,8 @@
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^6.7",
-        "doctrine/doctrine-bundle": "^2.3.2",
-        "doctrine/orm": "^2.9",
+        "doctrine/doctrine-bundle": "^2.7",
+        "doctrine/orm": "^2.14",
         "friendsofphp/php-cs-fixer": "^3.4",
         "knplabs/knp-menu-bundle": "^3.0",
         "matthiasnoback/symfony-config-test": "^4.2",
