@@ -68,6 +68,7 @@
         "symfony/filesystem": "^4.4 || ^5.4 || ^6.2",
         "symfony/phpunit-bridge": "^6.2",
         "symfony/security-bundle": "^4.4 || ^5.4 || ^6.2",
+        "symfony/yaml": "^4.4 || ^5.4 || ^6.2",
         "vimeo/psalm": "^4.19"
     },
     "conflict": {
