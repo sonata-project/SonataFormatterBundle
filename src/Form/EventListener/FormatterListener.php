@@ -18,21 +18,12 @@ use Symfony\Component\Form\FormEvent;
 
 final class FormatterListener
 {
-    private PoolInterface $pool;
-
-    private string $formatField;
-
-    private string $sourceField;
-
-    private string $targetField;
-
-    public function __construct(PoolInterface $pool, string $formatField, string $sourceField, string $targetField)
-    {
-        $this->pool = $pool;
-
-        $this->formatField = $formatField;
-        $this->sourceField = $sourceField;
-        $this->targetField = $targetField;
+    public function __construct(
+        private PoolInterface $pool,
+        private string $formatField,
+        private string $sourceField,
+        private string $targetField
+    ) {
     }
 
     public function postSubmit(FormEvent $event): void

@@ -13,23 +13,18 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\MediaBundle\Entity\BaseMedia;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="media__media")
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'media__media')]
 class Media extends BaseMedia
 {
-    /**
-     * @var int|null
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    protected $id;
+    #[ORM\Id]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[ORM\GeneratedValue]
+    protected ?int $id = null;
 
     public function setId(int $id): void
     {

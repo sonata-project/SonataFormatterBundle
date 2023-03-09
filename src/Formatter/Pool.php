@@ -29,11 +29,8 @@ final class Pool implements LoggerAwareInterface, PoolInterface
      */
     private array $formatters = [];
 
-    private string $defaultFormatter;
-
-    public function __construct(string $defaultFormatter)
+    public function __construct(private string $defaultFormatter)
     {
-        $this->defaultFormatter = $defaultFormatter;
         $this->logger = new NullLogger();
     }
 

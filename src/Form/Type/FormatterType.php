@@ -28,18 +28,15 @@ use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @psalm-suppress MissingTemplateParam https://github.com/phpstan/phpstan-symfony/issues/320
+ */
 final class FormatterType extends AbstractType
 {
-    private PoolInterface $pool;
-
-    private CKEditorConfigurationInterface $ckEditorConfiguration;
-
     public function __construct(
-        PoolInterface $pool,
-        CKEditorConfigurationInterface $ckEditorConfiguration
+        private PoolInterface $pool,
+        private CKEditorConfigurationInterface $ckEditorConfiguration
     ) {
-        $this->pool = $pool;
-        $this->ckEditorConfiguration = $ckEditorConfiguration;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
