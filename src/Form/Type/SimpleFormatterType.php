@@ -22,12 +22,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class SimpleFormatterType extends AbstractType
 {
-    private CKEditorConfigurationInterface $ckEditorConfiguration;
-
     public function __construct(
-        CKEditorConfigurationInterface $ckEditorConfiguration
+        private CKEditorConfigurationInterface $ckEditorConfiguration
     ) {
-        $this->ckEditorConfiguration = $ckEditorConfiguration;
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options): void

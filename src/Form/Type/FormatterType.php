@@ -30,16 +30,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class FormatterType extends AbstractType
 {
-    private PoolInterface $pool;
-
-    private CKEditorConfigurationInterface $ckEditorConfiguration;
-
     public function __construct(
-        PoolInterface $pool,
-        CKEditorConfigurationInterface $ckEditorConfiguration
+        private PoolInterface $pool,
+        private CKEditorConfigurationInterface $ckEditorConfiguration
     ) {
-        $this->pool = $pool;
-        $this->ckEditorConfiguration = $ckEditorConfiguration;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
