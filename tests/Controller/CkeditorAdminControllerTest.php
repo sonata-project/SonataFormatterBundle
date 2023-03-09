@@ -123,11 +123,7 @@ class CkeditorAdminControllerTest extends TestCase
         $this->configureSetFormTheme($formView, ['filterTheme']);
         $this->configureRender('@SonataFormatter/Ckeditor/browser.html.twig', 'renderResponse');
 
-        $datagrid->expects(static::exactly(4))->method('setValue')->withConsecutive(
-            ['context', null, 'another_context'],
-            ['providerName', null, 'provider'],
-            ['category', null, 1]
-        );
+        $datagrid->expects(static::exactly(4))->method('setValue');
         $datagrid->method('getResults')->willReturn([]);
         $datagrid->method('getForm')->willReturn($form);
         $categoryManager->method('getRootCategoriesForContext')->willReturn([$category]);

@@ -20,7 +20,7 @@ doctrine:
                 mappings:
                     SonataMediaBundle: null
                     SonataFormatterTest:
-                        type: annotation
+                        type: attribute
                         dir: "%kernel.project_dir%/Entity"
                         is_bundle: false
                         prefix: Sonata\FormatterBundle\Tests\App\Entity
@@ -39,8 +39,6 @@ fos_ck_editor:
 
 twig:
     exception_controller: null
-    paths:
-        - "%kernel.project_dir%/Resources/views"
     form_themes:
         - "@SonataFormatter/Form/formatter.html.twig"
     strict_variables: true
