@@ -15,23 +15,14 @@ namespace Sonata\FormatterBundle\Tests\Fixtures;
 
 class Entity
 {
-    /**
-     * @var string|int|null
-     */
-    private $id;
+    private int|string|null $id = null;
 
-    /**
-     * @param int|string $id
-     */
-    public function setId($id): void
+    public function setId(int|string $id): void
     {
         $this->id = $id;
     }
 
-    /**
-     * @return int|string|null
-     */
-    public function getId()
+    public function getId(): int|string|null
     {
         return $this->id;
     }

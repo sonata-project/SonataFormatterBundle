@@ -24,11 +24,8 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
  */
 final class FormatterValidator extends ConstraintValidator
 {
-    private PoolInterface $pool;
-
-    public function __construct(PoolInterface $pool)
+    public function __construct(private PoolInterface $pool)
     {
-        $this->pool = $pool;
     }
 
     /**

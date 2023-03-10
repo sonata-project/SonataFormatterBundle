@@ -18,11 +18,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 final class TextFormatterRuntime implements RuntimeExtensionInterface
 {
-    private PoolInterface $pool;
-
-    public function __construct(PoolInterface $pool)
+    public function __construct(private PoolInterface $pool)
     {
-        $this->pool = $pool;
     }
 
     public function transform(string $text, string $type): string

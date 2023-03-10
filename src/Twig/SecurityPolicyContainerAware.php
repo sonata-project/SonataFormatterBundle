@@ -53,13 +53,6 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
      */
     private array $allowedMethods = [];
 
-    private ContainerInterface $container;
-
-    /**
-     * @var string[]
-     */
-    private array $extensions = [];
-
     private bool $allowedBuilt = false;
 
     /**
@@ -67,10 +60,10 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
      *
      * @param string[] $extensions
      */
-    public function __construct(ContainerInterface $container, array $extensions = [])
-    {
-        $this->container = $container;
-        $this->extensions = $extensions;
+    public function __construct(
+        private ContainerInterface $container,
+        private array $extensions = []
+    ) {
     }
 
     /**
@@ -124,7 +117,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
         }
 
         if (!$allowed) {
-            $class = \get_class($obj);
+            $class = $obj::class;
             throw new SecurityNotAllowedMethodError(
                 sprintf(
                     'Calling "%s" method on a "%s" object is not allowed.',
@@ -159,7 +152,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
                 sprintf(
                     'Calling "%s" property on a "%s" object is not allowed.',
                     $property,
-                    \get_class($obj)
+                    $obj::class
                 )
             );
         }
