@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Psr\Container\ContainerInterface;
 use Sonata\FormatterBundle\Tests\App\Admin\TextEntityAdmin;
 use Sonata\FormatterBundle\Tests\App\Controller\TextFormatterController;
 use Sonata\FormatterBundle\Tests\App\Entity\TextEntity;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->services()
@@ -30,5 +30,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->set(TextFormatterController::class)
             ->public()
             ->tag('container.service_subscriber')
-            ->call('setContainer', [new ReferenceConfigurator(ContainerInterface::class)]);
+            ->call('setContainer', [service(ContainerInterface::class)]);
 };
