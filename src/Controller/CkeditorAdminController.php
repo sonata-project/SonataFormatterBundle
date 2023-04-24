@@ -50,13 +50,13 @@ final class CkeditorAdminController extends CRUDController
         $this->admin->checkAccess('list');
         $this->admin->setListMode('browser');
 
-        $filters = $request->query->all()['filter'] ?? [];
+        $filters = $request->query->all('filter');
 
         $pool = $this->container->get('sonata.media.pool');
         \assert($pool instanceof Pool);
 
         // set the default context
-        if (\is_array($filters) && \array_key_exists('context', $filters)) {
+        if (\array_key_exists('context', $filters)) {
             $context = $filters['context']['value'];
         } else {
             $context = $this->admin->getPersistentParameter('context', $pool->getDefaultContext());

@@ -11,15 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Sonata\FormatterBundle\Extension\ControlFlowExtension;
 use Sonata\FormatterBundle\Extension\GistExtension;
 use Sonata\FormatterBundle\Twig\Extension\TextFormatterExtension;
 use Sonata\FormatterBundle\Twig\TextFormatterRuntime;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "service" function for creating references to services when dropping support for Symfony 4.4
     $containerConfigurator->services()
 
         ->set('sonata.formatter.text.twig', TextFormatterExtension::class)
@@ -28,7 +27,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->set('sonata.formatter.twig.text_formatter_runtime', TextFormatterRuntime::class)
             ->tag('twig.runtime')
             ->args([
-                new ReferenceConfigurator('sonata.formatter.pool'),
+                service('sonata.formatter.pool'),
             ])
 
         ->set('sonata.formatter.twig.gist', GistExtension::class)
