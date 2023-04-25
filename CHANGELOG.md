@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.1.0](https://github.com/sonata-project/SonataFormatterBundle/compare/5.0.2...5.1.0) - 2023-04-25
+### Removed
+- [[#749](https://github.com/sonata-project/SonataFormatterBundle/pull/749)] Support for Symfony 4 ([@jordisala1991](https://github.com/jordisala1991))
+- [[#749](https://github.com/sonata-project/SonataFormatterBundle/pull/749)] Support for Twig 2 ([@jordisala1991](https://github.com/jordisala1991))
+- [[#744](https://github.com/sonata-project/SonataFormatterBundle/pull/744)] Drop support for PHP 7.4 ([@jordisala1991](https://github.com/jordisala1991))
+
 ## [5.0.2](https://github.com/sonata-project/SonataFormatterBundle/compare/5.0.1...5.0.2) - 2023-01-08
 ### Fixed
 - [[#735](https://github.com/sonata-project/SonataFormatterBundle/pull/735)] Fix sonata_formatter_type_widget with single format option template rendering ([@azlotnikov](https://github.com/azlotnikov))
