@@ -42,9 +42,9 @@ This package is available under the [MIT license](LICENSE).
 [test_unstable_badge]: https://github.com/sonata-project/SonataFormatterBundle/workflows/Test/badge.svg?branch=6.x
 [test_unstable_link]: https://github.com/sonata-project/SonataFormatterBundle/actions?query=workflow:test+branch:6.x
 [coverage_stable_badge]: https://codecov.io/gh/sonata-project/SonataFormatterBundle/branch/5.x/graph/badge.svg
-[coverage_stable_link]: https://codecov.io/gh/sonata-project/SonataFormatterBundle/branch/5.x
+[coverage_stable_link]: https://app.codecov.io/gh/sonata-project/SonataFormatterBundle/tree/5.x
 [coverage_unstable_badge]: https://codecov.io/gh/sonata-project/SonataFormatterBundle/branch/6.x/graph/badge.svg
-[coverage_unstable_link]: https://codecov.io/gh/sonata-project/SonataFormatterBundle/branch/6.x
+[coverage_unstable_link]: https://app.codecov.io/gh/sonata-project/SonataFormatterBundle/tree/6.x
 [shepherd_stable_badge]: https://shepherd.dev/github/sonata-project/SonataFormatterBundle/coverage.svg
 [shepherd_stable_link]: https://shepherd.dev/github/sonata-project/SonataFormatterBundle
 [documentation_stable_badge]: https://readthedocs.org/projects/sonataformatterbundle/badge/?version=5.x
