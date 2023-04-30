@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - [[#749](https://github.com/sonata-project/SonataFormatterBundle/pull/749)] Support for Symfony 4 ([@jordisala1991](https://github.com/jordisala1991))
 - [[#749](https://github.com/sonata-project/SonataFormatterBundle/pull/749)] Support for Twig 2 ([@jordisala1991](https://github.com/jordisala1991))
 - [[#744](https://github.com/sonata-project/SonataFormatterBundle/pull/744)] Drop support for PHP 7.4 ([@jordisala1991](https://github.com/jordisala1991))
+- [[#739](https://github.com/sonata-project/SonataFormatterBundle/pull/739)] Support for Symfony 6.0 and 6.1 ([@SonataCI](https://github.com/SonataCI))
 
 ## [5.0.2](https://github.com/sonata-project/SonataFormatterBundle/compare/5.0.1...5.0.2) - 2023-01-08
 ### Fixed
