@@ -76,6 +76,8 @@
         "sonata-project/classification-bundle": "<4.0",
         "sonata-project/media-bundle": "<4.2"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Sonata\\FormatterBundle\\": "src/"
