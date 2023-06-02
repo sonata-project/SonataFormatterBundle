@@ -46,8 +46,8 @@ final class FormatterType extends AbstractType
         $sourceField = $options['source_field'];
         \assert(\is_string($sourceField));
 
-        if (!isset($options['format_field_options']['empty_data']) ||
-             !\array_key_exists($options['format_field_options']['empty_data'], $this->pool->getFormatters())) {
+        if (!isset($options['format_field_options']['empty_data'])
+             || !\array_key_exists($options['format_field_options']['empty_data'], $this->pool->getFormatters())) {
             $options['format_field_options']['empty_data'] = $this->pool->getDefaultFormatter();
         }
 
