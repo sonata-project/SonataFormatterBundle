@@ -75,7 +75,6 @@ sonata_admin:
                       This is for testing purposes
 
 sonata_block:
-    http_cache: false
     blocks:
         sonata.formatter.block.formatter: null
 
