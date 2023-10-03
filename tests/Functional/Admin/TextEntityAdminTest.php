@@ -45,7 +45,7 @@ final class TextEntityAdminTest extends WebTestCase
     }
 
     /**
-     * @dataProvider provideFormUrlsCases
+     * @dataProvider provideFormsUrlsCases
      *
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $fieldValues
@@ -68,7 +68,7 @@ final class TextEntityAdminTest extends WebTestCase
      *
      * @phpstan-return iterable<array{0: string, 1: array<string, mixed>, 2: string, 3?: array<string, mixed>}>
      */
-    public static function provideFormUrlsCases(): iterable
+    public static function provideFormsUrlsCases(): iterable
     {
         yield 'Create TextEntity Text' => ['/admin/tests/app/textentity/create', [
             'uniqid' => 'textEntity',
