@@ -111,7 +111,7 @@ final class CkeditorAdminController extends CRUDController
         $formView = $datagrid->getForm()->createView();
         $this->setFormTheme($formView, $this->admin->getFilterTheme());
 
-        return $this->renderWithExtraParams('@SonataFormatter/Ckeditor/browser.html.twig', [
+        return $this->render('@SonataFormatter/Ckeditor/browser.html.twig', [
             'action' => 'browser',
             'form' => $formView,
             'datagrid' => $datagrid,
@@ -159,7 +159,7 @@ final class CkeditorAdminController extends CRUDController
             $request->get('format', MediaProviderInterface::FORMAT_REFERENCE)
         );
 
-        return $this->renderWithExtraParams('@SonataFormatter/Ckeditor/upload.html.twig', [
+        return $this->render('@SonataFormatter/Ckeditor/upload.html.twig', [
             'action' => 'list',
             'object' => $media,
             'format' => $format,
