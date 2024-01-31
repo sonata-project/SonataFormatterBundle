@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.4.0](https://github.com/sonata-project/SonataFormatterBundle/compare/5.3.0...5.4.0) - 2024-01-31
+### Added
+- [[#780](https://github.com/sonata-project/SonataFormatterBundle/pull/780)] Symfony 7 support ([@VincentLanglet](https://github.com/VincentLanglet))
+
+### Fixed
+- [[#774](https://github.com/sonata-project/SonataFormatterBundle/pull/774)] Usage of deprecated `renderWithExtraParams` method ([@VincentLanglet](https://github.com/VincentLanglet))
+
 ## [5.3.0](https://github.com/sonata-project/SonataFormatterBundle/compare/5.2.0...5.3.0) - 2023-06-04
 ### Added
 - [[#762](https://github.com/sonata-project/SonataFormatterBundle/pull/762)] Support for SonataBlockBundle 5.0 ([@jordisala1991](https://github.com/jordisala1991))
