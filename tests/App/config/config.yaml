@@ -16,6 +16,7 @@ doctrine:
     dbal:
         driver: pdo_sqlite
         path: "%app.base_dir%sonata_media_test.db3"
+        use_savepoints: true
     orm:
         entity_managers:
             default:
