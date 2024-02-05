@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.4.1](https://github.com/sonata-project/SonataFormatterBundle/compare/5.4.0...5.4.1) - 2024-02-05
+### Fixed
+- [[#788](https://github.com/sonata-project/SonataFormatterBundle/pull/788)] Symfony 7 support for symfony/config ([@lemorragia](https://github.com/lemorragia))
+
 ## [5.4.0](https://github.com/sonata-project/SonataFormatterBundle/compare/5.3.0...5.4.0) - 2024-01-31
 ### Added
 - [[#780](https://github.com/sonata-project/SonataFormatterBundle/pull/780)] Symfony 7 support ([@VincentLanglet](https://github.com/VincentLanglet))
