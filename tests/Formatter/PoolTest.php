@@ -59,7 +59,7 @@ class PoolTest extends TestCase
         $template = $this->createMock(Template::class);
         $template->expects(static::once())
             ->method('render')
-            ->will(static::throwException(new SyntaxError('Error')));
+            ->willThrowException(new SyntaxError('Error'));
 
         $env = $this->getEnv($template);
         $pool = $this->getPool();
@@ -75,7 +75,7 @@ class PoolTest extends TestCase
         $template = $this->createMock(Template::class);
         $template->expects(static::once())
             ->method('render')
-            ->will(static::throwException(new SecurityError('Error')));
+            ->willThrowException(new SecurityError('Error'));
 
         $env = $this->getEnv($template);
         $pool = $this->getPool();
@@ -93,7 +93,7 @@ class PoolTest extends TestCase
         $template = $this->createMock(Template::class);
         $template->expects(static::once())
             ->method('render')
-            ->will(static::throwException(new \RuntimeException('Error')));
+            ->willThrowException(new \RuntimeException('Error'));
 
         $env = $this->getEnv($template);
         $pool = $this->getPool();
