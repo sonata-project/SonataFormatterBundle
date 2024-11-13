@@ -143,6 +143,6 @@ class SonataFormatterTypeWidgetTest extends AbstractWidgetTestCase
 
     private function getSonataFormatterViewsPath(): string
     {
-        return sprintf('%s/../../../src/Resources/views', __DIR__);
+        return \sprintf('%s/../../../src/Resources/views', __DIR__);
     }
 }

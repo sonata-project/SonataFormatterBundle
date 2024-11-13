@@ -62,7 +62,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
      */
     public function __construct(
         private ContainerInterface $container,
-        private array $extensions = []
+        private array $extensions = [],
     ) {
     }
 
@@ -77,19 +77,19 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
 
         foreach ($tags as $tag) {
             if (!\in_array($tag, $this->allowedTags, true)) {
-                throw new SecurityError(sprintf('Tag "%s" is not allowed.', $tag));
+                throw new SecurityError(\sprintf('Tag "%s" is not allowed.', $tag));
             }
         }
 
         foreach ($filters as $filter) {
             if (!\in_array($filter, $this->allowedFilters, true)) {
-                throw new SecurityError(sprintf('Filter "%s" is not allowed.', $filter));
+                throw new SecurityError(\sprintf('Filter "%s" is not allowed.', $filter));
             }
         }
 
         foreach ($functions as $function) {
             if (!\in_array($function, $this->allowedFunctions, true)) {
-                throw new SecurityError(sprintf('Function "%s" is not allowed.', $function));
+                throw new SecurityError(\sprintf('Function "%s" is not allowed.', $function));
             }
         }
     }
@@ -119,7 +119,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
         if (!$allowed) {
             $class = $obj::class;
             throw new SecurityNotAllowedMethodError(
-                sprintf(
+                \sprintf(
                     'Calling "%s" method on a "%s" object is not allowed.',
                     $method,
                     $class
@@ -149,7 +149,7 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
 
         if (!$allowed) {
             throw new SecurityError(
-                sprintf(
+                \sprintf(
                     'Calling "%s" property on a "%s" object is not allowed.',
                     $property,
                     $obj::class
