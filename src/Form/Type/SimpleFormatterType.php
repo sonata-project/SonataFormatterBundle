@@ -26,7 +26,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class SimpleFormatterType extends AbstractType
 {
     public function __construct(
-        private CKEditorConfigurationInterface $ckEditorConfiguration
+        private CKEditorConfigurationInterface $ckEditorConfiguration,
     ) {
     }
 

@@ -33,7 +33,7 @@ final class GistExtension extends BaseExtension
 
     public function gist(int $number, string $file): string
     {
-        return sprintf(
+        return \sprintf(
             '<div class="sonata-gist"><script src="https://gist.github.com/%s.js?file=%s"></script></div>',
             $number,
             $file

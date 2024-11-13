@@ -40,13 +40,13 @@ final class AddTwigExtensionsCompilerPass implements CompilerPassInterface
         \assert(\is_array($formatters));
 
         foreach ($formatters as $code => $formatterConfig) {
-            $envId = sprintf('sonata.formatter.twig.env.%s', $code);
+            $envId = \sprintf('sonata.formatter.twig.env.%s', $code);
 
             if ($container->hasDefinition($envId)) {
                 $this->addExtensions(
                     $container,
                     $code,
-                    $container->getDefinition(sprintf('sonata.formatter.twig.env.%s', $code)),
+                    $container->getDefinition(\sprintf('sonata.formatter.twig.env.%s', $code)),
                     $formatterConfig['extensions']
                 );
             }
@@ -60,7 +60,7 @@ final class AddTwigExtensionsCompilerPass implements CompilerPassInterface
         ContainerBuilder $container,
         string $code,
         Definition $env,
-        array $extensions
+        array $extensions,
     ): void {
         $env->addMethodCall('addExtension', [
             new Definition(SandboxExtension::class, [
@@ -79,7 +79,7 @@ final class AddTwigExtensionsCompilerPass implements CompilerPassInterface
             $extensionClass = $extensionDefinition->getClass();
 
             if (null === $extensionClass || !is_a($extensionClass, ExtensionInterface::class, true)) {
-                throw new \InvalidArgumentException(sprintf(
+                throw new \InvalidArgumentException(\sprintf(
                     'Extension "%s" added to formatter "%s" do not implement %s interface.',
                     $extension,
                     $code,
