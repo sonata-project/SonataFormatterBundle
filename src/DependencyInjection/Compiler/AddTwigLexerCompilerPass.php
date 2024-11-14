@@ -36,7 +36,7 @@ final class AddTwigLexerCompilerPass implements CompilerPassInterface
         \assert(\is_array($formatters));
 
         foreach ($formatters as $code => $formatterConfig) {
-            $envId = sprintf('sonata.formatter.twig.env.%s', $code);
+            $envId = \sprintf('sonata.formatter.twig.env.%s', $code);
 
             if ($container->hasDefinition($envId)) {
                 $container->getDefinition($envId)

@@ -57,10 +57,10 @@ final class SonataFormatterExtension extends Extension
         }
 
         if (!\array_key_exists($config['default_formatter'], $config['formatters'])) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new \InvalidArgumentException(\sprintf(
                 'SonataFormatterBundle - Invalid default formatter: %s, available: %s',
                 $config['default_formatter'],
-                sprintf('["%s"]', implode('", "', array_keys($config['formatters'])))
+                \sprintf('["%s"]', implode('", "', array_keys($config['formatters'])))
             ));
         }
 
@@ -71,7 +71,7 @@ final class SonataFormatterExtension extends Extension
             $env = null;
 
             if (0 !== \count($formatterConfig['extensions'])) {
-                $envId = sprintf('sonata.formatter.twig.env.%s', $code);
+                $envId = \sprintf('sonata.formatter.twig.env.%s', $code);
 
                 $container->register($envId, Environment::class)
                     ->setArguments([

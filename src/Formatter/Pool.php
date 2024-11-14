@@ -47,7 +47,7 @@ final class Pool implements LoggerAwareInterface, PoolInterface
     public function get(string $code): array
     {
         if (!$this->has($code)) {
-            throw new \RuntimeException(sprintf('Unable to get the formatter : %s', $code));
+            throw new \RuntimeException(\sprintf('Unable to get the formatter : %s', $code));
         }
 
         return $this->formatters[$code];
@@ -70,7 +70,7 @@ final class Pool implements LoggerAwareInterface, PoolInterface
             \assert(null !== $this->logger);
 
             $this->logger->critical(
-                sprintf(
+                \sprintf(
                     '[FormatterBundle::transform] %s - Error while parsing twig template : %s',
                     $code,
                     $e->getMessage()
@@ -84,7 +84,7 @@ final class Pool implements LoggerAwareInterface, PoolInterface
             \assert(null !== $this->logger);
 
             $this->logger->critical(
-                sprintf(
+                \sprintf(
                     '[FormatterBundle::transform] %s - the user try an non white-listed keyword : %s',
                     $code,
                     $e->getMessage()

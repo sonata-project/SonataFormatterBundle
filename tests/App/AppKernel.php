@@ -63,12 +63,12 @@ final class AppKernel extends Kernel
 
     public function getCacheDir(): string
     {
-        return sprintf('%scache', $this->getBaseDir());
+        return \sprintf('%scache', $this->getBaseDir());
     }
 
     public function getLogDir(): string
     {
-        return sprintf('%slog', $this->getBaseDir());
+        return \sprintf('%slog', $this->getBaseDir());
     }
 
     public function getProjectDir(): string
@@ -99,6 +99,6 @@ final class AppKernel extends Kernel
 
     private function getBaseDir(): string
     {
-        return sprintf('%s/sonata-formatter-bundle/var/', sys_get_temp_dir());
+        return \sprintf('%s/sonata-formatter-bundle/var/', sys_get_temp_dir());
     }
 }

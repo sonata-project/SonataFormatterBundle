@@ -22,7 +22,7 @@ final class FormatterListener
         private PoolInterface $pool,
         private string $formatField,
         private string $sourceField,
-        private string $targetField
+        private string $targetField,
     ) {
     }
 
