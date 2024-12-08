@@ -27,7 +27,7 @@ final class GistExtension extends BaseExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('gist', [$this, 'gist'], ['is_safe' => ['html']]),
+            new TwigFunction('gist', $this->gist(...), ['is_safe' => ['html']]),
         ];
     }
 

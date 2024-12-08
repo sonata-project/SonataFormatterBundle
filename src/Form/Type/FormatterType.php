@@ -83,7 +83,7 @@ final class FormatterType extends AbstractType
                 $targetField
             );
 
-            $builder->addEventListener(FormEvents::PRE_SUBMIT, [$listener, 'postSubmit']);
+            $builder->addEventListener(FormEvents::PRE_SUBMIT, $listener->postSubmit(...));
         }
     }
 
