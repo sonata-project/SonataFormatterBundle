@@ -22,7 +22,7 @@ use Sonata\FormatterBundle\Validator\Constraints\FormatterValidator;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class FormatterValidatorTest extends TestCase
+final class FormatterValidatorTest extends TestCase
 {
     /**
      * @var ExecutionContextInterface&MockObject

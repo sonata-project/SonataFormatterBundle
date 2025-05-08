@@ -19,7 +19,7 @@ use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Test\BlockServiceTestCase;
 use Sonata\FormatterBundle\Block\FormatterBlockService;
 
-class FormatterBlockServiceTest extends BlockServiceTestCase
+final class FormatterBlockServiceTest extends BlockServiceTestCase
 {
     public function testExecute(): void
     {

@@ -26,7 +26,7 @@ use Symfony\Component\Form\PreloadedExtension;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-class SonataFormatterTypeWidgetTest extends AbstractWidgetTestCase
+final class SonataFormatterTypeWidgetTest extends AbstractWidgetTestCase
 {
     private Pool $pool;
 

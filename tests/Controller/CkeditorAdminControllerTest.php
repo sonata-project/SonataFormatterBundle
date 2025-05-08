@@ -38,7 +38,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class CkeditorAdminControllerTest extends TestCase
+final class CkeditorAdminControllerTest extends TestCase
 {
     private Container $container;
 

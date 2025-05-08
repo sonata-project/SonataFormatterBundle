@@ -23,12 +23,13 @@ use Twig\Sandbox\SecurityError;
 use Twig\Template;
 use Twig\TemplateWrapper;
 
-class PoolTest extends TestCase
+final class PoolTest extends TestCase
 {
     public function testPool(): void
     {
         $formatter = new TextFormatter();
 
+        // @phpstan-ignore-next-line classConstant.internalClass
         $template = $this->createMock(Template::class);
         $template->expects(static::once())->method('render')->willReturn('Salut');
 
@@ -56,6 +57,7 @@ class PoolTest extends TestCase
     {
         $formatter = new TextFormatter();
 
+        // @phpstan-ignore-next-line classConstant.internalClass
         $template = $this->createMock(Template::class);
         $template->expects(static::once())
             ->method('render')
@@ -72,6 +74,7 @@ class PoolTest extends TestCase
     {
         $formatter = new TextFormatter();
 
+        // @phpstan-ignore-next-line classConstant.internalClass
         $template = $this->createMock(Template::class);
         $template->expects(static::once())
             ->method('render')
@@ -90,6 +93,7 @@ class PoolTest extends TestCase
 
         $formatter = new TextFormatter();
 
+        // @phpstan-ignore-next-line classConstant.internalClass
         $template = $this->createMock(Template::class);
         $template->expects(static::once())
             ->method('render')
@@ -118,6 +122,9 @@ class PoolTest extends TestCase
         return $pool;
     }
 
+    /**
+     * @phpstan-ignore parameter.internalClass
+     */
     private function getEnv(Template $template): Environment
     {
         $env = $this->createMock(Environment::class);

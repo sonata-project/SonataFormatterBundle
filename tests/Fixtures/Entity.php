@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\Fixtures;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class Entity
 {
     private int|string|null $id = null;
