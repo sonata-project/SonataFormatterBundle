@@ -85,11 +85,11 @@ final class CkeditorAdminControllerTest extends TestCase
 
         $this->container->set('request_stack', $requestStack);
 
-        $adminFetcher = $this->createStub(AdminFetcherInterface::class);
+        $adminFetcher = static::createStub(AdminFetcherInterface::class);
         $adminFetcher->method('get')->willReturn($this->admin);
 
-        $categoryManagerInterface = $this->createStub(CategoryManagerInterface::class);
-        $contextManagerInterface = $this->createStub(ContextManagerInterface::class);
+        $categoryManagerInterface = static::createStub(CategoryManagerInterface::class);
+        $contextManagerInterface = static::createStub(ContextManagerInterface::class);
 
         $this->container->set('sonata.admin.request.fetcher', $adminFetcher);
         $this->container->set('sonata.media.manager.category', $categoryManagerInterface);
@@ -116,9 +116,9 @@ final class CkeditorAdminControllerTest extends TestCase
         $datagrid = $this->createMock(DatagridInterface::class);
         $mediaPool = new MediaPool('context');
         $categoryManager = $this->createMock(CategoryManagerInterface::class);
-        $category = $this->createStub(Entity::class);
-        $form = $this->createStub(Form::class);
-        $formView = $this->createStub(FormView::class);
+        $category = static::createStub(Entity::class);
+        $form = static::createStub(Form::class);
+        $formView = static::createStub(FormView::class);
 
         $this->configureSetFormTheme($formView, ['filterTheme']);
         $this->configureRender('@SonataFormatter/Ckeditor/browser.html.twig', 'renderResponse');
@@ -161,10 +161,10 @@ final class CkeditorAdminControllerTest extends TestCase
         $this->request->request->set('context', 'context');
         $this->request->request->set('format', 'reference');
 
-        $media = $this->createStub(MediaInterface::class);
+        $media = static::createStub(MediaInterface::class);
         $mediaManager = $this->createMock(MediaManagerInterface::class);
         $mediaPool = new MediaPool('context');
-        $mediaPool->addProvider('provider', $this->createStub(MediaProviderInterface::class));
+        $mediaPool->addProvider('provider', static::createStub(MediaProviderInterface::class));
 
         $this->configureRender('@SonataFormatter/Ckeditor/upload.html.twig', 'renderResponse');
         $mediaManager->method('create')->willReturn($media);
