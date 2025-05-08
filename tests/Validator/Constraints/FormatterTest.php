@@ -16,7 +16,7 @@ namespace Sonata\FormatterBundle\Tests\Validator\Constraints;
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Validator\Constraints\Formatter;
 
-class FormatterTest extends TestCase
+final class FormatterTest extends TestCase
 {
     public function testConstraint(): void
     {

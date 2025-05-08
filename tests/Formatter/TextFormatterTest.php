@@ -16,7 +16,7 @@ namespace Sonata\FormatterBundle\Tests\Formatter;
 use PHPUnit\Framework\TestCase;
 use Sonata\FormatterBundle\Formatter\TextFormatter;
 
-class TextFormatterTest extends TestCase
+final class TextFormatterTest extends TestCase
 {
     public function testFormatter(): void
     {

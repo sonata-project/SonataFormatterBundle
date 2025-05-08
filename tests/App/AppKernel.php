@@ -35,6 +35,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\UX\StimulusBundle\StimulusBundle;
 
 final class AppKernel extends Kernel
 {
@@ -58,6 +59,7 @@ final class AppKernel extends Kernel
             new SonataDoctrineORMAdminBundle(),
             new SonataMediaBundle(),
             new SonataFormatterBundle(),
+            new StimulusBundle(),
         ];
     }
 
