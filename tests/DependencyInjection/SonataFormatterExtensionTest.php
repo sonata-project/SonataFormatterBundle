@@ -17,7 +17,7 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sonata\FormatterBundle\DependencyInjection\SonataFormatterExtension;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
-class SonataFormatterExtensionTest extends AbstractExtensionTestCase
+final class SonataFormatterExtensionTest extends AbstractExtensionTestCase
 {
     public function testLoadWithMinimalDocumentedConfig(): void
     {

@@ -91,7 +91,7 @@ final class FormatterTypeTest extends TypeTestCase
 
     public function testWithOneFormat(): void
     {
-        $this->pool->add('text', $this->createStub(FormatterInterface::class));
+        $this->pool->add('text', static::createStub(FormatterInterface::class));
 
         $formData = ['text' => [
             'rawText' => 'test source',
@@ -115,8 +115,8 @@ final class FormatterTypeTest extends TypeTestCase
 
     public function testWithMultipleFormat(): void
     {
-        $this->pool->add('text', $this->createStub(FormatterInterface::class));
-        $this->pool->add('rawhtml', $this->createStub(FormatterInterface::class));
+        $this->pool->add('text', static::createStub(FormatterInterface::class));
+        $this->pool->add('rawhtml', static::createStub(FormatterInterface::class));
 
         $formData = ['text' => [
             'rawText' => 'test source',
@@ -207,8 +207,8 @@ final class FormatterTypeTest extends TypeTestCase
     {
         $this->ckEditorConfiguration->expects(static::once())->method('getDefaultConfig')->willReturn('default');
 
-        $this->pool->add('text', $this->createStub(FormatterInterface::class));
-        $this->pool->add('rawhtml', $this->createStub(FormatterInterface::class));
+        $this->pool->add('text', static::createStub(FormatterInterface::class));
+        $this->pool->add('rawhtml', static::createStub(FormatterInterface::class));
 
         $view = $this->factory->createBuilder(FormType::class, null)
             ->add('text', FormatterType::class, [

@@ -21,7 +21,7 @@ use Sonata\FormatterBundle\Formatter\Pool;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormInterface;
 
-class FormatterListenerTest extends TestCase
+final class FormatterListenerTest extends TestCase
 {
     public function testWithInvalidFormatter(): void
     {
