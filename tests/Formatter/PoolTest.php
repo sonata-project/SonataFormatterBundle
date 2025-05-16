@@ -130,6 +130,7 @@ final class PoolTest extends TestCase
         $env = $this->createMock(Environment::class);
 
         $env->expects(static::once())->method('createTemplate')->willReturnCallback(
+            // @phpstan-ignore-next-line method.internalClass
             static fn () => new TemplateWrapper($env, $template)
         );
 
