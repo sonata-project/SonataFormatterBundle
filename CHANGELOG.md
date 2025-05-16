@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.4.2](https://github.com/sonata-project/SonataFormatterBundle/compare/5.4.1...5.4.2) - 2025-05-16
+### Added
+- [[#792](https://github.com/sonata-project/SonataFormatterBundle/pull/792)] Compatibility with ORM 3 ([@dmaicher](https://github.com/dmaicher))
+
+### Fixed
+- [[#797](https://github.com/sonata-project/SonataFormatterBundle/pull/797)] Symfony 7.1 deprecation about `Symfony\Component\HttpKernel\DependencyInjection\Extension` usage ([@VincentLanglet](https://github.com/VincentLanglet))
+
 ## [5.4.1](https://github.com/sonata-project/SonataFormatterBundle/compare/5.4.0...5.4.1) - 2024-02-05
 ### Fixed
 - [[#788](https://github.com/sonata-project/SonataFormatterBundle/pull/788)] Symfony 7 support for symfony/config ([@lemorragia](https://github.com/lemorragia))
