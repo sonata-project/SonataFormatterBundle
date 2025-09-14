@@ -197,6 +197,7 @@ final class CkeditorAdminControllerTest extends TestCase
         $this->admin->method('getPersistentParameters')->willReturn(['param' => 'param']);
         $this->container->set('sonata.media.pool', new MediaPool('context'));
 
+        /** @psalm-suppress DeprecatedMethod */
         $this->twig->method('render')->with($template, static::isType('array'))->willReturn($rendered);
     }
 }

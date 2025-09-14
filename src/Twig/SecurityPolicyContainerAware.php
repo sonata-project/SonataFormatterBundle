@@ -44,12 +44,12 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
     private array $allowedFunctions = [];
 
     /**
-     * @var string[]|string[][]
+     * @var array<class-string, string|array<string>>
      */
     private array $allowedProperties = [];
 
     /**
-     * @var string[][]
+     * @var array<class-string, array<string>>
      */
     private array $allowedMethods = [];
 
