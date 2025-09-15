@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\FormatterBundle\Tests\Functional\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Sonata\FormatterBundle\Tests\App\Entity\Media;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -22,11 +23,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 final class CkeditorAdminTest extends WebTestCase
 {
     /**
-     * @dataProvider provideCrudUrlsCases
-     *
      * @param array<string, mixed>        $parameters
      * @param array<string, UploadedFile> $files
      */
+    #[DataProvider('provideCrudUrlsCases')]
     public function testCrudUrls(string $url, array $parameters = [], array $files = []): void
     {
         $client = self::createClient();

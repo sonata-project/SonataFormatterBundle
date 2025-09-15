@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sonata\FormatterBundle\Tests\Functional\Block;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class DashboardBlocksTest extends WebTestCase
 {
-    /**
-     * @dataProvider provideCrudUrlsCases
-     */
+    #[DataProvider('provideCrudUrlsCases')]
     public function testCrudUrls(string $url): void
     {
         $client = self::createClient();
