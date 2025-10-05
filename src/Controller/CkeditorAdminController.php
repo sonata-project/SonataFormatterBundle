@@ -16,6 +16,7 @@ namespace Sonata\FormatterBundle\Controller;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
+use Sonata\FormatterBundle\BCLayer\BCHelper;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Model\MediaManagerInterface;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
@@ -135,7 +136,7 @@ final class CkeditorAdminController extends CRUDController
         $mediaManager = $this->container->get('sonata.media.manager.media');
         \assert($mediaManager instanceof MediaManagerInterface);
 
-        $provider = $request->get('provider');
+        $provider = BCHelper::getFromRequest($request, 'provider');
         $file = $request->files->get('upload');
 
         if (null === $provider || null === $file) {
@@ -144,7 +145,7 @@ final class CkeditorAdminController extends CRUDController
 
         $pool = $this->container->get('sonata.media.pool');
         \assert($pool instanceof Pool);
-        $context = $request->get('context', $pool->getDefaultContext());
+        $context = BCHelper::getFromRequest($request, 'context', $pool->getDefaultContext());
 
         $media = $mediaManager->create();
         $media->setContext($context);
@@ -156,7 +157,7 @@ final class CkeditorAdminController extends CRUDController
 
         $format = $pool->getProvider($provider)->getFormatName(
             $media,
-            $request->get('format', MediaProviderInterface::FORMAT_REFERENCE)
+            BCHelper::getFromRequest($request, 'format', MediaProviderInterface::FORMAT_REFERENCE)
         );
 
         return $this->render('@SonataFormatter/Ckeditor/upload.html.twig', [
