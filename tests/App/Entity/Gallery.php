@@ -20,8 +20,6 @@ use Sonata\MediaBundle\Model\GalleryItemInterface;
 
 /**
  * @phpstan-extends BaseGallery<GalleryItemInterface>
- *
- * @psalm-suppress ClassMustBeFinal
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'media__gallery')]

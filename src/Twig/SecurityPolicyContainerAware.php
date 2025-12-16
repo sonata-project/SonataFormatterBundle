@@ -56,8 +56,6 @@ final class SecurityPolicyContainerAware implements SecurityPolicyInterface
     private bool $allowedBuilt = false;
 
     /**
-     * @psalm-suppress ContainerDependency
-     *
      * @param string[] $extensions
      */
     public function __construct(
