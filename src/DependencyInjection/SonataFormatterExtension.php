@@ -94,7 +94,7 @@ final class SonataFormatterExtension extends Extension
 
         $container->setParameter(
             'sonata.formatter.configuration.formatters',
-            $config['formatters']
+            $config['formatters'] /* @phpstan-ignore argument.type */
         );
     }
 

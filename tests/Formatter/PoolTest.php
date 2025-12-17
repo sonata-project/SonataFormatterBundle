@@ -123,8 +123,6 @@ final class PoolTest extends TestCase
     }
 
     /**
-     * @psalm-suppress InternalMethod
-     *
      * @phpstan-ignore parameter.internalClass
      */
     private function getEnv(Template $template): Environment
