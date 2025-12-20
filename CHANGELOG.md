@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.5.0](https://github.com/sonata-project/SonataFormatterBundle/compare/5.4.2...5.5.0) - 2025-12-20
+### Added
+- [[#824](https://github.com/sonata-project/SonataFormatterBundle/pull/824)] Symfony 8 support ([@VincentLanglet](https://github.com/VincentLanglet))
+
+### Fixed
+- [[#818](https://github.com/sonata-project/SonataFormatterBundle/pull/818)] Stop using internal/deprecated method `Request::get()` ([@VincentLanglet](https://github.com/VincentLanglet))
+
+### Removed
+- [[#822](https://github.com/sonata-project/SonataFormatterBundle/pull/822)] Support for PHP 8.1 ([@dmaicher](https://github.com/dmaicher))
+- [[#822](https://github.com/sonata-project/SonataFormatterBundle/pull/822)] Support for Symfony 7.1 and 7.2 ([@dmaicher](https://github.com/dmaicher))
+- [[#822](https://github.com/sonata-project/SonataFormatterBundle/pull/822)] Support for `sonata-project/block-bundle` v4 ([@dmaicher](https://github.com/dmaicher))
+- [[#822](https://github.com/sonata-project/SonataFormatterBundle/pull/822)] Support for `sonata-project/form-extensions` v1 ([@dmaicher](https://github.com/dmaicher))
+
 ## [5.4.2](https://github.com/sonata-project/SonataFormatterBundle/compare/5.4.1...5.4.2) - 2025-05-16
 ### Added
 - [[#792](https://github.com/sonata-project/SonataFormatterBundle/pull/792)] Compatibility with ORM 3 ([@dmaicher](https://github.com/dmaicher))
