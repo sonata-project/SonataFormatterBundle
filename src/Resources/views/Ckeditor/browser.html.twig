@@ -39,7 +39,7 @@ file that was distributed with this source code.
         $(function () {
             $(".select").click(function (e) {
                 e.preventDefault();
-                window.opener.CKEDITOR.tools.callFunction({{ app.request.get('CKEditorFuncNum')|escape('js') }}, $(this).attr("href"));
+                window.opener.CKEDITOR.tools.callFunction({{ app.request.query.get('CKEditorFuncNum')|escape('js') }}, $(this).attr("href"));
                 window.close();
             });
         });
