@@ -138,7 +138,7 @@ final class CkeditorAdminControllerTest extends TestCase
         $this->container->setParameter('kernel.bundles', ['SonataMediaBundle' => true]);
         $this->admin->expects(static::once())->method('checkAccess')->with('list');
         $this->admin->method('getDatagrid')->willReturn($datagrid);
-        $this->admin->method('getPersistentParameter')->willReturnMap([
+        $this->admin->expects(static::atLeast(2))->method('getPersistentParameter')->willReturnMap([
             ['context', 'context', 'another_context'],
             ['provider', null, 'provider'],
         ]);
