@@ -66,7 +66,7 @@ final class FormatterValidatorTest extends TestCase
     {
         $this->pool->add('existingFormatter', $this->createMock(FormatterInterface::class));
 
-        $this->constraint->message = $message = 'Constraint message';
+        $this->constraint->message = 'Constraint message';
 
         $this->context->expects(static::never())
             ->method('addViolation');
